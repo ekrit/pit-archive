@@ -32,6 +32,12 @@ jobs:
       - name: Self-tests (verify evaluation math)
         run: python -m tests.selftest
 
+      - name: Dress rehearsal (full pipeline against simulated internet)
+        run: python -m tests.dress_rehearsal
+
+      - name: Preflight (which live endpoints are reachable today)
+        run: python -m scraper.preflight || true
+
       - name: Run screener (also appends today's point-in-time snapshot)
         env:
           # SEC's fair-access policy asks for a descriptive contact.
