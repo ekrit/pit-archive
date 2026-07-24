@@ -557,7 +557,49 @@ def main():
     test_recency()
     test_cik_cache_credibility()
     test_wikipedia_resolution()
+    test_cik_from_xbrl_frames()
     print("ALL SELF-TESTS PASSED")
+
+
+def test_cik_from_xbrl_frames():
+    """Derive ticker->CIK via data.sec.gov when www.sec.gov is blocked."""
+    from scraper.sources import sec_filings as sf
+
+    frames = {"data": [
+        {"cik": 320193, "entityName": "Apple Inc."},
+        {"cik": 789019, "entityName": "MICROSOFT CORPORATION"},
+        {"cik": 111111, "entityName": "Ambiguous Holdings Inc."},
+        {"cik": 222222, "entityName": "Ambiguous Holdings"},   # same normalized
+        {"cik": 333333, "entityName": "Solo Motors Ltd"},
+    ]}
+
+    class S:
+        def __init__(self): self.n = 0
+        def get(self, url, params=None, headers=None, timeout=None):
+            self.n += 1
+            class R:
+                status_code = 200
+                def json(self_inner): return frames
+            return R()
+
+    names = {
+        "AAPL": "Apple Inc. - Common Stock",
+        "MSFT": "Microsoft Corporation - Common Stock",
+        "AMBG": "Ambiguous Holdings Inc. - Class A Ordinary Shares",
+        "SOLO": "Solo Motors Ltd - Common Stock",
+        "NOPE": "Company That Does Not File - Units",
+    }
+    got = sf.build_cik_map_from_frames(S(), names)
+    assert got["AAPL"] == 320193, got
+    assert got["MSFT"] == 789019, got          # case/suffix differences bridged
+    assert got["SOLO"] == 333333, got
+    assert "AMBG" not in got, "ambiguous names must be dropped, not guessed"
+    assert "NOPE" not in got, "non-filers must be absent"
+    # Normalization bridges NASDAQ vs SEC naming conventions.
+    assert sf._normalize_name("Apple Inc. - Common Stock") == \
+        sf._normalize_name("APPLE INC.") == "APPLE"
+    assert sf.build_cik_map_from_frames(S(), {}) == {}
+    print("  CIK map from XBRL frames (data.sec.gov fallback) OK")
 
 
 def test_cik_cache_credibility():

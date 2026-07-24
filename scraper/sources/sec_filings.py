@@ -13,6 +13,7 @@ tickers to CIK via the public company_tickers.json.
 import datetime as dt
 import json
 import os
+import re
 import time
 
 from .. import config
@@ -40,6 +41,86 @@ def _cik_cache_path() -> str:
     return os.path.join(os.path.dirname(config.WATCHLIST_FILE), "cik_map.json")
 
 
+# --- fallback: derive ticker->CIK without www.sec.gov -----------------------
+# data.sec.gov is reachable from CI (its submissions API answers 200) while
+# www.sec.gov/files/company_tickers.json 403s. The XBRL "frames" API lives on
+# data.sec.gov and returns thousands of {cik, entityName} pairs in ONE request,
+# which we can join to the ticker->company-name map already built from the
+# NASDAQ listing. Fuzzy-but-safe: names are normalized, and any name that maps
+# to more than one CIK is dropped rather than guessed.
+_FRAMES_URL = ("https://data.sec.gov/api/xbrl/frames/dei/"
+               "EntityCommonStockSharesOutstanding/shares/CY{year}Q{q}I.json")
+_NAME_NOISE_RE = re.compile(
+    r"\b(inc|corp|corporation|co|company|ltd|plc|holdings?|group|sa|nv|ag|"
+    r"limited|incorporated|lp|llc|trust|fund|the|new|class|common|stock|"
+    r"shares?|ordinary|depositary|american)\b", re.IGNORECASE)
+
+
+def _normalize_name(name: str) -> str:
+    """Aggressively normalize a company name for cross-source matching."""
+    name = re.sub(r"\s+-\s+.*$", "", name or "")          # NASDAQ descriptor
+    name = re.sub(r"[^A-Za-z0-9 ]+", " ", name)            # punctuation
+    name = _NAME_NOISE_RE.sub(" ", name)                   # legal/security noise
+    return " ".join(name.split()).upper()
+
+
+def _company_name_map() -> dict[str, str]:
+    path = os.path.join(os.path.dirname(config.WATCHLIST_FILE),
+                        "sec_company_names.json")
+    try:
+        with open(path) as fh:
+            return json.load(fh)
+    except (OSError, json.JSONDecodeError):
+        return {}
+
+
+def build_cik_map_from_frames(session, names: dict[str, str]) -> dict[str, int]:
+    """ticker -> CIK by joining the XBRL frames entity list to company names."""
+    if not names:
+        return {}
+    today = dt.date.today()
+    # Walk back a few quarters; the newest frame may not be published yet.
+    quarters = []
+    y, q = today.year, (today.month - 1) // 3 + 1
+    for _ in range(5):
+        quarters.append((y, q))
+        q -= 1
+        if q == 0:
+            y, q = y - 1, 4
+
+    entities: list[dict] = []
+    for year, quarter in quarters:
+        data = get_json(session, _FRAMES_URL.format(year=year, q=quarter),
+                        headers={"User-Agent": config.SEC_USER_AGENT})
+        if isinstance(data, dict) and data.get("data"):
+            entities = data["data"]
+            break
+    if not entities:
+        return {}
+
+    # Normalized SEC name -> CIK, dropping ambiguous names.
+    by_name: dict[str, int | None] = {}
+    for e in entities:
+        try:
+            cik = int(e["cik"])
+        except (KeyError, TypeError, ValueError):
+            continue
+        key = _normalize_name(e.get("entityName", ""))
+        if not key:
+            continue
+        if key in by_name and by_name[key] != cik:
+            by_name[key] = None  # ambiguous: refuse to guess
+        else:
+            by_name.setdefault(key, cik)
+
+    out: dict[str, int] = {}
+    for ticker, company in names.items():
+        cik = by_name.get(_normalize_name(company))
+        if cik:
+            out[ticker.upper()] = cik
+    return out
+
+
 def _load_cik_map(session) -> dict[str, int]:
     out: dict[str, int] = {}
     for url in _TICKER_MAP_URLS:
@@ -53,6 +134,12 @@ def _load_cik_map(session) -> dict[str, int]:
                 continue
         if out:
             break
+    if not out:
+        # www.sec.gov blocked -> derive the map from data.sec.gov instead.
+        out = build_cik_map_from_frames(session, _company_name_map())
+        if out:
+            print(f"[sec] CIK map derived from XBRL frames: {len(out)} tickers")
+
     path = _cik_cache_path()
     if len(out) >= _MIN_CREDIBLE_CIK_ENTRIES:
         try:  # refresh the committed cache for the next blocked run
