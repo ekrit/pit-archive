@@ -558,7 +558,34 @@ def main():
     test_cik_cache_credibility()
     test_wikipedia_resolution()
     test_cik_from_xbrl_frames()
+    test_preflight_ua_parity()
     print("ALL SELF-TESTS PASSED")
+
+
+def test_preflight_ua_parity():
+    """Probes must use the same User-Agent their real source uses.
+
+    A probe running with a different UA can report UP while the source is
+    refused — how preflight reported Wikipedia healthy while it collected
+    almost nothing.
+    """
+    from scraper import preflight, config
+    from scraper.sources import wikipedia as wiki
+    import inspect
+
+    # Every SEC/Wikimedia check is mapped to a matching UA bucket.
+    for name, _ in preflight.CHECKS:
+        if name.startswith("sec_"):
+            assert preflight._UA_FOR.get(name) == "sec", name
+        if "wiki" in name:
+            assert preflight._UA_FOR.get(name) == "wiki", name
+    # And the Wikipedia source really does use the Wikimedia UA.
+    src = inspect.getsource(wiki.fetch)
+    assert "WIKI_USER_AGENT" in src, "wikipedia source must use the Wikimedia UA"
+    # Wikimedia refuses browser-spoofing agents; ours must identify the tool.
+    assert "Mozilla" not in config.WIKI_USER_AGENT
+    assert "stocks-predictor" in config.WIKI_USER_AGENT
+    print("  preflight/source User-Agent parity OK")
 
 
 def test_cik_from_xbrl_frames():

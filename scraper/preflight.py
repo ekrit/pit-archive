@@ -22,6 +22,15 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT_PATH = os.path.join(ROOT, "data", "preflight.json")
 
 _Y = dt.date.today() - dt.timedelta(days=2)
+
+# Which User-Agent each source actually uses. A probe that runs with a
+# different UA than the real source can report UP while the source is being
+# refused — the exact way preflight lied about Wikipedia.
+_UA_FOR = {
+    "sec_tickers": "sec", "sec_submissions": "sec",
+    "wikimedia_pageviews": "wiki", "wikipedia_search": "wiki",
+}
+
 CHECKS = [
     ("yahoo_screener",
      "https://query2.finance.yahoo.com/v1/finance/screener/predefined/saved"
@@ -50,9 +59,14 @@ CHECKS = [
 
 
 def probe() -> dict:
-    session = make_session(user_agent=config.SEC_USER_AGENT)
+    sessions = {
+        "sec": make_session(user_agent=config.SEC_USER_AGENT),
+        "wiki": make_session(user_agent=config.WIKI_USER_AGENT),
+        "default": make_session(),
+    }
     results = {}
     for name, url in CHECKS:
+        session = sessions[_UA_FOR.get(name, "default")]
         t0 = time.monotonic()
         try:
             resp = session.get(url, timeout=10)

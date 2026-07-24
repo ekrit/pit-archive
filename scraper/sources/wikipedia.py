@@ -163,7 +163,9 @@ def _resolve_article(session, tk: str, names: dict[str, str], cache: dict) -> st
 
 
 def fetch(tickers: list[str]) -> dict[str, dict]:
-    get_session = parallel.thread_local(make_session)
+    # Wikimedia policy: identify the tool, don't spoof a browser.
+    get_session = parallel.thread_local(
+        lambda: make_session(user_agent=config.WIKI_USER_AGENT))
     names = _company_names()
     cache = _load_cache()
 

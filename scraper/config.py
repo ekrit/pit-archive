@@ -17,6 +17,13 @@ HTTP_USER_AGENT = os.environ.get(
     "Mozilla/5.0 (compatible; stocks-predictor-research-bot/1.0)",
 )
 
+# Wikimedia's User-Agent policy requires a descriptive agent identifying the
+# tool (browser-spoofing agents are refused), so its APIs get their own.
+WIKI_USER_AGENT = os.environ.get(
+    "WIKI_USER_AGENT",
+    "stocks-predictor/1.0 (research tool; https://github.com/ekrit/stocks-predictor)",
+)
+
 REQUEST_TIMEOUT_SECONDS = 15
 
 # Yahoo Finance predefined screener IDs used to discover candidate tickers
