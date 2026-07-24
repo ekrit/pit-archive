@@ -602,6 +602,11 @@ def test_wikipedia_resolution():
     assert wiki._clean_name("Apple Inc. - Common Stock") == "Apple"
     assert wiki._clean_name("ATA Creativity Global - American Depositary Shares") \
         == "ATA Creativity Global"
+    # Query order matters: 'Apple Inc.' finds the company, bare 'Apple' finds
+    # the fruit — so the suffixed form must be tried first, ticker last.
+    qs = wiki._search_queries("AAPL", "Apple Inc. - Common Stock")
+    assert qs == ["Apple Inc.", "Apple", "AAPL"], qs
+    assert wiki._search_queries("ZZZZ", "") == ["ZZZZ"]
 
     calls = []
 

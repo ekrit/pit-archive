@@ -85,14 +85,36 @@ def _company_names() -> dict[str, str]:
     return {}
 
 
+def _strip_descriptor(name: str) -> str:
+    """Drop the NASDAQ security-type descriptor after ' - '."""
+    return _DESCRIPTOR_RE.sub("", name or "").strip()
+
+
 def _clean_name(name: str) -> str:
-    """Strip security-type descriptors and legal suffixes for search."""
-    name = _DESCRIPTOR_RE.sub("", name or "").strip()
+    """Strip security-type descriptors AND legal suffixes for search."""
+    name = _strip_descriptor(name)
     prev = None
     while prev != name:
         prev = name
         name = _SUFFIX_RE.sub("", name).strip()
     return name
+
+
+def _search_queries(tk: str, raw_name: str) -> list[str]:
+    """Candidate search queries, most disambiguating first.
+
+    The legal suffix is a feature, not noise, when searching: 'Apple Inc.'
+    finds the company while 'Apple' finds the fruit. So try the
+    descriptor-stripped name (which keeps 'Inc.') before the fully cleaned
+    one, and only fall back to the bare ticker.
+    """
+    with_suffix = _strip_descriptor(raw_name)
+    stripped = _clean_name(raw_name)
+    out = []
+    for q in (with_suffix, stripped, tk):
+        if q and q not in out:
+            out.append(q)
+    return out
 
 
 def _stale(entry: dict) -> bool:
@@ -124,14 +146,17 @@ def _resolve_article(session, tk: str, names: dict[str, str], cache: dict) -> st
         if not entry.get("article") and not company and not _stale(entry):
             return None  # nothing new to try yet
 
-    query = company or tk
-    data = get_json(session, _SEARCH_URL.format(q=urllib.parse.quote(query)))
     article = None
-    if isinstance(data, list) and len(data) >= 2 and data[1]:
-        article = str(data[1][0]).replace(" ", "_")
+    used = None
+    for query in _search_queries(tk, names.get(tk, "")):
+        data = get_json(session, _SEARCH_URL.format(q=urllib.parse.quote(query)))
+        if isinstance(data, list) and len(data) >= 2 and data[1]:
+            article = str(data[1][0]).replace(" ", "_")
+            used = query
+            break
     cache[tk] = {
         "article": article or "",
-        "src": ("name" if company else "ticker") if article else "none",
+        "src": ("name" if (used and used != tk) else "ticker") if article else "none",
         "date": dt.date.today().isoformat(),
     }
     return article
@@ -178,4 +203,12 @@ def fetch(tickers: list[str]) -> dict[str, dict]:
         default=dict(_NEUTRAL),
     )
     _save_cache(cache)
+    # Distinguish the two very different failure modes: article resolution
+    # failing (search host blocked / no match) vs resolution succeeding but
+    # pageviews coming back empty. Without this the source just reads "0".
+    resolved = sum(1 for tk in tickers
+                   if isinstance(cache.get(tk), dict) and cache[tk].get("article"))
+    with_views = sum(1 for v in out.values() if (v.get("wiki_views_7d") or 0) > 0)
+    print(f"[wikipedia] resolved {resolved}/{len(tickers)} articles, "
+          f"{with_views} with pageviews, {len(names)} company names available")
     return out

@@ -40,8 +40,12 @@ CHECKS = [
      f"{(_Y - dt.timedelta(days=7)).strftime('%Y%m%d')}/{_Y.strftime('%Y%m%d')}"),
     ("finra_regsho", "https://cdn.finra.org/equity/regsho/daily/CNMSshvol"
                      f"{_Y.strftime('%Y%m%d')}.txt"),
-    ("sec_tickers_mirror", "https://data.sec.gov/files/company_tickers.json"),
     ("nasdaq_listing", "https://www.nasdaqtrader.com/dynamic/SymDir/nasdaqlisted.txt"),
+    # Wikipedia article RESOLUTION uses a different host than pageviews; when
+    # this is blocked, every wiki_* feature silently reads zero.
+    ("wikipedia_search",
+     "https://en.wikipedia.org/w/api.php?action=opensearch&limit=1"
+     "&namespace=0&format=json&search=Apple%20Inc."),
 ]
 
 
