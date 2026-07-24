@@ -54,7 +54,13 @@ def probe() -> dict:
             resp = session.get(url, timeout=10)
             ms = int((time.monotonic() - t0) * 1000)
             ok = resp.status_code == 200
-            results[name] = {"ok": ok, "status": resp.status_code, "ms": ms}
+            entry = {"ok": ok, "status": resp.status_code, "ms": ms}
+            if not ok:
+                # The body explains WHY: SEC returns a specific "undeclared
+                # automated tool" page for User-Agent policy rejections, which
+                # is a different fix from an IP block.
+                entry["body"] = " ".join(resp.text[:160].split())
+            results[name] = entry
         except Exception as e:  # noqa: BLE001
             ms = int((time.monotonic() - t0) * 1000)
             results[name] = {"ok": False, "status": type(e).__name__[:40], "ms": ms}
@@ -67,7 +73,17 @@ def main():
     print(f"Preflight: {up}/{len(results)} sources reachable")
     for name, r in results.items():
         mark = "UP  " if r["ok"] else "DOWN"
-        print(f"  [{mark}] {name:22s} status={r['status']} {r['ms']}ms")
+        line = f"  [{mark}] {name:22s} status={r['status']} {r['ms']}ms"
+        if r.get("body"):
+            line += f"\n           body: {r['body'][:120]}"
+        print(line)
+
+    # SEC's fair-access policy asks for a declared contact EMAIL in the
+    # User-Agent; without one, requests are refused regardless of rate.
+    if "@" not in config.SEC_USER_AGENT:
+        print("\n  [!] SEC_USER_AGENT has no contact email — SEC endpoints will "
+              "likely 403.\n      Set a repo secret SEC_USER_AGENT like "
+              "'your-project your.email@example.com'.")
     os.makedirs(os.path.dirname(OUT_PATH), exist_ok=True)
     with open(OUT_PATH, "w") as fh:
         json.dump({"checked_at": dt.datetime.now(dt.timezone.utc).isoformat(),

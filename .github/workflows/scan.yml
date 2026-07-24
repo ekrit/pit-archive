@@ -41,7 +41,10 @@ jobs:
       - name: Run screener (also appends today's point-in-time snapshot)
         env:
           # SEC's fair-access policy asks for a descriptive contact.
-          SEC_USER_AGENT: "stocks-predictor screener (github actions) contact:${{ github.repository_owner }}"
+          # SEC fair-access requires a declared contact EMAIL. Set repo secret
+          # SEC_USER_AGENT (e.g. "stocks-predictor you@example.com"); without
+          # it SEC endpoints 403 and the filings source stays dark.
+          SEC_USER_AGENT: ${{ secrets.SEC_USER_AGENT || format('stocks-predictor research (github.com/{0}/stocks-predictor)', github.repository_owner) }}
           # Whole-market daily-close archive (~10k tickers via SEC listing).
           FULL_MARKET_ARCHIVE: "1"
           MAX_PRICE_ARCHIVE_TICKERS: "12000"
