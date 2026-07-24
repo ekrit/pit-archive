@@ -59,6 +59,10 @@ def run(limit: int | None, use_reddit: bool, use_sec: bool, use_news: bool) -> d
             panel_tickers = list(dict.fromkeys(panel_tickers + universe.full_market()))
         except Exception as e:  # full-market fetch is best-effort
             print(f"[universe] full-market fetch failed: {e}")
+    if config.INTERNATIONAL_ARCHIVE:
+        intl = universe.international()
+        panel_tickers = list(dict.fromkeys(panel_tickers + intl))
+        print(f"[universe] +{len(intl)} international tickers in price archive")
     if limit is None:
         panel_tickers = panel_tickers[: config.MAX_PRICE_ARCHIVE_TICKERS]
     price_panel = prices.fetch_price_panel(panel_tickers)

@@ -190,3 +190,34 @@ def full_market(session=None) -> list[str]:
         except (json.JSONDecodeError, OSError):
             pass
     return ordered
+
+
+# --------------------------------------------------------------------------- #
+# international tier-1 universe (curated world markets, Yahoo suffixes)
+# --------------------------------------------------------------------------- #
+# International symbols carry digits and exchange suffixes (7203.T, 0700.HK,
+# RELIANCE.NS), so they get their own, looser validation pattern.
+_INTL_TICKER_RE = re.compile(r"^[A-Z0-9][A-Z0-9.\-]{0,14}$")
+
+
+def international() -> list[str]:
+    """Curated world-market tickers for the tier-1 price archive.
+
+    Read from data/markets/international.txt (editable; '#' comments). These
+    names get daily closes archived — and therefore labels and, later,
+    factor screening — while the deep attention sources remain US-only
+    (EDGAR/FINRA/WSB have no international equivalents).
+    """
+    path = os.path.join(os.path.dirname(config.WATCHLIST_FILE),
+                        "markets", "international.txt")
+    if not os.path.exists(path):
+        return []
+    out: list[str] = []
+    seen: set[str] = set()
+    with open(path) as fh:
+        for line in fh:
+            sym = line.split("#", 1)[0].strip().upper()
+            if sym and _INTL_TICKER_RE.match(sym) and sym not in seen:
+                seen.add(sym)
+                out.append(sym)
+    return out

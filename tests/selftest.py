@@ -553,7 +553,22 @@ def main():
     test_math_properties()
     test_scoring_edge_cases()
     test_quality_gate()
+    test_international_universe()
     print("ALL SELF-TESTS PASSED")
+
+
+def test_international_universe():
+    from scraper import universe
+    intl = universe.international()
+    assert len(intl) > 180, f"expected >180 international tickers, got {len(intl)}"
+    assert len(intl) == len(set(intl)), "duplicates in international universe"
+    # Every entry is suffixed with an exchange code and passes the loose regex.
+    assert all("." in t for t in intl), [t for t in intl if "." not in t][:5]
+    assert all(universe._INTL_TICKER_RE.match(t) for t in intl)
+    # Spot-check majors across regions.
+    for expect in ("ASML.AS", "7203.T", "0700.HK", "RELIANCE.NS", "005930.KS"):
+        assert expect in intl, f"missing {expect}"
+    print(f"  international universe ({len(intl)} tickers, 11 markets) OK")
 
 
 if __name__ == "__main__":

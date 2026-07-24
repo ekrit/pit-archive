@@ -68,6 +68,11 @@ MAX_PRICE_ARCHIVE_TICKERS = int(os.environ.get("MAX_PRICE_ARCHIVE_TICKERS", "500
 # This is the whole-market net needed to catch movers before they trend.
 FULL_MARKET_ARCHIVE = os.environ.get("FULL_MARKET_ARCHIVE", "0") == "1"
 
+# When "1", curated world-market tickers (data/markets/international.txt)
+# join the tier-1 price archive: UK/DE/FR/NL/CH/JP/HK/AU/CA/IN/KR large caps.
+# Prices+labels only -- the deep attention sources are US-only by nature.
+INTERNATIONAL_ARCHIVE = os.environ.get("INTERNATIONAL_ARCHIVE", "1") == "1"
+
 # Composite scoring weights. These are heuristic and not derived from any
 # validated backtest -- tune based on your own evaluation.
 SCORE_WEIGHTS = {
