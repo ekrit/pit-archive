@@ -1,0 +1,7 @@
+# Tickers to always include in the scan, one per line. '#' starts a comment.
+# Add your own high-conviction names here.
+NVDA
+TSLA
+PLTR
+SOFI
+AMD

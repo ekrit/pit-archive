@@ -1,0 +1,4 @@
+yfinance>=1.5.0
+vaderSentiment>=3.3.2
+requests>=2.31.0
+pandas>=2.0.0
