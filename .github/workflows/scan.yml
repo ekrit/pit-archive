@@ -73,7 +73,23 @@ jobs:
           git add data RANKINGS.md EVALUATION.md PREDICTIONS.md
           if git diff --staged --quiet; then
             echo "No changes to commit."
-          else
-            git commit -m "chore: daily rankings + history snapshot $(date -u +%Y-%m-%d)"
-            git push origin HEAD:main
+            exit 0
           fi
+          git commit -m "chore: daily rankings + history snapshot $(date -u +%Y-%m-%d)"
+          # main may have moved during a long collection (code pushes, another
+          # run). Merge-with-retry so a 17-minute full-market harvest is never
+          # lost to a non-fast-forward rejection; on conflicting data paths the
+          # freshly collected version wins (-X ours), non-conflicting incoming
+          # changes are kept.
+          for i in 1 2 3 4; do
+            if git push origin HEAD:main; then
+              echo "Pushed on attempt $i."
+              exit 0
+            fi
+            echo "Push rejected (attempt $i); merging latest main and retrying..."
+            git fetch origin main
+            git merge --no-edit -X ours origin/main || exit 1
+            sleep $((2 * i))
+          done
+          echo "Failed to push after retries."
+          exit 1
