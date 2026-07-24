@@ -183,8 +183,18 @@ def main() -> int:
     store.MANIFEST_PATH = os.path.join(store.HISTORY_DIR, "manifest.json")
     store.LEGACY_FEATURES_PATH = os.path.join(store.HISTORY_DIR, "features.jsonl")
     import scraper.config as config
+    # Cache paths (CIK map, wiki articles, universe) resolve from this at call
+    # time, so redirecting it keeps every source cache inside the sandbox.
+    real_data_dir = os.path.dirname(config.WATCHLIST_FILE)
     config.WATCHLIST_FILE = os.path.join(tmp, "watchlist.txt")
-    wikipedia._CACHE = os.path.join(tmp, "wiki_articles.json")
+
+    def _dir_state(d):
+        if not os.path.isdir(d):
+            return {}
+        return {p: os.path.getmtime(os.path.join(d, p))
+                for p in os.listdir(d) if os.path.isfile(os.path.join(d, p))}
+
+    real_data_before = _dir_state(real_data_dir)
     import scraper.main as main_mod
     main_mod.RANKINGS_DIR = os.path.join(tmp, "rankings")
     main_mod.RANKINGS_MD = os.path.join(tmp, "RANKINGS.md")
@@ -259,6 +269,14 @@ def main() -> int:
     check("dataset labels compile", len(examples) > 0, f"({len(examples)} examples)")
     if examples:
         check("relative labels attached", "rel_ret" in examples[0])
+
+    # ---- 5. isolation: the rehearsal must never touch real collected data ----
+    # A previous version wrote its 8 fake tickers into the real
+    # data/cik_map.json, which then starved the live SEC source.
+    real_data_after = _dir_state(real_data_dir)
+    touched = [p for p, mt in real_data_after.items()
+               if real_data_before.get(p) != mt]
+    check("no writes to real data dir", not touched, f"touched={touched}")
 
     print()
     if failures:

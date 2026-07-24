@@ -28,29 +28,48 @@ _PV_URL = ("https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/"
            "en.wikipedia/all-access/user/{article}/daily/{start}/{end}")
 _SEARCH_URL = ("https://en.wikipedia.org/w/api.php?action=opensearch&limit=1"
                "&namespace=0&format=json&search={q}")
-_CACHE = os.path.join(os.path.dirname(config.WATCHLIST_FILE), "wiki_articles.json")
-
 _NEUTRAL = {"wiki_views_7d": 0, "wiki_spike_ratio": None}
 
+# Security-type descriptor after a dash, as used by NASDAQ listings:
+# "Artius II Acquisition Inc. - Class A Ordinary Shares" -> "Artius II Acquisition Inc."
+_DESCRIPTOR_RE = re.compile(r"\s+-\s+.*$")
 # Legal suffixes that hurt Wikipedia title matching.
 _SUFFIX_RE = re.compile(
     r",?\s+(inc|corp|corporation|co|company|ltd|plc|holdings|group|sa|nv|ag|"
     r"limited|incorporated|lp|llc|trust|fund)\.?$", re.IGNORECASE)
 
+# Re-attempt a failed article lookup after this many days rather than caching
+# the failure forever.
+_NEGATIVE_TTL_DAYS = 7
+
+
+def _cache_path() -> str:
+    """Resolved at call time so tests can redirect config.WATCHLIST_FILE."""
+    return os.path.join(os.path.dirname(config.WATCHLIST_FILE), "wiki_articles.json")
+
 
 def _load_cache() -> dict:
-    if os.path.exists(_CACHE):
+    path = _cache_path()
+    if os.path.exists(path):
         try:
-            with open(_CACHE) as fh:
-                return json.load(fh)
+            with open(path) as fh:
+                raw = json.load(fh)
         except (json.JSONDecodeError, OSError):
-            pass
+            return {}
+        # Legacy format was {ticker: article-or-""}. Treat those as
+        # ticker-sourced so they get re-resolved once a real name exists.
+        out = {}
+        for k, v in raw.items():
+            out[k] = v if isinstance(v, dict) else {
+                "article": v or "", "src": "ticker" if v else "none", "date": ""}
+        return out
     return {}
 
 
 def _save_cache(cache: dict) -> None:
-    os.makedirs(os.path.dirname(_CACHE), exist_ok=True)
-    with open(_CACHE, "w") as fh:
+    path = _cache_path()
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    with open(path, "w") as fh:
         json.dump(cache, fh)
 
 
@@ -67,6 +86,8 @@ def _company_names() -> dict[str, str]:
 
 
 def _clean_name(name: str) -> str:
+    """Strip security-type descriptors and legal suffixes for search."""
+    name = _DESCRIPTOR_RE.sub("", name or "").strip()
     prev = None
     while prev != name:
         prev = name
@@ -74,15 +95,45 @@ def _clean_name(name: str) -> str:
     return name
 
 
+def _stale(entry: dict) -> bool:
+    if not entry.get("date"):
+        return True
+    try:
+        age = (dt.date.today() - dt.date.fromisoformat(entry["date"][:10])).days
+    except ValueError:
+        return True
+    return age >= _NEGATIVE_TTL_DAYS
+
+
 def _resolve_article(session, tk: str, names: dict[str, str], cache: dict) -> str | None:
-    if tk in cache:
-        return cache[tk] or None
-    query = _clean_name(names.get(tk, "")) or tk
+    """Ticker -> Wikipedia article, cached, without freezing bad resolutions.
+
+    A lookup made before company names were available (or one that failed)
+    must not be cached forever: it is retried once a real name exists, or
+    after the negative TTL.
+    """
+    company = _clean_name(names.get(tk, ""))
+    entry = cache.get(tk)
+    if isinstance(entry, dict):
+        good = entry.get("article") and entry.get("src") == "name"
+        # A ticker-fallback hit is superseded as soon as a company name exists.
+        usable_fallback = (entry.get("article") and entry.get("src") == "ticker"
+                           and not company)
+        if good or usable_fallback:
+            return entry["article"]
+        if not entry.get("article") and not company and not _stale(entry):
+            return None  # nothing new to try yet
+
+    query = company or tk
     data = get_json(session, _SEARCH_URL.format(q=urllib.parse.quote(query)))
     article = None
     if isinstance(data, list) and len(data) >= 2 and data[1]:
         article = str(data[1][0]).replace(" ", "_")
-    cache[tk] = article or ""
+    cache[tk] = {
+        "article": article or "",
+        "src": ("name" if company else "ticker") if article else "none",
+        "date": dt.date.today().isoformat(),
+    }
     return article
 
 

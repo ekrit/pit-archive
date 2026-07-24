@@ -555,7 +555,75 @@ def main():
     test_quality_gate()
     test_international_universe()
     test_recency()
+    test_cik_cache_credibility()
+    test_wikipedia_resolution()
     print("ALL SELF-TESTS PASSED")
+
+
+def test_cik_cache_credibility():
+    """A tiny (fixture-sized) CIK cache must never starve the live source."""
+    import json as _json
+    from scraper.sources import sec_filings
+    import scraper.config as config
+
+    with tempfile.TemporaryDirectory() as tmp:
+        orig = config.WATCHLIST_FILE
+        config.WATCHLIST_FILE = os.path.join(tmp, "watchlist.txt")
+        try:
+            path = sec_filings._cik_cache_path()
+            assert path.startswith(tmp), "cache path must follow config redirect"
+
+            class DeadSession:  # every mirror blocked
+                def get(self, url, params=None, headers=None, timeout=None):
+                    class R:
+                        status_code = 403
+                        def json(self): return None
+                    return R()
+
+            # 8-entry fixture cache (the exact poisoning that broke production).
+            with open(path, "w") as fh:
+                _json.dump({f"FAKE{i}": 1000 + i for i in range(8)}, fh)
+            assert sec_filings._load_cik_map(DeadSession()) == {}, "must reject tiny cache"
+
+            # A credible cache is used when mirrors are blocked.
+            with open(path, "w") as fh:
+                _json.dump({f"T{i:04d}": i for i in range(150)}, fh)
+            assert len(sec_filings._load_cik_map(DeadSession())) == 150
+        finally:
+            config.WATCHLIST_FILE = orig
+    print("  SEC CIK cache credibility guard OK")
+
+
+def test_wikipedia_resolution():
+    from scraper.sources import wikipedia as wiki
+    # NASDAQ-style descriptors and legal suffixes must be stripped for search.
+    assert wiki._clean_name("Artius II Acquisition Inc. - Class A Ordinary Shares") \
+        == "Artius II Acquisition"
+    assert wiki._clean_name("Apple Inc. - Common Stock") == "Apple"
+    assert wiki._clean_name("ATA Creativity Global - American Depositary Shares") \
+        == "ATA Creativity Global"
+
+    calls = []
+
+    class S:
+        def get(self, url, params=None, headers=None, timeout=None):
+            calls.append(url)
+            class R:
+                status_code = 200
+                def json(self):
+                    return ["q", ["Apple Inc"], [], []]
+            return R()
+
+    # A ticker-fallback cache entry must be re-resolved once a name exists
+    # (the bug that froze 'AAPL' -> 'AAPL' forever).
+    cache = {"AAPL": {"article": "AAPL", "src": "ticker", "date": "2026-07-01"}}
+    got = wiki._resolve_article(S(), "AAPL", {"AAPL": "Apple Inc. - Common Stock"}, cache)
+    assert got == "Apple_Inc", got
+    assert cache["AAPL"]["src"] == "name" and len(calls) == 1
+    # A name-sourced hit is reused without another request.
+    assert wiki._resolve_article(S(), "AAPL", {"AAPL": "Apple Inc."}, cache) == "Apple_Inc"
+    assert len(calls) == 1, "cached name-sourced article must not refetch"
+    print("  wikipedia name cleaning + cache anti-poisoning OK")
 
 
 def test_recency():
