@@ -381,6 +381,66 @@ def test_http_get_json_headers():
     print("  get_json passes custom headers OK")
 
 
+def test_nasdaq_listing_parser():
+    from scraper.universe import _parse_nasdaq_listing
+    text = ("Symbol|Security Name|Market Category|Test Issue|Financial Status|"
+            "Round Lot Size|ETF|NextShares\n"
+            "AAPL|Apple Inc. - Common Stock|Q|N|N|100|N|N\n"
+            "ZTST|Test Co|Q|Y|N|100|N|N\n"          # test issue -> skipped
+            "QQQ|Invesco QQQ Trust|G|N|N|100|Y|N\n"  # ETF -> skipped
+            "File Creation Time: 0724202618:00|||||||\n")
+    parsed = _parse_nasdaq_listing(text)
+    assert parsed == {"AAPL": "Apple Inc. - Common Stock"}, parsed
+    other = ("ACT Symbol|Security Name|Exchange|CQS Symbol|ETF|Round Lot Size|"
+             "Test Issue|NASDAQ Symbol\n"
+             "BRK.A|Berkshire Hathaway Inc.|N|BRK.A|N|100|N|BRK.A\n")
+    parsed2 = _parse_nasdaq_listing(other)
+    assert "BRK.A" in parsed2, parsed2
+    print("  NASDAQ listing parser (both layouts, filters) OK")
+
+
+def test_chunked_price_panel():
+    from scraper.sources import prices
+    calls = []
+    real = prices.yf.download
+
+    def fake_download(tickers=None, **kw):
+        tick_list = tickers.split()
+        calls.append(len(tick_list))
+        if len(calls) == 2:
+            raise RuntimeError("chunk 2 explodes")  # must not kill the panel
+        idx = pd.bdate_range(end=dt.date.today(), periods=12)
+        frames = {t: pd.DataFrame({"Close": np.full(12, 10.0),
+                                   "Volume": np.full(12, 1e6)}, index=idx)
+                  for t in tick_list}
+        return pd.concat(frames, axis=1) if len(tick_list) > 1 else frames[tick_list[0]]
+
+    prices.yf.download = fake_download
+    try:
+        old = prices.PANEL_CHUNK_SIZE
+        prices.PANEL_CHUNK_SIZE = 10
+        panel = prices.fetch_price_panel([f"T{i:03d}" for i in range(25)], days=5)
+    finally:
+        prices.yf.download = real
+        prices.PANEL_CHUNK_SIZE = old
+    assert calls == [10, 10, 5], calls           # chunked correctly
+    assert len(panel) == 15, len(panel)          # chunk 2's 10 lost, rest kept
+    print("  chunked price panel (bounded calls, per-chunk failure) OK")
+
+
+def test_thread_local_sessions():
+    import threading
+    from scraper import parallel
+    get = parallel.thread_local(object)
+    a = get()
+    assert get() is a, "same thread must reuse its instance"
+    seen = []
+    t = threading.Thread(target=lambda: seen.append(get()))
+    t.start(); t.join()
+    assert seen[0] is not a, "different thread must get its own instance"
+    print("  thread-local session factory OK")
+
+
 def main():
     print("Running self-tests...")
     test_metrics()
@@ -399,6 +459,9 @@ def main():
     test_relative_returns()
     test_neutralized_ic()
     test_http_get_json_headers()
+    test_nasdaq_listing_parser()
+    test_chunked_price_panel()
+    test_thread_local_sessions()
     print("ALL SELF-TESTS PASSED")
 
 

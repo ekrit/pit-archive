@@ -9,7 +9,12 @@ from . import config
 
 
 def _percentile_rank(values: dict[str, float]) -> dict[str, float]:
-    """Map raw values to [0,1] percentile ranks. Missing -> neutral 0.5."""
+    """Map raw values to [0,1] percentile ranks. Missing -> neutral 0.5.
+
+    O(n log n) via bisect so it stays instant even on a full-market universe.
+    """
+    import bisect
+
     present = {k: v for k, v in values.items() if v is not None}
     if not present:
         return {k: 0.5 for k in values}
@@ -18,11 +23,7 @@ def _percentile_rank(values: dict[str, float]) -> dict[str, float]:
 
     def rank(v):
         # fraction of values <= v
-        lo = 0
-        for x in ordered:
-            if x <= v:
-                lo += 1
-        return lo / n
+        return bisect.bisect_right(ordered, v) / n
 
     return {k: (rank(values[k]) if values[k] is not None else 0.5) for k in values}
 

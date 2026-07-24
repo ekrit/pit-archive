@@ -18,6 +18,20 @@ K = TypeVar("K")
 V = TypeVar("V")
 
 
+def thread_local(factory: Callable[[], V]) -> Callable[[], V]:
+    """Per-thread lazily-constructed instance (e.g. one requests.Session per
+    worker — Session is not documented thread-safe, so sharing one across the
+    pool risks corrupted connection state under load)."""
+    store = threading.local()
+
+    def get() -> V:
+        if not hasattr(store, "obj"):
+            store.obj = factory()
+        return store.obj
+
+    return get
+
+
 class RateLimiter:
     """Token bucket: at most `rate` acquisitions per second, thread-safe."""
 

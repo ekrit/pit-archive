@@ -32,16 +32,12 @@ def _safe_ret(close: pd.Series, lookback: int) -> float | None:
     return None
 
 
-def fetch_price_panel(tickers: list[str], days: int = 10) -> dict[str, dict]:
-    """Return {ticker: {isodate: close}} for the last `days` trading days.
+PANEL_CHUNK_SIZE = 400  # tickers per yf.download call; keeps requests sane at 10k+
 
-    Archived by the store so forward-return labels stay available even after a
-    ticker drops off the momentum screen. Backfilling several days per run lets
-    missed runs and weekends self-heal.
-    """
+
+def _panel_chunk(tickers: list[str], days: int) -> dict[str, dict]:
+    """One bounded yf.download call -> {ticker: {isodate: close}}."""
     panel: dict[str, dict] = {}
-    if not tickers:
-        return panel
     # A ~1mo window comfortably covers `days` trading days incl. weekends/holidays.
     data = yf.download(
         tickers=" ".join(tickers),
@@ -68,6 +64,25 @@ def fetch_price_panel(tickers: list[str], days: int = 10) -> dict[str, dict]:
                 series[date] = float(val)
         if series:
             panel[tk] = series
+    return panel
+
+
+def fetch_price_panel(tickers: list[str], days: int = 10) -> dict[str, dict]:
+    """Return {ticker: {isodate: close}} for the last `days` trading days.
+
+    Archived by the store so forward-return labels stay available even after a
+    ticker drops off the momentum screen. Chunked so a full-market universe
+    (~10k names) becomes ~25 bounded calls, and one bad chunk loses only its
+    own tickers instead of the whole panel.
+    """
+    panel: dict[str, dict] = {}
+    for i in range(0, len(tickers), PANEL_CHUNK_SIZE):
+        chunk = tickers[i:i + PANEL_CHUNK_SIZE]
+        try:
+            panel.update(_panel_chunk(chunk, days))
+        except Exception as e:  # noqa: BLE001 - per-chunk tolerance by design
+            print(f"[prices] panel chunk {i // PANEL_CHUNK_SIZE} failed: "
+                  f"{type(e).__name__}: {e}")
     return panel
 
 

@@ -87,7 +87,7 @@ def _resolve_article(session, tk: str, names: dict[str, str], cache: dict) -> st
 
 
 def fetch(tickers: list[str]) -> dict[str, dict]:
-    session = make_session()
+    get_session = parallel.thread_local(make_session)
     names = _company_names()
     cache = _load_cache()
 
@@ -96,6 +96,7 @@ def fetch(tickers: list[str]) -> dict[str, dict]:
     fmt = "%Y%m%d"
 
     def one(tk: str) -> dict:
+        session = get_session()
         article = _resolve_article(session, tk, names, cache)
         if not article:
             return dict(_NEUTRAL)

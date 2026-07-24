@@ -56,18 +56,82 @@ def discover() -> list[str]:
 
 
 # --------------------------------------------------------------------------- #
-# full-market universe (SEC company_tickers.json, ~10k names, free/no-key)
+# full-market universe (~10k names) with layered free fallbacks
 # --------------------------------------------------------------------------- #
+# www.sec.gov 403s many cloud IPs (GitHub runners included), so the listing is
+# fetched through a fallback chain, all free/no-key:
+#   1. SEC company_tickers.json (www.sec.gov)      tickers + names + best quality
+#   2. same file via data.sec.gov mirror           (data.sec.gov is not blocked)
+#   3. NASDAQ Trader symbol directory              tickers + names, open CDN
+#   4. committed cache from any earlier success    (listings churn slowly)
 
-_SEC_TICKERS_URL = "https://www.sec.gov/files/company_tickers.json"
+_SEC_TICKERS_URLS = [
+    "https://www.sec.gov/files/company_tickers.json",
+    "https://data.sec.gov/files/company_tickers.json",
+]
+_NASDAQ_URLS = [
+    "https://www.nasdaqtrader.com/dynamic/SymDir/nasdaqlisted.txt",
+    "https://www.nasdaqtrader.com/dynamic/SymDir/otherlisted.txt",
+]
+
+
+def _parse_nasdaq_listing(text: str) -> dict[str, str]:
+    """Parse a NASDAQ Trader pipe-delimited symbol file -> {ticker: name}.
+
+    Skips test issues and ETFs; tolerant of both nasdaqlisted (Symbol) and
+    otherlisted (ACT Symbol) layouts.
+    """
+    lines = [ln for ln in text.splitlines() if ln.strip()]
+    if not lines:
+        return {}
+    header = [h.strip() for h in lines[0].split("|")]
+
+    def col(*cands):
+        for c in cands:
+            if c in header:
+                return header.index(c)
+        return None
+
+    i_sym = col("Symbol", "ACT Symbol")
+    i_name = col("Security Name")
+    i_test = col("Test Issue")
+    i_etf = col("ETF")
+    if i_sym is None or i_name is None:
+        return {}
+    out: dict[str, str] = {}
+    for ln in lines[1:]:
+        if ln.startswith("File Creation Time"):
+            continue
+        parts = ln.split("|")
+        if len(parts) <= max(i_sym, i_name):
+            continue
+        if i_test is not None and len(parts) > i_test and parts[i_test].strip() == "Y":
+            continue
+        if i_etf is not None and len(parts) > i_etf and parts[i_etf].strip() == "Y":
+            continue
+        sym = parts[i_sym].strip().upper().replace("/", "-").replace("$", "")
+        if _TICKER_RE.match(sym):
+            out[sym] = parts[i_name].strip()
+    return out
+
+
+def _write_universe_caches(tickers: list[str], names: dict[str, str], today: str) -> None:
+    import json
+
+    base = os.path.dirname(config.WATCHLIST_FILE)
+    with open(os.path.join(base, "universe_full.json"), "w") as fh:
+        json.dump({"date": today, "tickers": tickers}, fh)
+    if names:
+        with open(os.path.join(base, "sec_company_names.json"), "w") as fh:
+            json.dump(names, fh)
 
 
 def full_market(session=None) -> list[str]:
-    """Every US-listed ticker the SEC knows about (~10k), cached daily.
+    """Every US-listed ticker (~10k), from a chain of free sources, cached.
 
     This is what lets the price archive cover the whole market instead of just
     the daily hot list — the base requirement for finding names *before* they
-    show up on anyone's screener. Cached to disk so one fetch per day suffices.
+    show up on anyone's screener.
     """
     import datetime as dt
     import json
@@ -84,31 +148,39 @@ def full_market(session=None) -> list[str]:
             pass
 
     session = session or make_session()
-    # SEC fair-access policy: identify yourself via User-Agent.
-    data = get_json(session, _SEC_TICKERS_URL,
-                    headers={"User-Agent": config.SEC_USER_AGENT})
     tickers: set[str] = set()
     names: dict[str, str] = {}
-    if isinstance(data, dict):
-        for entry in data.values():
-            sym = str(entry.get("ticker", "")).upper().replace("/", "-")
-            if _TICKER_RE.match(sym):
-                tickers.add(sym)
-                title = entry.get("title")
-                if title:
-                    names[sym] = str(title)
+
+    # 1+2: SEC listing (direct, then mirror).
+    for url in _SEC_TICKERS_URLS:
+        data = get_json(session, url, headers={"User-Agent": config.SEC_USER_AGENT})
+        if isinstance(data, dict) and data:
+            for entry in data.values():
+                sym = str(entry.get("ticker", "")).upper().replace("/", "-")
+                if _TICKER_RE.match(sym):
+                    tickers.add(sym)
+                    if entry.get("title"):
+                        names[sym] = str(entry["title"])
+            break
+
+    # 3: NASDAQ Trader symbol directory.
+    if not tickers:
+        for url in _NASDAQ_URLS:
+            try:
+                resp = session.get(url, timeout=config.REQUEST_TIMEOUT_SECONDS)
+                if resp.status_code == 200:
+                    parsed = _parse_nasdaq_listing(resp.text)
+                    tickers.update(parsed)
+                    names.update(parsed)
+            except Exception:  # noqa: BLE001 - best-effort chain
+                continue
+
     ordered = sorted(tickers)
     if ordered:
-        with open(cache, "w") as fh:
-            json.dump({"date": today, "tickers": ordered}, fh)
-        # Ticker -> company-name map, used by the Wikipedia attention source.
-        names_path = os.path.join(os.path.dirname(config.WATCHLIST_FILE),
-                                  "sec_company_names.json")
-        with open(names_path, "w") as fh:
-            json.dump(names, fh)
+        _write_universe_caches(ordered, names, today)
         return ordered
-    # Live fetch blocked (www.sec.gov 403s many cloud IPs): fall back to the
-    # committed cache even if stale — listings churn slowly.
+
+    # 4: stale committed cache.
     if os.path.exists(cache):
         try:
             with open(cache) as fh:

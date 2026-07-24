@@ -41,9 +41,10 @@ def _trending_set(session) -> set[str]:
 def fetch(tickers: list[str]) -> dict[str, dict]:
     session = make_session()
     trending = _trending_set(session)
+    get_session = parallel.thread_local(make_session)
 
     def one(tk: str) -> dict:
-        data = get_json(session, _STREAM_URL.format(tk=tk))
+        data = get_json(get_session(), _STREAM_URL.format(tk=tk))
         msgs = (data or {}).get("messages", []) if isinstance(data, dict) else []
         bodies = [m.get("body", "") for m in msgs if m.get("body")]
         sent = (

@@ -43,11 +43,11 @@ def fetch(tickers: list[str]) -> dict[str, dict]:
     """Threaded fetch — pacing enforced by a shared rate limiter, not sleeps."""
     from .. import parallel
 
-    session = make_session()
+    get_session = parallel.thread_local(make_session)
 
     def one(tk: str) -> dict:
         url = _RSS_TEMPLATE.format(query=_query_for(tk))
-        titles = _headlines(session, url)[: config.NEWS_ARTICLES_PER_TICKER]
+        titles = _headlines(get_session(), url)[: config.NEWS_ARTICLES_PER_TICKER]
         if not titles:
             return {"news_count": 0, "news_sentiment": 0.0}
         scores = [_analyzer.polarity_scores(t)["compound"] for t in titles]

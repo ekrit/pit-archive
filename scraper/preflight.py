@@ -40,6 +40,8 @@ CHECKS = [
      f"{(_Y - dt.timedelta(days=7)).strftime('%Y%m%d')}/{_Y.strftime('%Y%m%d')}"),
     ("finra_regsho", "https://cdn.finra.org/equity/regsho/daily/CNMSshvol"
                      f"{_Y.strftime('%Y%m%d')}.txt"),
+    ("sec_tickers_mirror", "https://data.sec.gov/files/company_tickers.json"),
+    ("nasdaq_listing", "https://www.nasdaqtrader.com/dynamic/SymDir/nasdaqlisted.txt"),
 ]
 
 
