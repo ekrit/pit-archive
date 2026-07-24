@@ -30,6 +30,45 @@ def _safe_ret(close: pd.Series, lookback: int) -> float | None:
     return None
 
 
+def fetch_price_panel(tickers: list[str], days: int = 10) -> dict[str, dict]:
+    """Return {ticker: {isodate: close}} for the last `days` trading days.
+
+    Archived by the store so forward-return labels stay available even after a
+    ticker drops off the momentum screen. Backfilling several days per run lets
+    missed runs and weekends self-heal.
+    """
+    panel: dict[str, dict] = {}
+    if not tickers:
+        return panel
+    # A ~1mo window comfortably covers `days` trading days incl. weekends/holidays.
+    data = yf.download(
+        tickers=" ".join(tickers),
+        period="1mo",
+        interval="1d",
+        group_by="ticker",
+        auto_adjust=True,
+        threads=True,
+        progress=False,
+    )
+    for tk in tickers:
+        try:
+            df = data if len(tickers) == 1 else data[tk]
+            df = df.dropna(subset=["Close"])
+        except (KeyError, TypeError):
+            continue
+        if df is None or df.empty:
+            continue
+        tail = df["Close"].iloc[-days:]
+        series = {}
+        for idx, val in tail.items():
+            date = idx.date().isoformat() if hasattr(idx, "date") else str(idx)[:10]
+            if val is not None and val == val and float(val) > 0:
+                series[date] = float(val)
+        if series:
+            panel[tk] = series
+    return panel
+
+
 def fetch(tickers: list[str]) -> dict[str, dict]:
     """Return {ticker: {feature: value}} for price-derived features."""
     results: dict[str, dict] = {}

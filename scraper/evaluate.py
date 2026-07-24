@@ -17,7 +17,7 @@ import argparse
 import datetime as dt
 import os
 
-from . import backtest, labels, model, store, universe
+from . import backtest, dataset, labels, model, store, universe
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 EVAL_MD = os.path.join(ROOT, "EVALUATION.md")
@@ -31,13 +31,17 @@ ALL_FEATURES = PRICE_ONLY_FEATURES + [
 
 
 def from_store(horizon: int) -> tuple[list[dict], str]:
-    records = store.load_history()
+    records = store.load_features()
     if not records:
         return [], "No history yet. Run the daily screener for a while first."
-    examples = labels.build_forward_returns(records, horizon_days=horizon)
+    # Compile against the dense price archive: robust labels even for names that
+    # have left the momentum screen, plus a written data-quality report.
+    examples = dataset.compile_labeled(horizon=horizon, write=True)
+    q = dataset.quality_report(examples, horizon)
     note = (
-        f"{len(records)} snapshots across {len(store.distinct_dates(records))} dates → "
-        f"{len(examples)} labeled examples at {horizon}d horizon."
+        f"{len(records)} feature snapshots across {len(store.distinct_dates(records))} dates → "
+        f"{len(examples)} labeled examples at {horizon}d horizon "
+        f"(pos rate {q['label_positive_rate']}, {q['distinct_tickers']} tickers)."
     )
     return examples, note
 

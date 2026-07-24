@@ -1,2 +1,2 @@
-# Point-in-time feature snapshots accumulate here (features.jsonl),
-# one JSON object per ticker per run. Do not edit by hand.
+# Point-in-time archives live in features/ and prices/ (monthly JSONL).
+# manifest.json summarizes coverage. See DATA.md for the full schema.

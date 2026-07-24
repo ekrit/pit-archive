@@ -50,6 +50,11 @@ WATCHLIST_FILE = os.path.join(
 
 MAX_TICKERS_TO_SCORE = 120  # cap total universe size per run to keep runtime/API usage bounded
 
+# Cap on how many tickers to archive daily closes for (today's universe plus
+# previously-tracked names). Bounds API load while keeping forward-return
+# labels available for names that have dropped off the hot list.
+MAX_PRICE_ARCHIVE_TICKERS = 500
+
 # Composite scoring weights. These are heuristic and not derived from any
 # validated backtest -- tune based on your own evaluation.
 SCORE_WEIGHTS = {

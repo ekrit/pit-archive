@@ -1,6 +1,6 @@
+# transient store artifacts
+*.tmp
+data/history/*.jsonl.migrated
 __pycache__/
 *.pyc
-.venv/
-venv/
-.env
 .DS_Store

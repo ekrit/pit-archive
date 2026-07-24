@@ -30,18 +30,26 @@ score. Results are written to:
 
 - `data/rankings/<YYYY-MM-DD>.json` — full detail, every ticker, every feature.
 - `RANKINGS.md` — human-readable top-25 table with a disclaimer header.
-- `data/history/features.jsonl` — an append-only, point-in-time snapshot of
-  every run. **This is the important one** — see below.
+- `data/history/features/` and `data/history/prices/` — the durable,
+  point-in-time archives that accumulate over months. **These are the important
+  ones.** Storage is idempotent (no double-counting on re-runs), month-partitioned,
+  schema-versioned, and the price archive stays dense for every ticker ever seen
+  so labels survive universe churn. Full schema & guarantees in
+  [`DATA.md`](DATA.md).
 
 ## Measuring what actually works (the point of the whole thing)
 
 A ranked list is worthless if the signals don't predict anything. The
 evaluation layer answers "which of these scrapers actually has edge?" honestly:
 
-- **`scraper/store.py`** logs a point-in-time snapshot every run, so a
-  leakage-free labeled dataset accumulates over weeks/months. News/Reddit/SEC
-  signals can't be reconstructed historically — recording them now is the only
-  way to ever evaluate them.
+- **`scraper/store.py`** is the point-in-time data store: idempotent,
+  month-partitioned, schema-versioned, with a dense price archive so labels
+  survive universe churn (see [`DATA.md`](DATA.md)). News/Reddit/SEC signals
+  can't be reconstructed historically — recording them now is the only way to
+  ever evaluate them.
+- **`scraper/dataset.py`** compiles the raw archives into a clean, deduplicated,
+  training-ready table (`data/dataset/labeled_<H>d.jsonl`) plus a data-quality
+  report, computing labels from the dense price archive.
 - **`scraper/labels.py`** turns snapshots into `(features → realized forward
   return)` examples, and can reconstruct price features from raw history for an
   immediate price-only backtest.

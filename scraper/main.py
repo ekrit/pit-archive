@@ -49,6 +49,14 @@ def run(limit: int | None, use_reddit: bool, use_sec: bool, use_news: bool) -> d
     # Only score tickers we actually got price data for (the quantitative core).
     tickers = [t for t in tickers if t in price_out]
 
+    # Build the dense price panel for label durability: today's universe plus
+    # every previously-tracked ticker, capped to bound API load.
+    panel_tickers = list(dict.fromkeys(tickers + store.tracked_tickers()))
+    if limit is None:
+        panel_tickers = panel_tickers[: config.MAX_PRICE_ARCHIVE_TICKERS]
+    price_panel = prices.fetch_price_panel(panel_tickers)
+    print(f"[prices] price panel for {len(price_panel)} tickers")
+
     news_out = news.fetch(tickers) if use_news else {}
     if use_news:
         print(f"[news] {len(news_out)} fetched")
@@ -68,6 +76,7 @@ def run(limit: int | None, use_reddit: bool, use_sec: bool, use_news: bool) -> d
         "universe_size": len(tickers),
         "disclaimer": DISCLAIMER,
         "results": ranked,
+        "price_panel": price_panel,
     }
 
 
@@ -83,7 +92,14 @@ def write_outputs(payload: dict) -> None:
     # time. This is what makes real evaluation/training possible in a few
     # months (see scraper/evaluate.py and STRATEGY.md).
     n_rows = store.append_snapshot(payload["results"], date=date_str)
-    print(f"[store] appended {n_rows} snapshot rows to history")
+    print(f"[store] appended {n_rows} feature rows")
+
+    # Archive a dense price panel for EVERY ticker ever tracked (not just
+    # today's hot list), so forward-return labels survive universe churn -- the
+    # winners usually leave the momentum screen right around their big move.
+    if payload.get("price_panel"):
+        n_px = store.append_prices(payload["price_panel"])
+        print(f"[store] archived {n_px} price rows")
 
     top = payload["results"][: config.TOP_N_RESULTS]
     lines = [

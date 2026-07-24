@@ -47,7 +47,7 @@ jobs:
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/rankings data/history RANKINGS.md EVALUATION.md
+          git add data/rankings data/history data/dataset RANKINGS.md EVALUATION.md
           if git diff --staged --quiet; then
             echo "No changes to commit."
           else

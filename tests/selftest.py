@@ -5,6 +5,9 @@ These do not touch the network; they verify the *math* is correct so that when
 the pipeline runs against real data in CI, the numbers mean what we claim.
 """
 import datetime as dt
+import importlib
+import os
+import tempfile
 
 import numpy as np
 import pandas as pd
@@ -117,6 +120,62 @@ def test_walk_forward_learns():
     print(f"  walk-forward learning OK (backend={res['backend']}, OOS AUC={res['oos_auc']})")
 
 
+def _fresh_store(tmp):
+    """Point the store package at a throwaway directory and reload it."""
+    import scraper.store as store
+    store.HISTORY_DIR = os.path.join(tmp, "history")
+    store.FEATURES_DIR = os.path.join(store.HISTORY_DIR, "features")
+    store.PRICES_DIR = os.path.join(store.HISTORY_DIR, "prices")
+    store.MANIFEST_PATH = os.path.join(store.HISTORY_DIR, "manifest.json")
+    store.LEGACY_FEATURES_PATH = os.path.join(store.HISTORY_DIR, "features.jsonl")
+    return store
+
+
+def test_store_idempotent_upsert():
+    with tempfile.TemporaryDirectory() as tmp:
+        store = _fresh_store(tmp)
+        res = [{"ticker": "AAA", "score": 90, "features": {"last_price": 100.0, "ret_21d": 0.3}},
+               {"ticker": "BBB", "score": 40, "features": {"last_price": 10.0, "ret_21d": -0.1}}]
+        store.append_snapshot(res, date="2026-07-24")
+        # Re-run the SAME day (simulates manual + scheduled) -> must NOT duplicate.
+        store.append_snapshot(res, date="2026-07-24")
+        recs = store.load_features()
+        assert len(recs) == 2, f"expected 2 deduped rows, got {len(recs)}"
+        assert all(r["schema_version"] == store.SCHEMA_VERSION for r in recs)
+        # Different day adds rows.
+        store.append_snapshot(res, date="2026-07-25")
+        assert len(store.load_features()) == 4
+        # Manifest reflects coverage.
+        man = store.update_manifest()
+        assert man["features"]["dates"] == 2 and man["features"]["distinct_tickers"] == 2
+        print("  store idempotent upsert + manifest OK")
+
+
+def test_prices_archive_and_dataset():
+    with tempfile.TemporaryDirectory() as tmp:
+        store = _fresh_store(tmp)
+        import scraper.dataset as dataset
+        importlib.reload(dataset)
+        dataset.store = store
+        dataset.DATASET_DIR = os.path.join(tmp, "dataset")
+
+        # Feature snapshot for AAA on day 0 at price 100.
+        store.append_snapshot(
+            [{"ticker": "AAA", "score": 88, "features": {"last_price": 100.0, "ret_21d": 0.2}}],
+            date="2026-01-01",
+        )
+        # Dense price archive: AAA rises 100 -> 130 sixty-ish days later. Crucially,
+        # AAA is NOT in any later feature snapshot (it left the hot list), yet the
+        # price archive still lets us label it.
+        panel = {"AAA": {"2026-01-01": 100.0, "2026-03-05": 130.0}}
+        store.append_prices(panel)
+        ex = dataset.compile_labeled(horizon=63, tolerance=10, write=False)
+        assert len(ex) == 1, ex
+        assert approx(ex[0]["fwd_ret"], 0.30, tol=1e-9), ex[0]
+        assert store.tracked_tickers() == ["AAA"]
+        print("  prices archive + dataset labeling (survives churn) OK")
+
+
 def main():
     print("Running self-tests...")
     test_metrics()
@@ -124,6 +183,8 @@ def main():
     test_price_history_reconstruction()
     test_backtest_detects_planted_edge()
     test_walk_forward_learns()
+    test_store_idempotent_upsert()
+    test_prices_archive_and_dataset()
     print("ALL SELF-TESTS PASSED")
 
 
