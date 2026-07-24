@@ -89,21 +89,55 @@ def evaluate_signal(examples: list[dict], key: str, min_names_per_date: int = 5)
     }
 
 
+def signal_turnover(examples: list[dict], key: str, top_frac: float = 0.2) -> float | None:
+    """Mean day-over-day turnover of the signal's top quantile (Alphalens-style).
+
+    1.0 = the top bucket is completely remade every date (expensive to trade,
+    likely noise); 0.0 = perfectly persistent. Needs >= 2 dates.
+    """
+    dates = sorted(_group_by_date(examples).items())
+    prev: set | None = None
+    turns: list[float] = []
+    for _, bucket in dates:
+        sig = _signal_values(bucket, key)
+        tickers = [e.get("ticker", f"?{i}") for i, e in enumerate(bucket)]
+        mask = np.isfinite(sig)
+        if mask.sum() < 5:
+            continue
+        order = np.argsort(sig)
+        k = max(1, int(round(mask.sum() * top_frac)))
+        top = {tickers[i] for i in order[-k:]}
+        if prev is not None and prev:
+            turns.append(1.0 - len(top & prev) / max(len(top), 1))
+        prev = top
+    return round(float(np.mean(turns)), 3) if turns else None
+
+
 def run(examples: list[dict], signals: list[str] | None = None) -> list[dict]:
     """Evaluate the composite score plus every requested signal, ranked by |mean IC|."""
     if not examples:
         return []
     if signals is None:
-        present = set()
+        # Evaluate EVERY numeric feature present (known names first, then the
+        # rest — e.g. the Alpha-factor battery — in stable order).
+        present: list[str] = []
+        seen = set()
         for e in examples:
-            present.update((e.get("features") or {}).keys())
-        signals = [s for s in (PRICE_SIGNALS + ATTENTION_SIGNALS) if s in present]
+            for k, v in (e.get("features") or {}).items():
+                if k not in seen and isinstance(v, (int, float)):
+                    seen.add(k)
+                    present.append(k)
+        known = [s for s in (PRICE_SIGNALS + ATTENTION_SIGNALS) if s in seen]
+        signals = known + [s for s in present if s not in known and s != "last_price"]
 
     rows = []
     if any(e.get("score") is not None for e in examples):
         rows.append(evaluate_signal(examples, "__score__"))
     for key in signals:
         rows.append(evaluate_signal(examples, key))
+    for r in rows:
+        key = "__score__" if r["signal"] == "composite_score" else r["signal"]
+        r["turnover"] = signal_turnover(examples, key)
 
     def sort_key(r):
         return abs(r["mean_ic"]) if r["mean_ic"] is not None else -1.0
@@ -119,8 +153,8 @@ def to_markdown(rows: list[dict], title: str = "Signal Evaluation") -> str:
         "IC = cross-sectional Spearman corr of signal vs forward return, averaged over dates. "
         "A consistent mean IC ≥ ~0.03 with |t-stat| ≥ 2 is a genuinely useful signal.",
         "",
-        "| Signal | mean IC | IC t-stat | dates | decile spread | top-quintile hit |",
-        "|--------|--------:|----------:|------:|--------------:|-----------------:|",
+        "| Signal | mean IC | IC t-stat | dates | decile spread | top-quintile hit | turnover |",
+        "|--------|--------:|----------:|------:|--------------:|-----------------:|---------:|",
     ]
     for r in rows:
         def f(x, pct=False):
@@ -131,7 +165,46 @@ def to_markdown(rows: list[dict], title: str = "Signal Evaluation") -> str:
             f"| {r['signal']} | {f(r['mean_ic'])} | "
             f"{r['t_stat'] if r['t_stat'] is not None else '—'} | "
             f"{r['n']} | {f(r['decile_spread'], pct=True)} | "
-            f"{f(r['top_quintile_hit_rate'])} |"
+            f"{f(r['top_quintile_hit_rate'])} | "
+            f"{f(r.get('turnover'))} |"
         )
     lines.append("")
     return "\n".join(lines)
+
+
+def ic_decay(compile_fn, horizons: list[int], top_k: int = 12) -> tuple[list[str], dict]:
+    """Alphalens-style IC decay: mean IC of each signal across horizons.
+
+    `compile_fn(horizon)` must return labeled examples for that horizon.
+    Returns (markdown lines, {signal: {horizon: mean_ic}}).
+    """
+    table: dict[str, dict[int, float | None]] = {}
+    for h in horizons:
+        examples = compile_fn(h)
+        if not examples:
+            continue
+        for r in run(examples):
+            table.setdefault(r["signal"], {})[h] = r["mean_ic"]
+    if not table:
+        return [], {}
+
+    # Rank signals by their best |IC| across horizons; keep the top_k.
+    def best(sig):
+        vals = [abs(v) for v in table[sig].values() if v is not None]
+        return max(vals) if vals else -1
+
+    ranked = sorted(table, key=best, reverse=True)[:top_k]
+    header = "| Signal | " + " | ".join(f"{h}d IC" for h in horizons) + " |"
+    sep = "|--------|" + "|".join("-------:" for _ in horizons) + "|"
+    lines = ["## IC decay across horizons", "",
+             "How each signal's predictive power changes with holding period — "
+             "a real signal usually decays smoothly; a leak or fluke jumps around.",
+             "", header, sep]
+    for sig in ranked:
+        cells = []
+        for h in horizons:
+            v = table[sig].get(h)
+            cells.append(f"{v:.4f}" if v is not None else "—")
+        lines.append(f"| {sig} | " + " | ".join(cells) + " |")
+    lines.append("")
+    return lines, table

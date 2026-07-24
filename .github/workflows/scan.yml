@@ -36,7 +36,13 @@ jobs:
         env:
           # SEC's fair-access policy asks for a descriptive contact.
           SEC_USER_AGENT: "stocks-predictor screener (github actions) contact:${{ github.repository_owner }}"
+          # Whole-market daily-close archive (~10k tickers via SEC listing).
+          FULL_MARKET_ARCHIVE: "1"
+          MAX_PRICE_ARCHIVE_TICKERS: "12000"
         run: python -m scraper.main
+
+      - name: Compact JSONL archives into the Parquet warehouse
+        run: python -m scraper.warehouse compact || true
 
       - name: Evaluate accumulated history (what works so far)
         # Harmless while history is short (writes a "not enough data yet" note);
@@ -47,7 +53,7 @@ jobs:
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/rankings data/history data/dataset RANKINGS.md EVALUATION.md
+          git add data/rankings data/history data/dataset data/warehouse RANKINGS.md EVALUATION.md
           if git diff --staged --quiet; then
             echo "No changes to commit."
           else

@@ -18,17 +18,18 @@ import datetime as dt
 import json
 import os
 
-from . import store
+from . import factors, store
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATASET_DIR = os.path.join(ROOT, "data", "dataset")
 
-FEATURE_KEYS = [
+BASE_FEATURE_KEYS = [
     "ret_5d", "ret_21d", "ret_63d", "volume_spike_ratio", "rsi_14",
     "pct_off_52w_high", "pct_above_52w_low", "annualized_vol",
     "news_count", "news_sentiment", "reddit_mentions", "reddit_sentiment",
     "sec_form4_recent", "sec_8k_recent",
 ]
+FEATURE_KEYS = BASE_FEATURE_KEYS + factors.FACTOR_NAMES
 
 
 def _future_close(series: list[tuple[str, float]], d0: str, horizon: int,

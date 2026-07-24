@@ -50,8 +50,15 @@ def run(limit: int | None, use_reddit: bool, use_sec: bool, use_news: bool) -> d
     tickers = [t for t in tickers if t in price_out]
 
     # Build the dense price panel for label durability: today's universe plus
-    # every previously-tracked ticker, capped to bound API load.
+    # every previously-tracked ticker — and, when FULL_MARKET_ARCHIVE=1, the
+    # entire US listing (~10k names) so movers are captured *before* they
+    # ever hit a screener. Capped to bound API load.
     panel_tickers = list(dict.fromkeys(tickers + store.tracked_tickers()))
+    if config.FULL_MARKET_ARCHIVE:
+        try:
+            panel_tickers = list(dict.fromkeys(panel_tickers + universe.full_market()))
+        except Exception as e:  # full-market fetch is best-effort
+            print(f"[universe] full-market fetch failed: {e}")
     if limit is None:
         panel_tickers = panel_tickers[: config.MAX_PRICE_ARCHIVE_TICKERS]
     price_panel = prices.fetch_price_panel(panel_tickers)

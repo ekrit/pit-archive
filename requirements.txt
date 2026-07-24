@@ -6,3 +6,6 @@ numpy>=1.24.0
 # Optional: enables the gradient-boosting model in scraper/model.py.
 # The pipeline falls back to a pure-numpy logistic regression without it.
 scikit-learn>=1.3.0
+# Columnar warehouse (scraper/warehouse.py): Parquet compaction + SQL queries.
+pyarrow>=14.0.0
+duckdb>=0.10.0

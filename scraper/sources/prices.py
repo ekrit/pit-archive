@@ -7,6 +7,8 @@ fields which the scorer treats as neutral.
 import pandas as pd
 import yfinance as yf
 
+from .. import factors
+
 
 def _rsi(close: pd.Series, period: int = 14) -> float | None:
     if len(close) < period + 1:
@@ -120,4 +122,9 @@ def fetch(tickers: list[str]) -> dict[str, dict]:
             "pct_above_52w_low": (last / lo_52 - 1.0) if lo_52 > 0 else None,
             "annualized_vol": float(close.pct_change().std() * (252 ** 0.5)) if len(close) > 2 else None,
         }
+
+        # Alpha158-inspired factor battery (see scraper/factors.py). Stored
+        # point-in-time so the accumulated dataset can evaluate all of them.
+        if {"Open", "High", "Low"}.issubset(df.columns):
+            results[tk].update(factors.compute_factors(df))
     return results

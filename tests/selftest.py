@@ -176,6 +176,95 @@ def test_prices_archive_and_dataset():
         print("  prices archive + dataset labeling (survives churn) OK")
 
 
+def test_factor_library():
+    from scraper import factors
+    n = 80
+    idx = pd.date_range("2025-01-01", periods=n, freq="D")
+    # Constant flat market: close=open=high=low=100, volume constant.
+    flat = pd.DataFrame({"Open": 100.0, "High": 100.0, "Low": 100.0,
+                         "Close": 100.0, "Volume": 1e6}, index=idx)
+    f = factors.compute_factors(flat)
+    assert len(f) == len(factors.FACTOR_NAMES) == 46
+    # Known answers on a flat series:
+    assert approx(f["KMID"], 0.0) and approx(f["KLEN"], 0.0)
+    assert approx(f["ROC_20"], 1.0) and approx(f["MA_20"], 1.0)
+    assert approx(f["STD_20"], 0.0) and approx(f["VMA_20"], 1.0)
+    assert f["RSV_20"] is None  # zero range -> undefined, not fake 0
+    assert approx(f["CNTP_20"], 0.0)  # no up days on a flat series
+
+    # Steadily rising series: momentum factors must reflect the trend.
+    rising_close = pd.Series(np.linspace(100, 200, n), index=idx)
+    rising = pd.DataFrame({"Open": rising_close.shift(1).fillna(99.0),
+                           "High": rising_close + 1, "Low": rising_close - 1,
+                           "Close": rising_close, "Volume": 1e6}, index=idx)
+    fr = factors.compute_factors(rising)
+    assert fr["ROC_20"] < 1.0, "past/current < 1 when rising"
+    assert fr["CNTP_20"] == 1.0, "every day is an up day"
+    assert fr["SUMP_20"] == 1.0, "all movement is gains"
+    assert fr["RSV_20"] > 0.9, "close near the top of its range"
+    # Point-in-time: factors at row i must ignore rows after i.
+    f_asof = factors.compute_factors(rising.iloc[:40])
+    f_full = factors.compute_factors(rising)
+    assert f_asof["ROC_20"] != f_full["ROC_20"]
+    print("  factor library (46 factors, known answers, point-in-time) OK")
+
+
+def test_warehouse_roundtrip():
+    try:
+        import duckdb  # noqa: F401
+        import pyarrow  # noqa: F401
+    except ImportError:
+        print("  warehouse SKIPPED (pyarrow/duckdb not installed)")
+        return
+    with tempfile.TemporaryDirectory() as tmp:
+        store = _fresh_store(tmp)
+        import scraper.warehouse as warehouse
+        importlib.reload(warehouse)
+        warehouse.store = store
+        warehouse.WAREHOUSE_DIR = os.path.join(tmp, "warehouse")
+        warehouse.FEATURES_WH = os.path.join(warehouse.WAREHOUSE_DIR, "features")
+        warehouse.PRICES_WH = os.path.join(warehouse.WAREHOUSE_DIR, "prices")
+
+        store.append_snapshot(
+            [{"ticker": "AAA", "score": 90, "features": {"last_price": 100.0, "ret_21d": 0.3}},
+             {"ticker": "BBB", "score": 40, "features": {"last_price": 10.0, "ret_21d": -0.1}}],
+            date="2026-07-24")
+        store.append_prices({"AAA": {"2026-07-24": 100.0, "2026-08-24": 120.0}})
+        s = warehouse.compact()
+        assert s["feature_rows"] == 2 and s["price_rows"] == 2, s
+        # SQL over parquet must see the same data.
+        rows = warehouse.sql("SELECT ticker, f_ret_21d FROM features ORDER BY ticker")
+        assert rows == [("AAA", 0.3), ("BBB", -0.1)], rows
+        n = warehouse.sql("SELECT COUNT(*) FROM prices")[0][0]
+        assert n == 2
+        print("  parquet warehouse + duckdb SQL round-trip OK")
+
+
+def test_turnover_and_ic_decay():
+    # Persistent signal: same ranking every date -> turnover 0.
+    dates = ["2026-01-01", "2026-01-02", "2026-01-03"]
+    persistent = [{"date": d, "ticker": f"T{i}", "features": {"sig": float(i)},
+                   "fwd_ret": 0.01 * i} for d in dates for i in range(10)]
+    t0 = backtest.signal_turnover(persistent, "sig")
+    assert t0 == 0.0, t0
+    # Fully remade top bucket -> turnover 1.
+    flip = []
+    for k, d in enumerate(dates):
+        for i in range(10):
+            val = float(i) if k % 2 == 0 else float(-i)
+            flip.append({"date": d, "ticker": f"T{i}", "features": {"sig": val},
+                         "fwd_ret": 0.0})
+    t1 = backtest.signal_turnover(flip, "sig")
+    assert t1 == 1.0, t1
+    # IC decay table builds for multiple horizons.
+    def compile_fn(h):
+        return persistent
+    lines, table = backtest.ic_decay(compile_fn, [5, 21])
+    assert any("sig" in ln for ln in lines), lines
+    assert table["sig"][5] == table["sig"][21] == 1.0  # perfect monotone signal
+    print("  turnover + IC decay OK")
+
+
 def main():
     print("Running self-tests...")
     test_metrics()
@@ -185,6 +274,9 @@ def main():
     test_walk_forward_learns()
     test_store_idempotent_upsert()
     test_prices_archive_and_dataset()
+    test_factor_library()
+    test_warehouse_roundtrip()
+    test_turnover_and_ic_decay()
     print("ALL SELF-TESTS PASSED")
 
 

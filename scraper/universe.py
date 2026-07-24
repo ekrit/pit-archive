@@ -53,3 +53,48 @@ def discover() -> list[str]:
     tickers = _from_screeners(session) | _from_watchlist()
     ordered = sorted(tickers)
     return ordered[: config.MAX_TICKERS_TO_SCORE]
+
+
+# --------------------------------------------------------------------------- #
+# full-market universe (SEC company_tickers.json, ~10k names, free/no-key)
+# --------------------------------------------------------------------------- #
+
+_SEC_TICKERS_URL = "https://www.sec.gov/files/company_tickers.json"
+
+
+def full_market(session=None) -> list[str]:
+    """Every US-listed ticker the SEC knows about (~10k), cached daily.
+
+    This is what lets the price archive cover the whole market instead of just
+    the daily hot list — the base requirement for finding names *before* they
+    show up on anyone's screener. Cached to disk so one fetch per day suffices.
+    """
+    import datetime as dt
+    import json
+
+    cache = os.path.join(os.path.dirname(config.WATCHLIST_FILE), "universe_full.json")
+    today = dt.date.today().isoformat()
+    if os.path.exists(cache):
+        try:
+            with open(cache) as fh:
+                payload = json.load(fh)
+            if payload.get("date") == today and payload.get("tickers"):
+                return payload["tickers"]
+        except (json.JSONDecodeError, OSError):
+            pass
+
+    session = session or make_session()
+    # SEC fair-access policy: identify yourself via User-Agent.
+    data = get_json(session, _SEC_TICKERS_URL,
+                    headers={"User-Agent": config.SEC_USER_AGENT})
+    tickers: set[str] = set()
+    if isinstance(data, dict):
+        for entry in data.values():
+            sym = str(entry.get("ticker", "")).upper().replace("/", "-")
+            if _TICKER_RE.match(sym):
+                tickers.add(sym)
+    ordered = sorted(tickers)
+    if ordered:
+        with open(cache, "w") as fh:
+            json.dump({"date": today, "tickers": ordered}, fh)
+    return ordered

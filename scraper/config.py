@@ -53,7 +53,13 @@ MAX_TICKERS_TO_SCORE = 120  # cap total universe size per run to keep runtime/AP
 # Cap on how many tickers to archive daily closes for (today's universe plus
 # previously-tracked names). Bounds API load while keeping forward-return
 # labels available for names that have dropped off the hot list.
-MAX_PRICE_ARCHIVE_TICKERS = 500
+# Overridable via env for scaling runs.
+MAX_PRICE_ARCHIVE_TICKERS = int(os.environ.get("MAX_PRICE_ARCHIVE_TICKERS", "500"))
+
+# When "1", the daily price archive covers the FULL US market (~10k tickers
+# from SEC company_tickers.json) rather than just screener + tracked names.
+# This is the whole-market net needed to catch movers before they trend.
+FULL_MARKET_ARCHIVE = os.environ.get("FULL_MARKET_ARCHIVE", "0") == "1"
 
 # Composite scoring weights. These are heuristic and not derived from any
 # validated backtest -- tune based on your own evaluation.

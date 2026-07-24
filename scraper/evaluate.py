@@ -23,11 +23,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 EVAL_MD = os.path.join(ROOT, "EVALUATION.md")
 
 PRICE_ONLY_FEATURES = ["ret_5d", "ret_21d", "ret_63d", "volume_spike_ratio", "rsi_14"]
-ALL_FEATURES = PRICE_ONLY_FEATURES + [
-    "pct_off_52w_high", "pct_above_52w_low", "annualized_vol",
-    "news_count", "news_sentiment", "reddit_mentions", "reddit_sentiment",
-    "sec_form4_recent", "sec_8k_recent",
-]
+ALL_FEATURES = dataset.FEATURE_KEYS  # base signals + the Alpha-factor battery
 
 
 def from_store(horizon: int) -> tuple[list[dict], str]:
@@ -72,7 +68,7 @@ def from_prices(horizon: int, limit: int | None) -> tuple[list[dict], str]:
     return examples, note
 
 
-def write_report(rows, model_res, note, mode, horizon):
+def write_report(rows, model_res, note, mode, horizon, decay_lines=None):
     lines = [
         "# Signal Evaluation — what actually works",
         "",
@@ -87,6 +83,7 @@ def write_report(rows, model_res, note, mode, horizon):
         "research, not advice.",
         "",
         backtest.to_markdown(rows, title=f"Per-signal edge ({horizon}d forward return)"),
+        *(decay_lines or []),
         "## Walk-forward model (out-of-sample)",
         "",
         "A model that learns the weights, evaluated strictly on future data it "
@@ -107,6 +104,8 @@ def main():
     ap.add_argument("--from-store", action="store_true", help="use accumulated history")
     ap.add_argument("--from-prices", action="store_true", help="immediate price-only backtest")
     ap.add_argument("--horizon", type=int, default=63, help="forward-return horizon in days")
+    ap.add_argument("--horizons", type=str, default="21,63,126",
+                    help="comma-separated horizons for the IC-decay table (store mode)")
     ap.add_argument("--limit", type=int, default=None, help="cap tickers (price mode)")
     args = ap.parse_args()
 
@@ -126,7 +125,17 @@ def main():
     rows = backtest.run(examples)
     model_res = model.walk_forward(examples, [f for f in feats]) if examples else {
         "error": "no examples"}
-    write_report(rows, model_res, note, mode, args.horizon)
+
+    # Alphalens-style IC decay across horizons (store mode only — it can
+    # recompile labels per horizon from the dense price archive).
+    decay_lines: list[str] = []
+    if mode == "from-store" and examples:
+        horizons = [int(h) for h in args.horizons.split(",") if h.strip()]
+        decay_lines, _ = backtest.ic_decay(
+            lambda h: dataset.compile_labeled(horizon=h, write=False), horizons
+        )
+
+    write_report(rows, model_res, note, mode, args.horizon, decay_lines)
 
     print("\nTop signals by |mean IC|:")
     for r in rows[:8]:

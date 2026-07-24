@@ -42,11 +42,23 @@ score. Results are written to:
 A ranked list is worthless if the signals don't predict anything. The
 evaluation layer answers "which of these scrapers actually has edge?" honestly:
 
+- **`scraper/factors.py`** computes a 46-factor battery (candle geometry +
+  rolling momentum/volatility/volume families) inspired by
+  [Microsoft Qlib's Alpha158](https://github.com/microsoft/qlib) — the
+  open-source baseline feature set for cross-sectional stock ranking. Every
+  factor is stored point-in-time and automatically evaluated.
 - **`scraper/store.py`** is the point-in-time data store: idempotent,
   month-partitioned, schema-versioned, with a dense price archive so labels
   survive universe churn (see [`DATA.md`](DATA.md)). News/Reddit/SEC signals
   can't be reconstructed historically — recording them now is the only way to
   ever evaluate them.
+- **`scraper/warehouse.py`** compacts the JSONL archives into a zstd Parquet
+  warehouse queryable with DuckDB SQL (`python -m scraper.warehouse sql
+  "SELECT ..."`) — the scale path to multi-GB/TB collection, mapped out in
+  [`SCALING.md`](SCALING.md).
+- **`scraper/universe.py::full_market()`** pulls the full US listing (~10k
+  tickers) from SEC's free `company_tickers.json`; with `FULL_MARKET_ARCHIVE=1`
+  the daily job archives closes for the *whole market*, not just the hot list.
 - **`scraper/dataset.py`** compiles the raw archives into a clean, deduplicated,
   training-ready table (`data/dataset/labeled_<H>d.jsonl`) plus a data-quality
   report, computing labels from the dense price archive.
@@ -55,7 +67,9 @@ evaluation layer answers "which of these scrapers actually has edge?" honestly:
   immediate price-only backtest.
 - **`scraper/metrics.py` + `scraper/backtest.py`** compute each signal's
   Information Coefficient (cross-sectional Spearman corr vs forward return,
-  averaged per-date with a t-stat), decile spread, and hit rate.
+  averaged per-date with a t-stat), decile spread, hit rate, plus
+  [Alphalens](https://alphalens.ml4trading.io/)-style top-quantile **turnover**
+  and an **IC-decay table** across horizons (`--horizons 21,63,126`).
 - **`scraper/model.py`** trains a walk-forward model (pure-numpy logistic
   regression, or gradient boosting if scikit-learn is installed) that *learns*
   the weights and is scored strictly out-of-sample.
