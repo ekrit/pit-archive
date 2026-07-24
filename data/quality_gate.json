@@ -1,7 +1,7 @@
 {
   "date": "2026-07-24",
   "n_tickers": 138,
-  "checked_at": "2026-07-24T20:54:05.387897+00:00",
+  "checked_at": "2026-07-24T21:46:04.274946+00:00",
   "families": {
     "prices": {
       "alive_fraction": 1.0,
@@ -22,7 +22,7 @@
       "status": "OK"
     },
     "stocktwits": {
-      "alive_fraction": 0.775,
+      "alive_fraction": 0.761,
       "floor": 0.2,
       "trailing_avg": null,
       "status": "OK"
@@ -34,7 +34,7 @@
       "status": "OK"
     },
     "wikipedia": {
-      "alive_fraction": 0.138,
+      "alive_fraction": 0.761,
       "floor": 0.1,
       "trailing_avg": null,
       "status": "OK"
