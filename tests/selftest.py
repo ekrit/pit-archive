@@ -554,7 +554,35 @@ def main():
     test_scoring_edge_cases()
     test_quality_gate()
     test_international_universe()
+    test_recency()
     print("ALL SELF-TESTS PASSED")
+
+
+def test_recency():
+    from scraper import recency
+    now = dt.datetime(2026, 7, 24, 12, 0, tzinfo=dt.timezone.utc)
+    # Weight semantics: fresh=1, one half-life=0.5, beyond max age=0, undated=1.
+    assert approx(recency.weight(0.0, 2.0, 7.0), 1.0)
+    assert approx(recency.weight(2.0, 2.0, 7.0), 0.5)
+    assert recency.weight(8.0, 2.0, 7.0) == 0.0
+    assert recency.weight(None, 2.0, 7.0) == 1.0
+    # Parsers: RFC-2822 (RSS), ISO (Stocktwits), epoch (Reddit).
+    a = recency.age_from_rfc2822("Thu, 23 Jul 2026 12:00:00 GMT", now)
+    assert approx(a, 1.0, tol=1e-6), a
+    b = recency.age_from_iso("2026-07-22T12:00:00Z", now)
+    assert approx(b, 2.0, tol=1e-6), b
+    c = recency.age_from_epoch(now.timestamp() - 86400 * 3, now)
+    assert approx(c, 3.0, tol=1e-6), c
+    assert recency.age_from_rfc2822("not a date") is None
+    # Weighted stats: one fresh bullish item dominates one stale bearish one.
+    eff, mean = recency.weighted_stats(
+        [(0.8, 0.0), (-0.8, 6.9)], half_life_days=2.0, max_age_days=7.0)
+    assert eff < 1.2 and mean > 0.5, (eff, mean)
+    # All-stale collapses to zero signal instead of stale sentiment.
+    eff2, mean2 = recency.weighted_stats(
+        [(0.9, 30.0), (0.9, 60.0)], half_life_days=2.0, max_age_days=7.0)
+    assert eff2 == 0.0 and mean2 == 0.0, (eff2, mean2)
+    print("  recency weighting (parsers, half-life, stale-collapse) OK")
 
 
 def test_international_universe():

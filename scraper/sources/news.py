@@ -23,7 +23,8 @@ def _query_for(ticker: str) -> str:
     return urllib.parse.quote_plus(f'"{ticker}" stock')
 
 
-def _headlines(session, url: str) -> list[str]:
+def _headlines(session, url: str) -> list[tuple[str, str | None]]:
+    """[(title, pubDate-string-or-None), ...] from an RSS feed."""
     try:
         resp = session.get(url, timeout=config.REQUEST_TIMEOUT_SECONDS)
         if resp.status_code != 200:
@@ -31,12 +32,14 @@ def _headlines(session, url: str) -> list[str]:
         root = ET.fromstring(resp.content)
     except (ET.ParseError, Exception):
         return []
-    titles = []
+    out = []
     for item in root.iter("item"):
         title_el = item.find("title")
         if title_el is not None and title_el.text:
-            titles.append(title_el.text)
-    return titles
+            date_el = item.find("pubDate")
+            out.append((title_el.text,
+                        date_el.text if date_el is not None else None))
+    return out
 
 
 def fetch(tickers: list[str]) -> dict[str, dict]:
@@ -46,15 +49,18 @@ def fetch(tickers: list[str]) -> dict[str, dict]:
     get_session = parallel.thread_local(make_session)
 
     def one(tk: str) -> dict:
+        from .. import recency
+
         url = _RSS_TEMPLATE.format(query=_query_for(tk))
-        titles = _headlines(get_session(), url)[: config.NEWS_ARTICLES_PER_TICKER]
-        if not titles:
+        items = _headlines(get_session(), url)[: config.NEWS_ARTICLES_PER_TICKER]
+        if not items:
             return {"news_count": 0, "news_sentiment": 0.0}
-        scores = [_analyzer.polarity_scores(t)["compound"] for t in titles]
-        return {
-            "news_count": len(titles),
-            "news_sentiment": sum(scores) / len(scores),
-        }
+        # Recency-weighted: a stale headline must not count like today's.
+        scored = [(_analyzer.polarity_scores(title)["compound"],
+                   recency.age_from_rfc2822(pub)) for title, pub in items]
+        eff_count, sentiment = recency.weighted_stats(
+            scored, recency.NEWS_HALF_LIFE_DAYS, recency.NEWS_MAX_AGE_DAYS)
+        return {"news_count": eff_count, "news_sentiment": sentiment}
 
     return parallel.fetch_map(
         tickers, one,

@@ -44,17 +44,21 @@ def fetch(tickers: list[str]) -> dict[str, dict]:
     get_session = parallel.thread_local(make_session)
 
     def one(tk: str) -> dict:
+        from .. import recency
+
         data = get_json(get_session(), _STREAM_URL.format(tk=tk))
         msgs = (data or {}).get("messages", []) if isinstance(data, dict) else []
-        bodies = [m.get("body", "") for m in msgs if m.get("body")]
-        sent = (
-            sum(_analyzer.polarity_scores(b)["compound"] for b in bodies) / len(bodies)
-            if bodies else 0.0
-        )
+        scored = [
+            (_analyzer.polarity_scores(m["body"])["compound"],
+             recency.age_from_iso(m.get("created_at")))
+            for m in msgs if m.get("body")
+        ]
+        eff_count, sentiment = recency.weighted_stats(
+            scored, recency.SOCIAL_HALF_LIFE_DAYS, recency.SOCIAL_MAX_AGE_DAYS)
         return {
             "st_trending": 1.0 if tk in trending else 0.0,
-            "st_msg_count": len(bodies),
-            "st_sentiment": round(sent, 4),
+            "st_msg_count": eff_count,
+            "st_sentiment": sentiment,
         }
 
     return parallel.fetch_map(

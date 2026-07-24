@@ -57,6 +57,8 @@ def fetch(tickers: list[str]) -> dict[str, dict]:
             children = data["data"]["children"]
         except (KeyError, TypeError):
             continue
+        from .. import recency
+
         for child in children:
             post = child.get("data", {})
             text = f"{post.get('title', '')} {post.get('selftext', '')}"
@@ -64,19 +66,26 @@ def fetch(tickers: list[str]) -> dict[str, dict]:
             found &= valid
             if not found:
                 continue
+            # Recency weight: 'hot' listings mix hours-old and days-old posts;
+            # only genuinely fresh chatter should move today's signal.
+            w = recency.weight(
+                recency.age_from_epoch(post.get("created_utc")),
+                recency.SOCIAL_HALF_LIFE_DAYS, recency.SOCIAL_MAX_AGE_DAYS)
+            if w <= 0:
+                continue
             compound = _analyzer.polarity_scores(text[:1000])["compound"]
             for tk in found:
                 # counts/sent dicts are keyed by original case; map back
                 for orig in tickers:
                     if orig.upper() == tk:
-                        counts[orig] += 1
-                        sent_sum[orig] += compound
+                        counts[orig] += w
+                        sent_sum[orig] += compound * w
 
     results: dict[str, dict] = {}
     for tk in tickers:
         c = counts[tk]
         results[tk] = {
-            "reddit_mentions": c,
-            "reddit_sentiment": (sent_sum[tk] / c) if c else 0.0,
+            "reddit_mentions": round(c, 2),
+            "reddit_sentiment": round(sent_sum[tk] / c, 4) if c else 0.0,
         }
     return results

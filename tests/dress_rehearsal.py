@@ -49,10 +49,16 @@ class FakeResponse:
 
 
 def _news_rss(ticker: str) -> str:
+    # Two fresh items plus one stale (40 days old) that recency must discount.
+    now = dt.datetime.now(dt.timezone.utc)
+    fresh = now.strftime("%a, %d %b %Y %H:%M:%S GMT")
+    stale = (now - dt.timedelta(days=40)).strftime("%a, %d %b %Y %H:%M:%S GMT")
+    phrases = [("surges on earnings beat", fresh),
+               ("attracts analyst upgrades", fresh),
+               ("saw unusual volume last quarter", stale)]
     items = "".join(
-        f"<item><title>{ticker} stock {phrase}</title></item>"
-        for phrase in ("surges on earnings beat", "attracts analyst upgrades",
-                       "sees unusual volume")
+        f"<item><title>{ticker} stock {p}</title><pubDate>{d}</pubDate></item>"
+        for p, d in phrases
     )
     return f'<?xml version="1.0"?><rss><channel>{items}</channel></rss>'
 
@@ -89,8 +95,10 @@ class FakeSession:
             return FakeResponse({"filings": {"recent": {
                 "form": ["4", "8-K", "10-Q"], "filingDate": [today, today, today]}}})
         if "reddit.com" in url:
+            now_ts = dt.datetime.now(dt.timezone.utc).timestamp()
             posts = [{"data": {"title": f"${t} to the moon, incredible setup",
-                               "selftext": f"{t} looks great"}} for t in TICKERS[:4]]
+                               "selftext": f"{t} looks great",
+                               "created_utc": now_ts - 3600}} for t in TICKERS[:4]]
             return FakeResponse({"data": {"children": posts}})
         if "news.google.com" in url:
             tk = next((t for t in TICKERS if t in url), TICKERS[0])
@@ -98,8 +106,10 @@ class FakeSession:
         if "trending/symbols" in url:
             return FakeResponse({"symbols": [{"symbol": t} for t in TICKERS[:2]]})
         if "streams/symbol" in url:
-            return FakeResponse({"messages": [{"body": "bullish breakout, loving this"},
-                                              {"body": "solid earnings, adding more"}]})
+            iso_now = dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+            return FakeResponse({"messages": [
+                {"body": "bullish breakout, loving this", "created_at": iso_now},
+                {"body": "solid earnings, adding more", "created_at": iso_now}]})
         if "action=opensearch" in url:
             name = url.split("search=")[-1]
             return FakeResponse([name, [f"{name} page"], [], []])
