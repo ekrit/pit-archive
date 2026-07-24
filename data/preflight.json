@@ -1,60 +1,62 @@
 {
-  "checked_at": "2026-07-24T20:13:58.241102+00:00",
+  "checked_at": "2026-07-24T20:30:34.943936+00:00",
   "sources": {
     "yahoo_screener": {
       "ok": true,
       "status": 200,
-      "ms": 210
+      "ms": 109
     },
     "yahoo_chart": {
       "ok": true,
       "status": 200,
-      "ms": 138
+      "ms": 145
     },
     "sec_tickers": {
       "ok": false,
       "status": 403,
-      "ms": 79
+      "ms": 68,
+      "body": "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\"> <html xmlns=\"http://www.w3.org/1999/xh"
     },
     "sec_submissions": {
       "ok": true,
       "status": 200,
-      "ms": 59
+      "ms": 143
     },
     "google_news_rss": {
       "ok": true,
       "status": 200,
-      "ms": 420
+      "ms": 533
     },
     "reddit_json": {
       "ok": false,
       "status": 403,
-      "ms": 78
+      "ms": 136,
+      "body": "<body class=theme-beta><div><style>.theme-light,:root{--rem360:22.5rem;--rem320:20rem;--rem192:12rem;--rem144:9rem;--rem128:8rem;--rem96:6rem;--rem90:5.625rem;-"
     },
     "stocktwits": {
       "ok": true,
       "status": 200,
-      "ms": 230
+      "ms": 101
     },
     "wikimedia_pageviews": {
       "ok": true,
       "status": 200,
-      "ms": 106
+      "ms": 99
     },
     "finra_regsho": {
       "ok": true,
       "status": 200,
-      "ms": 130
-    },
-    "sec_tickers_mirror": {
-      "ok": false,
-      "status": 404,
-      "ms": 54
+      "ms": 174
     },
     "nasdaq_listing": {
       "ok": true,
       "status": 200,
-      "ms": 342
+      "ms": 190
+    },
+    "wikipedia_search": {
+      "ok": true,
+      "status": 200,
+      "ms": 118
     }
   }
 }
