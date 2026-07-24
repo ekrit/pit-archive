@@ -42,6 +42,13 @@ REDDIT_REQUEST_DELAY_SECONDS = 2
 # Google News RSS query template, no auth required.
 NEWS_ARTICLES_PER_TICKER = 15
 
+# Threaded fetching (see scraper/parallel.py): worker cap and per-host request
+# rates. Politeness is governed by the rate limits, not the thread count.
+PARALLEL_WORKERS = int(os.environ.get("PARALLEL_WORKERS", "8"))
+NEWS_RATE_PER_SEC = 3.0
+STOCKTWITS_RATE_PER_SEC = 2.0
+WIKI_RATE_PER_SEC = 5.0
+
 # Extra tickers to always include regardless of what screeners surface,
 # one per line, '#' comments allowed.
 WATCHLIST_FILE = os.path.join(
@@ -64,13 +71,16 @@ FULL_MARKET_ARCHIVE = os.environ.get("FULL_MARKET_ARCHIVE", "0") == "1"
 # Composite scoring weights. These are heuristic and not derived from any
 # validated backtest -- tune based on your own evaluation.
 SCORE_WEIGHTS = {
-    "price_momentum": 0.30,
-    "volume_spike": 0.20,
-    "news_buzz": 0.15,
-    "news_sentiment": 0.10,
-    "reddit_buzz": 0.15,
+    "price_momentum": 0.25,
+    "volume_spike": 0.15,
+    "news_buzz": 0.12,
+    "news_sentiment": 0.08,
+    "reddit_buzz": 0.12,
     "reddit_sentiment": 0.05,
     "sec_activity": 0.05,
+    "st_attention": 0.08,     # Stocktwits trending + message volume
+    "wiki_attention": 0.05,   # Wikipedia pageview spike
+    "short_pressure": 0.05,   # FINRA short-volume ratio
 }
 
 TOP_N_RESULTS = 25

@@ -11,7 +11,7 @@ import json
 import os
 
 from . import config, universe, store
-from .sources import prices, sec_filings, news, reddit
+from .sources import prices, sec_filings, news, reddit, stocktwits, wikipedia, short_interest
 from .scoring import score
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -75,7 +75,16 @@ def run(limit: int | None, use_reddit: bool, use_sec: bool, use_news: bool) -> d
         total = sum(v.get("reddit_mentions", 0) for v in reddit_out.values())
         print(f"[reddit] {total} total mentions")
 
-    merged = _merge(price_out, news_out, sec_out, reddit_out, tickers=tickers)
+    # Additional attention/positioning sources (all free, best-effort).
+    st_out = stocktwits.fetch(tickers)
+    print(f"[stocktwits] {sum(1 for v in st_out.values() if v.get('st_msg_count'))} with messages")
+    wiki_out = wikipedia.fetch(tickers)
+    print(f"[wikipedia] {sum(1 for v in wiki_out.values() if v.get('wiki_views_7d'))} with views")
+    short_out = short_interest.fetch(tickers)
+    print(f"[finra] {sum(1 for v in short_out.values() if v.get('short_vol_ratio') is not None)} with short ratio")
+
+    merged = _merge(price_out, news_out, sec_out, reddit_out, st_out, wiki_out,
+                    short_out, tickers=tickers)
     ranked = score(merged)
 
     return {

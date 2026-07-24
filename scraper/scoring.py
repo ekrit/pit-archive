@@ -64,6 +64,15 @@ def score(merged: dict[str, dict]) -> list[dict]:
     news_sentiment = sentiment01("news_sentiment")
     reddit_sentiment = sentiment01("reddit_sentiment")
 
+    # Stocktwits attention: trending flag dominates, message count adds nuance.
+    st_raw = {}
+    for tk in tickers:
+        r = merged[tk]
+        st_raw[tk] = (r.get("st_trending") or 0.0) * 100 + (r.get("st_msg_count") or 0)
+    st_attention = _percentile_rank(st_raw)
+    wiki_attention = _percentile_rank(_collect(merged, "wiki_spike_ratio"))
+    short_pressure = _percentile_rank(_collect(merged, "short_vol_ratio"))
+
     w = config.SCORE_WEIGHTS
     out = []
     for tk in tickers:
@@ -75,6 +84,9 @@ def score(merged: dict[str, dict]) -> list[dict]:
             "reddit_buzz": reddit_buzz[tk],
             "reddit_sentiment": reddit_sentiment[tk],
             "sec_activity": sec_activity[tk],
+            "st_attention": st_attention[tk],
+            "wiki_attention": wiki_attention[tk],
+            "short_pressure": short_pressure[tk],
         }
         composite = sum(components[k] * w[k] for k in w)
         out.append(

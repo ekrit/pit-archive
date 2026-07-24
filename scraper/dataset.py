@@ -28,6 +28,8 @@ BASE_FEATURE_KEYS = [
     "pct_off_52w_high", "pct_above_52w_low", "annualized_vol",
     "news_count", "news_sentiment", "reddit_mentions", "reddit_sentiment",
     "sec_form4_recent", "sec_8k_recent",
+    "st_trending", "st_msg_count", "st_sentiment",
+    "wiki_views_7d", "wiki_spike_ratio", "short_vol_ratio",
 ]
 FEATURE_KEYS = BASE_FEATURE_KEYS + factors.FACTOR_NAMES
 
@@ -94,6 +96,18 @@ def compile_labeled(horizon: int = 63, tolerance: int = 7, write: bool = True) -
             "fwd_ret": p1 / p0 - 1.0,
             "horizon_days": horizon,
         })
+
+    # Relative forward return: raw return minus the same-date cross-sectional
+    # median. This is the better modeling target — it strips the market-wide
+    # move (beta) out of the label, so a signal must pick WHICH names outrun
+    # their peers, not merely notice that everything rose together.
+    from collections import defaultdict
+    by_date: dict[str, list[float]] = defaultdict(list)
+    for e in examples:
+        by_date[e["date"]].append(e["fwd_ret"])
+    medians = {d: sorted(v)[len(v) // 2] for d, v in by_date.items()}
+    for e in examples:
+        e["rel_ret"] = e["fwd_ret"] - medians[e["date"]]
 
     if write:
         os.makedirs(DATASET_DIR, exist_ok=True)

@@ -40,19 +40,25 @@ def _headlines(session, url: str) -> list[str]:
 
 
 def fetch(tickers: list[str]) -> dict[str, dict]:
+    """Threaded fetch — pacing enforced by a shared rate limiter, not sleeps."""
+    from .. import parallel
+
     session = make_session()
-    results: dict[str, dict] = {}
-    for tk in tickers:
+
+    def one(tk: str) -> dict:
         url = _RSS_TEMPLATE.format(query=_query_for(tk))
         titles = _headlines(session, url)[: config.NEWS_ARTICLES_PER_TICKER]
         if not titles:
-            results[tk] = {"news_count": 0, "news_sentiment": 0.0}
-            time.sleep(0.4)
-            continue
+            return {"news_count": 0, "news_sentiment": 0.0}
         scores = [_analyzer.polarity_scores(t)["compound"] for t in titles]
-        results[tk] = {
+        return {
             "news_count": len(titles),
             "news_sentiment": sum(scores) / len(scores),
         }
-        time.sleep(0.5)  # be polite to the RSS endpoint
-    return results
+
+    return parallel.fetch_map(
+        tickers, one,
+        max_workers=config.PARALLEL_WORKERS,
+        rate_per_sec=config.NEWS_RATE_PER_SEC,
+        default={"news_count": 0, "news_sentiment": 0.0},
+    )

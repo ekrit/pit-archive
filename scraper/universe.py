@@ -88,13 +88,22 @@ def full_market(session=None) -> list[str]:
     data = get_json(session, _SEC_TICKERS_URL,
                     headers={"User-Agent": config.SEC_USER_AGENT})
     tickers: set[str] = set()
+    names: dict[str, str] = {}
     if isinstance(data, dict):
         for entry in data.values():
             sym = str(entry.get("ticker", "")).upper().replace("/", "-")
             if _TICKER_RE.match(sym):
                 tickers.add(sym)
+                title = entry.get("title")
+                if title:
+                    names[sym] = str(title)
     ordered = sorted(tickers)
     if ordered:
         with open(cache, "w") as fh:
             json.dump({"date": today, "tickers": ordered}, fh)
+        # Ticker -> company-name map, used by the Wikipedia attention source.
+        names_path = os.path.join(os.path.dirname(config.WATCHLIST_FILE),
+                                  "sec_company_names.json")
+        with open(names_path, "w") as fh:
+            json.dump(names, fh)
     return ordered

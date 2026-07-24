@@ -42,6 +42,23 @@ score. Results are written to:
 A ranked list is worthless if the signals don't predict anything. The
 evaluation layer answers "which of these scrapers actually has edge?" honestly:
 
+- **New attention/positioning sources** (all free, no key):
+  [Stocktwits public API](https://api.stocktwits.com/api/2/trending/symbols.json)
+  (trending flag + message sentiment),
+  [Wikimedia pageviews](https://wikimedia.org/api/rest_v1/) (attention-spike
+  ratio — an academically documented investor-attention proxy), and
+  [FINRA Reg SHO daily short volume](https://www.finra.org/rules-guidance/notices/information-notice-051019)
+  (whole-market short-pressure ratio from one file per day).
+- **`scraper/parallel.py`** threads every per-ticker source through a shared
+  token-bucket rate limiter with retries — ~8-10x faster collection at the same
+  politeness per host.
+- **Purged + embargoed walk-forward** (`scraper/model.py`): training rows whose
+  forward-return window overlaps the test period are dropped (López de Prado,
+  *Advances in Financial ML* ch.7) — removing the subtle leak that inflates
+  naive financial backtests.
+- **Market-neutral labels**: the dataset stores `rel_ret` (return minus
+  same-date universe median) alongside raw `fwd_ret`, so models learn to pick
+  *which names beat their peers* rather than "the market went up."
 - **`scraper/factors.py`** computes a 46-factor battery (candle geometry +
   rolling momentum/volatility/volume families) inspired by
   [Microsoft Qlib's Alpha158](https://github.com/microsoft/qlib) — the

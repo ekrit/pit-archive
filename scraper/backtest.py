@@ -39,6 +39,12 @@ ATTENTION_SIGNALS = [
     "reddit_sentiment",
     "sec_form4_recent",
     "sec_8k_recent",
+    "st_trending",
+    "st_msg_count",
+    "st_sentiment",
+    "wiki_views_7d",
+    "wiki_spike_ratio",
+    "short_vol_ratio",
 ]
 
 

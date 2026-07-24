@@ -265,6 +265,80 @@ def test_turnover_and_ic_decay():
     print("  turnover + IC decay OK")
 
 
+def test_regsho_parser():
+    from scraper.sources import short_interest
+    text = ("Date|Symbol|ShortVolume|ShortExemptVolume|TotalVolume|Market\n"
+            "20260724|AAA|600|0|1000|B,Q,N\n"
+            "20260724|BBB|100|0|400|B\n"
+            "20260724|BAD|x|0|100|B\n"
+            "20260724|ZRO|50|0|0|B\n")
+    parsed = short_interest.parse_regsho(text)
+    assert parsed == {"AAA": 0.6, "BBB": 0.25}, parsed
+    print("  FINRA Reg SHO parser OK")
+
+
+def test_parallel_fetch_map():
+    from scraper import parallel
+    calls = {"n": 0}
+
+    def fn(k):
+        calls["n"] += 1
+        if k == "bad" and calls["n"] < 100:  # always fails
+            raise ValueError("boom")
+        return k.upper()
+
+    out = parallel.fetch_map(["a", "b", "bad"], fn, max_workers=3,
+                             rate_per_sec=1000, retries=1, default="FAIL")
+    assert out["a"] == "A" and out["b"] == "B"
+    assert out["bad"] == "FAIL", "failures must degrade to default, not raise"
+    # Rate limiter actually paces: 5 calls at 50/s take >= ~80ms.
+    import time as _t
+    lim = parallel.RateLimiter(50)
+    t0 = _t.monotonic()
+    for _ in range(5):
+        lim.acquire()
+    assert _t.monotonic() - t0 >= 0.06
+    print("  parallel fetch_map (retries, defaults, rate limit) OK")
+
+
+def test_purged_walk_forward():
+    from scraper.model import _purge_train_indices
+    # 10 training rows dated day 0..9, horizon 5 days; test starts day 12.
+    ex = [{"date": (dt.date(2026, 1, 1) + dt.timedelta(days=i)).isoformat(),
+           "horizon_days": 5} for i in range(10)]
+    test_start = (dt.date(2026, 1, 1) + dt.timedelta(days=12)).isoformat()
+    keep = _purge_train_indices(ex, 10, test_start, embargo_days=0)
+    # Row i's label window ends day i+5; must end BEFORE day 12 => i+5 < 12 => i <= 6.
+    assert list(keep) == [0, 1, 2, 3, 4, 5, 6], list(keep)
+    # With a 2-day embargo the cutoff moves to day 10 => i+5 < 10 => i <= 4.
+    keep_e = _purge_train_indices(ex, 10, test_start, embargo_days=2)
+    assert list(keep_e) == [0, 1, 2, 3, 4], list(keep_e)
+    print("  purged/embargoed walk-forward indices OK")
+
+
+def test_relative_returns():
+    with tempfile.TemporaryDirectory() as tmp:
+        store = _fresh_store(tmp)
+        import scraper.dataset as dataset
+        importlib.reload(dataset)
+        dataset.store = store
+        dataset.DATASET_DIR = os.path.join(tmp, "dataset")
+        # Three tickers, same date; market (median) rises 10%, AAA rises 30%.
+        store.append_snapshot(
+            [{"ticker": t, "score": 50, "features": {"last_price": 100.0}}
+             for t in ("AAA", "BBB", "CCC")], date="2026-01-01")
+        store.append_prices({
+            "AAA": {"2026-01-01": 100.0, "2026-03-05": 130.0},
+            "BBB": {"2026-01-01": 100.0, "2026-03-05": 110.0},
+            "CCC": {"2026-01-01": 100.0, "2026-03-05": 105.0},
+        })
+        ex = dataset.compile_labeled(horizon=63, tolerance=10, write=False)
+        rel = {e["ticker"]: e["rel_ret"] for e in ex}
+        assert approx(rel["AAA"], 0.20, tol=1e-9), rel  # 30% - 10% median
+        assert approx(rel["BBB"], 0.0, tol=1e-9), rel   # the median itself
+        print("  relative (market-neutral) labels OK")
+
+
 def main():
     print("Running self-tests...")
     test_metrics()
@@ -277,6 +351,10 @@ def main():
     test_factor_library()
     test_warehouse_roundtrip()
     test_turnover_and_ic_decay()
+    test_regsho_parser()
+    test_parallel_fetch_map()
+    test_purged_walk_forward()
+    test_relative_returns()
     print("ALL SELF-TESTS PASSED")
 
 

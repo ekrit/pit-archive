@@ -101,10 +101,43 @@ def label_top_quantile(examples: list[dict], top_frac: float = 0.2) -> np.ndarra
     return y
 
 
+def _purge_train_indices(ex: list[dict], tr_end: int, test_start_date: str,
+                         embargo_days: int = 0) -> np.ndarray:
+    """Purged + embargoed training indices (Lopez de Prado, AFML ch.7).
+
+    A training example whose forward-return window [date, date+horizon] reaches
+    into the test period leaks the test period's prices into training labels.
+    Purging drops any training row whose label window ends on/after the test
+    start (minus an optional embargo buffer).
+    """
+    import datetime as dt
+
+    t0 = dt.date.fromisoformat(test_start_date[:10])
+    cutoff = t0 - dt.timedelta(days=embargo_days)
+    keep = []
+    for i in range(tr_end):
+        d = ex[i].get("date")
+        h = int(ex[i].get("horizon_days", 0) or 0)
+        try:
+            label_end = dt.date.fromisoformat(str(d)[:10]) + dt.timedelta(days=h)
+        except (ValueError, TypeError):
+            continue
+        if label_end < cutoff:
+            keep.append(i)
+    return np.array(keep, dtype=int)
+
+
 def walk_forward(
-    examples: list[dict], feature_keys: list[str], n_folds: int = 4, top_frac: float = 0.2
+    examples: list[dict], feature_keys: list[str], n_folds: int = 4,
+    top_frac: float = 0.2, embargo_days: int = 2,
 ) -> dict:
-    """Expanding-window walk-forward evaluation. Returns OOS AUC and IC."""
+    """Purged, embargoed, expanding-window walk-forward. Returns OOS AUC/IC.
+
+    Purging matters because forward-return labels overlap in time: without it,
+    training rows near the fold boundary contain the test period's prices in
+    their labels — the subtle leak that makes naive financial backtests
+    look better than reality.
+    """
     ex = sorted(examples, key=lambda e: e.get("date", ""))
     if len(ex) < 40:
         return {"error": "not enough labeled examples for walk-forward (need >=40)",
@@ -117,14 +150,20 @@ def walk_forward(
     n = len(ex)
     fold_size = n // (n_folds + 1)
     oos_scores, oos_labels, oos_fwd = [], [], []
+    purged_total = 0
 
     for f in range(1, n_folds + 1):
         tr_end = fold_size * f
         te_end = min(fold_size * (f + 1), n)
         if te_end - tr_end < 5 or tr_end < 20:
             continue
-        Xtr_raw, Xte_raw = X_all[:tr_end], X_all[tr_end:te_end]
-        ytr = y_all[:tr_end]
+        tr_idx = _purge_train_indices(ex, tr_end, ex[tr_end].get("date", ""),
+                                      embargo_days)
+        purged_total += tr_end - len(tr_idx)
+        if len(tr_idx) < 20:
+            continue
+        Xtr_raw, Xte_raw = X_all[tr_idx], X_all[tr_end:te_end]
+        ytr = y_all[tr_idx]
         if len(np.unique(ytr)) < 2:
             continue
         Xtr, Xte = _standardize(Xtr_raw, Xte_raw)
@@ -149,6 +188,8 @@ def walk_forward(
     fwd = np.array(oos_fwd)
     return {
         "backend": "sklearn-HGB" if _HAVE_SKLEARN else "numpy-logreg",
+        "purged_rows": int(purged_total),
+        "embargo_days": embargo_days,
         "n_oos": int(s.size),
         "oos_auc": round(metrics.auc(s, lab), 4) if metrics.auc(s, lab) is not None else None,
         "oos_ic": round(metrics.spearman(s, fwd), 4) if metrics.spearman(s, fwd) is not None else None,
