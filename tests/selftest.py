@@ -677,6 +677,22 @@ def test_wikipedia_resolution():
     assert qs == ["Apple Inc.", "Apple", "AAPL"], qs
     assert wiki._search_queries("ZZZZ", "") == ["ZZZZ"]
 
+    # The NYSE-side listing appends descriptors with NO dash — the format that
+    # made 111/137 lookups send an unsearchable string and resolve to nothing.
+    for raw, want in [
+        ("Agnico Eagle Mines Limited Common Stock", "Agnico Eagle Mines"),
+        ("Aegon Ltd. New York Registry Shares", "Aegon Ltd."),
+        ("American Eagle Outfitters, Inc. Common Stock",
+         "American Eagle Outfitters, Inc."),   # leading qualifier kept
+        ("Alamos Gold Inc. Class A Common Shares", "Alamos Gold Inc."),
+        ("Advantage Solutions Inc.  - Class A Common Stock",
+         "Advantage Solutions Inc."),
+        ("AGNC Investment Corp. Common Stock", "AGNC Investment Corp."),
+        ("Artius II Acquisition Inc. - Rights", "Artius II Acquisition Inc."),
+    ]:
+        got = wiki._strip_descriptor(raw)
+        assert got == want, f"{raw!r} -> {got!r} (want {want!r})"
+
     calls = []
 
     class S:

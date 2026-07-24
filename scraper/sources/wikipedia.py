@@ -30,9 +30,25 @@ _SEARCH_URL = ("https://en.wikipedia.org/w/api.php?action=opensearch&limit=1"
                "&namespace=0&format=json&search={q}")
 _NEUTRAL = {"wiki_views_7d": 0, "wiki_spike_ratio": None}
 
-# Security-type descriptor after a dash, as used by NASDAQ listings:
+# Security-type descriptor after a dash, as used by the NASDAQ listing file:
 # "Artius II Acquisition Inc. - Class A Ordinary Shares" -> "Artius II Acquisition Inc."
 _DESCRIPTOR_RE = re.compile(r"\s+-\s+.*$")
+
+# The NYSE/other-listed file appends the same descriptors with NO dash
+# ("Agnico Eagle Mines Limited Common Stock", "Aegon Ltd. New York Registry
+# Shares"), which made the whole string the search query and matched nothing.
+# Strip a trailing descriptor phrase: qualifier words followed by a security
+# noun. Anchored at the end, so a company whose NAME starts with one of these
+# words (e.g. "American Eagle Outfitters") keeps it.
+_DESC_QUALIFIER = (
+    r"(?:class|series)\s+[A-Z0-9]{1,2}|new|york|registry|american|depositary|"
+    r"depository|subordinate|voting|ordinary|common|preferred|capital|"
+    r"beneficial|redeemable|convertible|non|par|value|limited|partnership"
+)
+_TRAILING_DESC_RE = re.compile(
+    rf"[\s,\-]+(?:(?:{_DESC_QUALIFIER})\s+)*"
+    r"(?:stock|shares?|units?|rights?|warrants?|interests?)\s*$",
+    re.IGNORECASE)
 # Legal suffixes that hurt Wikipedia title matching.
 _SUFFIX_RE = re.compile(
     r",?\s+(inc|corp|corporation|co|company|ltd|plc|holdings|group|sa|nv|ag|"
@@ -86,8 +102,13 @@ def _company_names() -> dict[str, str]:
 
 
 def _strip_descriptor(name: str) -> str:
-    """Drop the NASDAQ security-type descriptor after ' - '."""
-    return _DESCRIPTOR_RE.sub("", name or "").strip()
+    """Drop the security-type descriptor, dash-separated or not."""
+    name = _DESCRIPTOR_RE.sub("", name or "").strip()
+    prev = None
+    while prev != name:  # e.g. "... Common Stock" then a leftover qualifier
+        prev = name
+        name = _TRAILING_DESC_RE.sub("", name).strip(" ,-")
+    return name
 
 
 def _clean_name(name: str) -> str:

@@ -77,7 +77,9 @@ def probe() -> dict:
                 # The body explains WHY: SEC returns a specific "undeclared
                 # automated tool" page for User-Agent policy rejections, which
                 # is a different fix from an IP block.
-                entry["body"] = " ".join(resp.text[:160].split())
+                # Long enough to reach SEC's actual message, which sits below
+                # a boilerplate XHTML doctype header.
+                entry["body"] = " ".join(resp.text.split())[:600]
             results[name] = entry
         except Exception as e:  # noqa: BLE001
             ms = int((time.monotonic() - t0) * 1000)
