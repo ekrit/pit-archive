@@ -1,50 +1,60 @@
 {
-  "checked_at": "2026-07-24T18:50:11.834131+00:00",
+  "checked_at": "2026-07-24T19:29:59.796673+00:00",
   "sources": {
     "yahoo_screener": {
       "ok": true,
       "status": 200,
-      "ms": 94
+      "ms": 254
     },
     "yahoo_chart": {
       "ok": true,
       "status": 200,
-      "ms": 137
+      "ms": 223
     },
     "sec_tickers": {
       "ok": false,
       "status": 403,
-      "ms": 93
+      "ms": 177
     },
     "sec_submissions": {
       "ok": true,
       "status": 200,
-      "ms": 62
+      "ms": 191
     },
     "google_news_rss": {
       "ok": true,
       "status": 200,
-      "ms": 373
+      "ms": 448
     },
     "reddit_json": {
       "ok": false,
       "status": 403,
-      "ms": 125
+      "ms": 177
     },
     "stocktwits": {
       "ok": true,
       "status": 200,
-      "ms": 88
+      "ms": 193
     },
     "wikimedia_pageviews": {
       "ok": true,
       "status": 200,
-      "ms": 50
+      "ms": 785
     },
     "finra_regsho": {
       "ok": true,
       "status": 200,
-      "ms": 112
+      "ms": 192
+    },
+    "sec_tickers_mirror": {
+      "ok": false,
+      "status": 404,
+      "ms": 84
+    },
+    "nasdaq_listing": {
+      "ok": true,
+      "status": 200,
+      "ms": 505
     }
   }
 }

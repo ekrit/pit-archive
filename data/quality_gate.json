@@ -1,7 +1,7 @@
 {
   "date": "2026-07-24",
-  "n_tickers": 121,
-  "checked_at": "2026-07-24T18:58:14.291508+00:00",
+  "n_tickers": 127,
+  "checked_at": "2026-07-24T19:47:04.070480+00:00",
   "families": {
     "prices": {
       "alive_fraction": 1.0,
@@ -16,13 +16,13 @@
       "status": "OK"
     },
     "news": {
-      "alive_fraction": 1.0,
+      "alive_fraction": 0.976,
       "floor": 0.2,
       "trailing_avg": null,
       "status": "OK"
     },
     "stocktwits": {
-      "alive_fraction": 1.0,
+      "alive_fraction": 0.795,
       "floor": 0.2,
       "trailing_avg": null,
       "status": "OK"
@@ -34,10 +34,10 @@
       "status": "OK"
     },
     "wikipedia": {
-      "alive_fraction": 0.116,
+      "alive_fraction": 0.079,
       "floor": 0.1,
       "trailing_avg": null,
-      "status": "OK"
+      "status": "DEAD"
     },
     "sec_filings": {
       "alive_fraction": 0.0,
