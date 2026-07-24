@@ -65,9 +65,32 @@ def _signal_values(bucket: list[dict], key: str) -> np.ndarray:
     return np.array([v if isinstance(v, (int, float)) else np.nan for v in vals], dtype=float)
 
 
+def _residualize(sig: np.ndarray, base: np.ndarray) -> np.ndarray:
+    """Residual of sig after removing its linear dependence on base (per date).
+
+    The neutralized IC answers the question that separates a genuinely new
+    signal from repackaged momentum: does it still rank winners after the
+    momentum everyone already has is stripped out?
+    """
+    mask = np.isfinite(sig) & np.isfinite(base)
+    out = np.full_like(sig, np.nan)
+    if mask.sum() < 3:
+        return out
+    s, b = sig[mask], base[mask]
+    bv = b - b.mean()
+    denom = (bv ** 2).sum()
+    beta = ((s - s.mean()) * bv).sum() / denom if denom > 0 else 0.0
+    out[mask] = s - beta * b
+    return out
+
+
+NEUTRALIZE_AGAINST = "ret_21d"  # the baseline everyone already has
+
+
 def evaluate_signal(examples: list[dict], key: str, min_names_per_date: int = 5) -> dict:
-    """Per-date IC then summarize; plus pooled decile spread and hit rate."""
+    """Per-date IC (raw + momentum-neutralized); pooled decile spread, hit rate."""
     per_date_ic: list[float] = []
+    per_date_neut: list[float] = []
     for _, bucket in _group_by_date(examples).items():
         if len(bucket) < min_names_per_date:
             continue
@@ -76,8 +99,14 @@ def evaluate_signal(examples: list[dict], key: str, min_names_per_date: int = 5)
         ic = metrics.spearman(sig, fwd)
         if ic is not None:
             per_date_ic.append(ic)
+        if key not in ("__score__", NEUTRALIZE_AGAINST):
+            base = _signal_values(bucket, NEUTRALIZE_AGAINST)
+            nic = metrics.spearman(_residualize(sig, base), fwd)
+            if nic is not None:
+                per_date_neut.append(nic)
 
     summ = metrics.ic_summary(per_date_ic)
+    neut = metrics.ic_summary(per_date_neut) if per_date_neut else None
 
     # Pooled economic metrics (across all examples).
     all_sig = _signal_values(examples, key)
@@ -88,6 +117,8 @@ def evaluate_signal(examples: list[dict], key: str, min_names_per_date: int = 5)
     return {
         "signal": key if key != "__score__" else "composite_score",
         **summ,
+        "neut_ic": neut["mean_ic"] if neut else None,
+        "neut_t_stat": neut["t_stat"] if neut else None,
         "decile_spread": spread["spread"],
         "top_decile_ret": spread["top"],
         "bottom_decile_ret": spread["bottom"],
@@ -159,8 +190,8 @@ def to_markdown(rows: list[dict], title: str = "Signal Evaluation") -> str:
         "IC = cross-sectional Spearman corr of signal vs forward return, averaged over dates. "
         "A consistent mean IC ≥ ~0.03 with |t-stat| ≥ 2 is a genuinely useful signal.",
         "",
-        "| Signal | mean IC | IC t-stat | dates | decile spread | top-quintile hit | turnover |",
-        "|--------|--------:|----------:|------:|--------------:|-----------------:|---------:|",
+        "| Signal | mean IC | IC t-stat | neut IC | dates | decile spread | top-quintile hit | turnover |",
+        "|--------|--------:|----------:|--------:|------:|--------------:|-----------------:|---------:|",
     ]
     for r in rows:
         def f(x, pct=False):
@@ -170,6 +201,7 @@ def to_markdown(rows: list[dict], title: str = "Signal Evaluation") -> str:
         lines.append(
             f"| {r['signal']} | {f(r['mean_ic'])} | "
             f"{r['t_stat'] if r['t_stat'] is not None else '—'} | "
+            f"{f(r.get('neut_ic'))} | "
             f"{r['n']} | {f(r['decile_spread'], pct=True)} | "
             f"{f(r['top_quintile_hit_rate'])} | "
             f"{f(r.get('turnover'))} |"

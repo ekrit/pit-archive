@@ -14,11 +14,13 @@ def make_session(user_agent: str | None = None) -> requests.Session:
     return session
 
 
-def get_json(session: requests.Session, url: str, *, params: dict | None = None, retries: int = 3):
+def get_json(session: requests.Session, url: str, *, params: dict | None = None,
+             headers: dict | None = None, retries: int = 3):
     """GET returning parsed JSON, or None on repeated failure. Never raises."""
     for attempt in range(retries):
         try:
-            resp = session.get(url, params=params, timeout=config.REQUEST_TIMEOUT_SECONDS)
+            resp = session.get(url, params=params, headers=headers,
+                               timeout=config.REQUEST_TIMEOUT_SECONDS)
             if resp.status_code == 200:
                 return resp.json()
             # 429/403 -> back off and retry

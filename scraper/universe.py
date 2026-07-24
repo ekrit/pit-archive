@@ -106,4 +106,15 @@ def full_market(session=None) -> list[str]:
                                   "sec_company_names.json")
         with open(names_path, "w") as fh:
             json.dump(names, fh)
+        return ordered
+    # Live fetch blocked (www.sec.gov 403s many cloud IPs): fall back to the
+    # committed cache even if stale — listings churn slowly.
+    if os.path.exists(cache):
+        try:
+            with open(cache) as fh:
+                payload = json.load(fh)
+            if payload.get("tickers"):
+                return payload["tickers"]
+        except (json.JSONDecodeError, OSError):
+            pass
     return ordered

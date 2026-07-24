@@ -339,6 +339,48 @@ def test_relative_returns():
         print("  relative (market-neutral) labels OK")
 
 
+def test_neutralized_ic():
+    # 'shadow' is momentum in disguise (0.99 corr with ret_21d): raw IC looks
+    # great, neutralized IC must collapse toward 0. 'fresh' is independent
+    # alpha: neutralization must preserve it.
+    rng = np.random.default_rng(3)
+    examples = []
+    for d in range(10):
+        date = (dt.date(2026, 1, 1) + dt.timedelta(days=d * 30)).isoformat()
+        for i in range(40):
+            mom = rng.normal()
+            fresh = rng.normal()
+            fwd = 0.5 * mom + 0.5 * fresh + rng.normal(scale=0.3)
+            examples.append({
+                "date": date, "ticker": f"T{i}",
+                "features": {"ret_21d": mom, "shadow": mom + rng.normal(scale=0.05),
+                             "fresh": fresh},
+                "fwd_ret": fwd,
+            })
+    rows = {r["signal"]: r for r in backtest.run(examples,
+                                                 signals=["ret_21d", "shadow", "fresh"])}
+    assert rows["shadow"]["mean_ic"] > 0.3, rows["shadow"]  # raw looks strong
+    assert abs(rows["shadow"]["neut_ic"]) < 0.15, rows["shadow"]  # exposed as momentum
+    assert rows["fresh"]["neut_ic"] > 0.3, rows["fresh"]  # true alpha survives
+    print("  neutralized IC (kills momentum-in-disguise, keeps real alpha) OK")
+
+
+def test_http_get_json_headers():
+    from scraper import http
+
+    class S:
+        def get(self, url, params=None, headers=None, timeout=None):
+            class R:
+                status_code = 200
+                def json(self):
+                    return {"h": headers}
+            return R()
+
+    out = http.get_json(S(), "http://x", headers={"User-Agent": "ua"})
+    assert out == {"h": {"User-Agent": "ua"}}, out
+    print("  get_json passes custom headers OK")
+
+
 def main():
     print("Running self-tests...")
     test_metrics()
@@ -355,6 +397,8 @@ def main():
     test_parallel_fetch_map()
     test_purged_walk_forward()
     test_relative_returns()
+    test_neutralized_ic()
+    test_http_get_json_headers()
     print("ALL SELF-TESTS PASSED")
 
 

@@ -11,6 +11,8 @@ SEC asks for a descriptive User-Agent and rate limits to ~10 req/s. We map
 tickers to CIK via the public company_tickers.json.
 """
 import datetime as dt
+import json
+import os
 import time
 
 from .. import config
@@ -19,18 +21,35 @@ from ..http import make_session, get_json
 _TICKER_MAP_URL = "https://www.sec.gov/files/company_tickers.json"
 _SUBMISSIONS_URL = "https://data.sec.gov/submissions/CIK{cik:010d}.json"
 _LOOKBACK_DAYS = 45
+# www.sec.gov 403s many cloud IPs (GitHub runners included) while data.sec.gov
+# stays open. The CIK map is committed to the repo as a cache, so a 403 on the
+# live fetch degrades to yesterday's map instead of losing the whole source.
+_CIK_CACHE = os.path.join(os.path.dirname(config.WATCHLIST_FILE), "cik_map.json")
 
 
 def _load_cik_map(session) -> dict[str, int]:
     data = get_json(session, _TICKER_MAP_URL)
     out: dict[str, int] = {}
-    if not data:
+    if data:
+        for row in data.values():
+            try:
+                out[row["ticker"].upper()] = int(row["cik_str"])
+            except (KeyError, ValueError, TypeError):
+                continue
+        if out:  # refresh the committed cache for the next blocked run
+            try:
+                with open(_CIK_CACHE, "w") as fh:
+                    json.dump(out, fh)
+            except OSError:
+                pass
         return out
-    for row in data.values():
+    # Live fetch blocked -> committed cache.
+    if os.path.exists(_CIK_CACHE):
         try:
-            out[row["ticker"].upper()] = int(row["cik_str"])
-        except (KeyError, ValueError, TypeError):
-            continue
+            with open(_CIK_CACHE) as fh:
+                return {k: int(v) for k, v in json.load(fh).items()}
+        except (json.JSONDecodeError, OSError, ValueError):
+            pass
     return out
 
 

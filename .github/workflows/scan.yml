@@ -55,11 +55,16 @@ jobs:
         # becomes meaningful automatically as snapshots accumulate over weeks.
         run: python -m scraper.evaluate --from-store --horizon 63 || true
 
+      - name: Learned predictions (auto-activates once history suffices)
+        run: python -m scraper.predict || true
+
       - name: Commit results
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/rankings data/history data/dataset data/warehouse RANKINGS.md EVALUATION.md
+          # Whole data dir: rankings, history, dataset, warehouse, plus the
+          # cached SEC CIK/name maps that let blocked runs use yesterday's map.
+          git add data RANKINGS.md EVALUATION.md PREDICTIONS.md
           if git diff --staged --quiet; then
             echo "No changes to commit."
           else
