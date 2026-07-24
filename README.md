@@ -30,6 +30,48 @@ score. Results are written to:
 
 - `data/rankings/<YYYY-MM-DD>.json` — full detail, every ticker, every feature.
 - `RANKINGS.md` — human-readable top-25 table with a disclaimer header.
+- `data/history/features.jsonl` — an append-only, point-in-time snapshot of
+  every run. **This is the important one** — see below.
+
+## Measuring what actually works (the point of the whole thing)
+
+A ranked list is worthless if the signals don't predict anything. The
+evaluation layer answers "which of these scrapers actually has edge?" honestly:
+
+- **`scraper/store.py`** logs a point-in-time snapshot every run, so a
+  leakage-free labeled dataset accumulates over weeks/months. News/Reddit/SEC
+  signals can't be reconstructed historically — recording them now is the only
+  way to ever evaluate them.
+- **`scraper/labels.py`** turns snapshots into `(features → realized forward
+  return)` examples, and can reconstruct price features from raw history for an
+  immediate price-only backtest.
+- **`scraper/metrics.py` + `scraper/backtest.py`** compute each signal's
+  Information Coefficient (cross-sectional Spearman corr vs forward return,
+  averaged per-date with a t-stat), decile spread, and hit rate.
+- **`scraper/model.py`** trains a walk-forward model (pure-numpy logistic
+  regression, or gradient boosting if scikit-learn is installed) that *learns*
+  the weights and is scored strictly out-of-sample.
+
+Run it:
+
+```bash
+# Immediate price-signal backtest (works today, price signals only):
+python -m scraper.evaluate --from-prices --horizon 63 --limit 60
+
+# Evaluate accumulated multi-source history (grows meaningful over months):
+python -m scraper.evaluate --from-store --horizon 63
+```
+
+Both write [`EVALUATION.md`](EVALUATION.md) with a ranked signal table and the
+out-of-sample model result. **Read [`STRATEGY.md`](STRATEGY.md) for the full
+month-by-month playbook** — it's the honest answer to "how do I predict stock
+growth in a few months."
+
+The math is unit-tested against synthetic data with known answers:
+
+```bash
+python -m tests.selftest
+```
 
 ## How the candidate universe is built
 

@@ -10,7 +10,7 @@ import datetime as dt
 import json
 import os
 
-from . import config, universe
+from . import config, universe, store
 from .sources import prices, sec_filings, news, reddit
 from .scoring import score
 
@@ -78,6 +78,12 @@ def write_outputs(payload: dict) -> None:
     with open(json_path, "w") as fh:
         json.dump(payload, fh, indent=2)
     print(f"[write] {json_path}")
+
+    # Append a point-in-time snapshot so a labeled dataset accumulates over
+    # time. This is what makes real evaluation/training possible in a few
+    # months (see scraper/evaluate.py and STRATEGY.md).
+    n_rows = store.append_snapshot(payload["results"], date=date_str)
+    print(f"[store] appended {n_rows} snapshot rows to history")
 
     top = payload["results"][: config.TOP_N_RESULTS]
     lines = [
