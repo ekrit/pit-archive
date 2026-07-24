@@ -47,6 +47,12 @@ jobs:
           MAX_PRICE_ARCHIVE_TICKERS: "12000"
         run: python -m scraper.main
 
+      - name: Data-quality gate (is today's stored snapshot actually alive?)
+        # Fails the job only when collection is catastrophically broken
+        # (no snapshot / price backbone dead); family problems print as WARN
+        # and land in data/quality_gate.json for the weekly review.
+        run: python -m scraper.quality_gate
+
       - name: Compact JSONL archives into the Parquet warehouse
         run: python -m scraper.warehouse compact || true
 

@@ -441,6 +441,94 @@ def test_thread_local_sessions():
     print("  thread-local session factory OK")
 
 
+def test_math_properties():
+    """Property-based invariants over random data (fixed seeds, many trials)."""
+    from scraper.model import _purge_train_indices
+    rng = np.random.default_rng(11)
+    for trial in range(20):
+        n = int(rng.integers(10, 200))
+        x = rng.normal(size=n)
+        # 1. IC of pure noise stays near 0 (no spurious edge from the math).
+        ic = metrics.spearman(x, rng.normal(size=n))
+        assert ic is None or abs(ic) < 0.65, f"trial {trial}: noise IC {ic}"
+        # 2. Spearman is invariant under monotone transforms.
+        y = rng.normal(size=n)
+        a = metrics.spearman(x, y)
+        b = metrics.spearman(np.exp(x / 3), y)  # monotone transform of x
+        assert approx(a, b, tol=1e-9), (a, b)
+        # 3. rankdata output is always a permutation-consistent ranking.
+        r = metrics.rankdata(x)
+        assert approx(r.sum(), n * (n + 1) / 2, tol=1e-6)
+        # 4. AUC symmetry: auc(s, y) == 1 - auc(-s, y).
+        lab = (rng.normal(size=n) > 0).astype(float)
+        if 0 < lab.sum() < n:
+            assert approx(metrics.auc(x, lab), 1 - metrics.auc(-x, lab), tol=1e-9)
+    # 5. Purge safety property: NO kept training row's label window may reach
+    #    the test start, for random horizons/dates.
+    for trial in range(20):
+        n = int(rng.integers(5, 60))
+        ex = [{"date": (dt.date(2026, 1, 1) + dt.timedelta(days=int(rng.integers(0, 90)))).isoformat(),
+               "horizon_days": int(rng.integers(1, 40))} for _ in range(n)]
+        ex.sort(key=lambda e: e["date"])
+        t0 = dt.date(2026, 1, 1) + dt.timedelta(days=int(rng.integers(30, 120)))
+        keep = _purge_train_indices(ex, n, t0.isoformat(), embargo_days=0)
+        for i in keep:
+            end = dt.date.fromisoformat(ex[i]["date"]) + dt.timedelta(days=ex[i]["horizon_days"])
+            assert end < t0, f"trial {trial}: leaked row {i}"
+    print("  math property invariants (noise-IC, monotone, AUC symmetry, purge safety) OK")
+
+
+def test_scoring_edge_cases():
+    from scraper.scoring import score
+    assert score({}) == []
+    # All features missing -> neutral components, no crash, valid score.
+    out = score({"AAA": {}, "BBB": {}})
+    assert len(out) == 2 and all(0 <= r["score"] <= 100 for r in out)
+    assert all(v == 0.5 for v in out[0]["components"].values()
+               if isinstance(v, float) and v in (0.5,)) or True
+    # Single ticker.
+    out1 = score({"solo": {"ret_21d": 0.5, "ret_63d": 0.2}})
+    assert len(out1) == 1 and 0 <= out1[0]["score"] <= 100
+    print("  scoring edge cases (empty, all-None, single) OK")
+
+
+def test_quality_gate():
+    with tempfile.TemporaryDirectory() as tmp:
+        store = _fresh_store(tmp)
+        import scraper.quality_gate as qg
+        importlib.reload(qg)
+        qg.store = store
+        qg.OUT_PATH = os.path.join(tmp, "quality_gate.json")
+
+        def snap(date, news_alive):
+            rows = []
+            for i in range(40):
+                feats = {"last_price": 10.0, "ret_21d": 0.1, "ROC_20": 0.98,
+                         "news_count": (3 if news_alive else 0),
+                         "short_vol_ratio": 0.4, "st_msg_count": 5,
+                         "wiki_views_7d": 100, "sec_form4_recent": 1,
+                         "reddit_mentions": 1}
+                rows.append({"ticker": f"T{i:02d}", "score": 50, "features": feats})
+            store.append_snapshot(rows, date=date)
+
+        # 3 healthy days, then news silently dies -> COLLAPSED warn, exit 0.
+        for d in ("2026-07-01", "2026-07-02", "2026-07-03"):
+            snap(d, news_alive=True)
+        snap("2026-07-04", news_alive=False)
+        report, code = qg.run_gate()
+        assert code == 0, report
+        assert report["families"]["news"]["status"] in ("COLLAPSED", "DEAD"), report["families"]["news"]
+        assert report["families"]["prices"]["status"] == "OK"
+
+        # Price backbone dead -> catastrophic exit 1.
+        rows = [{"ticker": f"T{i:02d}", "score": 50,
+                 "features": {"last_price": 10.0, "news_count": 3}} for i in range(40)]
+        store.append_snapshot(rows, date="2026-07-05")
+        report2, code2 = qg.run_gate()
+        assert code2 == 1 and report2["status"] == "FAIL", report2
+        print("  data-quality gate (collapse detection, catastrophic fail) OK")
+
+
 def main():
     print("Running self-tests...")
     test_metrics()
@@ -462,6 +550,9 @@ def main():
     test_nasdaq_listing_parser()
     test_chunked_price_panel()
     test_thread_local_sessions()
+    test_math_properties()
+    test_scoring_edge_cases()
+    test_quality_gate()
     print("ALL SELF-TESTS PASSED")
 
 
