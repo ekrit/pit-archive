@@ -559,7 +559,53 @@ def main():
     test_wikipedia_resolution()
     test_cik_from_xbrl_frames()
     test_preflight_ua_parity()
+    test_sec_throttle_handling()
     print("ALL SELF-TESTS PASSED")
+
+
+def test_sec_throttle_handling():
+    """A throttle must be waited out; a real failure must not be."""
+    from scraper.sources import sec_filings as sf
+    import scraper.config as config
+
+    class Resp:
+        def __init__(self, code, text="", payload=None):
+            self.status_code, self.text, self._p = code, text, payload
+        def json(self):
+            if self._p is None:
+                raise ValueError("no json")
+            return self._p
+
+    throttle = Resp(403, "<title>SEC.gov | Request Rate Threshold Exceeded</title>")
+    blocked = Resp(403, "<title>Access Denied</title>")
+    assert sf.is_rate_limited(throttle) is True
+    assert sf.is_rate_limited(blocked) is False
+    assert sf.is_rate_limited(Resp(200, "ok")) is False
+    assert sf.is_rate_limited(None) is False
+
+    orig_backoff, orig_max = (config.SEC_THROTTLE_BACKOFF_SECONDS,
+                              config.SEC_THROTTLE_MAX_WAITS)
+    config.SEC_THROTTLE_BACKOFF_SECONDS, config.SEC_THROTTLE_MAX_WAITS = 0.01, 2
+    try:
+        # Throttled twice, then succeeds -> patient retry returns the payload.
+        seq = [throttle, throttle, Resp(200, "", {"ok": 1})]
+        class S1:
+            def get(self, url, headers=None, timeout=None): return seq.pop(0)
+        assert sf._get_json_patient(S1(), "u") == {"ok": 1}
+        assert not seq, "should have consumed all responses"
+
+        # A non-throttle failure returns immediately without burning retries.
+        calls = []
+        class S2:
+            def get(self, url, headers=None, timeout=None):
+                calls.append(1)
+                return blocked
+        assert sf._get_json_patient(S2(), "u") is None
+        assert len(calls) == 1, f"must not retry a hard block ({len(calls)} calls)"
+    finally:
+        config.SEC_THROTTLE_BACKOFF_SECONDS = orig_backoff
+        config.SEC_THROTTLE_MAX_WAITS = orig_max
+    print("  SEC throttle detection + patient retry OK")
 
 
 def test_preflight_ua_parity():

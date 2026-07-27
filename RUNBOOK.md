@@ -44,7 +44,8 @@ code, not data — sources degrade to neutral values rather than failing.
 | Yahoo endpoints 401/999 | Yahoo tightened anonymous access (happens periodically) | yfinance usually ships a workaround within days: bump the pin, re-run. Meanwhile screener universe falls back to watchlist + tracked names |
 | Reddit 403/429 | Anonymous JSON blocked | Accept neutral zeros short-term; the durable fix is free Reddit API credentials via PRAW |
 | Stocktwits 429 | Anonymous rate limit | Lower `STOCKTWITS_RATE_PER_SEC` to 0.5; it recovers |
-| SEC 403 | User-Agent not descriptive | Ensure `SEC_USER_AGENT` env is set with a real contact |
+| SEC 403 "Request Rate Threshold Exceeded" | SEC caps ~10 req/s **per IP**, and CI runners share outbound IPs with other tenants, so part of the budget is already spent before the run starts. Confirmed live: this is throttling, not a UA rejection or an IP ban | Handled automatically — requests are paced at `SEC_RATE_PER_SEC` (2/s) and a throttle is waited out (`SEC_THROTTLE_BACKOFF_SECONDS`). Once one fetch succeeds the CIK map is committed and reused, so later runs do not need it. If it persists for days, lower `SEC_RATE_PER_SEC` or run collection from a non-shared IP |
+| SEC 403 with a different message | Genuine block or UA policy | Set the `SEC_USER_AGENT` secret to `<project> <your-email>` |
 | Actions job hits 6h limit | Universe too large for runner | Lower `MAX_PRICE_ARCHIVE_TICKERS`, or move collection to a $5/mo VPS cron (same scripts, unchanged) |
 | Commit conflicts | Concurrent manual + scheduled runs | Safe: writes are idempotent upserts; re-run the job |
 | "No space" in Actions | Warehouse grew past runner disk | `SCALING.md` migration time |

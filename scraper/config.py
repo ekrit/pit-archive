@@ -56,6 +56,15 @@ NEWS_RATE_PER_SEC = 3.0
 STOCKTWITS_RATE_PER_SEC = 2.0
 WIKI_RATE_PER_SEC = 5.0
 
+# SEC publishes a 10 req/s cap PER IP. CI runners share outbound IPs with
+# other tenants, so the budget is already partly spent before we start —
+# observed live as "SEC.gov | Request Rate Threshold Exceeded" (HTTP 403).
+# Stay well under, and wait out a throttle rather than hammering through it.
+SEC_RATE_PER_SEC = float(os.environ.get("SEC_RATE_PER_SEC", "2.0"))
+SEC_THROTTLE_BACKOFF_SECONDS = float(
+    os.environ.get("SEC_THROTTLE_BACKOFF_SECONDS", "20"))
+SEC_THROTTLE_MAX_WAITS = int(os.environ.get("SEC_THROTTLE_MAX_WAITS", "3"))
+
 # Extra tickers to always include regardless of what screeners surface,
 # one per line, '#' comments allowed.
 WATCHLIST_FILE = os.path.join(

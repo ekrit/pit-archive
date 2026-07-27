@@ -90,8 +90,7 @@ def build_cik_map_from_frames(session, names: dict[str, str]) -> dict[str, int]:
 
     entities: list[dict] = []
     for year, quarter in quarters:
-        data = get_json(session, _FRAMES_URL.format(year=year, q=quarter),
-                        headers={"User-Agent": config.SEC_USER_AGENT})
+        data = _get_json_patient(session, _FRAMES_URL.format(year=year, q=quarter))
         if isinstance(data, dict) and data.get("data"):
             entities = data["data"]
             break
@@ -121,10 +120,48 @@ def build_cik_map_from_frames(session, names: dict[str, str]) -> dict[str, int]:
     return out
 
 
+def is_rate_limited(resp) -> bool:
+    """True when SEC is throttling rather than refusing us outright.
+
+    SEC answers 403 with a 'Request Rate Threshold Exceeded' page when an IP
+    exceeds its ~10 req/s budget — on shared CI runners that budget is partly
+    spent by other tenants. Distinguishing this from a real block matters:
+    a throttle clears if you wait, a block never does.
+    """
+    if resp is None or getattr(resp, "status_code", None) not in (403, 429):
+        return False
+    body = (getattr(resp, "text", "") or "")[:2000].lower()
+    return ("rate threshold" in body or "request rate" in body
+            or "too many requests" in body)
+
+
+def _get_json_patient(session, url: str):
+    """GET that waits out SEC throttling instead of hammering through it."""
+    for attempt in range(config.SEC_THROTTLE_MAX_WAITS + 1):
+        try:
+            resp = session.get(url, headers={"User-Agent": config.SEC_USER_AGENT},
+                               timeout=config.REQUEST_TIMEOUT_SECONDS)
+        except Exception:  # noqa: BLE001 - network hiccup
+            resp = None
+        if resp is not None and resp.status_code == 200:
+            try:
+                return resp.json()
+            except ValueError:
+                return None
+        if not is_rate_limited(resp):
+            return None  # genuine failure: no point waiting
+        if attempt < config.SEC_THROTTLE_MAX_WAITS:
+            wait = config.SEC_THROTTLE_BACKOFF_SECONDS * (attempt + 1)
+            print(f"[sec] throttled by SEC, waiting {wait:.0f}s "
+                  f"(attempt {attempt + 1}/{config.SEC_THROTTLE_MAX_WAITS})")
+            time.sleep(wait)
+    return None
+
+
 def _load_cik_map(session) -> dict[str, int]:
     out: dict[str, int] = {}
     for url in _TICKER_MAP_URLS:
-        data = get_json(session, url, headers={"User-Agent": config.SEC_USER_AGENT})
+        data = _get_json_patient(session, url)
         if not data:
             continue
         for row in data.values():
@@ -172,12 +209,17 @@ def fetch(tickers: list[str]) -> dict[str, dict]:
     cutoff = dt.date.today() - dt.timedelta(days=_LOOKBACK_DAYS)
     results: dict[str, dict] = {}
 
+    # Shared CI IPs already spend part of SEC's per-IP budget, so pace well
+    # under the published cap instead of racing to it.
+    from .. import parallel
+    limiter = parallel.RateLimiter(config.SEC_RATE_PER_SEC)
+
     for tk in tickers:
         cik = cik_map.get(tk.upper())
         if cik is None:
             continue
-        data = get_json(session, _SUBMISSIONS_URL.format(cik=cik))
-        time.sleep(0.15)  # stay under SEC's ~10 req/s fair-access limit
+        limiter.acquire()
+        data = _get_json_patient(session, _SUBMISSIONS_URL.format(cik=cik))
         if not data:
             continue
         try:
