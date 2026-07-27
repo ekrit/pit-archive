@@ -21,7 +21,20 @@ from .http import make_session
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT_PATH = os.path.join(ROOT, "data", "preflight.json")
 
-_Y = dt.date.today() - dt.timedelta(days=2)
+def _last_business_day(lag_days: int = 1) -> dt.date:
+    """Most recent weekday at least `lag_days` back.
+
+    Publishers like FINRA post nothing on weekends, so probing a fixed
+    'today - 2' lands on Saturday every Monday and reports a healthy source
+    as DOWN — a false alarm trains you to ignore the monitor.
+    """
+    d = dt.date.today() - dt.timedelta(days=lag_days)
+    while d.weekday() >= 5:
+        d -= dt.timedelta(days=1)
+    return d
+
+
+_Y = _last_business_day(2)
 
 # Which User-Agent each source actually uses. A probe that runs with a
 # different UA than the real source can report UP while the source is being

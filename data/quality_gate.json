@@ -1,7 +1,7 @@
 {
   "date": "2026-07-27",
   "n_tickers": 119,
-  "checked_at": "2026-07-27T08:04:12.138588+00:00",
+  "checked_at": "2026-07-27T08:12:18.341374+00:00",
   "families": {
     "prices": {
       "alive_fraction": 1.0,
@@ -43,13 +43,13 @@
       "alive_fraction": 0.0,
       "floor": 0.1,
       "trailing_avg": 0.0,
-      "status": "DEAD"
+      "status": "EXPECTED-DOWN"
     },
     "reddit": {
       "alive_fraction": 0.0,
       "floor": 0.01,
       "trailing_avg": 0.0,
-      "status": "DEAD"
+      "status": "EXPECTED-DOWN"
     }
   },
   "status": "OK"

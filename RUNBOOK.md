@@ -43,6 +43,28 @@ code, not data — sources degrade to neutral values rather than failing.
 |---|---|---|
 | Yahoo endpoints 401/999 | Yahoo tightened anonymous access (happens periodically) | yfinance usually ships a workaround within days: bump the pin, re-run. Meanwhile screener universe falls back to watchlist + tracked names |
 | Reddit 403/429 | Anonymous JSON blocked | Accept neutral zeros short-term; the durable fix is free Reddit API credentials via PRAW |
+
+### Known unavailable on shared CI runners
+
+`sec_filings` and `reddit` are listed in `EXPECTED_UNAVAILABLE`
+(`scraper/quality_gate.py`), so the gate reports them as **EXPECTED-DOWN**
+instead of DEAD. They are still collected every run, and the gate prints a
+loud "is ALIVE again" line the moment either starts returning data.
+
+Why they are down, and what would actually fix them:
+
+- **sec_filings** — SEC throttles by IP (`Request Rate Threshold Exceeded`),
+  and GitHub runners share outbound IPs with other tenants who have already
+  spent the budget. Our own pacing (2 req/s) and patient backoff are not
+  enough because the IP is throttled before we start. Real fixes: run
+  collection from a non-shared IP (a $5/mo VPS cron runs the identical
+  scripts), or wait for a window where one map fetch succeeds — the CIK map
+  is committed once obtained, which immunizes all later runs.
+- **reddit** — anonymous JSON access is refused by design. Only free Reddit
+  API credentials (PRAW) fix this; no server-side workaround exists.
+
+Remove a family from `EXPECTED_UNAVAILABLE` as soon as it works, so a later
+regression is caught rather than silently tolerated.
 | Stocktwits 429 | Anonymous rate limit | Lower `STOCKTWITS_RATE_PER_SEC` to 0.5; it recovers |
 | SEC 403 "Request Rate Threshold Exceeded" | SEC caps ~10 req/s **per IP**, and CI runners share outbound IPs with other tenants, so part of the budget is already spent before the run starts. Confirmed live: this is throttling, not a UA rejection or an IP ban | Handled automatically — requests are paced at `SEC_RATE_PER_SEC` (2/s) and a throttle is waited out (`SEC_THROTTLE_BACKOFF_SECONDS`). Once one fetch succeeds the CIK map is committed and reused, so later runs do not need it. If it persists for days, lower `SEC_RATE_PER_SEC` or run collection from a non-shared IP |
 | SEC 403 with a different message | Genuine block or UA policy | Set the `SEC_USER_AGENT` secret to `<project> <your-email>` |

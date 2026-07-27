@@ -89,12 +89,18 @@ def build_cik_map_from_frames(session, names: dict[str, str]) -> dict[str, int]:
             y, q = y - 1, 4
 
     entities: list[dict] = []
+    tried = []
     for year, quarter in quarters:
         data = _get_json_patient(session, _FRAMES_URL.format(year=year, q=quarter))
+        tried.append(f"CY{year}Q{quarter}I")
         if isinstance(data, dict) and data.get("data"):
             entities = data["data"]
+            print(f"[sec] XBRL frame CY{year}Q{quarter}I -> {len(entities)} entities")
             break
     if not entities:
+        # Say which quarters were attempted, so a naming/publication problem is
+        # distinguishable from data.sec.gov refusing us.
+        print(f"[sec] no XBRL frame returned data (tried {', '.join(tried)})")
         return {}
 
     # Normalized SEC name -> CIK, dropping ambiguous names.
@@ -117,6 +123,8 @@ def build_cik_map_from_frames(session, names: dict[str, str]) -> dict[str, int]:
         cik = by_name.get(_normalize_name(company))
         if cik:
             out[ticker.upper()] = cik
+    print(f"[sec] frames join: {len(out)} of {len(names)} tickers matched "
+          f"({len(by_name)} distinct SEC entity names)")
     return out
 
 

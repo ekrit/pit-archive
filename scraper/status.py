@@ -80,8 +80,8 @@ def main():
         print(f"\nSIGNAL HEALTH ({gate.get('date')}, {gate.get('n_tickers')} tickers)"
               f" — gate: {gate.get('status')}")
         for fam, r in gate["families"].items():
-            mark = {"OK": "  ok  ", "DEAD": " DEAD ", "COLLAPSED": "COLLAPS"}.get(
-                r["status"], r["status"])
+            mark = {"OK": "  ok  ", "DEAD": " DEAD ", "COLLAPSED": "COLLAPS",
+                    "EXPECTED-DOWN": " n/a  "}.get(r["status"], r["status"])
             print(f"  [{mark}] {fam:<14} alive={r['alive_fraction']:.0%} "
                   f"(floor {r['floor']:.0%})")
 

@@ -520,6 +520,21 @@ def test_quality_gate():
         assert report["families"]["news"]["status"] in ("COLLAPSED", "DEAD"), report["families"]["news"]
         assert report["families"]["prices"]["status"] == "OK"
 
+        # A family known-blocked on CI reports EXPECTED-DOWN, not DEAD, so it
+        # cannot drown out a real regression; a family NOT on that list still
+        # reports DEAD.
+        # (Above, with an empty list, the broken news family reported
+        # COLLAPSED/DEAD.) Listing it flips it to EXPECTED-DOWN so it cannot
+        # drown out a real regression, while healthy families are untouched.
+        qg.EXPECTED_UNAVAILABLE = {"news"}
+        rep_exp, code_exp = qg.run_gate()
+        assert rep_exp["families"]["news"]["status"] == "EXPECTED-DOWN", \
+            rep_exp["families"]["news"]
+        assert rep_exp["families"]["prices"]["status"] == "OK", \
+            "listing one family must not affect others"
+        assert code_exp == 0
+        qg.EXPECTED_UNAVAILABLE = set()
+
         # Price backbone dead -> catastrophic exit 1.
         rows = [{"ticker": f"T{i:02d}", "score": 50,
                  "features": {"last_price": 10.0, "news_count": 3}} for i in range(40)]
