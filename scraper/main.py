@@ -152,11 +152,20 @@ def write_outputs(payload: dict) -> None:
 
 def main():
     ap = argparse.ArgumentParser(description="Momentum/attention stock screener")
+    ap.add_argument("--skip-if-collected-today", action="store_true",
+                    help="exit early if a snapshot for today already exists "
+                         "(for a catch-up schedule that must not duplicate work)")
     ap.add_argument("--limit", type=int, default=None, help="cap universe size")
     ap.add_argument("--no-reddit", action="store_true")
     ap.add_argument("--no-sec", action="store_true")
     ap.add_argument("--no-news", action="store_true")
     args = ap.parse_args()
+
+    if args.skip_if_collected_today:
+        today = dt.date.today().isoformat()
+        if today in store.distinct_dates(store.load_features()):
+            print(f"[main] snapshot for {today} already collected — skipping.")
+            return
 
     payload = run(
         limit=args.limit,

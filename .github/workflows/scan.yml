@@ -4,6 +4,13 @@ on:
   schedule:
     # 06:30 UTC every weekday (after US market data settles from prior close).
     - cron: "30 6 * * 1-5"
+    # Catch-up passes. GitHub delays — and sometimes silently drops —
+    # scheduled runs under load, which would cost a collection day that can
+    # never be recovered. These retries skip immediately when the day's
+    # snapshot already exists (see --skip-if-collected-today), so a healthy
+    # morning run makes them near-free.
+    - cron: "0 11 * * 1-5"
+    - cron: "0 16 * * 1-5"
   workflow_dispatch: {}   # allow manual runs from the Actions tab
 
 permissions:
@@ -48,7 +55,10 @@ jobs:
           # Whole-market daily-close archive (~10k tickers via SEC listing).
           FULL_MARKET_ARCHIVE: "1"
           MAX_PRICE_ARCHIVE_TICKERS: "12000"
-        run: python -m scraper.main
+          # Catch-up schedules must not redo a day already collected; the
+          # primary schedule and manual runs always collect.
+          SKIP_IF_DONE: ${{ (github.event.schedule == '0 11 * * 1-5' || github.event.schedule == '0 16 * * 1-5') && '--skip-if-collected-today' || '' }}
+        run: python -m scraper.main $SKIP_IF_DONE
 
       - name: Data-quality gate (is today's stored snapshot actually alive?)
         # Fails the job only when collection is catastrophically broken

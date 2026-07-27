@@ -560,7 +560,38 @@ def main():
     test_cik_from_xbrl_frames()
     test_preflight_ua_parity()
     test_sec_throttle_handling()
+    test_catchup_schedule_wiring()
     print("ALL SELF-TESTS PASSED")
+
+
+def test_catchup_schedule_wiring():
+    """Catch-up schedules must exist and must pass the skip flag.
+
+    GitHub delays and sometimes drops cron runs; a missed collection day can
+    never be recovered, so the retries matter — but they must not redo a day
+    that already succeeded.
+    """
+    import re as _re
+    wf = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+                      ".github", "workflows", "scan.yml")
+    text = open(wf).read()
+    crons = _re.findall(r'cron:\s*"([^"]+)"', text)
+    assert len(crons) >= 2, f"need catch-up schedules, found {crons}"
+    assert "30 6 * * 1-5" in crons, crons
+    # Every catch-up cron must be referenced by the skip-flag condition.
+    for c in crons:
+        if c != "30 6 * * 1-5":
+            assert c in text.split("SKIP_IF_DONE")[1][:400], \
+                f"catch-up cron {c} not wired to --skip-if-collected-today"
+    assert "--skip-if-collected-today" in text
+    assert "python -m scraper.main $SKIP_IF_DONE" in text
+
+    # And the flag is actually implemented.
+    import scraper.main as m
+    import inspect
+    src = inspect.getsource(m.main)
+    assert "skip_if_collected_today" in src and "distinct_dates" in src
+    print(f"  catch-up schedules wired ({len(crons)} crons, skip flag honored) OK")
 
 
 def test_sec_throttle_handling():
