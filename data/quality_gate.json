@@ -1,54 +1,54 @@
 {
-  "date": "2026-07-24",
-  "n_tickers": 138,
-  "checked_at": "2026-07-24T21:46:04.274946+00:00",
+  "date": "2026-07-27",
+  "n_tickers": 119,
+  "checked_at": "2026-07-27T08:04:12.138588+00:00",
   "families": {
     "prices": {
       "alive_fraction": 1.0,
       "floor": 0.8,
-      "trailing_avg": null,
+      "trailing_avg": 1.0,
       "status": "OK"
     },
     "factors": {
       "alive_fraction": 1.0,
       "floor": 0.8,
-      "trailing_avg": null,
+      "trailing_avg": 1.0,
       "status": "OK"
     },
     "news": {
-      "alive_fraction": 0.986,
+      "alive_fraction": 0.992,
       "floor": 0.2,
-      "trailing_avg": null,
+      "trailing_avg": 0.986,
       "status": "OK"
     },
     "stocktwits": {
-      "alive_fraction": 0.761,
+      "alive_fraction": 0.706,
       "floor": 0.2,
-      "trailing_avg": null,
+      "trailing_avg": 0.761,
       "status": "OK"
     },
     "finra_short": {
       "alive_fraction": 1.0,
       "floor": 0.5,
-      "trailing_avg": null,
+      "trailing_avg": 1.0,
       "status": "OK"
     },
     "wikipedia": {
-      "alive_fraction": 0.761,
+      "alive_fraction": 0.866,
       "floor": 0.1,
-      "trailing_avg": null,
+      "trailing_avg": 0.761,
       "status": "OK"
     },
     "sec_filings": {
       "alive_fraction": 0.0,
       "floor": 0.1,
-      "trailing_avg": null,
+      "trailing_avg": 0.0,
       "status": "DEAD"
     },
     "reddit": {
       "alive_fraction": 0.0,
       "floor": 0.01,
-      "trailing_avg": null,
+      "trailing_avg": 0.0,
       "status": "DEAD"
     }
   },
