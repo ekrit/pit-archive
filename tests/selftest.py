@@ -576,7 +576,28 @@ def main():
     test_preflight_ua_parity()
     test_sec_throttle_handling()
     test_catchup_schedule_wiring()
+    test_weekly_sweep_gate()
     print("ALL SELF-TESTS PASSED")
+
+
+def test_weekly_sweep_gate():
+    """Full-market sweep is weekly, but never skipped on an empty archive.
+
+    Prices are backfillable; attention data is not. Paying 25+ CI minutes a
+    day for prices is what exhausted the Actions quota, so the sweep is gated
+    to one weekday — while a cold start must still populate immediately.
+    """
+    import inspect
+    import scraper.main as m
+    src = inspect.getsource(m.run)
+    assert "FULL_MARKET_WEEKDAY" in src and "sweep_today" in src
+    # The cold-start escape hatch must be present: an empty price archive
+    # sweeps regardless of weekday.
+    assert "not store.load_prices()" in src, \
+        "an empty archive must sweep on any weekday"
+    import scraper.config as config
+    assert isinstance(config.FULL_MARKET_WEEKDAY, int)
+    print("  weekly full-market sweep gate (with cold-start escape) OK")
 
 
 def test_catchup_schedule_wiring():

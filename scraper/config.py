@@ -89,6 +89,14 @@ FULL_MARKET_ARCHIVE = os.environ.get("FULL_MARKET_ARCHIVE", "0") == "1"
 # Prices+labels only -- the deep attention sources are US-only by nature.
 INTERNATIONAL_ARCHIVE = os.environ.get("INTERNATIONAL_ARCHIVE", "1") == "1"
 
+# The full-market price sweep (~7k tickers) dominates run time — 25-35 min vs
+# ~5 min without it — which burns CI minutes fast on a private repo. It does
+# not need to run daily: PRICES ARE BACKFILLABLE from Yahoo at any time, while
+# attention signals (news/social/filings) exist only if captured today. So the
+# daily run protects the unbackfillable data and the heavy sweep runs weekly.
+# 0=Monday .. 6=Sunday; -1 disables the weekday gate (always sweep).
+FULL_MARKET_WEEKDAY = int(os.environ.get("FULL_MARKET_WEEKDAY", "0"))
+
 # Composite scoring weights. These are heuristic and not derived from any
 # validated backtest -- tune based on your own evaluation.
 SCORE_WEIGHTS = {

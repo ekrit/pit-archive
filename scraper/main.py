@@ -54,11 +54,21 @@ def run(limit: int | None, use_reddit: bool, use_sec: bool, use_news: bool) -> d
     # entire US listing (~10k names) so movers are captured *before* they
     # ever hit a screener. Capped to bound API load.
     panel_tickers = list(dict.fromkeys(tickers + store.tracked_tickers()))
-    if config.FULL_MARKET_ARCHIVE:
+    # Weekly full-market sweep (see config.FULL_MARKET_WEEKDAY): prices are
+    # backfillable, so paying 25+ CI minutes for them daily is poor value
+    # compared to guaranteeing the daily attention snapshot.
+    sweep_today = (config.FULL_MARKET_WEEKDAY < 0
+                   or dt.date.today().weekday() == config.FULL_MARKET_WEEKDAY
+                   or not store.load_prices())
+    if config.FULL_MARKET_ARCHIVE and sweep_today:
         try:
             panel_tickers = list(dict.fromkeys(panel_tickers + universe.full_market()))
+            print("[universe] full-market sweep day")
         except Exception as e:  # full-market fetch is best-effort
             print(f"[universe] full-market fetch failed: {e}")
+    elif config.FULL_MARKET_ARCHIVE:
+        print(f"[universe] lite day — full-market sweep runs on weekday "
+              f"{config.FULL_MARKET_WEEKDAY}; tracked tickers still archived")
     if config.INTERNATIONAL_ARCHIVE:
         intl = universe.international()
         panel_tickers = list(dict.fromkeys(panel_tickers + intl))

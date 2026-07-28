@@ -69,6 +69,15 @@ regression is caught rather than silently tolerated.
 | SEC 403 "Request Rate Threshold Exceeded" | SEC caps ~10 req/s **per IP**, and CI runners share outbound IPs with other tenants, so part of the budget is already spent before the run starts. Confirmed live: this is throttling, not a UA rejection or an IP ban | Handled automatically — requests are paced at `SEC_RATE_PER_SEC` (2/s) and a throttle is waited out (`SEC_THROTTLE_BACKOFF_SECONDS`). Once one fetch succeeds the CIK map is committed and reused, so later runs do not need it. If it persists for days, lower `SEC_RATE_PER_SEC` or run collection from a non-shared IP |
 | SEC 403 with a different message | Genuine block or UA policy | Set the `SEC_USER_AGENT` secret to `<project> <your-email>` |
 | Actions job hits 6h limit | Universe too large for runner | Lower `MAX_PRICE_ARCHIVE_TICKERS`, or move collection to a $5/mo VPS cron (same scripts, unchanged) |
+| **Every run fails in ~3s with no steps and no runner** (scheduled *and* manual) | Not a code fault — GitHub is refusing to start jobs. On a **private** repo this is almost always the monthly Actions minutes allowance being exhausted (or a spending-limit/billing issue). Observed 2026-07-27: run #9 succeeded, every run after failed instantly | Three fixes, cheapest first: **(1) make the repo public** — public repos get unlimited free Actions minutes and this problem disappears permanently; **(2)** wait for the monthly quota reset, with the weekly-sweep optimization below cutting burn ~5x; **(3)** move collection to a $5/mo VPS cron, which also fixes SEC throttling. Check Settings → Billing → Actions to confirm |
+
+### Keeping CI minutes low
+
+The full-market price sweep (~7k tickers) takes 25-35 min; without it a run is
+~5 min. Because **prices are backfillable from Yahoo at any time and attention
+data is not**, the sweep is gated to one weekday (`FULL_MARKET_WEEKDAY`,
+default Monday) while the daily run always captures the unbackfillable
+signals. A cold/empty archive sweeps immediately regardless of weekday.
 | Commit conflicts | Concurrent manual + scheduled runs | Safe: writes are idempotent upserts; re-run the job |
 | "No space" in Actions | Warehouse grew past runner disk | `SCALING.md` migration time |
 
