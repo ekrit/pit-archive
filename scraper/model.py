@@ -82,6 +82,20 @@ def _make_model():
     return _NumpyLogReg()
 
 
+def label_big_move(examples: list[dict], threshold: float = 0.30) -> np.ndarray:
+    """1 if the ABSOLUTE forward return clears `threshold` (e.g. +30%).
+
+    This is the "next big riser" question stated honestly: a rare-event
+    classification, not a ranking. It is deliberately separate from the
+    top-quintile target because in a falling market the best relative
+    performer can still lose money — and a +30% hit rate is the number that
+    actually corresponds to what you are hunting.
+    """
+    return np.array(
+        [1.0 if e.get("fwd_ret", 0.0) >= threshold else 0.0 for e in examples],
+        dtype=float)
+
+
 def label_top_quantile(examples: list[dict], top_frac: float = 0.2) -> np.ndarray:
     """Label = 1 if fwd_ret is in the top `top_frac` of its own date's names."""
     from collections import defaultdict

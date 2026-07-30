@@ -578,7 +578,73 @@ def main():
     test_catchup_schedule_wiring()
     test_weekly_sweep_gate()
     test_backfill()
+    test_calibration_and_ensemble()
     print("ALL SELF-TESTS PASSED")
+
+
+def test_calibration_and_ensemble():
+    """Probabilities must mean what they say, and the ensemble must learn."""
+    from scraper import ensemble
+
+    # --- isotonic regression: monotone fit, exact on already-monotone data ---
+    s = np.array([1.0, 2, 3, 4, 5])
+    lab = np.array([0.0, 0, 1, 1, 1])
+    knots = metrics.isotonic_fit(s, lab)
+    fit = metrics.isotonic_predict(knots, s)
+    assert np.all(np.diff(fit) >= -1e-9), f"must be non-decreasing: {fit}"
+    assert approx(fit[0], 0.0, tol=1e-6) and approx(fit[-1], 1.0, tol=1e-6)
+    # A violation is pooled to the block mean rather than left inverted.
+    knots2 = metrics.isotonic_fit(np.array([1.0, 2, 3]), np.array([1.0, 0, 1]))
+    fit2 = metrics.isotonic_predict(knots2, np.array([1.0, 2, 3]))
+    assert np.all(np.diff(fit2) >= -1e-9), fit2
+    assert approx(fit2[0], 0.5, tol=1e-6), fit2
+
+    # --- Brier + calibration table ---
+    assert approx(metrics.brier_score(np.array([1.0, 0.0]), np.array([1.0, 0.0])), 0.0)
+    assert approx(metrics.brier_score(np.array([0.5, 0.5]), np.array([1.0, 0.0])), 0.25)
+    rng = np.random.default_rng(5)
+    p = rng.uniform(size=400)
+    y = (rng.uniform(size=400) < p).astype(float)   # perfectly calibrated by construction
+    tab = metrics.calibration_table(p, y, bins=4)
+    assert len(tab) == 4
+    for row in tab:  # predicted and actual should track within sampling noise
+        assert abs(row["mean_predicted"] - row["actual_rate"]) < 0.18, row
+
+    # --- rank averaging is scale-invariant ---
+    a = np.array([1.0, 2, 3]); b = np.array([100.0, 200, 300])
+    assert np.allclose(ensemble.rank_average([a]), ensemble.rank_average([b])), \
+        "raw scales must not matter, only ranks"
+
+    # --- ensemble learns a planted signal out-of-sample and calibrates ---
+    examples = []
+    for d in range(20):
+        date = (dt.date(2026, 1, 1) + dt.timedelta(days=d * 7)).isoformat()
+        for _ in range(30):
+            g = rng.normal()
+            examples.append({
+                "date": date, "ticker": f"T{_}", "horizon_days": 5,
+                "features": {"good": g, "noise": rng.normal()},
+                "fwd_ret": 0.6 * g + rng.normal(scale=0.4),
+            })
+    res = ensemble.walk_forward_ensemble(examples, ["good", "noise"], n_folds=4)
+    assert res.get("oos_auc", 0) > 0.65, res
+    assert res["brier_uncalibrated"] is not None
+    if "brier_calibrated" in res:
+        assert res["brier_calibrated"] <= res["brier_uncalibrated"] + 0.05, res
+
+    # --- big-move target: rare-event labeling is absolute, not relative ---
+    big = model.label_big_move(
+        [{"fwd_ret": 0.5}, {"fwd_ret": 0.1}, {"fwd_ret": -0.4}], threshold=0.30)
+    assert list(big) == [1.0, 0.0, 0.0], big
+
+    # --- full fit produces probabilities in [0,1] for new rows ---
+    predict, info = ensemble.fit_full(examples, ["good", "noise"])
+    probs = predict([{"features": {"good": 2.0, "noise": 0.0}},
+                     {"features": {"good": -2.0, "noise": 0.0}}])
+    assert probs.shape == (2,) and np.all((probs >= 0) & (probs <= 1)), probs
+    assert probs[0] > probs[1], "a strong signal must score above a weak one"
+    print(f"  calibration + ensemble (OOS AUC {res['oos_auc']}, "
+          f"Brier {res['brier_uncalibrated']}->{res.get('brier_calibrated')}) OK")
 
 
 def test_backfill():

@@ -106,6 +106,103 @@ def hit_rate(signal: np.ndarray, fwd_ret: np.ndarray, top_frac: float = 0.2) -> 
     return float((fwd_ret[top_idx] > 0).mean())
 
 
+def brier_score(probs: np.ndarray, labels: np.ndarray) -> float | None:
+    """Mean squared error of probabilities. Lower is better; 0.25 = coin flip.
+
+    AUC only measures RANKING. Brier measures whether the numbers mean what
+    they say — the difference between "these 20 names are the most likely"
+    and "each of these has a 30% chance", which is what position sizing needs.
+    """
+    probs = np.asarray(probs, dtype=float)
+    labels = np.asarray(labels, dtype=float)
+    mask = np.isfinite(probs) & np.isfinite(labels)
+    if mask.sum() == 0:
+        return None
+    return float(np.mean((probs[mask] - labels[mask]) ** 2))
+
+
+def calibration_table(probs: np.ndarray, labels: np.ndarray,
+                      bins: int = 5) -> list[dict]:
+    """Predicted vs realized rate per probability bucket.
+
+    The reality check on a prediction list: of the names the model called
+    30%, how many actually delivered? Systematic overshoot here is the
+    classic way a model looks confident and loses money.
+    """
+    probs = np.asarray(probs, dtype=float)
+    labels = np.asarray(labels, dtype=float)
+    mask = np.isfinite(probs) & np.isfinite(labels)
+    probs, labels = probs[mask], labels[mask]
+    if probs.size == 0:
+        return []
+    edges = np.quantile(probs, np.linspace(0, 1, bins + 1))
+    edges[-1] += 1e-9
+    out = []
+    for i in range(bins):
+        sel = (probs >= edges[i]) & (probs < edges[i + 1])
+        if sel.sum() == 0:
+            continue
+        out.append({
+            "bucket": i + 1,
+            "n": int(sel.sum()),
+            "mean_predicted": round(float(probs[sel].mean()), 4),
+            "actual_rate": round(float(labels[sel].mean()), 4),
+        })
+    return out
+
+
+def isotonic_fit(scores: np.ndarray, labels: np.ndarray):
+    """Pool-Adjacent-Violators isotonic regression (pure numpy).
+
+    Maps raw model scores to calibrated probabilities using only the
+    monotone assumption (higher score -> not-lower probability), which is
+    exactly what a ranking model gives you. Returns (x, y) knots for
+    `isotonic_predict`.
+    """
+    scores = np.asarray(scores, dtype=float)
+    labels = np.asarray(labels, dtype=float)
+    mask = np.isfinite(scores) & np.isfinite(labels)
+    scores, labels = scores[mask], labels[mask]
+    if scores.size == 0:
+        return np.array([0.0]), np.array([0.5])
+    order = np.argsort(scores, kind="mergesort")
+    x = scores[order]
+    y = labels[order].astype(float)
+
+    # PAV: merge adjacent blocks that violate monotonicity.
+    values = list(y)
+    weights = [1.0] * len(y)
+    idx = list(range(len(y)))
+    i = 0
+    while i < len(values) - 1:
+        if values[i] <= values[i + 1] + 1e-12:
+            i += 1
+            continue
+        tot_w = weights[i] + weights[i + 1]
+        merged = (values[i] * weights[i] + values[i + 1] * weights[i + 1]) / tot_w
+        values[i:i + 2] = [merged]
+        weights[i:i + 2] = [tot_w]
+        idx[i:i + 2] = [idx[i]]
+        if i > 0:
+            i -= 1
+    # Expand blocks back over the sorted x positions.
+    fitted = np.empty(len(y))
+    pos = 0
+    for v, w in zip(values, weights):
+        n = int(round(w))
+        fitted[pos:pos + n] = v
+        pos += n
+    return x, fitted
+
+
+def isotonic_predict(knots, scores: np.ndarray) -> np.ndarray:
+    """Apply a fitted isotonic map, clipped to [0, 1]."""
+    x, y = knots
+    scores = np.asarray(scores, dtype=float)
+    out = np.interp(scores, x, y, left=y[0], right=y[-1])
+    return np.clip(out, 0.0, 1.0)
+
+
 def auc(scores: np.ndarray, labels: np.ndarray) -> float | None:
     """Area under ROC via the rank (Mann-Whitney U) identity. labels in {0,1}."""
     scores = np.asarray(scores, dtype=float)
