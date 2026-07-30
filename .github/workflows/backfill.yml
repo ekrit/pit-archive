@@ -1,0 +1,75 @@
+name: backfill-missed-days
+
+# Recovers the recoverable part of any missed collection day (prices,
+# factors, FINRA short volume, Wikipedia pageviews — all queryable by date).
+# News/social/filings for those days are gone and the rows say so.
+#
+# Kept OUT of the daily workflow deliberately: it is expensive (full price
+# history per ticker per missed date) and only earns its cost after an
+# outage, so it runs weekly and on demand rather than every day.
+on:
+  schedule:
+    - cron: "0 5 * * 6"     # Saturday 05:00 UTC, after the trading week
+  workflow_dispatch:
+    inputs:
+      since:
+        description: "Backfill missing weekdays from this date (YYYY-MM-DD)"
+        required: false
+        default: ""
+
+permissions:
+  contents: write
+
+concurrency:
+  group: stocks-data-write   # never write the store while a scan is running
+  cancel-in-progress: false
+
+jobs:
+  backfill:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - run: pip install -r requirements.txt
+
+      - name: Backfill missing weekdays
+        env:
+          SEC_USER_AGENT: ${{ secrets.SEC_USER_AGENT || format('stocks-predictor research (github.com/{0}/stocks-predictor)', github.repository_owner) }}
+        run: |
+          SINCE="${{ github.event.inputs.since }}"
+          if [ -z "$SINCE" ]; then
+            # Default: look back two weeks, which covers any plausible outage
+            # without re-walking the whole archive.
+            SINCE=$(date -u -d "14 days ago" +%Y-%m-%d)
+          fi
+          echo "Backfilling missing weekdays since $SINCE"
+          python -m scraper.backfill --since "$SINCE"
+
+      - name: Rebuild derived artifacts
+        run: |
+          python -m scraper.warehouse compact || true
+          python -m scraper.evaluate --from-store --horizon 63 || true
+
+      - name: Commit recovered data
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data EVALUATION.md
+          if git diff --staged --quiet; then
+            echo "Nothing to backfill."
+            exit 0
+          fi
+          git commit -m "chore: backfill recovered data $(date -u +%Y-%m-%d)"
+          for i in 1 2 3 4; do
+            if git push origin HEAD:main; then
+              echo "Pushed on attempt $i."
+              exit 0
+            fi
+            git fetch origin main
+            git merge --no-edit -X ours origin/main || exit 1
+            sleep $((2 * i))
+          done
+          exit 1

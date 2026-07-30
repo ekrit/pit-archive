@@ -17,7 +17,9 @@ permissions:
   contents: write   # needed to commit results back to main
 
 concurrency:
-  group: daily-screener
+  # Shared with backfill-missed-days: both write data/history, and two
+  # concurrent writers would race on the same partitions.
+  group: stocks-data-write
   cancel-in-progress: false
 
 jobs:

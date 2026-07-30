@@ -577,7 +577,57 @@ def main():
     test_sec_throttle_handling()
     test_catchup_schedule_wiring()
     test_weekly_sweep_gate()
+    test_backfill()
     print("ALL SELF-TESTS PASSED")
+
+
+def test_backfill():
+    """Backfill recovers what publishers expose by date — and says what it can't."""
+    from scraper import backfill
+
+    # Missing-weekday detection skips weekends and dates already collected.
+    have = {"2026-07-27"}
+    got = backfill.missing_business_days(
+        dt.date(2026, 7, 24), dt.date(2026, 7, 29), have)
+    assert [d.isoformat() for d in got] == ["2026-07-24", "2026-07-28",
+                                            "2026-07-29"], got
+    assert all(d.weekday() < 5 for d in got), "weekends must never be targets"
+
+    # Features as-of a past date must ignore later rows (no look-ahead).
+    idx = pd.bdate_range("2026-01-01", periods=120)
+    close = pd.Series(np.linspace(10, 130, 120), index=idx)
+    df = pd.DataFrame({"Open": close, "High": close * 1.01, "Low": close * 0.99,
+                       "Close": close, "Volume": np.full(120, 1e6)}, index=idx)
+    cut = idx[80].date()
+    f_asof = backfill._price_features_asof(df, cut)
+    f_full = backfill._price_features_asof(df, idx[-1].date())
+    assert f_asof and f_full
+    assert approx(f_asof["last_price"], float(close.iloc[80]), tol=1e-6)
+    assert f_asof["last_price"] < f_full["last_price"], "as-of must not see the future"
+    assert f_asof.get("ROC_20") is not None, "factor battery should populate"
+
+    # The honesty contract: attention feeds are declared unrecoverable.
+    for fam in ("news", "stocktwits", "reddit"):
+        assert fam in backfill.UNRECOVERABLE, fam
+    for fam in ("prices", "finra_short", "wikipedia"):
+        assert fam in backfill.RECOVERABLE, fam
+
+    # Backfilled rows are flagged in the store so evaluation can exclude them.
+    with tempfile.TemporaryDirectory() as tmp:
+        store = _fresh_store(tmp)
+        store.append_snapshot([{
+            "ticker": "AAA", "score": None, "features": {"last_price": 10.0},
+            "backfilled": True, "backfilled_missing": ["news"],
+        }], date="2026-07-28")
+        rec = store.load_features()[0]
+        assert rec["backfilled"] is True and rec["backfilled_missing"] == ["news"]
+        # A normal row carries no flag at all.
+        store.append_snapshot([{"ticker": "BBB", "score": 1,
+                                "features": {"last_price": 5.0}}],
+                              date="2026-07-29")
+        plain = [r for r in store.load_features() if r["ticker"] == "BBB"][0]
+        assert "backfilled" not in plain
+    print("  backfill (missing-day math, as-of features, honesty flags) OK")
 
 
 def test_weekly_sweep_gate():

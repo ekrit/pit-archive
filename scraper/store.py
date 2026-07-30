@@ -138,7 +138,7 @@ def append_snapshot(results: list[dict], date: str | None = None) -> int:
         if not tk:
             continue
         feats = r.get("features") or {}
-        records.append({
+        rec = {
             "schema_version": SCHEMA_VERSION,
             "date": date,
             "ticker": tk,
@@ -146,7 +146,14 @@ def append_snapshot(results: list[dict], date: str | None = None) -> int:
             "last_price": _num_or_none(feats.get("last_price")),
             "components": r.get("components", {}),
             "features": feats,
-        })
+        }
+        # Reconstructed rows are marked so evaluation can separate them from
+        # true point-in-time captures: their universe and signal coverage
+        # differ from a live run (see scraper/backfill.py).
+        if r.get("backfilled"):
+            rec["backfilled"] = True
+            rec["backfilled_missing"] = r.get("backfilled_missing", [])
+        records.append(rec)
     n = _upsert(FEATURES_DIR, records)
     _migrate_legacy_features()
     update_manifest()

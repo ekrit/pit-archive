@@ -183,14 +183,24 @@ def _resolve_article(session, tk: str, names: dict[str, str], cache: dict) -> st
     return article
 
 
-def fetch(tickers: list[str]) -> dict[str, dict]:
+def fetch_asof(tickers: list[str], as_of: dt.date) -> dict[str, dict]:
+    """Pageviews as they stood on a PAST date.
+
+    The Wikimedia API serves per-day counts for an arbitrary range, so this
+    returns exactly what a live run on `as_of` would have seen — no
+    look-ahead. Used by scraper/backfill.py to recover missed days.
+    """
+    return fetch(tickers, as_of=as_of)
+
+
+def fetch(tickers: list[str], as_of: dt.date | None = None) -> dict[str, dict]:
     # Wikimedia policy: identify the tool, don't spoof a browser.
     get_session = parallel.thread_local(
         lambda: make_session(user_agent=config.WIKI_USER_AGENT))
     names = _company_names()
     cache = _load_cache()
 
-    end = dt.date.today() - dt.timedelta(days=1)
+    end = (as_of or dt.date.today()) - dt.timedelta(days=1)
     start = end - dt.timedelta(days=28)
     fmt = "%Y%m%d"
 
