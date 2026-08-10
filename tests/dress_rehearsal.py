@@ -1,6 +1,6 @@
 """Full-pipeline dress rehearsal with a simulated internet.
 
-Runs the REAL `scraper.main` end-to-end — universe discovery, all 7 sources,
+Runs the REAL `pipeline.main` end-to-end — universe discovery, all 7 sources,
 scoring, store writes, warehouse compaction, dataset compilation, evaluation —
 against a fake HTTP layer that mimics each real endpoint's response shape.
 Catches integration bugs (merge keys, response parsing, file plumbing) that
@@ -157,16 +157,16 @@ def main() -> int:
 
     # Route every module's HTTP + yfinance to the fakes.
     fake = FakeSession()
-    import scraper.http as http_mod
+    import pipeline.http as http_mod
     http_mod.make_session = lambda user_agent=None: fake
-    import scraper.universe as universe
-    import scraper.sources.prices as prices
-    import scraper.sources.news as news
-    import scraper.sources.reddit as reddit
-    import scraper.sources.sec_filings as sec_filings
-    import scraper.sources.stocktwits as stocktwits
-    import scraper.sources.wikipedia as wikipedia
-    import scraper.sources.short_interest as short_interest
+    import pipeline.universe as universe
+    import pipeline.sources.quotes as prices
+    import pipeline.sources.newsfeed as news
+    import pipeline.sources.forum as reddit
+    import pipeline.sources.filings as sec_filings
+    import pipeline.sources.social as stocktwits
+    import pipeline.sources.pageviews as wikipedia
+    import pipeline.sources.positioning as short_interest
     for mod in (universe, news, reddit, sec_filings, stocktwits, wikipedia,
                 short_interest):
         if hasattr(mod, "make_session"):
@@ -176,13 +176,13 @@ def main() -> int:
     prices.yf.download = _fake_yf_download
 
     # Redirect all writes into the sandbox.
-    import scraper.store as store
+    import pipeline.store as store
     store.HISTORY_DIR = os.path.join(tmp, "history")
     store.FEATURES_DIR = os.path.join(store.HISTORY_DIR, "features")
     store.PRICES_DIR = os.path.join(store.HISTORY_DIR, "prices")
     store.MANIFEST_PATH = os.path.join(store.HISTORY_DIR, "manifest.json")
     store.LEGACY_FEATURES_PATH = os.path.join(store.HISTORY_DIR, "features.jsonl")
-    import scraper.config as config
+    import pipeline.config as config
     # Cache paths (CIK map, wiki articles, universe) resolve from this at call
     # time, so redirecting it keeps every source cache inside the sandbox.
     real_data_dir = os.path.dirname(config.WATCHLIST_FILE)
@@ -195,10 +195,10 @@ def main() -> int:
                 for p in os.listdir(d) if os.path.isfile(os.path.join(d, p))}
 
     real_data_before = _dir_state(real_data_dir)
-    import scraper.main as main_mod
+    import pipeline.main as main_mod
     main_mod.RANKINGS_DIR = os.path.join(tmp, "rankings")
-    main_mod.RANKINGS_MD = os.path.join(tmp, "RANKINGS.md")
-    import scraper.dataset as dataset
+    main_mod.RANKINGS_MD = os.path.join(tmp, "data/daily_output.md")
+    import pipeline.dataset as dataset
     dataset.DATASET_DIR = os.path.join(tmp, "dataset")
 
     failures: list[str] = []
@@ -244,7 +244,7 @@ def main() -> int:
 
     # ---- 3. warehouse ----
     try:
-        import scraper.warehouse as warehouse
+        import pipeline.warehouse as warehouse
         warehouse.WAREHOUSE_DIR = os.path.join(tmp, "warehouse")
         warehouse.FEATURES_WH = os.path.join(warehouse.WAREHOUSE_DIR, "features")
         warehouse.PRICES_WH = os.path.join(warehouse.WAREHOUSE_DIR, "prices")

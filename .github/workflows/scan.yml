@@ -45,39 +45,39 @@ jobs:
         run: python -m tests.dress_rehearsal
 
       - name: Preflight (which live endpoints are reachable today)
-        run: python -m scraper.preflight || true
+        run: python -m pipeline.preflight || true
 
       - name: Run screener (also appends today's point-in-time snapshot)
         env:
           # SEC's fair-access policy asks for a descriptive contact.
           # SEC fair-access requires a declared contact EMAIL. Set repo secret
-          # SEC_USER_AGENT (e.g. "stocks-predictor you@example.com"); without
+          # SEC_USER_AGENT (e.g. "pit-archive you@example.com"); without
           # it SEC endpoints 403 and the filings source stays dark.
-          SEC_USER_AGENT: ${{ secrets.SEC_USER_AGENT || format('stocks-predictor research (github.com/{0}/stocks-predictor)', github.repository_owner) }}
+          SEC_USER_AGENT: ${{ secrets.SEC_USER_AGENT || format('pit-archive research (github.com/{0}/pit-archive)', github.repository_owner) }}
           # Whole-market daily-close archive (~10k tickers via SEC listing).
           FULL_MARKET_ARCHIVE: "1"
           MAX_PRICE_ARCHIVE_TICKERS: "12000"
           # Catch-up schedules must not redo a day already collected; the
           # primary schedule and manual runs always collect.
           SKIP_IF_DONE: ${{ (github.event.schedule == '0 11 * * 1-5' || github.event.schedule == '0 16 * * 1-5') && '--skip-if-collected-today' || '' }}
-        run: python -m scraper.main $SKIP_IF_DONE
+        run: python -m pipeline.main $SKIP_IF_DONE
 
       - name: Data-quality gate (is today's stored snapshot actually alive?)
         # Fails the job only when collection is catastrophically broken
         # (no snapshot / price backbone dead); family problems print as WARN
         # and land in data/quality_gate.json for the weekly review.
-        run: python -m scraper.quality_gate
+        run: python -m pipeline.quality_gate
 
       - name: Compact JSONL archives into the Parquet warehouse
-        run: python -m scraper.warehouse compact || true
+        run: python -m pipeline.warehouse compact || true
 
       - name: Evaluate accumulated history (what works so far)
         # Harmless while history is short (writes a "not enough data yet" note);
         # becomes meaningful automatically as snapshots accumulate over weeks.
-        run: python -m scraper.evaluate --from-store --horizon 63 || true
+        run: python -m pipeline.evaluate --from-store --horizon 63 || true
 
       - name: Learned predictions (auto-activates once history suffices)
-        run: python -m scraper.predict || true
+        run: python -m pipeline.predict || true
 
       - name: Commit results
         run: |
@@ -85,7 +85,7 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           # Whole data dir: rankings, history, dataset, warehouse, plus the
           # cached SEC CIK/name maps that let blocked runs use yesterday's map.
-          git add data RANKINGS.md EVALUATION.md PREDICTIONS.md
+          git add data
           if git diff --staged --quiet; then
             echo "No changes to commit."
             exit 0

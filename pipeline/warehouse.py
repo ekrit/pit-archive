@@ -14,9 +14,9 @@ loading them into memory, and the identical files can later be pushed to
 object storage (S3/R2/B2) and queried in place when they outgrow git.
 
 Usage:
-    python -m scraper.warehouse compact          # rebuild parquet from JSONL
-    python -m scraper.warehouse sql "SELECT ..." # ad-hoc DuckDB query
-    python -m scraper.warehouse stats            # size/coverage summary
+    python -m pipeline.warehouse compact          # rebuild parquet from JSONL
+    python -m pipeline.warehouse sql "SELECT ..." # ad-hoc DuckDB query
+    python -m pipeline.warehouse stats            # size/coverage summary
 
 Tables (hive-style month partitions):
     data/warehouse/features/month=YYYY-MM/part.parquet   flat: one column per feature

@@ -34,7 +34,7 @@ silver  data/warehouse/*.parquet  zstd columnar, DuckDB-queryable, ~10-40x small
 gold    data/dataset/labeled_*.jsonl  training-ready labeled table
 ```
 
-`python -m scraper.warehouse compact` rebuilds silver from bronze at any time —
+`python -m pipeline.warehouse compact` rebuilds silver from bronze at any time —
 bronze is the source of truth, silver is disposable/rebuildable, which is what
 makes the whole thing safe to evolve.
 
@@ -47,7 +47,7 @@ upload it to object storage instead (Cloudflare R2 / Backblaze B2 / S3 — R2 ha
 zero egress fees and a free 10 GB tier). One workflow step:
 `rclone sync data/warehouse r2:bucket/warehouse`. DuckDB queries parquet on S3
 APIs natively (`read_parquet('s3://bucket/warehouse/prices/month=*/part.parquet')`),
-so `scraper/warehouse.py` needs only the glob string changed — the SQL and all
+so `pipeline/warehouse.py` needs only the glob string changed — the SQL and all
 analysis code stay identical.
 
 **> 5 GB (minute bars / full-market news):** move bronze off git too — write

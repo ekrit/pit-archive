@@ -1,4 +1,4 @@
-"""CLI: measure what actually works, and write EVALUATION.md.
+"""CLI: measure what actually works, and write data/eval_report.md.
 
 Modes:
   --from-store   evaluate the accumulated multi-source history (grows over
@@ -9,7 +9,7 @@ Modes:
                  usable today, before the store has accumulated. Price signals
                  only.
 
-Both write a ranked signal table + walk-forward model result to EVALUATION.md.
+Both write a ranked signal table + walk-forward model result to data/eval_report.md.
 """
 from __future__ import annotations
 
@@ -20,7 +20,7 @@ import os
 from . import backtest, dataset, labels, model, store, universe
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-EVAL_MD = os.path.join(ROOT, "EVALUATION.md")
+EVAL_MD = os.path.join(ROOT, "data/eval_report.md")
 
 PRICE_ONLY_FEATURES = ["ret_5d", "ret_21d", "ret_63d", "volume_spike_ratio", "rsi_14"]
 ALL_FEATURES = dataset.FEATURE_KEYS  # base signals + the Alpha-factor battery
@@ -43,7 +43,7 @@ def from_store(horizon: int) -> tuple[list[dict], str]:
 
 
 def from_prices(horizon: int, limit: int | None) -> tuple[list[dict], str]:
-    from .sources import prices as price_src
+    from .sources import quotes as price_src
     import yfinance as yf
 
     tickers = universe.discover()

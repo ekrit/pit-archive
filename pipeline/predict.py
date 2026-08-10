@@ -1,6 +1,6 @@
-"""Daily learned predictions: PREDICTIONS.md.
+"""Daily learned predictions: data/model_output.md.
 
-    python -m scraper.predict
+    python -m pipeline.predict
 
 Replaces the hand-tuned composite score with a calibrated ensemble once the
 archive holds enough labeled history. Two targets are produced side by side
@@ -24,7 +24,7 @@ import os
 from . import dataset, ensemble, store
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-OUT_MD = os.path.join(ROOT, "PREDICTIONS.md")
+OUT_MD = os.path.join(ROOT, "data/model_output.md")
 
 MIN_DATES = 8
 MIN_EXAMPLES = 200
@@ -50,7 +50,7 @@ def _not_ready(n_dates: int, n_examples: int) -> str:
         f"examples; ~{need_d} more collection days, then the {HORIZON}d label "
         f"lag before those days mature into examples)._",
         "",
-        "Today's heuristic screen is in RANKINGS.md. Learned predictions "
+        "Today's heuristic screen is in data/daily_output.md. Learned predictions "
         "appear here automatically — no action needed — once enough labeled "
         "history exists to train and validate on.",
         "",

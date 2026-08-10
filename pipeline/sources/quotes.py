@@ -138,7 +138,7 @@ def fetch(tickers: list[str]) -> dict[str, dict]:
             "annualized_vol": float(close.pct_change().std() * (252 ** 0.5)) if len(close) > 2 else None,
         }
 
-        # Alpha158-inspired factor battery (see scraper/factors.py). Stored
+        # Alpha158-inspired factor battery (see pipeline/factors.py). Stored
         # point-in-time so the accumulated dataset can evaluate all of them.
         if {"Open", "High", "Low"}.issubset(df.columns):
             results[tk].update(factors.compute_factors(df))

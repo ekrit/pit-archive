@@ -9,19 +9,19 @@ import os
 # SEC requires a descriptive User-Agent identifying the requester for its
 # free, no-key EDGAR APIs. Override with your own contact via env var.
 SEC_USER_AGENT = os.environ.get(
-    "SEC_USER_AGENT", "stocks-predictor-research-tool contact:set-SEC_USER_AGENT-env-var"
+    "SEC_USER_AGENT", "pit-archive-collector contact:set-SEC_USER_AGENT-env-var"
 )
 
 HTTP_USER_AGENT = os.environ.get(
     "SCRAPER_USER_AGENT",
-    "Mozilla/5.0 (compatible; stocks-predictor-research-bot/1.0)",
+    "Mozilla/5.0 (compatible; pit-archive-collector/1.0)",
 )
 
 # Wikimedia's User-Agent policy requires a descriptive agent identifying the
 # tool (browser-spoofing agents are refused), so its APIs get their own.
 WIKI_USER_AGENT = os.environ.get(
     "WIKI_USER_AGENT",
-    "stocks-predictor/1.0 (research tool; https://github.com/ekrit/stocks-predictor)",
+    "pit-archive/1.0 (data collection; https://github.com/ekrit/pit-archive)",
 )
 
 REQUEST_TIMEOUT_SECONDS = 15
@@ -49,7 +49,7 @@ REDDIT_REQUEST_DELAY_SECONDS = 2
 # Google News RSS query template, no auth required.
 NEWS_ARTICLES_PER_TICKER = 15
 
-# Threaded fetching (see scraper/parallel.py): worker cap and per-host request
+# Threaded fetching (see pipeline/parallel.py): worker cap and per-host request
 # rates. Politeness is governed by the rate limits, not the thread count.
 PARALLEL_WORKERS = int(os.environ.get("PARALLEL_WORKERS", "8"))
 NEWS_RATE_PER_SEC = 3.0

@@ -71,5 +71,5 @@ well-calibrated shortlist is genuinely valuable.
 
 - Purged + embargoed walk-forward only; no shuffled splits, ever.
 - Report: OOS IC, decile spread net of costs, top-quintile hit rate,
-  calibration error, turnover. All in `EVALUATION.md`, tracked over time.
+  calibration error, turnover. All in `data/eval_report.md`, tracked over time.
 - A model is promoted only on OOS evidence from data it never touched.

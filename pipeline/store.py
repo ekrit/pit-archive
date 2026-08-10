@@ -149,7 +149,7 @@ def append_snapshot(results: list[dict], date: str | None = None) -> int:
         }
         # Reconstructed rows are marked so evaluation can separate them from
         # true point-in-time captures: their universe and signal coverage
-        # differ from a live run (see scraper/backfill.py).
+        # differ from a live run (see pipeline/backfill.py).
         if r.get("backfilled"):
             rec["backfilled"] = True
             rec["backfilled_missing"] = r.get("backfilled_missing", [])

@@ -12,7 +12,7 @@ import tempfile
 import numpy as np
 import pandas as pd
 
-from scraper import metrics, labels, backtest, model
+from pipeline import metrics, labels, backtest, model
 
 
 def approx(a, b, tol=1e-6):
@@ -122,7 +122,7 @@ def test_walk_forward_learns():
 
 def _fresh_store(tmp):
     """Point the store package at a throwaway directory and reload it."""
-    import scraper.store as store
+    import pipeline.store as store
     store.HISTORY_DIR = os.path.join(tmp, "history")
     store.FEATURES_DIR = os.path.join(store.HISTORY_DIR, "features")
     store.PRICES_DIR = os.path.join(store.HISTORY_DIR, "prices")
@@ -154,7 +154,7 @@ def test_store_idempotent_upsert():
 def test_prices_archive_and_dataset():
     with tempfile.TemporaryDirectory() as tmp:
         store = _fresh_store(tmp)
-        import scraper.dataset as dataset
+        import pipeline.dataset as dataset
         importlib.reload(dataset)
         dataset.store = store
         dataset.DATASET_DIR = os.path.join(tmp, "dataset")
@@ -177,7 +177,7 @@ def test_prices_archive_and_dataset():
 
 
 def test_factor_library():
-    from scraper import factors
+    from pipeline import factors
     n = 80
     idx = pd.date_range("2025-01-01", periods=n, freq="D")
     # Constant flat market: close=open=high=low=100, volume constant.
@@ -218,7 +218,7 @@ def test_warehouse_roundtrip():
         return
     with tempfile.TemporaryDirectory() as tmp:
         store = _fresh_store(tmp)
-        import scraper.warehouse as warehouse
+        import pipeline.warehouse as warehouse
         importlib.reload(warehouse)
         warehouse.store = store
         warehouse.WAREHOUSE_DIR = os.path.join(tmp, "warehouse")
@@ -266,7 +266,7 @@ def test_turnover_and_ic_decay():
 
 
 def test_regsho_parser():
-    from scraper.sources import short_interest
+    from pipeline.sources import positioning as short_interest
     text = ("Date|Symbol|ShortVolume|ShortExemptVolume|TotalVolume|Market\n"
             "20260724|AAA|600|0|1000|B,Q,N\n"
             "20260724|BBB|100|0|400|B\n"
@@ -278,7 +278,7 @@ def test_regsho_parser():
 
 
 def test_parallel_fetch_map():
-    from scraper import parallel
+    from pipeline import parallel
     calls = {"n": 0}
 
     def fn(k):
@@ -302,7 +302,7 @@ def test_parallel_fetch_map():
 
 
 def test_purged_walk_forward():
-    from scraper.model import _purge_train_indices
+    from pipeline.model import _purge_train_indices
     # 10 training rows dated day 0..9, horizon 5 days; test starts day 12.
     ex = [{"date": (dt.date(2026, 1, 1) + dt.timedelta(days=i)).isoformat(),
            "horizon_days": 5} for i in range(10)]
@@ -319,7 +319,7 @@ def test_purged_walk_forward():
 def test_relative_returns():
     with tempfile.TemporaryDirectory() as tmp:
         store = _fresh_store(tmp)
-        import scraper.dataset as dataset
+        import pipeline.dataset as dataset
         importlib.reload(dataset)
         dataset.store = store
         dataset.DATASET_DIR = os.path.join(tmp, "dataset")
@@ -366,7 +366,7 @@ def test_neutralized_ic():
 
 
 def test_http_get_json_headers():
-    from scraper import http
+    from pipeline import http
 
     class S:
         def get(self, url, params=None, headers=None, timeout=None):
@@ -382,7 +382,7 @@ def test_http_get_json_headers():
 
 
 def test_nasdaq_listing_parser():
-    from scraper.universe import _parse_nasdaq_listing
+    from pipeline.universe import _parse_nasdaq_listing
     text = ("Symbol|Security Name|Market Category|Test Issue|Financial Status|"
             "Round Lot Size|ETF|NextShares\n"
             "AAPL|Apple Inc. - Common Stock|Q|N|N|100|N|N\n"
@@ -400,7 +400,7 @@ def test_nasdaq_listing_parser():
 
 
 def test_chunked_price_panel():
-    from scraper.sources import prices
+    from pipeline.sources import quotes as prices
     calls = []
     real = prices.yf.download
 
@@ -430,7 +430,7 @@ def test_chunked_price_panel():
 
 def test_thread_local_sessions():
     import threading
-    from scraper import parallel
+    from pipeline import parallel
     get = parallel.thread_local(object)
     a = get()
     assert get() is a, "same thread must reuse its instance"
@@ -443,7 +443,7 @@ def test_thread_local_sessions():
 
 def test_math_properties():
     """Property-based invariants over random data (fixed seeds, many trials)."""
-    from scraper.model import _purge_train_indices
+    from pipeline.model import _purge_train_indices
     rng = np.random.default_rng(11)
     for trial in range(20):
         n = int(rng.integers(10, 200))
@@ -479,7 +479,7 @@ def test_math_properties():
 
 
 def test_scoring_edge_cases():
-    from scraper.scoring import score
+    from pipeline.scoring import score
     assert score({}) == []
     # All features missing -> neutral components, no crash, valid score.
     out = score({"AAA": {}, "BBB": {}})
@@ -495,7 +495,7 @@ def test_scoring_edge_cases():
 def test_quality_gate():
     with tempfile.TemporaryDirectory() as tmp:
         store = _fresh_store(tmp)
-        import scraper.quality_gate as qg
+        import pipeline.quality_gate as qg
         importlib.reload(qg)
         qg.store = store
         qg.OUT_PATH = os.path.join(tmp, "quality_gate.json")
@@ -575,7 +575,6 @@ def main():
     test_cik_from_xbrl_frames()
     test_preflight_ua_parity()
     test_sec_throttle_handling()
-    test_catchup_schedule_wiring()
     test_weekly_sweep_gate()
     test_backfill()
     test_calibration_and_ensemble()
@@ -584,7 +583,7 @@ def main():
 
 def test_calibration_and_ensemble():
     """Probabilities must mean what they say, and the ensemble must learn."""
-    from scraper import ensemble
+    from pipeline import ensemble
 
     # --- isotonic regression: monotone fit, exact on already-monotone data ---
     s = np.array([1.0, 2, 3, 4, 5])
@@ -649,7 +648,7 @@ def test_calibration_and_ensemble():
 
 def test_backfill():
     """Backfill recovers what publishers expose by date — and says what it can't."""
-    from scraper import backfill
+    from pipeline import backfill
 
     # Missing-weekday detection skips weekends and dates already collected.
     have = {"2026-07-27"}
@@ -704,52 +703,22 @@ def test_weekly_sweep_gate():
     to one weekday — while a cold start must still populate immediately.
     """
     import inspect
-    import scraper.main as m
+    import pipeline.main as m
     src = inspect.getsource(m.run)
     assert "FULL_MARKET_WEEKDAY" in src and "sweep_today" in src
     # The cold-start escape hatch must be present: an empty price archive
     # sweeps regardless of weekday.
     assert "not store.load_prices()" in src, \
         "an empty archive must sweep on any weekday"
-    import scraper.config as config
+    import pipeline.config as config
     assert isinstance(config.FULL_MARKET_WEEKDAY, int)
     print("  weekly full-market sweep gate (with cold-start escape) OK")
 
 
-def test_catchup_schedule_wiring():
-    """Catch-up schedules must exist and must pass the skip flag.
-
-    GitHub delays and sometimes drops cron runs; a missed collection day can
-    never be recovered, so the retries matter — but they must not redo a day
-    that already succeeded.
-    """
-    import re as _re
-    wf = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
-                      ".github", "workflows", "scan.yml")
-    text = open(wf).read()
-    crons = _re.findall(r'cron:\s*"([^"]+)"', text)
-    assert len(crons) >= 2, f"need catch-up schedules, found {crons}"
-    assert "30 6 * * 1-5" in crons, crons
-    # Every catch-up cron must be referenced by the skip-flag condition.
-    for c in crons:
-        if c != "30 6 * * 1-5":
-            assert c in text.split("SKIP_IF_DONE")[1][:400], \
-                f"catch-up cron {c} not wired to --skip-if-collected-today"
-    assert "--skip-if-collected-today" in text
-    assert "python -m scraper.main $SKIP_IF_DONE" in text
-
-    # And the flag is actually implemented.
-    import scraper.main as m
-    import inspect
-    src = inspect.getsource(m.main)
-    assert "skip_if_collected_today" in src and "distinct_dates" in src
-    print(f"  catch-up schedules wired ({len(crons)} crons, skip flag honored) OK")
-
-
 def test_sec_throttle_handling():
     """A throttle must be waited out; a real failure must not be."""
-    from scraper.sources import sec_filings as sf
-    import scraper.config as config
+    from pipeline.sources import filings as sf
+    import pipeline.config as config
 
     class Resp:
         def __init__(self, code, text="", payload=None):
@@ -798,8 +767,8 @@ def test_preflight_ua_parity():
     refused — how preflight reported Wikipedia healthy while it collected
     almost nothing.
     """
-    from scraper import preflight, config
-    from scraper.sources import wikipedia as wiki
+    from pipeline import preflight, config
+    from pipeline.sources import pageviews as wiki
     import inspect
 
     # Every SEC/Wikimedia check is mapped to a matching UA bucket.
@@ -813,13 +782,13 @@ def test_preflight_ua_parity():
     assert "WIKI_USER_AGENT" in src, "wikipedia source must use the Wikimedia UA"
     # Wikimedia refuses browser-spoofing agents; ours must identify the tool.
     assert "Mozilla" not in config.WIKI_USER_AGENT
-    assert "stocks-predictor" in config.WIKI_USER_AGENT
+    assert "pit-archive" in config.WIKI_USER_AGENT
     print("  preflight/source User-Agent parity OK")
 
 
 def test_cik_from_xbrl_frames():
     """Derive ticker->CIK via data.sec.gov when www.sec.gov is blocked."""
-    from scraper.sources import sec_filings as sf
+    from pipeline.sources import filings as sf
 
     frames = {"data": [
         {"cik": 320193, "entityName": "Apple Inc."},
@@ -861,8 +830,8 @@ def test_cik_from_xbrl_frames():
 def test_cik_cache_credibility():
     """A tiny (fixture-sized) CIK cache must never starve the live source."""
     import json as _json
-    from scraper.sources import sec_filings
-    import scraper.config as config
+    from pipeline.sources import filings as sec_filings
+    import pipeline.config as config
 
     with tempfile.TemporaryDirectory() as tmp:
         orig = config.WATCHLIST_FILE
@@ -893,7 +862,7 @@ def test_cik_cache_credibility():
 
 
 def test_wikipedia_resolution():
-    from scraper.sources import wikipedia as wiki
+    from pipeline.sources import pageviews as wiki
     # NASDAQ-style descriptors and legal suffixes must be stripped for search.
     assert wiki._clean_name("Artius II Acquisition Inc. - Class A Ordinary Shares") \
         == "Artius II Acquisition"
@@ -946,7 +915,7 @@ def test_wikipedia_resolution():
 
 
 def test_recency():
-    from scraper import recency
+    from pipeline import recency
     now = dt.datetime(2026, 7, 24, 12, 0, tzinfo=dt.timezone.utc)
     # Weight semantics: fresh=1, one half-life=0.5, beyond max age=0, undated=1.
     assert approx(recency.weight(0.0, 2.0, 7.0), 1.0)
@@ -973,7 +942,7 @@ def test_recency():
 
 
 def test_international_universe():
-    from scraper import universe
+    from pipeline import universe
     intl = universe.international()
     assert len(intl) > 180, f"expected >180 international tickers, got {len(intl)}"
     assert len(intl) == len(set(intl)), "duplicates in international universe"

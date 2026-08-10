@@ -38,28 +38,28 @@ because you're accumulating data nobody can reconstruct after the fact.**
 
 ### Month 0 (now)
 1. Let the daily GitHub Action run. It logs a point-in-time snapshot every
-   weekday and updates `RANKINGS.md`. Do nothing else yet.
+   weekday and updates `data/daily_output.md`. Do nothing else yet.
 2. Run the immediate price-signal backtest to get a first read:
    ```bash
-   python -m scraper.evaluate --from-prices --horizon 63 --limit 60
+   python -m pipeline.evaluate --from-prices --horizon 63 --limit 60
    ```
-   Read `EVALUATION.md`. Note which price signals show a consistent, positive
+   Read `data/eval_report.md`. Note which price signals show a consistent, positive
    mean IC with |t-stat| ≥ 2. Those are your starting candidates.
 3. **Paper-trade only.** Track the top-N list on paper (or a broker's paper
    account). Do not risk real money on month-0 hunches.
 
 ### Months 1–3 (accumulate + measure)
-4. Each week, run `python -m scraper.evaluate --from-store --horizon 63` and
-   watch the per-signal IC table in `EVALUATION.md` stabilize as the sample
+4. Each week, run `python -m pipeline.evaluate --from-store --horizon 63` and
+   watch the per-signal IC table in `data/eval_report.md` stabilize as the sample
    grows. A signal that looked great on 3 dates and fades by 30 dates was
    noise — this is the process working.
 5. Keep the signals with consistent IC; demote or drop the ones that don't
-   clear |t-stat| ≥ 2. Re-tune `SCORE_WEIGHTS` in `scraper/config.py` to lean
+   clear |t-stat| ≥ 2. Re-tune `SCORE_WEIGHTS` in `pipeline/config.py` to lean
    on what's working (or let the model do it, next step).
 
 ### Months 3–6 (learn + validate)
 6. Once you have ~40+ labeled dates, the walk-forward model
-   (`scraper/model.py`, run automatically by `evaluate.py`) trains on the past
+   (`pipeline/model.py`, run automatically by `evaluate.py`) trains on the past
    and predicts the strictly-future next block. Trust the **out-of-sample**
    AUC / IC / decile-spread numbers, never the in-sample ones.
 7. Decision gate — go/no-go for real money, all must hold:

@@ -1,6 +1,6 @@
 """One-command health report for the collection phase.
 
-    python -m scraper.status
+    python -m pipeline.status
 
 Answers the daily question — "did yesterday's scrape actually work?" — from
 committed data alone, no API access required: how many dates collected, how
@@ -40,7 +40,7 @@ def _business_days_between(a: str, b: str) -> int:
 
 def main():
     print("=" * 62)
-    print("  STOCKS-PREDICTOR — COLLECTION STATUS")
+    print("  PIT-ARCHIVE — COLLECTION STATUS")
     print("=" * 62)
 
     man = _read_json("data/history/manifest.json")
@@ -98,7 +98,7 @@ def main():
               f"{q.get('distinct_dates', 0)} dates")
 
     # Current top names from the committed rankings.
-    rank_path = os.path.join(ROOT, "RANKINGS.md")
+    rank_path = os.path.join(ROOT, "data/daily_output.md")
     if os.path.exists(rank_path):
         rows = [ln for ln in open(rank_path).read().splitlines()
                 if ln.startswith("| ") and not ln.startswith("| #")

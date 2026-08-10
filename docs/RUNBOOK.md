@@ -4,11 +4,11 @@
 
 | What | Where | When |
 |---|---|---|
-| Daily collection (`scraper.main`) | GitHub Actions (`scan.yml`) | 06:30 UTC weekdays + manual `workflow_dispatch` |
+| Daily collection (`pipeline.main`) | GitHub Actions (`scan.yml`) | 06:30 UTC weekdays + manual `workflow_dispatch` |
 | Self-tests + dress rehearsal | Same job, before collection | Every run |
 | Preflight endpoint probe | Same job | Every run — logs which sources are up |
 | Warehouse compaction | Same job, after collection | Every run |
-| Evaluation (`scraper.evaluate`) | Same job | Every run (meaningful after ~40 dates) |
+| Evaluation (`pipeline.evaluate`) | Same job | Every run (meaningful after ~40 dates) |
 
 Everything commits back to `main`; git history doubles as the run ledger.
 
@@ -26,7 +26,7 @@ code, not data — sources degrade to neutral values rather than failing.
    the worse failure mode. Missingness spiking on one feature = investigate.
 2. Glance at `data/history/manifest.json`: `dates` should grow by ~5/week and
    `last_date` should be this week. If not, the commit step is failing.
-3. Skim `EVALUATION.md`. Early months: expect noise; you're checking the
+3. Skim `data/eval_report.md`. Early months: expect noise; you're checking the
    tables render and the example count grows, not hunting signals yet.
 
 ## Monthly (30 minutes)
@@ -47,7 +47,7 @@ code, not data — sources degrade to neutral values rather than failing.
 ### Known unavailable on shared CI runners
 
 `sec_filings` and `reddit` are listed in `EXPECTED_UNAVAILABLE`
-(`scraper/quality_gate.py`), so the gate reports them as **EXPECTED-DOWN**
+(`pipeline/quality_gate.py`), so the gate reports them as **EXPECTED-DOWN**
 instead of DEAD. They are still collected every run, and the gate prints a
 loud "is ALIVE again" line the moment either starts returning data.
 
@@ -89,14 +89,14 @@ signals. A cold/empty archive sweeps immediately regardless of weekday.
 
 # Local run against real internet (from any machine):
 pip install -r requirements.txt
-python -m scraper.preflight             # what's reachable from here?
-python -m scraper.main --limit 20       # small live run
-python -m scraper.main                  # full run
+python -m pipeline.preflight             # what's reachable from here?
+python -m pipeline.main --limit 20       # small live run
+python -m pipeline.main                  # full run
 
 # Rebuild analytics from accumulated data (no network needed):
-python -m scraper.warehouse compact
-python -m scraper.warehouse sql "SELECT date, COUNT(*) FROM features GROUP BY date ORDER BY date"
-python -m scraper.evaluate --from-store --horizon 63 --horizons 21,63,126
+python -m pipeline.warehouse compact
+python -m pipeline.warehouse sql "SELECT date, COUNT(*) FROM features GROUP BY date ORDER BY date"
+python -m pipeline.evaluate --from-store --horizon 63 --horizons 21,63,126
 
 # Verify everything still works after any edit:
 python -m tests.selftest && python -m tests.dress_rehearsal

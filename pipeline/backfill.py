@@ -1,7 +1,7 @@
 """Reconstruct the recoverable part of a missed collection day.
 
-    python -m scraper.backfill --since 2026-07-28
-    python -m scraper.backfill --dates 2026-07-28,2026-07-29 --dry-run
+    python -m pipeline.backfill --since 2026-07-28
+    python -m pipeline.backfill --dates 2026-07-28,2026-07-29 --dry-run
 
 When collection stops (CI outage, quota block, a bad deploy), some of the
 missed data is gone forever and some is not. The split is what matters:
@@ -31,7 +31,7 @@ import argparse
 import datetime as dt
 
 from . import config, factors, store
-from .sources import short_interest, wikipedia
+from .sources import positioning as short_interest, pageviews as wikipedia
 
 RECOVERABLE = ["prices", "factors", "finra_short", "wikipedia"]
 UNRECOVERABLE = ["news", "stocktwits", "reddit", "sec_filings"]

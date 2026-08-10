@@ -64,10 +64,10 @@ data/
 ```bash
 # Compile features + dense prices into labeled examples at a 63-day horizon,
 # writing data/dataset/labeled_63d.jsonl and a quality report:
-python -m scraper.evaluate --from-store --horizon 63
+python -m pipeline.evaluate --from-store --horizon 63
 ```
 
-`scraper/dataset.compile_labeled()` computes each label from the **price
+`pipeline/dataset.compile_labeled()` computes each label from the **price
 archive** (falling back to the snapshot's `last_price` only if the archive has a
 gap), so labels are robust to universe churn. See `STRATEGY.md` for how to use
 the accumulating dataset month by month, and `README.md` for the evaluation

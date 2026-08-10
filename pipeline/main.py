@@ -1,9 +1,9 @@
 """End-to-end screener run: discover -> gather signals -> score -> write.
 
 Usage:
-    python -m scraper.main               # full run
-    python -m scraper.main --limit 15    # cap universe (fast smoke test)
-    python -m scraper.main --no-reddit --no-sec   # skip slow/blockable sources
+    python -m pipeline.main               # full run
+    python -m pipeline.main --limit 15    # cap universe (fast smoke test)
+    python -m pipeline.main --no-reddit --no-sec   # skip slow/blockable sources
 """
 import argparse
 import datetime as dt
@@ -11,12 +11,14 @@ import json
 import os
 
 from . import config, universe, store
-from .sources import prices, sec_filings, news, reddit, stocktwits, wikipedia, short_interest
+from .sources import (quotes as prices, filings as sec_filings, newsfeed as news,
+                      forum as reddit, social as stocktwits, pageviews as wikipedia,
+                      positioning as short_interest)
 from .scoring import score
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 RANKINGS_DIR = os.path.join(ROOT, "data", "rankings")
-RANKINGS_MD = os.path.join(ROOT, "RANKINGS.md")
+RANKINGS_MD = os.path.join(ROOT, "data/daily_output.md")
 
 DISCLAIMER = (
     "This is an automated, experimental momentum/attention **screener**, not "
@@ -120,7 +122,7 @@ def write_outputs(payload: dict) -> None:
 
     # Append a point-in-time snapshot so a labeled dataset accumulates over
     # time. This is what makes real evaluation/training possible in a few
-    # months (see scraper/evaluate.py and STRATEGY.md).
+    # months (see pipeline/evaluate.py and STRATEGY.md).
     n_rows = store.append_snapshot(payload["results"], date=date_str)
     print(f"[store] appended {n_rows} feature rows")
 
@@ -155,6 +157,7 @@ def write_outputs(payload: dict) -> None:
             f"{f.get('news_count', '—')} | {f.get('reddit_mentions', '—')} |"
         )
     lines.append("")
+    os.makedirs(os.path.dirname(RANKINGS_MD), exist_ok=True)
     with open(RANKINGS_MD, "w") as fh:
         fh.write("\n".join(lines))
     print(f"[write] {RANKINGS_MD}")

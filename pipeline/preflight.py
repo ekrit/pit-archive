@@ -1,6 +1,6 @@
 """Endpoint health probe: know which data sources are up BEFORE the run.
 
-    python -m scraper.preflight
+    python -m pipeline.preflight
 
 Prints a table of every external dependency with status + latency, writes
 data/preflight.json, and always exits 0 (informational — the pipeline itself

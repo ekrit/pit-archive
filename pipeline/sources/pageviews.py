@@ -188,7 +188,7 @@ def fetch_asof(tickers: list[str], as_of: dt.date) -> dict[str, dict]:
 
     The Wikimedia API serves per-day counts for an arbitrary range, so this
     returns exactly what a live run on `as_of` would have seen — no
-    look-ahead. Used by scraper/backfill.py to recover missed days.
+    look-ahead. Used by pipeline/backfill.py to recover missed days.
     """
     return fetch(tickers, as_of=as_of)
 

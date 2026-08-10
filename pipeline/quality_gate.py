@@ -1,6 +1,6 @@
 """Post-collection data-quality gate: protect the DATA, not just the code.
 
-    python -m scraper.quality_gate
+    python -m pipeline.quality_gate
 
 Unit tests catch broken code; nothing else catches a source that returns
 HTTP 200 with a changed response shape and silently yields zeros forever —

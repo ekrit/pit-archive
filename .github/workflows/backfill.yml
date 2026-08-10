@@ -37,7 +37,7 @@ jobs:
 
       - name: Backfill missing weekdays
         env:
-          SEC_USER_AGENT: ${{ secrets.SEC_USER_AGENT || format('stocks-predictor research (github.com/{0}/stocks-predictor)', github.repository_owner) }}
+          SEC_USER_AGENT: ${{ secrets.SEC_USER_AGENT || format('pit-archive research (github.com/{0}/pit-archive)', github.repository_owner) }}
         run: |
           SINCE="${{ github.event.inputs.since }}"
           if [ -z "$SINCE" ]; then
@@ -46,18 +46,18 @@ jobs:
             SINCE=$(date -u -d "14 days ago" +%Y-%m-%d)
           fi
           echo "Backfilling missing weekdays since $SINCE"
-          python -m scraper.backfill --since "$SINCE"
+          python -m pipeline.backfill --since "$SINCE"
 
       - name: Rebuild derived artifacts
         run: |
-          python -m scraper.warehouse compact || true
-          python -m scraper.evaluate --from-store --horizon 63 || true
+          python -m pipeline.warehouse compact || true
+          python -m pipeline.evaluate --from-store --horizon 63 || true
 
       - name: Commit recovered data
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data EVALUATION.md
+          git add data
           if git diff --staged --quiet; then
             echo "Nothing to backfill."
             exit 0
