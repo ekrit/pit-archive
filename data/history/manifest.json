@@ -1,9 +1,9 @@
 {
   "schema_version": 2,
-  "updated_at": "2026-08-14T08:12:50.113840+00:00",
+  "updated_at": "2026-08-15T05:24:09.394886+00:00",
   "features": {
-    "rows": 1808,
-    "dates": 15,
+    "rows": 2403,
+    "dates": 20,
     "first_date": "2026-07-20",
     "last_date": "2026-08-14",
     "distinct_tickers": 363
