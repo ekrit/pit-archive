@@ -71,7 +71,7 @@ WATCHLIST_FILE = os.path.join(
     os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data", "watchlist.txt"
 )
 
-MAX_TICKERS_TO_SCORE = 120  # cap total universe size per run to keep runtime/API usage bounded
+MAX_TICKERS_TO_SCORE = int(os.environ.get("MAX_TICKERS_TO_SCORE", "220"))  # room for a themed watchlist alongside daily screener names
 
 # Cap on how many tickers to archive daily closes for (today's universe plus
 # previously-tracked names). Bounds API load while keeping forward-return

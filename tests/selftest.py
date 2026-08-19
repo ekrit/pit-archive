@@ -568,6 +568,7 @@ def main():
     test_math_properties()
     test_scoring_edge_cases()
     test_quality_gate()
+    test_watchlist_priority()
     test_international_universe()
     test_recency()
     test_cik_cache_credibility()
@@ -939,6 +940,40 @@ def test_recency():
         [(0.9, 30.0), (0.9, 60.0)], half_life_days=2.0, max_age_days=7.0)
     assert eff2 == 0.0 and mean2 == 0.0, (eff2, mean2)
     print("  recency weighting (parsers, half-life, stale-collapse) OK")
+
+
+def test_watchlist_priority():
+    """Watchlist names must never be dropped by the universe cap.
+
+    discover() used to sort the union alphabetically then truncate, so a
+    deliberately tracked ticker could vanish purely because of its letter —
+    silently defeating the point of tracking a theme.
+    """
+    from pipeline import universe
+    import pipeline.config as config
+
+    watch = {f"ZZ{i:02d}" for i in range(30)}          # sort last on purpose
+    screened = {f"AA{i:02d}" for i in range(500)}      # would fill the cap
+    orig_w, orig_s, orig_cap = (universe._from_watchlist,
+                                universe._from_screeners,
+                                config.MAX_TICKERS_TO_SCORE)
+    try:
+        universe._from_watchlist = lambda: watch
+        universe._from_screeners = lambda session: screened
+        universe.make_session = lambda user_agent=None: None
+        config.MAX_TICKERS_TO_SCORE = 100
+        got = universe.discover()
+        assert len(got) == 100, len(got)
+        assert watch.issubset(set(got)), "every watchlist name must survive"
+        assert got[:len(watch)] == sorted(watch), "watchlist comes first"
+        # A watchlist larger than the cap still returns all of it.
+        config.MAX_TICKERS_TO_SCORE = 10
+        got2 = universe.discover()
+        assert set(got2) == watch, "cap must not cut the watchlist itself"
+    finally:
+        universe._from_watchlist, universe._from_screeners = orig_w, orig_s
+        config.MAX_TICKERS_TO_SCORE = orig_cap
+    print("  watchlist priority over screener cap OK")
 
 
 def test_international_universe():

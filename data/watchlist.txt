@@ -1,7 +1,84 @@
-# Tickers to always include in the scan, one per line. '#' starts a comment.
-# Add your own high-conviction names here.
+# Tickers always included in the daily scan, one per line. '#' = comment.
+# These get the FULL feature treatment (all ~66 signals), not just the price
+# archive — so a theme you want evidence on must be listed here.
+#
+# NOTE: this is a DATA COLLECTION list, not a recommendation list. The point
+# is to have point-in-time evidence on these names when the evaluation layer
+# matures, so the data can judge the thesis instead of the thesis judging
+# itself.
+
+# --- personal watchlist ---
 NVDA
 TSLA
 PLTR
 SOFI
 AMD
+
+# --- theme: US electricity / AI power buildout -----------------------------
+# Rationale for tracking (NOT for buying): data-centre load is the first real
+# US electricity demand growth in ~20 years. Whether that translates into
+# equity returns from HERE is exactly what is unknown — much is already
+# priced. Tracked across the whole value chain so the data can show which
+# part (if any) actually carries signal.
+
+# independent power producers & nuclear-heavy utilities
+CEG
+VST
+NRG
+TLN
+NEE
+D
+SO
+AEP
+ETR
+EXC
+PEG
+PCG
+
+# electrical equipment, grid hardware, turbines
+GEV
+ETN
+PWR
+HUBB
+AME
+EMR
+NVT
+ATKR
+ENS
+POWL
+
+# data-centre thermal / power distribution
+VRT
+MOD
+TT
+JCI
+CARR
+
+# nuclear: SMRs, fuel cycle, enrichment
+SMR
+OKLO
+LEU
+CCJ
+BWXT
+UEC
+UUUU
+NNE
+
+# natural gas feeding the turbines (fuel + midstream)
+EQT
+AR
+RRC
+EXE
+LNG
+WMB
+KMI
+TRGP
+
+# engineering & construction actually building it
+J
+ACM
+MYRG
+DY
+IESC
+PRIM
+FIX

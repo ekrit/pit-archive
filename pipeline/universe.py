@@ -48,11 +48,19 @@ def _from_watchlist() -> set[str]:
 
 
 def discover() -> list[str]:
-    """Return a deduped, capped list of candidate tickers."""
+    """Return a deduped, capped list of candidate tickers.
+
+    Watchlist names come FIRST and are never dropped by the cap. Previously
+    the union was sorted alphabetically then truncated, so a deliberately
+    tracked name could be silently cut just because of its letter — which
+    would quietly break exactly the thematic tracking the watchlist exists
+    for. Screener names then fill whatever room is left.
+    """
     session = make_session()
-    tickers = _from_screeners(session) | _from_watchlist()
-    ordered = sorted(tickers)
-    return ordered[: config.MAX_TICKERS_TO_SCORE]
+    watch = sorted(_from_watchlist())
+    screened = sorted(_from_screeners(session) - set(watch))
+    room = max(0, config.MAX_TICKERS_TO_SCORE - len(watch))
+    return watch + screened[:room]
 
 
 # --------------------------------------------------------------------------- #
