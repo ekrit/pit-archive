@@ -30,6 +30,8 @@ BASE_FEATURE_KEYS = [
     "sec_form4_recent", "sec_8k_recent",
     "st_trending", "st_msg_count", "st_sentiment",
     "wiki_views_7d", "wiki_spike_ratio", "short_vol_ratio",
+    "eps_rev_30d", "eps_rev_90d", "eps_rev_breadth", "eps_rev_vs_price",
+    "analyst_count", "pt_upside",
 ]
 FEATURE_KEYS = BASE_FEATURE_KEYS + factors.FACTOR_NAMES
 

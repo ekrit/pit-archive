@@ -123,6 +123,26 @@ class FakeSession:
         return FakeResponse({}, status=404)
 
 
+class _FakeTicker:
+    """Analyst-estimate shapes for the estimates source."""
+    def __init__(self, symbol):
+        self.symbol = symbol
+    @property
+    def eps_trend(self):
+        return pd.DataFrame({"current": [2.0], "30daysAgo": [1.8],
+                             "90daysAgo": [1.2]}, index=["+1y"])
+    @property
+    def eps_revisions(self):
+        return pd.DataFrame({"upLast30days": [6], "downLast30days": [1]},
+                            index=["+1y"])
+    @property
+    def earnings_estimate(self):
+        return pd.DataFrame({"numberOfAnalysts": [5]}, index=["+1y"])
+    @property
+    def analyst_price_targets(self):
+        return {"mean": 120.0, "current": 100.0}
+
+
 def _fake_yf_download(tickers=None, period=None, interval=None, group_by=None,
                       auto_adjust=None, threads=None, progress=None, **kw):
     """Shape-accurate yfinance.download stand-in (MultiIndex ticker columns)."""
@@ -173,6 +193,7 @@ def main() -> int:
             mod.make_session = lambda user_agent=None: fake
     import yfinance
     yfinance.download = _fake_yf_download
+    yfinance.Ticker = _FakeTicker
     prices.yf.download = _fake_yf_download
 
     # Redirect all writes into the sandbox.
@@ -218,7 +239,8 @@ def main() -> int:
     expected_signals = ["ret_21d", "news_count", "news_sentiment", "reddit_mentions",
                         "sec_form4_recent", "st_trending", "st_msg_count",
                         "wiki_views_7d", "wiki_spike_ratio", "short_vol_ratio",
-                        "KMID", "ROC_20", "RSV_60"]
+                        "KMID", "ROC_20", "RSV_60",
+                        "eps_rev_90d", "eps_rev_vs_price", "analyst_count"]
     missing = [k for k in expected_signals if k not in feats]
     check("all source families present in features", not missing, f"missing={missing}")
     check("factor battery populated",

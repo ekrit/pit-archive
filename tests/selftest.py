@@ -568,6 +568,7 @@ def main():
     test_math_properties()
     test_scoring_edge_cases()
     test_quality_gate()
+    test_estimate_revisions()
     test_watchlist_priority()
     test_international_universe()
     test_recency()
@@ -940,6 +941,90 @@ def test_recency():
         [(0.9, 30.0), (0.9, 60.0)], half_life_days=2.0, max_age_days=7.0)
     assert eff2 == 0.0 and mean2 == 0.0, (eff2, mean2)
     print("  recency weighting (parsers, half-life, stale-collapse) OK")
+
+
+def test_estimate_revisions():
+    """Revision math, sign-flip handling, and the 'not yet paid for' screen."""
+    from pipeline.sources import estimates as est
+    import pandas as _pd
+
+    # _pct_change must survive negative bases: an EPS estimate going from
+    # -0.10 to +0.40 is a genuine upgrade, and naive division reports it as
+    # negative, which would invert the signal exactly on the inflections
+    # this source exists to catch.
+    assert approx(est._pct_change(1.20, 1.00), 0.20)
+    assert est._pct_change(0.40, -0.10) > 0, "sign flip up must read positive"
+    assert est._pct_change(-0.40, 0.10) < 0, "sign flip down must read negative"
+    assert est._pct_change(1.0, 0) is None and est._pct_change(None, 1.0) is None
+
+    # _cell tolerates missing frames, periods and columns rather than raising.
+    df = _pd.DataFrame({"current": [2.0], "30daysAgo": [1.6], "90daysAgo": [1.0]},
+                       index=["+1y"])
+    df.index.name = "period"
+    assert approx(est._cell(df, "+1y", "current"), 2.0)
+    assert est._cell(df, "0q", "current") is None
+    assert est._cell(df, "+1y", "nope") is None
+    assert est._cell(None, "+1y", "current") is None
+    assert est._cell(_pd.DataFrame(), "+1y", "current") is None
+
+    # The screen: estimates +100% over 90d while price only +20% leaves a
+    # large positive gap; the same revision after a +150% run does not.
+    class FakeTicker:
+        def __init__(self, sym): pass
+        eps_trend = df
+        eps_revisions = _pd.DataFrame(
+            {"upLast30days": [8], "downLast30days": [2]}, index=["+1y"])
+        earnings_estimate = _pd.DataFrame(
+            {"numberOfAnalysts": [4]}, index=["+1y"])
+        analyst_price_targets = {"mean": 150.0, "current": 100.0}
+
+    import sys, types
+    fake_yf = types.ModuleType("yfinance"); fake_yf.Ticker = FakeTicker
+    real = sys.modules.get("yfinance")
+    sys.modules["yfinance"] = fake_yf
+    try:
+        cheap = est._one("AAA", price_ret_63d=0.20)
+        rich = est._one("BBB", price_ret_63d=1.50)
+    finally:
+        if real is not None:
+            sys.modules["yfinance"] = real
+        else:
+            del sys.modules["yfinance"]
+
+    assert approx(cheap["eps_rev_90d"], 1.0), cheap        # 1.0 -> 2.0
+    assert approx(cheap["eps_rev_30d"], 0.25), cheap       # 1.6 -> 2.0
+    assert approx(cheap["eps_rev_breadth"], 0.6), cheap    # (8-2)/10
+    assert cheap["analyst_count"] == 4 and approx(cheap["pt_upside"], 0.5)
+    assert cheap["eps_rev_vs_price"] > 0.7, cheap          # revision unpaid for
+    assert rich["eps_rev_vs_price"] < 0, rich              # already re-rated
+    assert cheap["eps_rev_vs_price"] > rich["eps_rev_vs_price"]
+
+    # A ticker with no coverage returns neutrals, never an exception.
+    class DeadTicker:
+        def __init__(self, sym): pass
+        @property
+        def eps_trend(self): raise RuntimeError("no data")
+        @property
+        def eps_revisions(self): raise RuntimeError("no data")
+        @property
+        def earnings_estimate(self): raise RuntimeError("no data")
+        @property
+        def analyst_price_targets(self): raise RuntimeError("no data")
+    fake_yf.Ticker = DeadTicker
+    sys.modules["yfinance"] = fake_yf
+    try:
+        empty = est._one("ZZZ", price_ret_63d=0.1)
+    finally:
+        if real is not None: sys.modules["yfinance"] = real
+        else: del sys.modules["yfinance"]
+    assert all(v is None for v in empty.values()), empty
+
+    # Registered for compilation and evaluated as its own family.
+    from pipeline import dataset, backtest
+    for k in ("eps_rev_90d", "eps_rev_vs_price", "pt_upside"):
+        assert k in dataset.FEATURE_KEYS, k
+        assert k in backtest.FUNDAMENTAL_SIGNALS, k
+    print("  estimate revisions (sign flips, screen, graceful absence) OK")
 
 
 def test_watchlist_priority():

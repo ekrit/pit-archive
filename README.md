@@ -43,6 +43,10 @@ See [`docs/DATA.md`](docs/DATA.md) for the full schema and guarantees.
 Naive evaluation of time-series data is misleading in well-documented ways, so
 the analysis layer is built around avoiding them:
 
+Signal families are grouped by where they sit in the causal chain: most are
+coincident (price, attention), while estimate revisions are the one family
+expected to *lead*, which is why they are measured separately.
+
 - **Cross-sectional rank correlation per date**, averaged with a t-statistic —
   not one pooled correlation, which mixes broad market-wide movement into the
   measurement.

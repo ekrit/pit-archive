@@ -40,6 +40,10 @@ FAMILIES: dict[str, tuple[str, str, float]] = {
     "wikipedia": ("wiki_views_7d", "positive", 0.10),
     "sec_filings": ("sec_form4_recent", "notnull", 0.10),
     "reddit": ("reddit_mentions", "positive", 0.01),
+    # Only a minority of a small-cap-heavy universe carries analyst coverage,
+    # so the floor is deliberately low: absence of coverage is normal, a drop
+    # to zero across the board is not.
+    "estimates": ("eps_rev_90d", "notnull", 0.15),
 }
 CATASTROPHIC = {"prices", "factors"}
 

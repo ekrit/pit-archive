@@ -12,6 +12,7 @@ import os
 
 from . import config, universe, store
 from .sources import (quotes as prices, filings as sec_filings, newsfeed as news,
+                      estimates,
                       forum as reddit, social as stocktwits, pageviews as wikipedia,
                       positioning as short_interest)
 from .scoring import score
@@ -96,11 +97,18 @@ def run(limit: int | None, use_reddit: bool, use_sec: bool, use_news: bool) -> d
     print(f"[stocktwits] {sum(1 for v in st_out.values() if v.get('st_msg_count'))} with messages")
     wiki_out = wikipedia.fetch(tickers)
     print(f"[wikipedia] {sum(1 for v in wiki_out.values() if v.get('wiki_views_7d'))} with views")
+    # Estimate revisions need the 63-day return to compute "revision not yet
+    # paid for", so they run after prices.
+    est_out = estimates.fetch(
+        tickers, {tk: (price_out.get(tk) or {}).get("ret_63d") for tk in tickers})
+    n_cov = sum(1 for v in est_out.values() if v.get("eps_rev_90d") is not None)
+    print(f"[estimates] {n_cov}/{len(tickers)} with analyst coverage")
+
     short_out = short_interest.fetch(tickers)
     print(f"[finra] {sum(1 for v in short_out.values() if v.get('short_vol_ratio') is not None)} with short ratio")
 
     merged = _merge(price_out, news_out, sec_out, reddit_out, st_out, wiki_out,
-                    short_out, tickers=tickers)
+                    short_out, est_out, tickers=tickers)
     ranked = score(merged)
 
     return {

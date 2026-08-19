@@ -55,6 +55,8 @@ PARALLEL_WORKERS = int(os.environ.get("PARALLEL_WORKERS", "8"))
 NEWS_RATE_PER_SEC = 3.0
 STOCKTWITS_RATE_PER_SEC = 2.0
 WIKI_RATE_PER_SEC = 5.0
+# Yahoo quote-summary is heavier than a chart call; one request per ticker.
+ESTIMATES_RATE_PER_SEC = float(os.environ.get("ESTIMATES_RATE_PER_SEC", "2.0"))
 
 # SEC publishes a 10 req/s cap PER IP. CI runners share outbound IPs with
 # other tenants, so the budget is already partly spent before we start —

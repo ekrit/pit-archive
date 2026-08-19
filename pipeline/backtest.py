@@ -47,6 +47,17 @@ ATTENTION_SIGNALS = [
     "short_vol_ratio",
 ]
 
+# Estimate revisions are the one family expected to LEAD price rather than
+# follow it, so they are worth reading separately from attention signals.
+FUNDAMENTAL_SIGNALS = [
+    "eps_rev_30d",
+    "eps_rev_90d",
+    "eps_rev_breadth",
+    "eps_rev_vs_price",
+    "analyst_count",
+    "pt_upside",
+]
+
 
 def _group_by_date(examples: list[dict]) -> dict[str, list[dict]]:
     groups: dict[str, list[dict]] = defaultdict(list)
@@ -164,7 +175,8 @@ def run(examples: list[dict], signals: list[str] | None = None) -> list[dict]:
                 if k not in seen and isinstance(v, (int, float)):
                     seen.add(k)
                     present.append(k)
-        known = [s for s in (PRICE_SIGNALS + ATTENTION_SIGNALS) if s in seen]
+        known = [s for s in (PRICE_SIGNALS + ATTENTION_SIGNALS + FUNDAMENTAL_SIGNALS)
+                 if s in seen]
         signals = known + [s for s in present if s not in known and s != "last_price"]
 
     rows = []
