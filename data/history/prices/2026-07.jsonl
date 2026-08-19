@@ -63827,6 +63827,7 @@
 {"close":59.7599983215332,"date":"2026-07-23","schema_version":2,"ticker":"WKL.AS"}
 {"close":0.6600000262260437,"date":"2026-07-23","schema_version":2,"ticker":"WKSP"}
 {"close":2.2300000190734863,"date":"2026-07-23","schema_version":2,"ticker":"WLDS"}
+{"close":11.199999809265137,"date":"2026-07-23","schema_version":2,"ticker":"WLDSW"}
 {"close":10.260000228881836,"date":"2026-07-23","schema_version":2,"ticker":"WLII"}
 {"close":75.2300033569336,"date":"2026-07-23","schema_version":2,"ticker":"WLK"}
 {"close":50.209999084472656,"date":"2026-07-23","schema_version":2,"ticker":"WLYB"}
@@ -78794,6 +78795,7 @@
 {"close":68.81999969482422,"date":"2026-07-28","schema_version":2,"ticker":"GSHD"}
 {"close":10.489999771118164,"date":"2026-07-28","schema_version":2,"ticker":"GSHR"}
 {"close":10.529999732971191,"date":"2026-07-28","schema_version":2,"ticker":"GSHRU"}
+{"close":0.30000001192092896,"date":"2026-07-28","schema_version":2,"ticker":"GSHRW"}
 {"close":5.5,"date":"2026-07-28","schema_version":2,"ticker":"GSIT"}
 {"close":24.399999618530273,"date":"2026-07-28","schema_version":2,"ticker":"GSIW"}
 {"close":53.709999084472656,"date":"2026-07-28","schema_version":2,"ticker":"GSK"}
@@ -100121,6 +100123,7 @@
 {"close":27.56999969482422,"date":"2026-07-31","schema_version":2,"ticker":"MBUU"}
 {"close":10.170000076293945,"date":"2026-07-31","schema_version":2,"ticker":"MBVI"}
 {"close":10.260000228881836,"date":"2026-07-31","schema_version":2,"ticker":"MBVIU"}
+{"close":0.3499999940395355,"date":"2026-07-31","schema_version":2,"ticker":"MBVIW"}
 {"close":60.08000183105469,"date":"2026-07-31","schema_version":2,"ticker":"MBWM"}
 {"close":65.93000030517578,"date":"2026-07-31","schema_version":2,"ticker":"MBX"}
 {"close":66.42561340332031,"date":"2026-07-31","schema_version":2,"ticker":"MC"}
@@ -102149,6 +102152,7 @@
 {"close":9.359999656677246,"date":"2026-07-31","schema_version":2,"ticker":"SVM"}
 {"close":5.460000038146973,"date":"2026-07-31","schema_version":2,"ticker":"SVRA"}
 {"close":3.7100000381469727,"date":"2026-07-31","schema_version":2,"ticker":"SVRE"}
+{"close":0.010599999688565731,"date":"2026-07-31","schema_version":2,"ticker":"SVREW"}
 {"close":6.460000038146973,"date":"2026-07-31","schema_version":2,"ticker":"SVRN"}
 {"close":10.260000228881836,"date":"2026-07-31","schema_version":2,"ticker":"SVV"}
 {"close":45.970001220703125,"date":"2026-07-31","schema_version":2,"ticker":"SW"}
