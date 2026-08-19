@@ -67,11 +67,32 @@ def main():
     print(f"  freshness         : {fresh}")
 
     # Progress toward the milestones that unlock evaluation and predictions.
+    # Predictions need BOTH enough snapshot dates AND enough matured labels.
+    # Reporting only the date count once claimed "ACTIVE" while the model was
+    # still unable to train, which is exactly the kind of false green a status
+    # tool must not print.
+    q = _read_json("data/dataset/quality_63d.json") or {}
+    n_examples = q.get("labeled_rows", 0)
     need_pred = max(0, 8 - f["dates"])
     print(f"\nPROGRESS")
     print(f"  dates collected   : {f['dates']}")
-    print(f"  learned predictions unlock in ~{need_pred} more collection day(s)"
-          if need_pred else "  learned predictions: ACTIVE")
+    if need_pred:
+        print(f"  learned predictions: waiting on {need_pred} more collection day(s)")
+    elif n_examples < 200:
+        # Snapshots only become examples once their forward-return window has
+        # elapsed, so the binding constraint here is calendar time, not runs.
+        first = f.get("first_date")
+        matures = ""
+        if first:
+            d = dt.date.fromisoformat(first) + dt.timedelta(days=63)
+            matures = f"; first labels ~{d.isoformat()}"
+            days_left = (d - dt.date.today()).days
+            if days_left > 0:
+                matures += f" ({days_left}d away)"
+        print(f"  learned predictions: waiting on labels "
+              f"({n_examples}/200 examples{matures})")
+    else:
+        print("  learned predictions: ACTIVE")
     print("  first meaningful IC evaluation needs ~63d of labels "
           "(snapshots mature into examples)")
 

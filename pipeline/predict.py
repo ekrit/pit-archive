@@ -42,13 +42,18 @@ DISCLAIMER = (
 
 def _not_ready(n_dates: int, n_examples: int) -> str:
     need_d = max(0, MIN_DATES - n_dates)
+    # Once enough dates exist, more collection does NOT help: each snapshot has
+    # to age past the forward-return horizon before it becomes an example.
+    blocker = (f"~{need_d} more collection day(s), then the {HORIZON}d label lag"
+               if need_d else
+               f"the {HORIZON}d label lag — snapshots must age before they "
+               f"become examples; collecting faster does not help")
     return "\n".join([
         "# Model Predictions",
         "",
         f"_Status: **collecting** — {n_dates} snapshot dates, {n_examples} "
         f"labeled examples (need ≥{MIN_DATES} dates and ≥{MIN_EXAMPLES} "
-        f"examples; ~{need_d} more collection days, then the {HORIZON}d label "
-        f"lag before those days mature into examples)._",
+        f"examples). Waiting on: {blocker}._",
         "",
         "Today's heuristic screen is in data/daily_output.md. Learned predictions "
         "appear here automatically — no action needed — once enough labeled "
