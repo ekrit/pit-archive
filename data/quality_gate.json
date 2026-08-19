@@ -1,7 +1,7 @@
 {
   "date": "2026-08-19",
   "n_tickers": 120,
-  "checked_at": "2026-08-19T07:34:58.518612+00:00",
+  "checked_at": "2026-08-19T11:19:54.754127+00:00",
   "families": {
     "prices": {
       "alive_fraction": 1.0,
@@ -50,6 +50,12 @@
       "floor": 0.01,
       "trailing_avg": 0.0,
       "status": "EXPECTED-DOWN"
+    },
+    "estimates": {
+      "alive_fraction": 0.0,
+      "floor": 0.15,
+      "trailing_avg": 0.0,
+      "status": "DEAD"
     }
   },
   "status": "OK"
