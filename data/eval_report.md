@@ -1,8 +1,8 @@
 # Signal Evaluation — what actually works
 
-_Generated: 2026-08-22T05:23:21.943786+00:00 · mode: from-store · horizon: 63d_
+_Generated: 2026-08-24T07:56:00.731935+00:00 · mode: from-store · horizon: 63d_
 
-> 3197 feature snapshots across 25 dates → 0 labeled examples at 63d horizon (pos rate None, 0 tickers).
+> 3417 feature snapshots across 26 dates → 0 labeled examples at 63d horizon (pos rate None, 0 tickers).
 
 > ⚠️ Positive in-sample IC is easy to find by luck. Trust a signal only when the mean IC is **consistent across many dates** (|t-stat| ≥ 2) AND the walk-forward out-of-sample numbers below hold up. Everything here is research, not advice.
 
