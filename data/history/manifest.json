@@ -1,15 +1,15 @@
 {
   "schema_version": 2,
-  "updated_at": "2026-08-28T01:03:00.359656+00:00",
+  "updated_at": "2026-08-28T19:12:05.552185+00:00",
   "features": {
-    "rows": 4293,
+    "rows": 4369,
     "dates": 30,
     "first_date": "2026-07-20",
     "last_date": "2026-08-28",
-    "distinct_tickers": 758
+    "distinct_tickers": 798
   },
   "prices": {
-    "rows": 234471,
+    "rows": 241252,
     "dates": 46,
     "first_date": "2026-06-25",
     "last_date": "2026-08-28",
