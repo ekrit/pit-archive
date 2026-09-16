@@ -1,6 +1,6 @@
 # Model Predictions
 
-_Snapshot 2026-09-16 · trained on 236 labeled examples across 2 dates · 63d horizon · generated 2026-09-16T12:12:21.963565+00:00_
+_Snapshot 2026-09-16 · trained on 236 labeled examples across 2 dates · 63d horizon · generated 2026-09-16T15:17:01.769323+00:00_
 
 > Model output, not advice. A probability here is only worth what the out-of-sample table below says it is: check Brier and the calibration rows before acting on any number. Markets are largely efficient — expect a small edge at best, and size positions accordingly.
 
