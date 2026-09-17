@@ -1,7 +1,7 @@
 {
-  "feature_rows": 7427,
-  "price_rows": 319812,
-  "jsonl_bytes": 42059565,
-  "parquet_bytes": 4997114,
+  "feature_rows": 7643,
+  "price_rows": 326859,
+  "jsonl_bytes": 43122102,
+  "parquet_bytes": 5138246,
   "compression_ratio": 8.4
 }

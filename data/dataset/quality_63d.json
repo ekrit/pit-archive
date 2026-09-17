@@ -1,10 +1,10 @@
 {
   "horizon_days": 63,
-  "labeled_rows": 236,
-  "distinct_dates": 2,
+  "labeled_rows": 354,
+  "distinct_dates": 3,
   "distinct_tickers": 118,
-  "label_positive_rate": 0.5551,
-  "fwd_ret_mean": 0.0605,
+  "label_positive_rate": 0.5311,
+  "fwd_ret_mean": 0.0494,
   "feature_missing_pct": {
     "ret_5d": 0.0,
     "ret_21d": 0.0,
@@ -24,7 +24,7 @@
     "st_msg_count": 100.0,
     "st_sentiment": 100.0,
     "wiki_views_7d": 0.0,
-    "wiki_spike_ratio": 25.0,
+    "wiki_spike_ratio": 21.5,
     "short_vol_ratio": 0.0,
     "eps_rev_30d": 100.0,
     "eps_rev_90d": 100.0,
