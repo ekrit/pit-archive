@@ -1,31 +1,31 @@
 # Model Predictions
 
-_Snapshot 2026-09-17 · trained on 354 labeled examples across 3 dates · 63d horizon · generated 2026-09-17T19:35:01.389933+00:00_
+_Snapshot 2026-09-18 · trained on 472 labeled examples across 4 dates · 63d horizon · generated 2026-09-18T11:55:23.678991+00:00_
 
 > Model output, not advice. A probability here is only worth what the out-of-sample table below says it is: check Brier and the calibration rows before acting on any number. Markets are largely efficient — expect a small edge at best, and size positions accordingly.
 
 | # | Ticker | P(top quintile) | P(≥+30%) | Heuristic |
 |--:|:------:|----------------:|---------:|----------:|
-| 1 | ALAB | 1.000 | 0.167 | 53.32 |
-| 2 | AMKR | 1.000 | 1.000 | 45.99 |
-| 3 | APLD | 1.000 | 0.700 | 45.3 |
-| 4 | BWXT | 1.000 | 0.700 | 47.73 |
-| 5 | CARR | 1.000 | 0.474 | 57.63 |
-| 6 | CORZ | 1.000 | 0.474 | 46.88 |
-| 7 | ENS | 1.000 | 0.987 | 45.22 |
-| 8 | IONQ | 1.000 | 0.745 | 54.06 |
-| 9 | IREN | 1.000 | 0.200 | 55.83 |
-| 10 | KEEL | 1.000 | 1.000 | 47.64 |
-| 11 | KLIC | 1.000 | 0.700 | 33.16 |
-| 12 | LIF | 1.000 | 0.700 | 49.75 |
-| 13 | LRCX | 1.000 | 1.000 | 51.41 |
-| 14 | MKSI | 1.000 | 0.750 | 44.91 |
-| 15 | MOD | 1.000 | 0.474 | 40.69 |
-| 16 | MYRG | 1.000 | 1.000 | 38.03 |
-| 17 | POWL | 1.000 | 1.000 | 41.56 |
-| 18 | PRIM | 1.000 | 0.823 | 47.26 |
-| 19 | TLN | 1.000 | 0.000 | 45.78 |
-| 20 | ASTS | 0.650 | 0.474 | 52.94 |
+| 1 | AEVA | 1.000 | 0.722 | 42.34 |
+| 2 | ALAB | 1.000 | 1.000 | 56.41 |
+| 3 | AMKR | 1.000 | 1.000 | 45.29 |
+| 4 | BW | 1.000 | 1.000 | 47.72 |
+| 5 | CAPR | 1.000 | 1.000 | 50.69 |
+| 6 | CCOI | 1.000 | 1.000 | 45.75 |
+| 7 | CORZ | 1.000 | 1.000 | 49.77 |
+| 8 | ENS | 1.000 | 0.100 | 49.07 |
+| 9 | EVGO | 1.000 | 0.815 | 47.7 |
+| 10 | KPTI | 1.000 | 0.722 | 40.59 |
+| 11 | LIF | 1.000 | 1.000 | 45.25 |
+| 12 | MKSI | 1.000 | 1.000 | 42.95 |
+| 13 | MRNA | 1.000 | 1.000 | 73.33 |
+| 14 | MYRG | 1.000 | 1.000 | 38.46 |
+| 15 | PENG | 1.000 | 1.000 | 51.28 |
+| 16 | POWL | 1.000 | 1.000 | 37.82 |
+| 17 | KLIC | 0.833 | 1.000 | 34.8 |
+| 18 | OPEN | 0.833 | 0.722 | 46.89 |
+| 19 | PAY | 0.833 | 0.722 | 68.58 |
+| 20 | KEEL | 0.821 | 1.000 | 56.36 |
 
 ## Out-of-sample evidence
 
