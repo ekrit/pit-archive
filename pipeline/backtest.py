@@ -98,7 +98,33 @@ def _residualize(sig: np.ndarray, base: np.ndarray) -> np.ndarray:
 NEUTRALIZE_AGAINST = "ret_21d"  # the baseline everyone already has
 
 
-def evaluate_signal(examples: list[dict], key: str, min_names_per_date: int = 5) -> dict:
+def _overlap_factor(examples: list[dict]) -> float:
+    """horizon_days / median spacing between consecutive snapshot dates.
+
+    Daily snapshots against a 21-day horizon overlap ~21x; weekly snapshots
+    against the same horizon overlap ~3x. Using the observed spacing keeps
+    the adjustment honest if the collection cadence ever changes.
+    """
+    import datetime as _dt
+    dates = sorted({e.get("date") for e in examples if e.get("date")})
+    if len(dates) < 2:
+        return 1.0
+    gaps = []
+    for a, b in zip(dates, dates[1:]):
+        try:
+            gaps.append((_dt.date.fromisoformat(b) - _dt.date.fromisoformat(a)).days)
+        except (ValueError, TypeError):
+            continue
+    if not gaps:
+        return 1.0
+    spacing = sorted(gaps)[len(gaps) // 2] or 1
+    horizons = [e.get("horizon_days") for e in examples if e.get("horizon_days")]
+    horizon = horizons[0] if horizons else 1
+    return max(1.0, horizon / spacing)
+
+
+def evaluate_signal(examples: list[dict], key: str, min_names_per_date: int = 5,
+                    overlap: float = 1.0) -> dict:
     """Per-date IC (raw + momentum-neutralized); pooled decile spread, hit rate."""
     per_date_ic: list[float] = []
     per_date_neut: list[float] = []
@@ -116,8 +142,9 @@ def evaluate_signal(examples: list[dict], key: str, min_names_per_date: int = 5)
             if nic is not None:
                 per_date_neut.append(nic)
 
-    summ = metrics.ic_summary(per_date_ic)
-    neut = metrics.ic_summary(per_date_neut) if per_date_neut else None
+    summ = metrics.ic_summary(per_date_ic, overlap=overlap)
+    neut = (metrics.ic_summary(per_date_neut, overlap=overlap)
+            if per_date_neut else None)
 
     # Pooled economic metrics (across all examples).
     all_sig = _signal_values(examples, key)
@@ -179,11 +206,12 @@ def run(examples: list[dict], signals: list[str] | None = None) -> list[dict]:
                  if s in seen]
         signals = known + [s for s in present if s not in known and s != "last_price"]
 
+    overlap = _overlap_factor(examples)
     rows = []
     if any(e.get("score") is not None for e in examples):
-        rows.append(evaluate_signal(examples, "__score__"))
+        rows.append(evaluate_signal(examples, "__score__", overlap=overlap))
     for key in signals:
-        rows.append(evaluate_signal(examples, key))
+        rows.append(evaluate_signal(examples, key, overlap=overlap))
     for r in rows:
         key = "__score__" if r["signal"] == "composite_score" else r["signal"]
         r["turnover"] = signal_turnover(examples, key)

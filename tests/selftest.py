@@ -568,6 +568,7 @@ def main():
     test_math_properties()
     test_scoring_edge_cases()
     test_quality_gate()
+    test_overlap_adjusted_tstat()
     test_predictions_require_validation()
     test_estimate_revisions()
     test_watchlist_priority()
@@ -942,6 +943,45 @@ def test_recency():
         [(0.9, 30.0), (0.9, 60.0)], half_life_days=2.0, max_age_days=7.0)
     assert eff2 == 0.0 and mean2 == 0.0, (eff2, mean2)
     print("  recency weighting (parsers, half-life, stale-collapse) OK")
+
+
+def test_overlap_adjusted_tstat():
+    """Overlapping forward windows must not inflate significance.
+
+    Observed live: 40 of 69 signals showed |t| >= 2 (top t = 7.0) while the
+    purged out-of-sample model scored AUC 0.488 -- no edge at all. The
+    contradiction was the t-stat treating 35 daily snapshots as 35
+    independent draws, when a 21-day forward window makes consecutive dates
+    share 20 of 21 days of return. Correcting it left 0 of 69 significant,
+    which agrees with the model.
+    """
+    ics = [0.12] * 35                       # a steady, plausible-looking IC
+    naive = metrics.ic_summary(ics)
+    adj = metrics.ic_summary(ics, overlap=21.0)
+    assert adj["n_eff"] < naive["n"], (naive, adj)
+    assert approx(adj["n_eff"], 35 / 21, tol=0.1), adj
+    # Zero-variance ICs give no t-stat at all; use a noisy series to compare.
+    rng = np.random.default_rng(7)
+    noisy = list(0.12 + rng.normal(0, 0.05, 35))
+    n2, a2 = metrics.ic_summary(noisy), metrics.ic_summary(noisy, overlap=21.0)
+    assert a2["t_stat"] < n2["t_stat"], (n2, a2)
+    assert approx(a2["t_stat"] / n2["t_stat"], (35 / 21) ** 0.5 / 35 ** 0.5, tol=0.02)
+
+    # The overlap factor is derived from the data, not hardcoded.
+    daily = [{"date": (dt.date(2026, 1, 1) + dt.timedelta(days=i)).isoformat(),
+              "horizon_days": 21, "features": {}, "fwd_ret": 0.0}
+             for i in range(10)]
+    assert approx(backtest._overlap_factor(daily), 21.0)
+    weekly = [{"date": (dt.date(2026, 1, 1) + dt.timedelta(days=7 * i)).isoformat(),
+               "horizon_days": 21, "features": {}, "fwd_ret": 0.0}
+              for i in range(10)]
+    assert approx(backtest._overlap_factor(weekly), 3.0)   # 21 / 7
+    # No overlap when the horizon matches the spacing.
+    matched = [{"date": (dt.date(2026, 1, 1) + dt.timedelta(days=21 * i)).isoformat(),
+                "horizon_days": 21, "features": {}, "fwd_ret": 0.0}
+               for i in range(5)]
+    assert approx(backtest._overlap_factor(matched), 1.0)
+    print("  overlap-adjusted t-stat (deflates autocorrelated ICs) OK")
 
 
 def test_predictions_require_validation():

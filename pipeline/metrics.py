@@ -54,8 +54,21 @@ def spearman(x: np.ndarray, y: np.ndarray) -> float | None:
     return float(np.corrcoef(rx, ry)[0, 1])
 
 
-def ic_summary(ics: list[float]) -> dict:
-    """Summarize a series of per-date ICs into mean, std, and t-stat (IR)."""
+def ic_summary(ics: list[float], overlap: float = 1.0) -> dict:
+    """Summarize per-date ICs into mean, std, and an OVERLAP-ADJUSTED t-stat.
+
+    The naive t-stat is mean/std * sqrt(n_dates), which assumes each date is
+    an independent draw. With a forward-return horizon longer than the
+    sampling interval that is false: consecutive daily snapshots measured
+    against a 21-day forward window share 20 of those 21 days, so their ICs
+    are heavily autocorrelated. Treating them as independent overstates the
+    t-stat by roughly sqrt(overlap) -- enough to turn noise into an apparent
+    t of 7, which is exactly how a signal that an honest out-of-sample test
+    shows to be worthless can look overwhelmingly significant.
+
+    `overlap` is horizon_days / sampling_interval_days. The effective sample
+    is n / overlap, floored at 1.
+    """
     vals = np.array([v for v in ics if v is not None and math.isfinite(v)], dtype=float)
     if vals.size == 0:
         return {"n": 0, "mean_ic": None, "std_ic": None, "ic_ir": None, "t_stat": None}
@@ -63,13 +76,15 @@ def ic_summary(ics: list[float]) -> dict:
     std = float(vals.std(ddof=1)) if vals.size > 1 else 0.0
     # Information Ratio of the IC series == its t-stat scaled by sqrt(n).
     ir = (mean / std) if std > 0 else None
-    t_stat = (ir * math.sqrt(vals.size)) if ir is not None else None
+    n_eff = max(1.0, vals.size / max(overlap, 1.0))
+    t_stat = (ir * math.sqrt(n_eff)) if ir is not None else None
     return {
         "n": int(vals.size),
         "mean_ic": round(mean, 4),
         "std_ic": round(std, 4),
         "ic_ir": round(ir, 3) if ir is not None else None,
         "t_stat": round(t_stat, 2) if t_stat is not None else None,
+        "n_eff": round(n_eff, 1),
     }
 
 
