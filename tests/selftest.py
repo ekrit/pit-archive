@@ -568,6 +568,7 @@ def main():
     test_math_properties()
     test_scoring_edge_cases()
     test_quality_gate()
+    test_predictions_require_validation()
     test_estimate_revisions()
     test_watchlist_priority()
     test_international_universe()
@@ -941,6 +942,34 @@ def test_recency():
         [(0.9, 30.0), (0.9, 60.0)], half_life_days=2.0, max_age_days=7.0)
     assert eff2 == 0.0 and mean2 == 0.0, (eff2, mean2)
     print("  recency weighting (parsers, half-life, stale-collapse) OK")
+
+
+def test_predictions_require_validation():
+    """A model with no validated fold must publish no probabilities.
+
+    Observed live on 2026-09-18: 472 examples across only 4 LABELED dates
+    passed a gate that counted 46 SNAPSHOT dates, so the model fit the rows,
+    emitted P=1.000 for several names, and the out-of-sample section read
+    'no valid folds'. Confident numbers with nothing behind them are the
+    exact failure this project exists to prevent.
+    """
+    from pipeline import predict
+
+    # The gate keys on labeled dates, which is what walk-forward splits on.
+    assert predict.MIN_LABELED_DATES >= 10, predict.MIN_LABELED_DATES
+    md = predict._not_ready(n_dates=46, n_examples=472, labeled_dates=4)
+    assert "currently 4" in md, md          # names the real shortfall
+    assert "labeled date" in md             # and names the right axis
+    assert "|" not in md, "a not-ready report must contain no ranked table"
+    assert "P(" not in md, "no probabilities may appear before validation"
+
+    # And the second guard: past the gate but with unusable folds, still no list.
+    import inspect
+    src = inspect.getsource(predict.run)
+    assert '"error" in res_rank and "error" in res_big' in src, \
+        "run() must refuse to publish when walk-forward yields no folds"
+    assert "not validated" in src
+    print("  predictions blocked without out-of-sample validation OK")
 
 
 def test_estimate_revisions():

@@ -28,6 +28,13 @@ OUT_MD = os.path.join(ROOT, "data/model_output.md")
 
 MIN_DATES = 8
 MIN_EXAMPLES = 200
+# Walk-forward validation splits along the DATE axis, so what gates a
+# trustworthy model is the number of LABELED dates, not the number of
+# snapshots collected. With too few, purging strips the whole training set
+# and every fold is discarded -- while the model itself still happily fits
+# the rows and emits P=1.000. Publishing those numbers with no validation
+# behind them is precisely the false confidence this project exists to avoid.
+MIN_LABELED_DATES = 10
 HORIZON = 63
 TOP_N = 20
 BIG_MOVE_THRESHOLD = 0.30
@@ -40,12 +47,15 @@ DISCLAIMER = (
 )
 
 
-def _not_ready(n_dates: int, n_examples: int) -> str:
+def _not_ready(n_dates: int, n_examples: int, labeled_dates: int = 0) -> str:
     need_d = max(0, MIN_DATES - n_dates)
+    need_ld = max(0, MIN_LABELED_DATES - labeled_dates)
     # Once enough dates exist, more collection does NOT help: each snapshot has
     # to age past the forward-return horizon before it becomes an example.
     blocker = (f"~{need_d} more collection day(s), then the {HORIZON}d label lag"
                if need_d else
+               f"{need_ld} more labeled date(s) before folds can be validated"
+               if need_ld else
                f"the {HORIZON}d label lag — snapshots must age before they "
                f"become examples; collecting faster does not help")
     return "\n".join([
@@ -53,7 +63,9 @@ def _not_ready(n_dates: int, n_examples: int) -> str:
         "",
         f"_Status: **collecting** — {n_dates} snapshot dates, {n_examples} "
         f"labeled examples (need ≥{MIN_DATES} dates and ≥{MIN_EXAMPLES} "
-        f"examples). Waiting on: {blocker}._",
+        f"examples, and \u2265{MIN_LABELED_DATES} labeled dates for "
+        f"walk-forward validation \u2014 currently {labeled_dates}). "
+        f"Waiting on: {blocker}._",
         "",
         "Today's heuristic screen is in data/daily_output.md. Learned predictions "
         "appear here automatically — no action needed — once enough labeled "
@@ -95,8 +107,10 @@ def run() -> str:
     dates = store.distinct_dates(features_all)
     examples = dataset.compile_labeled(horizon=HORIZON, write=False)
 
-    if len(dates) < MIN_DATES or len(examples) < MIN_EXAMPLES:
-        return _not_ready(len(dates), len(examples))
+    labeled_dates = len({e["date"] for e in examples})
+    if (len(dates) < MIN_DATES or len(examples) < MIN_EXAMPLES
+            or labeled_dates < MIN_LABELED_DATES):
+        return _not_ready(len(dates), len(examples), labeled_dates)
 
     # Exclude reconstructed rows: their universe and signal coverage differ
     # from live captures, so training on them would blur what the model is
@@ -107,12 +121,35 @@ def run() -> str:
 
     # Peer-relative target uses rel_ret; the big-move target needs the raw
     # return, since a 30% gain is 30% regardless of what peers did.
+    labeled_dates = len({e["date"] for e in live})
     rel = [dict(e, fwd_ret=e.get("rel_ret", e["fwd_ret"])) for e in live]
     res_rank = ensemble.walk_forward_ensemble(rel, feature_keys,
                                               target="top_quintile")
     res_big = ensemble.walk_forward_ensemble(live, feature_keys,
                                              target="big_move",
                                              big_move_threshold=BIG_MOVE_THRESHOLD)
+
+    # Hard stop: a model with no validated fold has produced no evidence that
+    # its probabilities mean anything. Rank-ordering names anyway would hand
+    # back confident-looking numbers (P=1.000 is typical when a model simply
+    # memorises a small sample) with nothing standing behind them.
+    if "error" in res_rank and "error" in res_big:
+        return "\n".join([
+            "# Model Predictions",
+            "",
+            f"_Status: **not validated** \u2014 {len(live)} labeled examples across "
+            f"{labeled_dates} labeled dates, but walk-forward produced no usable "
+            f"folds ({res_rank.get('error')})._",
+            "",
+            "No ranked list is published. The model can fit these rows, but "
+            "nothing here demonstrates the fit generalises, and a confident "
+            "number with no out-of-sample evidence behind it is worse than no "
+            "number at all. Predictions resume automatically once folds "
+            "validate.",
+            "",
+            "Today's heuristic screen remains in `data/daily_output.md`.",
+            "",
+        ])
 
     latest = dates[-1]
     todays = [r for r in features_all if r.get("date") == latest]
