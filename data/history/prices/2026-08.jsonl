@@ -102167,7 +102167,7 @@
 {"close":41.5,"date":"2026-08-21","schema_version":2,"ticker":"RNST"}
 {"close":0.8180000185966492,"date":"2026-08-21","schema_version":2,"ticker":"RNTX"}
 {"close":6.809999942779541,"date":"2026-08-21","schema_version":2,"ticker":"RNW"}
-{"close":0.0010000000474974513,"date":"2026-08-21","schema_version":2,"ticker":"RNWWW"}
+{"close":0.0005000000237487257,"date":"2026-08-21","schema_version":2,"ticker":"RNWWW"}
 {"close":1.3200000524520874,"date":"2026-08-21","schema_version":2,"ticker":"RNXT"}
 {"close":112.16999816894531,"date":"2026-08-21","schema_version":2,"ticker":"ROAD"}
 {"close":4.090000152587891,"date":"2026-08-21","schema_version":2,"ticker":"ROC"}
@@ -118957,6 +118957,7 @@
 {"close":3.2100000381469727,"date":"2026-08-26","schema_version":2,"ticker":"BULLW"}
 {"close":4.340000152587891,"date":"2026-08-26","schema_version":2,"ticker":"BUR"}
 {"close":313.989990234375,"date":"2026-08-26","schema_version":2,"ticker":"BURL"}
+{"close":0.039000000804662704,"date":"2026-08-26","schema_version":2,"ticker":"BURU"}
 {"close":30.1299991607666,"date":"2026-08-26","schema_version":2,"ticker":"BUSE"}
 {"close":26.033000946044922,"date":"2026-08-26","schema_version":2,"ticker":"BUSEP"}
 {"close":28.149999618530273,"date":"2026-08-26","schema_version":2,"ticker":"BUUU"}
@@ -125880,6 +125881,7 @@
 {"close":3.4800000190734863,"date":"2026-08-27","schema_version":2,"ticker":"BULLW"}
 {"close":4.320000171661377,"date":"2026-08-27","schema_version":2,"ticker":"BUR"}
 {"close":290.0,"date":"2026-08-27","schema_version":2,"ticker":"BURL"}
+{"close":0.03999999910593033,"date":"2026-08-27","schema_version":2,"ticker":"BURU"}
 {"close":30.200000762939453,"date":"2026-08-27","schema_version":2,"ticker":"BUSE"}
 {"close":25.950000762939453,"date":"2026-08-27","schema_version":2,"ticker":"BUSEP"}
 {"close":31.84000015258789,"date":"2026-08-27","schema_version":2,"ticker":"BUUU"}
@@ -139978,7 +139980,7 @@
 {"close":3.369999885559082,"date":"2026-08-31","schema_version":2,"ticker":"BULLW"}
 {"close":4.150000095367432,"date":"2026-08-31","schema_version":2,"ticker":"BUR"}
 {"close":259.760009765625,"date":"2026-08-31","schema_version":2,"ticker":"BURL"}
-{"close":1.600000023841858,"date":"2026-08-31","schema_version":2,"ticker":"BURU"}
+{"close":0.03999999910593033,"date":"2026-08-31","schema_version":2,"ticker":"BURU"}
 {"close":30.100000381469727,"date":"2026-08-31","schema_version":2,"ticker":"BUSE"}
 {"close":25.84000015258789,"date":"2026-08-31","schema_version":2,"ticker":"BUSEP"}
 {"close":30.639999389648438,"date":"2026-08-31","schema_version":2,"ticker":"BUUU"}
