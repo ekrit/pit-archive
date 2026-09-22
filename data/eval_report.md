@@ -1,6 +1,6 @@
 # Signal Evaluation — what actually works
 
-_Generated: 2026-09-22T15:21:14.566760+00:00 · mode: from-store · horizon: 63d_
+_Generated: 2026-09-22T19:35:58.068469+00:00 · mode: from-store · horizon: 63d_
 
 > 8300 feature snapshots across 48 dates → 727 labeled examples at 63d horizon (pos rate 0.6176, 140 tickers).
 
