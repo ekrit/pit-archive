@@ -1,8 +1,8 @@
 # Signal Evaluation — what actually works
 
-_Generated: 2026-09-22T19:35:58.068469+00:00 · mode: from-store · horizon: 63d_
+_Generated: 2026-09-23T12:16:20.065615+00:00 · mode: from-store · horizon: 63d_
 
-> 8300 feature snapshots across 48 dates → 727 labeled examples at 63d horizon (pos rate 0.6176, 140 tickers).
+> 8519 feature snapshots across 49 dates → 727 labeled examples at 63d horizon (pos rate 0.6176, 140 tickers).
 
 > ⚠️ Positive in-sample IC is easy to find by luck. Trust a signal only when the mean IC is **consistent across many dates** (|t-stat| ≥ 2) AND the walk-forward out-of-sample numbers below hold up. Everything here is research, not advice.
 
@@ -86,7 +86,7 @@ How each signal's predictive power changes with holding period — a real signal
 |--------|-------:|-------:|-------:|
 | CNTP_60 | -0.1273 | -0.2666 | — |
 | pct_off_52w_high | -0.1498 | -0.2613 | — |
-| CORR_20 | 0.0383 | -0.2435 | — |
+| CORR_20 | 0.0382 | -0.2435 | — |
 | STD_60 | 0.0405 | 0.2171 | — |
 | MAX_60 | 0.0978 | 0.2126 | — |
 | ret_63d | -0.1628 | -0.1975 | — |
@@ -94,7 +94,7 @@ How each signal's predictive power changes with holding period — a real signal
 | eps_rev_vs_price | 0.1947 | — | — |
 | MA_60 | 0.1047 | 0.1875 | — |
 | SUMP_60 | -0.1530 | -0.1874 | — |
-| RSV_60 | -0.1241 | -0.1799 | — |
+| RSV_60 | -0.1242 | -0.1799 | — |
 | eps_rev_breadth | 0.1795 | — | — |
 
 ## Walk-forward model (out-of-sample)
