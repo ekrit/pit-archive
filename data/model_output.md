@@ -1,5 +1,7 @@
 # Model Predictions
 
-_Status: **collecting** — 51 snapshot dates, 1081 labeled examples (need ≥8 dates and ≥200 examples, and ≥10 labeled dates for walk-forward validation — currently 9). Waiting on: 1 more labeled date(s) before folds can be validated._
+_Status: **not validated** — 1317 labeled examples across 11 labeled dates, but walk-forward produced no usable folds (no valid folds)._
 
-Today's heuristic screen is in data/daily_output.md. Learned predictions appear here automatically — no action needed — once enough labeled history exists to train and validate on.
+No ranked list is published. The model can fit these rows, but nothing here demonstrates the fit generalises, and a confident number with no out-of-sample evidence behind it is worse than no number at all. Predictions resume automatically once folds validate.
+
+Today's heuristic screen remains in `data/daily_output.md`.
