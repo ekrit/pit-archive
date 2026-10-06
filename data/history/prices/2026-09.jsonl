@@ -100291,7 +100291,7 @@
 {"close":3.6600000858306885,"date":"2026-09-22","schema_version":2,"ticker":"CGTL"}
 {"close":0.9810000061988831,"date":"2026-09-22","schema_version":2,"ticker":"CGTX"}
 {"close":11.65999984741211,"date":"2026-09-22","schema_version":2,"ticker":"CHA"}
-{"close":8.720253944396973,"date":"2026-09-22","schema_version":2,"ticker":"CHAD"}
+{"close":8.715462684631348,"date":"2026-09-22","schema_version":2,"ticker":"CHAD"}
 {"close":0.28999999165534973,"date":"2026-09-22","schema_version":2,"ticker":"CHAI"}
 {"close":10.960000038146973,"date":"2026-09-22","schema_version":2,"ticker":"CHAR"}
 {"close":0.10000000149011612,"date":"2026-09-22","schema_version":2,"ticker":"CHARR"}
@@ -101741,7 +101741,7 @@
 {"close":253.75,"date":"2026-09-22","schema_version":2,"ticker":"GPI"}
 {"close":18.991052627563477,"date":"2026-09-22","schema_version":2,"ticker":"GPJA"}
 {"close":9.569999694824219,"date":"2026-09-22","schema_version":2,"ticker":"GPK"}
-{"close":0.8479999899864197,"date":"2026-09-22","schema_version":2,"ticker":"GPMT"}
+{"close":8.37744140625,"date":"2026-09-22","schema_version":2,"ticker":"GPMT"}
 {"close":84.77999877929688,"date":"2026-09-22","schema_version":2,"ticker":"GPN"}
 {"close":158.5,"date":"2026-09-22","schema_version":2,"ticker":"GPOR"}
 {"close":15.069999694824219,"date":"2026-09-22","schema_version":2,"ticker":"GPRE"}
@@ -101856,7 +101856,7 @@
 {"close":15.6899995803833,"date":"2026-09-22","schema_version":2,"ticker":"HBAN"}
 {"close":24.71742057800293,"date":"2026-09-22","schema_version":2,"ticker":"HBANL"}
 {"close":20.06999969482422,"date":"2026-09-22","schema_version":2,"ticker":"HBANM"}
-{"close":16.510000228881836,"date":"2026-09-22","schema_version":2,"ticker":"HBANP"}
+{"close":16.20697593688965,"date":"2026-09-22","schema_version":2,"ticker":"HBANP"}
 {"close":19.079999923706055,"date":"2026-09-22","schema_version":2,"ticker":"HBANZ"}
 {"close":34.060001373291016,"date":"2026-09-22","schema_version":2,"ticker":"HBB"}
 {"close":68.11000061035156,"date":"2026-09-22","schema_version":2,"ticker":"HBCP"}
@@ -102010,7 +102010,7 @@
 {"close":1509.4000244140625,"date":"2026-09-22","schema_version":2,"ticker":"HSBA.L"}
 {"close":101.58999633789062,"date":"2026-09-22","schema_version":2,"ticker":"HSBC"}
 {"close":4.610000133514404,"date":"2026-09-22","schema_version":2,"ticker":"HSCS"}
-{"close":0.05490000173449516,"date":"2026-09-22","schema_version":2,"ticker":"HSCSW"}
+{"close":0.09950000047683716,"date":"2026-09-22","schema_version":2,"ticker":"HSCSW"}
 {"close":3.2699999809265137,"date":"2026-09-22","schema_version":2,"ticker":"HSDT"}
 {"close":18.139999389648438,"date":"2026-09-22","schema_version":2,"ticker":"HSHP"}
 {"close":87.43000030517578,"date":"2026-09-22","schema_version":2,"ticker":"HSIC"}
@@ -102075,7 +102075,7 @@
 {"close":22.690000534057617,"date":"2026-09-22","schema_version":2,"ticker":"HYMC"}
 {"close":16.5,"date":"2026-09-22","schema_version":2,"ticker":"HYNE"}
 {"close":3.990000009536743,"date":"2026-09-22","schema_version":2,"ticker":"HYPD"}
-{"close":4.78000020980835,"date":"2026-09-22","schema_version":2,"ticker":"HYPMY"}
+{"close":4.730147361755371,"date":"2026-09-22","schema_version":2,"ticker":"HYPMY"}
 {"close":0.8050000071525574,"date":"2026-09-22","schema_version":2,"ticker":"HYPR"}
 {"close":7.949999809265137,"date":"2026-09-22","schema_version":2,"ticker":"HYT"}
 {"close":52.40999984741211,"date":"2026-09-22","schema_version":2,"ticker":"HZO"}
@@ -103202,7 +103202,7 @@
 {"close":9.119999885559082,"date":"2026-09-22","schema_version":2,"ticker":"MYN"}
 {"close":0.3400000035762787,"date":"2026-09-22","schema_version":2,"ticker":"MYND"}
 {"close":1.6399999856948853,"date":"2026-09-22","schema_version":2,"ticker":"MYO"}
-{"close":0.460999995470047,"date":"2026-09-22","schema_version":2,"ticker":"MYPS"}
+{"close":4.610000133514404,"date":"2026-09-22","schema_version":2,"ticker":"MYPS"}
 {"close":289.04998779296875,"date":"2026-09-22","schema_version":2,"ticker":"MYRG"}
 {"close":1.840000033378601,"date":"2026-09-22","schema_version":2,"ticker":"MYSE"}
 {"close":1.6799999475479126,"date":"2026-09-22","schema_version":2,"ticker":"MYSZ"}
@@ -105616,7 +105616,7 @@
 {"close":8.369999885559082,"date":"2026-09-22","schema_version":2,"ticker":"VSTM"}
 {"close":14.430000305175781,"date":"2026-09-22","schema_version":2,"ticker":"VSTS"}
 {"close":83.81999969482422,"date":"2026-09-22","schema_version":2,"ticker":"VSXY"}
-{"close":0.15000000596046448,"date":"2026-09-22","schema_version":2,"ticker":"VTAK"}
+{"close":1.5,"date":"2026-09-22","schema_version":2,"ticker":"VTAK"}
 {"close":3.630000114440918,"date":"2026-09-22","schema_version":2,"ticker":"VTEX"}
 {"close":0.25,"date":"2026-09-22","schema_version":2,"ticker":"VTGN"}
 {"close":1.1200000047683716,"date":"2026-09-22","schema_version":2,"ticker":"VTIX"}
@@ -105738,8 +105738,8 @@
 {"close":68.80000305175781,"date":"2026-09-22","schema_version":2,"ticker":"WLK"}
 {"close":21.3799991607666,"date":"2026-09-22","schema_version":2,"ticker":"WLKP"}
 {"close":9.9399995803833,"date":"2026-09-22","schema_version":2,"ticker":"WLTH"}
-{"close":47.02000045776367,"date":"2026-09-22","schema_version":2,"ticker":"WLY"}
-{"close":47.150001525878906,"date":"2026-09-22","schema_version":2,"ticker":"WLYB"}
+{"close":46.6736946105957,"date":"2026-09-22","schema_version":2,"ticker":"WLY"}
+{"close":46.809715270996094,"date":"2026-09-22","schema_version":2,"ticker":"WLYB"}
 {"close":207.67999267578125,"date":"2026-09-22","schema_version":2,"ticker":"WM"}
 {"close":70.9800033569336,"date":"2026-09-22","schema_version":2,"ticker":"WMB"}
 {"close":27.389999389648438,"date":"2026-09-22","schema_version":2,"ticker":"WMG"}
@@ -106730,9 +106730,9 @@
 {"close":0.5600000023841858,"date":"2026-09-23","schema_version":2,"ticker":"BBBYW"}
 {"close":9.6850004196167,"date":"2026-09-23","schema_version":2,"ticker":"BBCP"}
 {"close":1.350000023841858,"date":"2026-09-23","schema_version":2,"ticker":"BBCQW"}
-{"close":3.4600000381469727,"date":"2026-09-23","schema_version":2,"ticker":"BBD"}
+{"close":3.4562082290649414,"date":"2026-09-23","schema_version":2,"ticker":"BBD"}
 {"close":8.65999984741211,"date":"2026-09-23","schema_version":2,"ticker":"BBDC"}
-{"close":3.109999895095825,"date":"2026-09-23","schema_version":2,"ticker":"BBDO"}
+{"close":3.1070473194122314,"date":"2026-09-23","schema_version":2,"ticker":"BBDO"}
 {"close":16.600000381469727,"date":"2026-09-23","schema_version":2,"ticker":"BBGI"}
 {"close":65.70999908447266,"date":"2026-09-23","schema_version":2,"ticker":"BBIO"}
 {"close":0.5059999823570251,"date":"2026-09-23","schema_version":2,"ticker":"BBLG"}
@@ -107284,7 +107284,7 @@
 {"close":146.16000366210938,"date":"2026-09-23","schema_version":2,"ticker":"CDW"}
 {"close":1.3799999952316284,"date":"2026-09-23","schema_version":2,"ticker":"CDXS"}
 {"close":3.819999933242798,"date":"2026-09-23","schema_version":2,"ticker":"CDZI"}
-{"close":21.75,"date":"2026-09-23","schema_version":2,"ticker":"CDZIP"}
+{"close":21.201351165771484,"date":"2026-09-23","schema_version":2,"ticker":"CDZIP"}
 {"close":48.4900016784668,"date":"2026-09-23","schema_version":2,"ticker":"CE"}
 {"close":74.98999786376953,"date":"2026-09-23","schema_version":2,"ticker":"CECO"}
 {"close":19.389999389648438,"date":"2026-09-23","schema_version":2,"ticker":"CEE"}
@@ -107335,7 +107335,7 @@
 {"close":3.7799999713897705,"date":"2026-09-23","schema_version":2,"ticker":"CGTL"}
 {"close":0.949999988079071,"date":"2026-09-23","schema_version":2,"ticker":"CGTX"}
 {"close":11.279999732971191,"date":"2026-09-23","schema_version":2,"ticker":"CHA"}
-{"close":8.80933666229248,"date":"2026-09-23","schema_version":2,"ticker":"CHAD"}
+{"close":8.804495811462402,"date":"2026-09-23","schema_version":2,"ticker":"CHAD"}
 {"close":0.3050000071525574,"date":"2026-09-23","schema_version":2,"ticker":"CHAI"}
 {"close":11.015000343322754,"date":"2026-09-23","schema_version":2,"ticker":"CHAR"}
 {"close":10.930000305175781,"date":"2026-09-23","schema_version":2,"ticker":"CHARU"}
@@ -107460,7 +107460,7 @@
 {"close":32.709999084472656,"date":"2026-09-23","schema_version":2,"ticker":"CMG"}
 {"close":524.6500244140625,"date":"2026-09-23","schema_version":2,"ticker":"CMI"}
 {"close":2.2799999713897705,"date":"2026-09-23","schema_version":2,"ticker":"CMMB"}
-{"close":0.8500000238418579,"date":"2026-09-23","schema_version":2,"ticker":"CMND"}
+{"close":6.800000190734863,"date":"2026-09-23","schema_version":2,"ticker":"CMND"}
 {"close":23.200000762939453,"date":"2026-09-23","schema_version":2,"ticker":"CMP"}
 {"close":77.98999786376953,"date":"2026-09-23","schema_version":2,"ticker":"CMPR"}
 {"close":13.75,"date":"2026-09-23","schema_version":2,"ticker":"CMPS"}
@@ -107692,7 +107692,7 @@
 {"close":2.380000114440918,"date":"2026-09-23","schema_version":2,"ticker":"CURV"}
 {"close":4.474999904632568,"date":"2026-09-23","schema_version":2,"ticker":"CURX"}
 {"close":5.789999961853027,"date":"2026-09-23","schema_version":2,"ticker":"CUVL"}
-{"close":28.25,"date":"2026-09-23","schema_version":2,"ticker":"CUZ"}
+{"close":27.927257537841797,"date":"2026-09-23","schema_version":2,"ticker":"CUZ"}
 {"close":6.050000190734863,"date":"2026-09-23","schema_version":2,"ticker":"CV"}
 {"close":21.809362411499023,"date":"2026-09-23","schema_version":2,"ticker":"CVBF"}
 {"close":541.8400268554688,"date":"2026-09-23","schema_version":2,"ticker":"CVCO"}
@@ -108173,7 +108173,7 @@
 {"close":8.729999542236328,"date":"2026-09-23","schema_version":2,"ticker":"ERC"}
 {"close":10.5,"date":"2026-09-23","schema_version":2,"ticker":"ERH"}
 {"close":9.566800117492676,"date":"2026-09-23","schema_version":2,"ticker":"ERIC"}
-{"close":225.77000427246094,"date":"2026-09-23","schema_version":2,"ticker":"ERIE"}
+{"close":224.2760467529297,"date":"2026-09-23","schema_version":2,"ticker":"ERIE"}
 {"close":6.800000190734863,"date":"2026-09-23","schema_version":2,"ticker":"ERII"}
 {"close":3.6500000953674316,"date":"2026-09-23","schema_version":2,"ticker":"ERNA"}
 {"close":36.47999954223633,"date":"2026-09-23","schema_version":2,"ticker":"ERO"}
@@ -108612,7 +108612,7 @@
 {"close":0.9100000262260437,"date":"2026-09-23","schema_version":2,"ticker":"GDTC"}
 {"close":28.84000015258789,"date":"2026-09-23","schema_version":2,"ticker":"GDV"}
 {"close":7.699999809265137,"date":"2026-09-23","schema_version":2,"ticker":"GDYN"}
-{"close":319.79998779296875,"date":"2026-09-23","schema_version":2,"ticker":"GE"}
+{"close":319.3144226074219,"date":"2026-09-23","schema_version":2,"ticker":"GE"}
 {"close":542.4000244140625,"date":"2026-09-23","schema_version":2,"ticker":"GEBN.SW"}
 {"close":5.300000190734863,"date":"2026-09-23","schema_version":2,"ticker":"GECC"}
 {"close":24.649999618530273,"date":"2026-09-23","schema_version":2,"ticker":"GECCG"}
@@ -108691,7 +108691,7 @@
 {"close":23.329999923706055,"date":"2026-09-23","schema_version":2,"ticker":"GJS"}
 {"close":23.142915725708008,"date":"2026-09-23","schema_version":2,"ticker":"GJT"}
 {"close":153.49000549316406,"date":"2026-09-23","schema_version":2,"ticker":"GKOS"}
-{"close":168.75,"date":"2026-09-23","schema_version":2,"ticker":"GL"}
+{"close":168.41387939453125,"date":"2026-09-23","schema_version":2,"ticker":"GL"}
 {"close":19.219999313354492,"date":"2026-09-23","schema_version":2,"ticker":"GLAD"}
 {"close":7.849999904632568,"date":"2026-09-23","schema_version":2,"ticker":"GLAS"}
 {"close":41.2400016784668,"date":"2026-09-23","schema_version":2,"ticker":"GLBE"}
@@ -108777,7 +108777,7 @@
 {"close":247.50999450683594,"date":"2026-09-23","schema_version":2,"ticker":"GPI"}
 {"close":18.76583480834961,"date":"2026-09-23","schema_version":2,"ticker":"GPJA"}
 {"close":9.65999984741211,"date":"2026-09-23","schema_version":2,"ticker":"GPK"}
-{"close":0.8370000123977661,"date":"2026-09-23","schema_version":2,"ticker":"GPMT"}
+{"close":8.272674560546875,"date":"2026-09-23","schema_version":2,"ticker":"GPMT"}
 {"close":84.0,"date":"2026-09-23","schema_version":2,"ticker":"GPN"}
 {"close":159.72000122070312,"date":"2026-09-23","schema_version":2,"ticker":"GPOR"}
 {"close":15.109999656677246,"date":"2026-09-23","schema_version":2,"ticker":"GPRE"}
@@ -108857,7 +108857,7 @@
 {"close":13.960000038146973,"date":"2026-09-23","schema_version":2,"ticker":"GUG"}
 {"close":3.5999999046325684,"date":"2026-09-23","schema_version":2,"ticker":"GURE"}
 {"close":6.010000228881836,"date":"2026-09-23","schema_version":2,"ticker":"GUT"}
-{"close":0.4860000014305115,"date":"2026-09-23","schema_version":2,"ticker":"GUTS"}
+{"close":5.831999778747559,"date":"2026-09-23","schema_version":2,"ticker":"GUTS"}
 {"close":0.017000000923871994,"date":"2026-09-23","schema_version":2,"ticker":"GV"}
 {"close":112.5240478515625,"date":"2026-09-23","schema_version":2,"ticker":"GVA"}
 {"close":1.090000033378601,"date":"2026-09-23","schema_version":2,"ticker":"GVH"}
@@ -108891,7 +108891,7 @@
 {"close":15.380000114440918,"date":"2026-09-23","schema_version":2,"ticker":"HBAN"}
 {"close":24.638795852661133,"date":"2026-09-23","schema_version":2,"ticker":"HBANL"}
 {"close":20.010000228881836,"date":"2026-09-23","schema_version":2,"ticker":"HBANM"}
-{"close":16.479999542236328,"date":"2026-09-23","schema_version":2,"ticker":"HBANP"}
+{"close":16.177526473999023,"date":"2026-09-23","schema_version":2,"ticker":"HBANP"}
 {"close":19.06999969482422,"date":"2026-09-23","schema_version":2,"ticker":"HBANZ"}
 {"close":34.58000183105469,"date":"2026-09-23","schema_version":2,"ticker":"HBB"}
 {"close":67.16999816894531,"date":"2026-09-23","schema_version":2,"ticker":"HBCP"}
@@ -109105,7 +109105,7 @@
 {"close":21.260000228881836,"date":"2026-09-23","schema_version":2,"ticker":"HYMC"}
 {"close":16.440000534057617,"date":"2026-09-23","schema_version":2,"ticker":"HYNE"}
 {"close":3.9200000762939453,"date":"2026-09-23","schema_version":2,"ticker":"HYPD"}
-{"close":4.760000228881836,"date":"2026-09-23","schema_version":2,"ticker":"HYPMY"}
+{"close":4.71035623550415,"date":"2026-09-23","schema_version":2,"ticker":"HYPMY"}
 {"close":0.7900000214576721,"date":"2026-09-23","schema_version":2,"ticker":"HYPR"}
 {"close":7.829999923706055,"date":"2026-09-23","schema_version":2,"ticker":"HYT"}
 {"close":52.41999816894531,"date":"2026-09-23","schema_version":2,"ticker":"HZO"}
@@ -109153,7 +109153,7 @@
 {"close":12.258605003356934,"date":"2026-09-23","schema_version":2,"ticker":"IDE"}
 {"close":2.3399999141693115,"date":"2026-09-23","schema_version":2,"ticker":"IDN"}
 {"close":30.020000457763672,"date":"2026-09-23","schema_version":2,"ticker":"IDR"}
-{"close":67.87000274658203,"date":"2026-09-23","schema_version":2,"ticker":"IDT"}
+{"close":67.80984497070312,"date":"2026-09-23","schema_version":2,"ticker":"IDT"}
 {"close":522.02001953125,"date":"2026-09-23","schema_version":2,"ticker":"IDXX"}
 {"close":37.459999084472656,"date":"2026-09-23","schema_version":2,"ticker":"IDYA"}
 {"close":10.399999618530273,"date":"2026-09-23","schema_version":2,"ticker":"IE"}
@@ -109673,7 +109673,7 @@
 {"close":10.180000305175781,"date":"2026-09-23","schema_version":2,"ticker":"LFACU"}
 {"close":4.400000095367432,"date":"2026-09-23","schema_version":2,"ticker":"LFCR"}
 {"close":3.049999952316284,"date":"2026-09-23","schema_version":2,"ticker":"LFMD"}
-{"close":23.214000701904297,"date":"2026-09-23","schema_version":2,"ticker":"LFMDP"}
+{"close":22.65732192993164,"date":"2026-09-23","schema_version":2,"ticker":"LFMDP"}
 {"close":2.1600000858306885,"date":"2026-09-23","schema_version":2,"ticker":"LFS"}
 {"close":12.079999923706055,"date":"2026-09-23","schema_version":2,"ticker":"LFST"}
 {"close":5.269999980926514,"date":"2026-09-23","schema_version":2,"ticker":"LFT"}
@@ -109966,7 +109966,7 @@
 {"close":10.020000457763672,"date":"2026-09-23","schema_version":2,"ticker":"MEVO"}
 {"close":10.1899995803833,"date":"2026-09-23","schema_version":2,"ticker":"MEVOU"}
 {"close":13.336000442504883,"date":"2026-09-23","schema_version":2,"ticker":"MF"}
-{"close":8.319999694824219,"date":"2026-09-23","schema_version":2,"ticker":"MFA"}
+{"close":7.928470134735107,"date":"2026-09-23","schema_version":2,"ticker":"MFA"}
 {"close":25.200000762939453,"date":"2026-09-23","schema_version":2,"ticker":"MFAN"}
 {"close":25.280000686645508,"date":"2026-09-23","schema_version":2,"ticker":"MFAO"}
 {"close":43.599998474121094,"date":"2026-09-23","schema_version":2,"ticker":"MFC"}
@@ -110102,7 +110102,7 @@
 {"close":189.3699951171875,"date":"2026-09-23","schema_version":2,"ticker":"MOH"}
 {"close":4.300000190734863,"date":"2026-09-23","schema_version":2,"ticker":"MOLN"}
 {"close":4.929999828338623,"date":"2026-09-23","schema_version":2,"ticker":"MOMO"}
-{"close":200.32000732421875,"date":"2026-09-23","schema_version":2,"ticker":"MORN"}
+{"close":199.7961883544922,"date":"2026-09-23","schema_version":2,"ticker":"MORN"}
 {"close":24.3700008392334,"date":"2026-09-23","schema_version":2,"ticker":"MOS"}
 {"close":33.2400016784668,"date":"2026-09-23","schema_version":2,"ticker":"MOV"}
 {"close":11.420000076293945,"date":"2026-09-23","schema_version":2,"ticker":"MOVE"}
@@ -110136,8 +110136,8 @@
 {"close":0.7350000143051147,"date":"2026-09-23","schema_version":2,"ticker":"MRM"}
 {"close":182.11000061035156,"date":"2026-09-23","schema_version":2,"ticker":"MRNA"}
 {"close":0.25,"date":"2026-09-23","schema_version":2,"ticker":"MRNO"}
-{"close":26.809999465942383,"date":"2026-09-23","schema_version":2,"ticker":"MRP"}
-{"close":170.3800048828125,"date":"2026-09-23","schema_version":2,"ticker":"MRSH"}
+{"close":25.949377059936523,"date":"2026-09-23","schema_version":2,"ticker":"MRP"}
+{"close":169.39202880859375,"date":"2026-09-23","schema_version":2,"ticker":"MRSH"}
 {"close":1.9800000190734863,"date":"2026-09-23","schema_version":2,"ticker":"MRT"}
 {"close":13.170000076293945,"date":"2026-09-23","schema_version":2,"ticker":"MRTN"}
 {"close":7.369999885559082,"date":"2026-09-23","schema_version":2,"ticker":"MRVI"}
@@ -110161,7 +110161,7 @@
 {"close":394.79998779296875,"date":"2026-09-23","schema_version":2,"ticker":"MSGS"}
 {"close":2.0299999713897705,"date":"2026-09-23","schema_version":2,"ticker":"MSGY"}
 {"close":460.44000244140625,"date":"2026-09-23","schema_version":2,"ticker":"MSI"}
-{"close":12.40999984741211,"date":"2026-09-23","schema_version":2,"ticker":"MSIF"}
+{"close":12.296525001525879,"date":"2026-09-23","schema_version":2,"ticker":"MSIF"}
 {"close":8.40999984741211,"date":"2026-09-23","schema_version":2,"ticker":"MSLE"}
 {"close":124.0999984741211,"date":"2026-09-23","schema_version":2,"ticker":"MSM"}
 {"close":0.44999998807907104,"date":"2026-09-23","schema_version":2,"ticker":"MSN"}
@@ -110173,7 +110173,7 @@
 {"close":10.170000076293945,"date":"2026-09-23","schema_version":2,"ticker":"MTAL"}
 {"close":219.5800018310547,"date":"2026-09-23","schema_version":2,"ticker":"MTB"}
 {"close":6.920000076293945,"date":"2026-09-23","schema_version":2,"ticker":"MTC"}
-{"close":40.47999954223633,"date":"2026-09-23","schema_version":2,"ticker":"MTCH"}
+{"close":40.279205322265625,"date":"2026-09-23","schema_version":2,"ticker":"MTCH"}
 {"close":1492.3399658203125,"date":"2026-09-23","schema_version":2,"ticker":"MTD"}
 {"close":52.119998931884766,"date":"2026-09-23","schema_version":2,"ticker":"MTDR"}
 {"close":0.9919999837875366,"date":"2026-09-23","schema_version":2,"ticker":"MTEK"}
@@ -110227,7 +110227,7 @@
 {"close":8.9399995803833,"date":"2026-09-23","schema_version":2,"ticker":"MYN"}
 {"close":0.35600000619888306,"date":"2026-09-23","schema_version":2,"ticker":"MYND"}
 {"close":1.6399999856948853,"date":"2026-09-23","schema_version":2,"ticker":"MYO"}
-{"close":0.4399999976158142,"date":"2026-09-23","schema_version":2,"ticker":"MYPS"}
+{"close":4.400000095367432,"date":"2026-09-23","schema_version":2,"ticker":"MYPS"}
 {"close":295.17999267578125,"date":"2026-09-23","schema_version":2,"ticker":"MYRG"}
 {"close":1.8300000429153442,"date":"2026-09-23","schema_version":2,"ticker":"MYSE"}
 {"close":1.8799999952316284,"date":"2026-09-23","schema_version":2,"ticker":"MYSZ"}
@@ -110380,7 +110380,7 @@
 {"close":3.5299999713897705,"date":"2026-09-23","schema_version":2,"ticker":"NMAD"}
 {"close":14.180000305175781,"date":"2026-09-23","schema_version":2,"ticker":"NMAI"}
 {"close":10.899999618530273,"date":"2026-09-23","schema_version":2,"ticker":"NMAX"}
-{"close":9.279999732971191,"date":"2026-09-23","schema_version":2,"ticker":"NMCO"}
+{"close":9.207972526550293,"date":"2026-09-23","schema_version":2,"ticker":"NMCO"}
 {"close":7.059999942779541,"date":"2026-09-23","schema_version":2,"ticker":"NMFC"}
 {"close":25.389999389648438,"date":"2026-09-23","schema_version":2,"ticker":"NMFCZ"}
 {"close":1.350000023841858,"date":"2026-09-23","schema_version":2,"ticker":"NMG"}
@@ -110615,7 +110615,7 @@
 {"close":25.579999923706055,"date":"2026-09-23","schema_version":2,"ticker":"OFSSO"}
 {"close":27.950000762939453,"date":"2026-09-23","schema_version":2,"ticker":"OGC"}
 {"close":4.050000190734863,"date":"2026-09-23","schema_version":2,"ticker":"OGCP"}
-{"close":44.709999084472656,"date":"2026-09-23","schema_version":2,"ticker":"OGE"}
+{"close":44.28696060180664,"date":"2026-09-23","schema_version":2,"ticker":"OGE"}
 {"close":0.49000000953674316,"date":"2026-09-23","schema_version":2,"ticker":"OGEN"}
 {"close":2.690000057220459,"date":"2026-09-23","schema_version":2,"ticker":"OGG"}
 {"close":0.025100000202655792,"date":"2026-09-23","schema_version":2,"ticker":"OGGWZ"}
@@ -110898,7 +110898,7 @@
 {"close":1.340000033378601,"date":"2026-09-23","schema_version":2,"ticker":"PETZ"}
 {"close":2.1600000858306885,"date":"2026-09-23","schema_version":2,"ticker":"PEW"}
 {"close":3.0,"date":"2026-09-23","schema_version":2,"ticker":"PFAI"}
-{"close":105.80000305175781,"date":"2026-09-23","schema_version":2,"ticker":"PFBC"}
+{"close":105.00511169433594,"date":"2026-09-23","schema_version":2,"ticker":"PFBC"}
 {"close":10.90999984741211,"date":"2026-09-23","schema_version":2,"ticker":"PFD"}
 {"close":28.18000030517578,"date":"2026-09-23","schema_version":2,"ticker":"PFE"}
 {"close":6.949999809265137,"date":"2026-09-23","schema_version":2,"ticker":"PFFL"}
@@ -110980,7 +110980,7 @@
 {"close":127.20999908447266,"date":"2026-09-23","schema_version":2,"ticker":"PLMR"}
 {"close":41.0,"date":"2026-09-23","schema_version":2,"ticker":"PLNT"}
 {"close":39.45000076293945,"date":"2026-09-23","schema_version":2,"ticker":"PLOW"}
-{"close":427.2799987792969,"date":"2026-09-23","schema_version":2,"ticker":"PLPC"}
+{"close":427.0596618652344,"date":"2026-09-23","schema_version":2,"ticker":"PLPC"}
 {"close":1.125,"date":"2026-09-23","schema_version":2,"ticker":"PLRX"}
 {"close":11.15999984741211,"date":"2026-09-23","schema_version":2,"ticker":"PLRZ"}
 {"close":51.97999954223633,"date":"2026-09-23","schema_version":2,"ticker":"PLSE"}
@@ -110996,7 +110996,7 @@
 {"close":2.799999952316284,"date":"2026-09-23","schema_version":2,"ticker":"PLX"}
 {"close":263.8999938964844,"date":"2026-09-23","schema_version":2,"ticker":"PLXS"}
 {"close":2.140000104904175,"date":"2026-09-23","schema_version":2,"ticker":"PLYX"}
-{"close":190.83999633789062,"date":"2026-09-23","schema_version":2,"ticker":"PM"}
+{"close":189.21737670898438,"date":"2026-09-23","schema_version":2,"ticker":"PM"}
 {"close":1.2999999523162842,"date":"2026-09-23","schema_version":2,"ticker":"PMA"}
 {"close":0.9139999747276306,"date":"2026-09-23","schema_version":2,"ticker":"PMAX"}
 {"close":0.4284999966621399,"date":"2026-09-23","schema_version":2,"ticker":"PMCB"}
@@ -111329,7 +111329,7 @@
 {"close":5.980000019073486,"date":"2026-09-23","schema_version":2,"ticker":"RGC"}
 {"close":20.649999618530273,"date":"2026-09-23","schema_version":2,"ticker":"RGCO"}
 {"close":184.52999877929688,"date":"2026-09-23","schema_version":2,"ticker":"RGEN"}
-{"close":252.77999877929688,"date":"2026-09-23","schema_version":2,"ticker":"RGLD"}
+{"close":252.26318359375,"date":"2026-09-23","schema_version":2,"ticker":"RGLD"}
 {"close":2.0999999046325684,"date":"2026-09-23","schema_version":2,"ticker":"RGNT"}
 {"close":7.5,"date":"2026-09-23","schema_version":2,"ticker":"RGNX"}
 {"close":3.890000104904175,"date":"2026-09-23","schema_version":2,"ticker":"RGP"}
@@ -111361,12 +111361,12 @@
 {"close":167.61000061035156,"date":"2026-09-23","schema_version":2,"ticker":"RIO.AX"}
 {"close":7199.0,"date":"2026-09-23","schema_version":2,"ticker":"RIO.L"}
 {"close":24.690000534057617,"date":"2026-09-23","schema_version":2,"ticker":"RIOT"}
-{"close":9.420000076293945,"date":"2026-09-23","schema_version":2,"ticker":"RITM"}
+{"close":9.156282424926758,"date":"2026-09-23","schema_version":2,"ticker":"RITM"}
 {"close":0.004100000020116568,"date":"2026-09-23","schema_version":2,"ticker":"RITR"}
 {"close":10.5600004196167,"date":"2026-09-23","schema_version":2,"ticker":"RIV"}
 {"close":15.020000457763672,"date":"2026-09-23","schema_version":2,"ticker":"RIVN"}
 {"close":18.719999313354492,"date":"2026-09-23","schema_version":2,"ticker":"RJET"}
-{"close":158.22999572753906,"date":"2026-09-23","schema_version":2,"ticker":"RJF"}
+{"close":157.68927001953125,"date":"2026-09-23","schema_version":2,"ticker":"RJF"}
 {"close":0.4259999990463257,"date":"2026-09-23","schema_version":2,"ticker":"RKDA"}
 {"close":70.30999755859375,"date":"2026-09-23","schema_version":2,"ticker":"RKLB"}
 {"close":12.149999618530273,"date":"2026-09-23","schema_version":2,"ticker":"RKT"}
@@ -111459,7 +111459,7 @@
 {"close":9.84000015258789,"date":"2026-09-23","schema_version":2,"ticker":"RTB"}
 {"close":21.40999984741211,"date":"2026-09-23","schema_version":2,"ticker":"RTO"}
 {"close":192.19000244140625,"date":"2026-09-23","schema_version":2,"ticker":"RTX"}
-{"close":1.149999976158142,"date":"2026-09-23","schema_version":2,"ticker":"RUBI"}
+{"close":0.7666659951210022,"date":"2026-09-23","schema_version":2,"ticker":"RUBI"}
 {"close":8.270000457763672,"date":"2026-09-23","schema_version":2,"ticker":"RUM"}
 {"close":2.0,"date":"2026-09-23","schema_version":2,"ticker":"RUMBW"}
 {"close":8.350000381469727,"date":"2026-09-23","schema_version":2,"ticker":"RUN"}
@@ -111540,7 +111540,7 @@
 {"close":186.4600067138672,"date":"2026-09-23","schema_version":2,"ticker":"SAP.DE"}
 {"close":17.459999084472656,"date":"2026-09-23","schema_version":2,"ticker":"SAR"}
 {"close":22.579999923706055,"date":"2026-09-23","schema_version":2,"ticker":"SARO"}
-{"close":99.6465835571289,"date":"2026-09-23","schema_version":2,"ticker":"SATA"}
+{"close":99.59477233886719,"date":"2026-09-23","schema_version":2,"ticker":"SATA"}
 {"close":5.510000228881836,"date":"2026-09-23","schema_version":2,"ticker":"SATL"}
 {"close":0.4650000035762787,"date":"2026-09-23","schema_version":2,"ticker":"SATLW"}
 {"close":24.770000457763672,"date":"2026-09-23","schema_version":2,"ticker":"SAV"}
@@ -111589,7 +111589,7 @@
 {"close":7.724706649780273,"date":"2026-09-23","schema_version":2,"ticker":"SCM"}
 {"close":654.0,"date":"2026-09-23","schema_version":2,"ticker":"SCMN.SW"}
 {"close":1.9800000190734863,"date":"2026-09-23","schema_version":2,"ticker":"SCNI"}
-{"close":0.28999999165534973,"date":"2026-09-23","schema_version":2,"ticker":"SCNX"}
+{"close":7.25,"date":"2026-09-23","schema_version":2,"ticker":"SCNX"}
 {"close":4.940000057220459,"date":"2026-09-23","schema_version":2,"ticker":"SCOR"}
 {"close":10.050000190734863,"date":"2026-09-23","schema_version":2,"ticker":"SCPQ"}
 {"close":10.279999732971191,"date":"2026-09-23","schema_version":2,"ticker":"SCPQU"}
@@ -112054,7 +112054,7 @@
 {"close":0.9399999976158142,"date":"2026-09-23","schema_version":2,"ticker":"SYNX"}
 {"close":1.7699999809265137,"date":"2026-09-23","schema_version":2,"ticker":"SYPR"}
 {"close":88.16999816894531,"date":"2026-09-23","schema_version":2,"ticker":"SYRE"}
-{"close":77.13999938964844,"date":"2026-09-23","schema_version":2,"ticker":"SYY"}
+{"close":76.59445190429688,"date":"2026-09-23","schema_version":2,"ticker":"SYY"}
 {"close":10.479999542236328,"date":"2026-09-23","schema_version":2,"ticker":"SZZL"}
 {"close":10.539999961853027,"date":"2026-09-23","schema_version":2,"ticker":"SZZLU"}
 {"close":25.299999237060547,"date":"2026-09-23","schema_version":2,"ticker":"T"}
@@ -112172,7 +112172,7 @@
 {"close":2.809999942779541,"date":"2026-09-23","schema_version":2,"ticker":"THM"}
 {"close":72.30999755859375,"date":"2026-09-23","schema_version":2,"ticker":"THO"}
 {"close":18.860000610351562,"date":"2026-09-23","schema_version":2,"ticker":"THQ"}
-{"close":35.25,"date":"2026-09-23","schema_version":2,"ticker":"THRM"}
+{"close":33.08028793334961,"date":"2026-09-23","schema_version":2,"ticker":"THRM"}
 {"close":1.840000033378601,"date":"2026-09-23","schema_version":2,"ticker":"THRY"}
 {"close":13.369999885559082,"date":"2026-09-23","schema_version":2,"ticker":"THW"}
 {"close":8.930000305175781,"date":"2026-09-23","schema_version":2,"ticker":"TIC"}
@@ -112572,7 +112572,7 @@
 {"close":70.25,"date":"2026-09-23","schema_version":2,"ticker":"VIST"}
 {"close":10.3100004196167,"date":"2026-09-23","schema_version":2,"ticker":"VITL"}
 {"close":11.588736534118652,"date":"2026-09-23","schema_version":2,"ticker":"VIV"}
-{"close":0.531499981880188,"date":"2026-09-23","schema_version":2,"ticker":"VIVK"}
+{"close":7.972499847412109,"date":"2026-09-23","schema_version":2,"ticker":"VIVK"}
 {"close":3.859999895095825,"date":"2026-09-23","schema_version":2,"ticker":"VIVO"}
 {"close":0.23000000417232513,"date":"2026-09-23","schema_version":2,"ticker":"VIVS"}
 {"close":8.15999984741211,"date":"2026-09-23","schema_version":2,"ticker":"VKI"}
@@ -112596,7 +112596,7 @@
 {"close":9.220000267028809,"date":"2026-09-23","schema_version":2,"ticker":"VMET"}
 {"close":470.23065185546875,"date":"2026-09-23","schema_version":2,"ticker":"VMI"}
 {"close":8.850000381469727,"date":"2026-09-23","schema_version":2,"ticker":"VMO"}
-{"close":61.290000915527344,"date":"2026-09-23","schema_version":2,"ticker":"VMRK"}
+{"close":60.569366455078125,"date":"2026-09-23","schema_version":2,"ticker":"VMRK"}
 {"close":17.334999084472656,"date":"2026-09-23","schema_version":2,"ticker":"VNA.DE"}
 {"close":11.109999656677246,"date":"2026-09-23","schema_version":2,"ticker":"VNCE"}
 {"close":5.039999961853027,"date":"2026-09-23","schema_version":2,"ticker":"VNDA"}
@@ -112648,7 +112648,7 @@
 {"close":8.180000305175781,"date":"2026-09-23","schema_version":2,"ticker":"VSTM"}
 {"close":13.869999885559082,"date":"2026-09-23","schema_version":2,"ticker":"VSTS"}
 {"close":83.33999633789062,"date":"2026-09-23","schema_version":2,"ticker":"VSXY"}
-{"close":0.1599999964237213,"date":"2026-09-23","schema_version":2,"ticker":"VTAK"}
+{"close":1.600000023841858,"date":"2026-09-23","schema_version":2,"ticker":"VTAK"}
 {"close":3.609999895095825,"date":"2026-09-23","schema_version":2,"ticker":"VTEX"}
 {"close":0.3700000047683716,"date":"2026-09-23","schema_version":2,"ticker":"VTGN"}
 {"close":1.1299999952316284,"date":"2026-09-23","schema_version":2,"ticker":"VTIX"}
@@ -112716,7 +112716,7 @@
 {"close":10.40999984741211,"date":"2026-09-23","schema_version":2,"ticker":"WENN"}
 {"close":10.510000228881836,"date":"2026-09-23","schema_version":2,"ticker":"WENNU"}
 {"close":0.25999999046325684,"date":"2026-09-23","schema_version":2,"ticker":"WENNW"}
-{"close":34.40999984741211,"date":"2026-09-23","schema_version":2,"ticker":"WERN"}
+{"close":34.27372360229492,"date":"2026-09-23","schema_version":2,"ticker":"WERN"}
 {"close":45.650001525878906,"date":"2026-09-23","schema_version":2,"ticker":"WES"}
 {"close":73.79000091552734,"date":"2026-09-23","schema_version":2,"ticker":"WES.AX"}
 {"close":8.079999923706055,"date":"2026-09-23","schema_version":2,"ticker":"WEST"}
@@ -112769,8 +112769,8 @@
 {"close":68.41999816894531,"date":"2026-09-23","schema_version":2,"ticker":"WLK"}
 {"close":21.350000381469727,"date":"2026-09-23","schema_version":2,"ticker":"WLKP"}
 {"close":9.84000015258789,"date":"2026-09-23","schema_version":2,"ticker":"WLTH"}
-{"close":47.75,"date":"2026-09-23","schema_version":2,"ticker":"WLY"}
-{"close":47.7599983215332,"date":"2026-09-23","schema_version":2,"ticker":"WLYB"}
+{"close":47.398319244384766,"date":"2026-09-23","schema_version":2,"ticker":"WLY"}
+{"close":47.41530990600586,"date":"2026-09-23","schema_version":2,"ticker":"WLYB"}
 {"close":207.8800048828125,"date":"2026-09-23","schema_version":2,"ticker":"WM"}
 {"close":71.11000061035156,"date":"2026-09-23","schema_version":2,"ticker":"WMB"}
 {"close":27.15999984741211,"date":"2026-09-23","schema_version":2,"ticker":"WMG"}
@@ -112954,7 +112954,7 @@
 {"close":90.64120483398438,"date":"2026-09-23","schema_version":2,"ticker":"ZBH"}
 {"close":29.6299991607666,"date":"2026-09-23","schema_version":2,"ticker":"ZBIO"}
 {"close":371.0199890136719,"date":"2026-09-23","schema_version":2,"ticker":"ZBRA"}
-{"close":0.9879999756813049,"date":"2026-09-23","schema_version":2,"ticker":"ZCMD"}
+{"close":1.9759999513626099,"date":"2026-09-23","schema_version":2,"ticker":"ZCMD"}
 {"close":56.75,"date":"2026-09-23","schema_version":2,"ticker":"ZD"}
 {"close":1.6200000047683716,"date":"2026-09-23","schema_version":2,"ticker":"ZDAI"}
 {"close":3.0299999713897705,"date":"2026-09-23","schema_version":2,"ticker":"ZDGE"}
@@ -113762,9 +113762,9 @@
 {"close":0.5899999737739563,"date":"2026-09-24","schema_version":2,"ticker":"BBBYW"}
 {"close":9.600000381469727,"date":"2026-09-24","schema_version":2,"ticker":"BBCP"}
 {"close":1.3300000429153442,"date":"2026-09-24","schema_version":2,"ticker":"BBCQW"}
-{"close":3.380000114440918,"date":"2026-09-24","schema_version":2,"ticker":"BBD"}
+{"close":3.376296043395996,"date":"2026-09-24","schema_version":2,"ticker":"BBD"}
 {"close":8.619999885559082,"date":"2026-09-24","schema_version":2,"ticker":"BBDC"}
-{"close":3.0799999237060547,"date":"2026-09-24","schema_version":2,"ticker":"BBDO"}
+{"close":3.077075719833374,"date":"2026-09-24","schema_version":2,"ticker":"BBDO"}
 {"close":16.040000915527344,"date":"2026-09-24","schema_version":2,"ticker":"BBGI"}
 {"close":66.27999877929688,"date":"2026-09-24","schema_version":2,"ticker":"BBIO"}
 {"close":0.4909999966621399,"date":"2026-09-24","schema_version":2,"ticker":"BBLG"}
@@ -114310,7 +114310,7 @@
 {"close":139.4600067138672,"date":"2026-09-24","schema_version":2,"ticker":"CDW"}
 {"close":1.3700000047683716,"date":"2026-09-24","schema_version":2,"ticker":"CDXS"}
 {"close":3.7100000381469727,"date":"2026-09-24","schema_version":2,"ticker":"CDZI"}
-{"close":21.799999237060547,"date":"2026-09-24","schema_version":2,"ticker":"CDZIP"}
+{"close":21.250089645385742,"date":"2026-09-24","schema_version":2,"ticker":"CDZIP"}
 {"close":47.560001373291016,"date":"2026-09-24","schema_version":2,"ticker":"CE"}
 {"close":72.86000061035156,"date":"2026-09-24","schema_version":2,"ticker":"CECO"}
 {"close":19.0,"date":"2026-09-24","schema_version":2,"ticker":"CEE"}
@@ -114361,7 +114361,7 @@
 {"close":3.799999952316284,"date":"2026-09-24","schema_version":2,"ticker":"CGTL"}
 {"close":0.9509999752044678,"date":"2026-09-24","schema_version":2,"ticker":"CGTX"}
 {"close":11.470000267028809,"date":"2026-09-24","schema_version":2,"ticker":"CHA"}
-{"close":8.769744873046875,"date":"2026-09-24","schema_version":2,"ticker":"CHAD"}
+{"close":8.764925956726074,"date":"2026-09-24","schema_version":2,"ticker":"CHAD"}
 {"close":0.28600001335144043,"date":"2026-09-24","schema_version":2,"ticker":"CHAI"}
 {"close":11.015000343322754,"date":"2026-09-24","schema_version":2,"ticker":"CHAR"}
 {"close":10.930000305175781,"date":"2026-09-24","schema_version":2,"ticker":"CHARU"}
@@ -114484,7 +114484,7 @@
 {"close":32.0099983215332,"date":"2026-09-24","schema_version":2,"ticker":"CMG"}
 {"close":521.0700073242188,"date":"2026-09-24","schema_version":2,"ticker":"CMI"}
 {"close":2.200000047683716,"date":"2026-09-24","schema_version":2,"ticker":"CMMB"}
-{"close":0.8100000023841858,"date":"2026-09-24","schema_version":2,"ticker":"CMND"}
+{"close":6.480000019073486,"date":"2026-09-24","schema_version":2,"ticker":"CMND"}
 {"close":22.75,"date":"2026-09-24","schema_version":2,"ticker":"CMP"}
 {"close":78.61000061035156,"date":"2026-09-24","schema_version":2,"ticker":"CMPR"}
 {"close":13.09000015258789,"date":"2026-09-24","schema_version":2,"ticker":"CMPS"}
@@ -114720,7 +114720,7 @@
 {"close":2.440000057220459,"date":"2026-09-24","schema_version":2,"ticker":"CURV"}
 {"close":4.449999809265137,"date":"2026-09-24","schema_version":2,"ticker":"CURX"}
 {"close":5.78000020980835,"date":"2026-09-24","schema_version":2,"ticker":"CUVL"}
-{"close":28.489999771118164,"date":"2026-09-24","schema_version":2,"ticker":"CUZ"}
+{"close":28.16451644897461,"date":"2026-09-24","schema_version":2,"ticker":"CUZ"}
 {"close":6.170000076293945,"date":"2026-09-24","schema_version":2,"ticker":"CV"}
 {"close":22.096717834472656,"date":"2026-09-24","schema_version":2,"ticker":"CVBF"}
 {"close":543.2100219726562,"date":"2026-09-24","schema_version":2,"ticker":"CVCO"}
@@ -115200,7 +115200,7 @@
 {"close":8.640000343322754,"date":"2026-09-24","schema_version":2,"ticker":"ERC"}
 {"close":10.34000015258789,"date":"2026-09-24","schema_version":2,"ticker":"ERH"}
 {"close":9.35049057006836,"date":"2026-09-24","schema_version":2,"ticker":"ERIC"}
-{"close":218.9600067138672,"date":"2026-09-24","schema_version":2,"ticker":"ERIE"}
+{"close":217.5111083984375,"date":"2026-09-24","schema_version":2,"ticker":"ERIE"}
 {"close":6.829999923706055,"date":"2026-09-24","schema_version":2,"ticker":"ERII"}
 {"close":3.619999885559082,"date":"2026-09-24","schema_version":2,"ticker":"ERNA"}
 {"close":0.03500000014901161,"date":"2026-09-24","schema_version":2,"ticker":"ERNAW"}
@@ -115641,7 +115641,7 @@
 {"close":0.9100000262260437,"date":"2026-09-24","schema_version":2,"ticker":"GDTC"}
 {"close":28.780000686645508,"date":"2026-09-24","schema_version":2,"ticker":"GDV"}
 {"close":7.710000038146973,"date":"2026-09-24","schema_version":2,"ticker":"GDYN"}
-{"close":319.7799987792969,"date":"2026-09-24","schema_version":2,"ticker":"GE"}
+{"close":319.2944641113281,"date":"2026-09-24","schema_version":2,"ticker":"GE"}
 {"close":539.7999877929688,"date":"2026-09-24","schema_version":2,"ticker":"GEBN.SW"}
 {"close":5.269999980926514,"date":"2026-09-24","schema_version":2,"ticker":"GECC"}
 {"close":24.81999969482422,"date":"2026-09-24","schema_version":2,"ticker":"GECCG"}
@@ -115720,7 +115720,7 @@
 {"close":23.1200008392334,"date":"2026-09-24","schema_version":2,"ticker":"GJS"}
 {"close":23.142915725708008,"date":"2026-09-24","schema_version":2,"ticker":"GJT"}
 {"close":154.8800048828125,"date":"2026-09-24","schema_version":2,"ticker":"GKOS"}
-{"close":167.32000732421875,"date":"2026-09-24","schema_version":2,"ticker":"GL"}
+{"close":166.9867401123047,"date":"2026-09-24","schema_version":2,"ticker":"GL"}
 {"close":19.219999313354492,"date":"2026-09-24","schema_version":2,"ticker":"GLAD"}
 {"close":7.150000095367432,"date":"2026-09-24","schema_version":2,"ticker":"GLAS"}
 {"close":40.880001068115234,"date":"2026-09-24","schema_version":2,"ticker":"GLBE"}
@@ -115805,7 +115805,7 @@
 {"close":247.7899932861328,"date":"2026-09-24","schema_version":2,"ticker":"GPI"}
 {"close":18.686174392700195,"date":"2026-09-24","schema_version":2,"ticker":"GPJA"}
 {"close":9.34000015258789,"date":"2026-09-24","schema_version":2,"ticker":"GPK"}
-{"close":0.9430000185966492,"date":"2026-09-24","schema_version":2,"ticker":"GPMT"}
+{"close":9.31837272644043,"date":"2026-09-24","schema_version":2,"ticker":"GPMT"}
 {"close":85.30999755859375,"date":"2026-09-24","schema_version":2,"ticker":"GPN"}
 {"close":161.91000366210938,"date":"2026-09-24","schema_version":2,"ticker":"GPOR"}
 {"close":15.010000228881836,"date":"2026-09-24","schema_version":2,"ticker":"GPRE"}
@@ -115886,7 +115886,7 @@
 {"close":13.789999961853027,"date":"2026-09-24","schema_version":2,"ticker":"GUG"}
 {"close":3.240000009536743,"date":"2026-09-24","schema_version":2,"ticker":"GURE"}
 {"close":5.920000076293945,"date":"2026-09-24","schema_version":2,"ticker":"GUT"}
-{"close":0.4699999988079071,"date":"2026-09-24","schema_version":2,"ticker":"GUTS"}
+{"close":5.639999866485596,"date":"2026-09-24","schema_version":2,"ticker":"GUTS"}
 {"close":0.013000000268220901,"date":"2026-09-24","schema_version":2,"ticker":"GV"}
 {"close":110.80597686767578,"date":"2026-09-24","schema_version":2,"ticker":"GVA"}
 {"close":1.090000033378601,"date":"2026-09-24","schema_version":2,"ticker":"GVH"}
@@ -115920,7 +115920,7 @@
 {"close":15.3100004196167,"date":"2026-09-24","schema_version":2,"ticker":"HBAN"}
 {"close":24.619138717651367,"date":"2026-09-24","schema_version":2,"ticker":"HBANL"}
 {"close":20.049999237060547,"date":"2026-09-24","schema_version":2,"ticker":"HBANM"}
-{"close":16.25,"date":"2026-09-24","schema_version":2,"ticker":"HBANP"}
+{"close":15.95174789428711,"date":"2026-09-24","schema_version":2,"ticker":"HBANP"}
 {"close":19.200000762939453,"date":"2026-09-24","schema_version":2,"ticker":"HBANZ"}
 {"close":37.310001373291016,"date":"2026-09-24","schema_version":2,"ticker":"HBB"}
 {"close":67.72000122070312,"date":"2026-09-24","schema_version":2,"ticker":"HBCP"}
@@ -116131,7 +116131,7 @@
 {"close":20.889999389648438,"date":"2026-09-24","schema_version":2,"ticker":"HYMC"}
 {"close":16.43000030517578,"date":"2026-09-24","schema_version":2,"ticker":"HYNE"}
 {"close":4.170000076293945,"date":"2026-09-24","schema_version":2,"ticker":"HYPD"}
-{"close":4.639999866485596,"date":"2026-09-24","schema_version":2,"ticker":"HYPMY"}
+{"close":4.591607093811035,"date":"2026-09-24","schema_version":2,"ticker":"HYPMY"}
 {"close":0.7960000038146973,"date":"2026-09-24","schema_version":2,"ticker":"HYPR"}
 {"close":7.739999771118164,"date":"2026-09-24","schema_version":2,"ticker":"HYT"}
 {"close":52.40999984741211,"date":"2026-09-24","schema_version":2,"ticker":"HZO"}
@@ -116181,7 +116181,7 @@
 {"close":12.169343948364258,"date":"2026-09-24","schema_version":2,"ticker":"IDE"}
 {"close":2.4000000953674316,"date":"2026-09-24","schema_version":2,"ticker":"IDN"}
 {"close":29.799999237060547,"date":"2026-09-24","schema_version":2,"ticker":"IDR"}
-{"close":67.75,"date":"2026-09-24","schema_version":2,"ticker":"IDT"}
+{"close":67.68994903564453,"date":"2026-09-24","schema_version":2,"ticker":"IDT"}
 {"close":513.3900146484375,"date":"2026-09-24","schema_version":2,"ticker":"IDXX"}
 {"close":36.7400016784668,"date":"2026-09-24","schema_version":2,"ticker":"IDYA"}
 {"close":9.989999771118164,"date":"2026-09-24","schema_version":2,"ticker":"IE"}
@@ -116704,7 +116704,7 @@
 {"close":10.180000305175781,"date":"2026-09-24","schema_version":2,"ticker":"LFACU"}
 {"close":4.289999961853027,"date":"2026-09-24","schema_version":2,"ticker":"LFCR"}
 {"close":2.9100000858306885,"date":"2026-09-24","schema_version":2,"ticker":"LFMD"}
-{"close":23.200000762939453,"date":"2026-09-24","schema_version":2,"ticker":"LFMDP"}
+{"close":22.643657684326172,"date":"2026-09-24","schema_version":2,"ticker":"LFMDP"}
 {"close":2.125,"date":"2026-09-24","schema_version":2,"ticker":"LFS"}
 {"close":11.800000190734863,"date":"2026-09-24","schema_version":2,"ticker":"LFST"}
 {"close":5.170000076293945,"date":"2026-09-24","schema_version":2,"ticker":"LFT"}
@@ -116996,7 +116996,7 @@
 {"close":10.020000457763672,"date":"2026-09-24","schema_version":2,"ticker":"MEVO"}
 {"close":10.1899995803833,"date":"2026-09-24","schema_version":2,"ticker":"MEVOU"}
 {"close":13.850000381469727,"date":"2026-09-24","schema_version":2,"ticker":"MF"}
-{"close":8.15999984741211,"date":"2026-09-24","schema_version":2,"ticker":"MFA"}
+{"close":7.776000022888184,"date":"2026-09-24","schema_version":2,"ticker":"MFA"}
 {"close":25.149999618530273,"date":"2026-09-24","schema_version":2,"ticker":"MFAN"}
 {"close":25.249000549316406,"date":"2026-09-24","schema_version":2,"ticker":"MFAO"}
 {"close":43.4900016784668,"date":"2026-09-24","schema_version":2,"ticker":"MFC"}
@@ -117130,7 +117130,7 @@
 {"close":193.30999755859375,"date":"2026-09-24","schema_version":2,"ticker":"MOH"}
 {"close":4.300000190734863,"date":"2026-09-24","schema_version":2,"ticker":"MOLN"}
 {"close":5.010000228881836,"date":"2026-09-24","schema_version":2,"ticker":"MOMO"}
-{"close":196.41000366210938,"date":"2026-09-24","schema_version":2,"ticker":"MORN"}
+{"close":195.8964080810547,"date":"2026-09-24","schema_version":2,"ticker":"MORN"}
 {"close":23.690000534057617,"date":"2026-09-24","schema_version":2,"ticker":"MOS"}
 {"close":33.41999816894531,"date":"2026-09-24","schema_version":2,"ticker":"MOV"}
 {"close":11.979999542236328,"date":"2026-09-24","schema_version":2,"ticker":"MOVE"}
@@ -117165,8 +117165,8 @@
 {"close":194.82000732421875,"date":"2026-09-24","schema_version":2,"ticker":"MRNA"}
 {"close":0.3070000112056732,"date":"2026-09-24","schema_version":2,"ticker":"MRNO"}
 {"close":0.006500000134110451,"date":"2026-09-24","schema_version":2,"ticker":"MRNOW"}
-{"close":27.059999465942383,"date":"2026-09-24","schema_version":2,"ticker":"MRP"}
-{"close":169.92999267578125,"date":"2026-09-24","schema_version":2,"ticker":"MRSH"}
+{"close":26.19135284423828,"date":"2026-09-24","schema_version":2,"ticker":"MRP"}
+{"close":168.9446258544922,"date":"2026-09-24","schema_version":2,"ticker":"MRSH"}
 {"close":2.130000114440918,"date":"2026-09-24","schema_version":2,"ticker":"MRT"}
 {"close":12.84000015258789,"date":"2026-09-24","schema_version":2,"ticker":"MRTN"}
 {"close":7.650000095367432,"date":"2026-09-24","schema_version":2,"ticker":"MRVI"}
@@ -117190,7 +117190,7 @@
 {"close":402.5,"date":"2026-09-24","schema_version":2,"ticker":"MSGS"}
 {"close":1.9700000286102295,"date":"2026-09-24","schema_version":2,"ticker":"MSGY"}
 {"close":454.9100036621094,"date":"2026-09-24","schema_version":2,"ticker":"MSI"}
-{"close":12.170000076293945,"date":"2026-09-24","schema_version":2,"ticker":"MSIF"}
+{"close":12.058719635009766,"date":"2026-09-24","schema_version":2,"ticker":"MSIF"}
 {"close":8.710000038146973,"date":"2026-09-24","schema_version":2,"ticker":"MSLE"}
 {"close":120.7300033569336,"date":"2026-09-24","schema_version":2,"ticker":"MSM"}
 {"close":0.46000000834465027,"date":"2026-09-24","schema_version":2,"ticker":"MSN"}
@@ -117202,7 +117202,7 @@
 {"close":10.15999984741211,"date":"2026-09-24","schema_version":2,"ticker":"MTAL"}
 {"close":218.66000366210938,"date":"2026-09-24","schema_version":2,"ticker":"MTB"}
 {"close":5.960000038146973,"date":"2026-09-24","schema_version":2,"ticker":"MTC"}
-{"close":40.79999923706055,"date":"2026-09-24","schema_version":2,"ticker":"MTCH"}
+{"close":40.597618103027344,"date":"2026-09-24","schema_version":2,"ticker":"MTCH"}
 {"close":1519.1500244140625,"date":"2026-09-24","schema_version":2,"ticker":"MTD"}
 {"close":52.970001220703125,"date":"2026-09-24","schema_version":2,"ticker":"MTDR"}
 {"close":1.0299999713897705,"date":"2026-09-24","schema_version":2,"ticker":"MTEK"}
@@ -117256,7 +117256,7 @@
 {"close":8.920000076293945,"date":"2026-09-24","schema_version":2,"ticker":"MYN"}
 {"close":0.3529999852180481,"date":"2026-09-24","schema_version":2,"ticker":"MYND"}
 {"close":1.6699999570846558,"date":"2026-09-24","schema_version":2,"ticker":"MYO"}
-{"close":0.44600000977516174,"date":"2026-09-24","schema_version":2,"ticker":"MYPS"}
+{"close":4.460000038146973,"date":"2026-09-24","schema_version":2,"ticker":"MYPS"}
 {"close":295.17999267578125,"date":"2026-09-24","schema_version":2,"ticker":"MYRG"}
 {"close":1.8600000143051147,"date":"2026-09-24","schema_version":2,"ticker":"MYSE"}
 {"close":1.7799999713897705,"date":"2026-09-24","schema_version":2,"ticker":"MYSZ"}
@@ -117410,7 +117410,7 @@
 {"close":3.630000114440918,"date":"2026-09-24","schema_version":2,"ticker":"NMAD"}
 {"close":14.020000457763672,"date":"2026-09-24","schema_version":2,"ticker":"NMAI"}
 {"close":10.979999542236328,"date":"2026-09-24","schema_version":2,"ticker":"NMAX"}
-{"close":9.140000343322754,"date":"2026-09-24","schema_version":2,"ticker":"NMCO"}
+{"close":9.069060325622559,"date":"2026-09-24","schema_version":2,"ticker":"NMCO"}
 {"close":7.010000228881836,"date":"2026-09-24","schema_version":2,"ticker":"NMFC"}
 {"close":25.350000381469727,"date":"2026-09-24","schema_version":2,"ticker":"NMFCZ"}
 {"close":1.350000023841858,"date":"2026-09-24","schema_version":2,"ticker":"NMG"}
@@ -117644,7 +117644,7 @@
 {"close":25.579999923706055,"date":"2026-09-24","schema_version":2,"ticker":"OFSSO"}
 {"close":28.0,"date":"2026-09-24","schema_version":2,"ticker":"OGC"}
 {"close":4.0,"date":"2026-09-24","schema_version":2,"ticker":"OGCP"}
-{"close":44.279998779296875,"date":"2026-09-24","schema_version":2,"ticker":"OGE"}
+{"close":43.86103057861328,"date":"2026-09-24","schema_version":2,"ticker":"OGE"}
 {"close":0.5,"date":"2026-09-24","schema_version":2,"ticker":"OGEN"}
 {"close":2.7300000190734863,"date":"2026-09-24","schema_version":2,"ticker":"OGG"}
 {"close":1.100000023841858,"date":"2026-09-24","schema_version":2,"ticker":"OGI"}
@@ -117927,7 +117927,7 @@
 {"close":1.3650000095367432,"date":"2026-09-24","schema_version":2,"ticker":"PETZ"}
 {"close":2.1600000858306885,"date":"2026-09-24","schema_version":2,"ticker":"PEW"}
 {"close":3.0,"date":"2026-09-24","schema_version":2,"ticker":"PFAI"}
-{"close":108.58000183105469,"date":"2026-09-24","schema_version":2,"ticker":"PFBC"}
+{"close":107.76422119140625,"date":"2026-09-24","schema_version":2,"ticker":"PFBC"}
 {"close":10.899999618530273,"date":"2026-09-24","schema_version":2,"ticker":"PFD"}
 {"close":28.40999984741211,"date":"2026-09-24","schema_version":2,"ticker":"PFE"}
 {"close":6.929999828338623,"date":"2026-09-24","schema_version":2,"ticker":"PFFL"}
@@ -118008,7 +118008,7 @@
 {"close":125.62999725341797,"date":"2026-09-24","schema_version":2,"ticker":"PLMR"}
 {"close":40.720001220703125,"date":"2026-09-24","schema_version":2,"ticker":"PLNT"}
 {"close":39.72999954223633,"date":"2026-09-24","schema_version":2,"ticker":"PLOW"}
-{"close":429.82000732421875,"date":"2026-09-24","schema_version":2,"ticker":"PLPC"}
+{"close":429.5983581542969,"date":"2026-09-24","schema_version":2,"ticker":"PLPC"}
 {"close":1.1399999856948853,"date":"2026-09-24","schema_version":2,"ticker":"PLRX"}
 {"close":10.510000228881836,"date":"2026-09-24","schema_version":2,"ticker":"PLRZ"}
 {"close":51.83000183105469,"date":"2026-09-24","schema_version":2,"ticker":"PLSE"}
@@ -118024,7 +118024,7 @@
 {"close":2.75,"date":"2026-09-24","schema_version":2,"ticker":"PLX"}
 {"close":261.6099853515625,"date":"2026-09-24","schema_version":2,"ticker":"PLXS"}
 {"close":2.140000104904175,"date":"2026-09-24","schema_version":2,"ticker":"PLYX"}
-{"close":191.5,"date":"2026-09-24","schema_version":2,"ticker":"PM"}
+{"close":189.8717803955078,"date":"2026-09-24","schema_version":2,"ticker":"PM"}
 {"close":1.2699999809265137,"date":"2026-09-24","schema_version":2,"ticker":"PMA"}
 {"close":1.649999976158142,"date":"2026-09-24","schema_version":2,"ticker":"PMAX"}
 {"close":0.4564000070095062,"date":"2026-09-24","schema_version":2,"ticker":"PMCB"}
@@ -118355,7 +118355,7 @@
 {"close":6.170000076293945,"date":"2026-09-24","schema_version":2,"ticker":"RGC"}
 {"close":20.780000686645508,"date":"2026-09-24","schema_version":2,"ticker":"RGCO"}
 {"close":190.64999389648438,"date":"2026-09-24","schema_version":2,"ticker":"RGEN"}
-{"close":252.49000549316406,"date":"2026-09-24","schema_version":2,"ticker":"RGLD"}
+{"close":251.97378540039062,"date":"2026-09-24","schema_version":2,"ticker":"RGLD"}
 {"close":2.0399999618530273,"date":"2026-09-24","schema_version":2,"ticker":"RGNT"}
 {"close":7.239999771118164,"date":"2026-09-24","schema_version":2,"ticker":"RGNX"}
 {"close":3.75,"date":"2026-09-24","schema_version":2,"ticker":"RGP"}
@@ -118386,12 +118386,12 @@
 {"close":166.4600067138672,"date":"2026-09-24","schema_version":2,"ticker":"RIO.AX"}
 {"close":7070.0,"date":"2026-09-24","schema_version":2,"ticker":"RIO.L"}
 {"close":23.479999542236328,"date":"2026-09-24","schema_version":2,"ticker":"RIOT"}
-{"close":9.119999885559082,"date":"2026-09-24","schema_version":2,"ticker":"RITM"}
+{"close":8.864680290222168,"date":"2026-09-24","schema_version":2,"ticker":"RITM"}
 {"close":0.004000000189989805,"date":"2026-09-24","schema_version":2,"ticker":"RITR"}
 {"close":10.34000015258789,"date":"2026-09-24","schema_version":2,"ticker":"RIV"}
 {"close":15.289999961853027,"date":"2026-09-24","schema_version":2,"ticker":"RIVN"}
 {"close":18.719999313354492,"date":"2026-09-24","schema_version":2,"ticker":"RJET"}
-{"close":158.75999450683594,"date":"2026-09-24","schema_version":2,"ticker":"RJF"}
+{"close":158.21746826171875,"date":"2026-09-24","schema_version":2,"ticker":"RJF"}
 {"close":0.3160000145435333,"date":"2026-09-24","schema_version":2,"ticker":"RKDA"}
 {"close":73.61000061035156,"date":"2026-09-24","schema_version":2,"ticker":"RKLB"}
 {"close":11.930000305175781,"date":"2026-09-24","schema_version":2,"ticker":"RKT"}
@@ -118483,7 +118483,7 @@
 {"close":10.319999694824219,"date":"2026-09-24","schema_version":2,"ticker":"RTB"}
 {"close":20.549999237060547,"date":"2026-09-24","schema_version":2,"ticker":"RTO"}
 {"close":188.61000061035156,"date":"2026-09-24","schema_version":2,"ticker":"RTX"}
-{"close":1.2000000476837158,"date":"2026-09-24","schema_version":2,"ticker":"RUBI"}
+{"close":0.800000011920929,"date":"2026-09-24","schema_version":2,"ticker":"RUBI"}
 {"close":8.600000381469727,"date":"2026-09-24","schema_version":2,"ticker":"RUM"}
 {"close":1.8799999952316284,"date":"2026-09-24","schema_version":2,"ticker":"RUMBW"}
 {"close":7.78000020980835,"date":"2026-09-24","schema_version":2,"ticker":"RUN"}
@@ -118564,7 +118564,7 @@
 {"close":184.17999267578125,"date":"2026-09-24","schema_version":2,"ticker":"SAP.DE"}
 {"close":17.329999923706055,"date":"2026-09-24","schema_version":2,"ticker":"SAR"}
 {"close":22.18000030517578,"date":"2026-09-24","schema_version":2,"ticker":"SARO"}
-{"close":99.69841766357422,"date":"2026-09-24","schema_version":2,"ticker":"SATA"}
+{"close":99.6465835571289,"date":"2026-09-24","schema_version":2,"ticker":"SATA"}
 {"close":5.940000057220459,"date":"2026-09-24","schema_version":2,"ticker":"SATL"}
 {"close":0.5400000214576721,"date":"2026-09-24","schema_version":2,"ticker":"SATLW"}
 {"close":24.639999389648438,"date":"2026-09-24","schema_version":2,"ticker":"SAV"}
@@ -118612,7 +118612,7 @@
 {"close":7.615907669067383,"date":"2026-09-24","schema_version":2,"ticker":"SCM"}
 {"close":656.5,"date":"2026-09-24","schema_version":2,"ticker":"SCMN.SW"}
 {"close":1.8600000143051147,"date":"2026-09-24","schema_version":2,"ticker":"SCNI"}
-{"close":0.28700000047683716,"date":"2026-09-24","schema_version":2,"ticker":"SCNX"}
+{"close":7.175000190734863,"date":"2026-09-24","schema_version":2,"ticker":"SCNX"}
 {"close":4.809999942779541,"date":"2026-09-24","schema_version":2,"ticker":"SCOR"}
 {"close":10.050000190734863,"date":"2026-09-24","schema_version":2,"ticker":"SCPQ"}
 {"close":10.279999732971191,"date":"2026-09-24","schema_version":2,"ticker":"SCPQU"}
@@ -119073,7 +119073,7 @@
 {"close":1.0099999904632568,"date":"2026-09-24","schema_version":2,"ticker":"SYNX"}
 {"close":1.7699999809265137,"date":"2026-09-24","schema_version":2,"ticker":"SYPR"}
 {"close":87.08999633789062,"date":"2026-09-24","schema_version":2,"ticker":"SYRE"}
-{"close":78.19000244140625,"date":"2026-09-24","schema_version":2,"ticker":"SYY"}
+{"close":77.63703155517578,"date":"2026-09-24","schema_version":2,"ticker":"SYY"}
 {"close":10.489999771118164,"date":"2026-09-24","schema_version":2,"ticker":"SZZL"}
 {"close":10.539999961853027,"date":"2026-09-24","schema_version":2,"ticker":"SZZLU"}
 {"close":25.450000762939453,"date":"2026-09-24","schema_version":2,"ticker":"T"}
@@ -119191,7 +119191,7 @@
 {"close":2.809999942779541,"date":"2026-09-24","schema_version":2,"ticker":"THM"}
 {"close":70.93000030517578,"date":"2026-09-24","schema_version":2,"ticker":"THO"}
 {"close":18.760000228881836,"date":"2026-09-24","schema_version":2,"ticker":"THQ"}
-{"close":33.88999938964844,"date":"2026-09-24","schema_version":2,"ticker":"THRM"}
+{"close":31.803997039794922,"date":"2026-09-24","schema_version":2,"ticker":"THRM"}
 {"close":1.7899999618530273,"date":"2026-09-24","schema_version":2,"ticker":"THRY"}
 {"close":13.319999694824219,"date":"2026-09-24","schema_version":2,"ticker":"THW"}
 {"close":8.869999885559082,"date":"2026-09-24","schema_version":2,"ticker":"TIC"}
@@ -119589,7 +119589,7 @@
 {"close":68.30000305175781,"date":"2026-09-24","schema_version":2,"ticker":"VIST"}
 {"close":10.09000015258789,"date":"2026-09-24","schema_version":2,"ticker":"VITL"}
 {"close":11.62852668762207,"date":"2026-09-24","schema_version":2,"ticker":"VIV"}
-{"close":0.5339000225067139,"date":"2026-09-24","schema_version":2,"ticker":"VIVK"}
+{"close":8.008500099182129,"date":"2026-09-24","schema_version":2,"ticker":"VIVK"}
 {"close":4.065000057220459,"date":"2026-09-24","schema_version":2,"ticker":"VIVO"}
 {"close":0.23000000417232513,"date":"2026-09-24","schema_version":2,"ticker":"VIVS"}
 {"close":7.960000038146973,"date":"2026-09-24","schema_version":2,"ticker":"VKI"}
@@ -119613,7 +119613,7 @@
 {"close":9.130000114440918,"date":"2026-09-24","schema_version":2,"ticker":"VMET"}
 {"close":464.5799865722656,"date":"2026-09-24","schema_version":2,"ticker":"VMI"}
 {"close":8.600000381469727,"date":"2026-09-24","schema_version":2,"ticker":"VMO"}
-{"close":61.04999923706055,"date":"2026-09-24","schema_version":2,"ticker":"VMRK"}
+{"close":60.33218765258789,"date":"2026-09-24","schema_version":2,"ticker":"VMRK"}
 {"close":17.09000015258789,"date":"2026-09-24","schema_version":2,"ticker":"VNA.DE"}
 {"close":11.140000343322754,"date":"2026-09-24","schema_version":2,"ticker":"VNCE"}
 {"close":4.980000019073486,"date":"2026-09-24","schema_version":2,"ticker":"VNDA"}
@@ -119665,7 +119665,7 @@
 {"close":7.800000190734863,"date":"2026-09-24","schema_version":2,"ticker":"VSTM"}
 {"close":13.84000015258789,"date":"2026-09-24","schema_version":2,"ticker":"VSTS"}
 {"close":83.80999755859375,"date":"2026-09-24","schema_version":2,"ticker":"VSXY"}
-{"close":0.1599999964237213,"date":"2026-09-24","schema_version":2,"ticker":"VTAK"}
+{"close":1.600000023841858,"date":"2026-09-24","schema_version":2,"ticker":"VTAK"}
 {"close":3.5999999046325684,"date":"2026-09-24","schema_version":2,"ticker":"VTEX"}
 {"close":0.30000001192092896,"date":"2026-09-24","schema_version":2,"ticker":"VTGN"}
 {"close":1.190000057220459,"date":"2026-09-24","schema_version":2,"ticker":"VTIX"}
@@ -119733,7 +119733,7 @@
 {"close":10.40999984741211,"date":"2026-09-24","schema_version":2,"ticker":"WENN"}
 {"close":10.640000343322754,"date":"2026-09-24","schema_version":2,"ticker":"WENNU"}
 {"close":0.25,"date":"2026-09-24","schema_version":2,"ticker":"WENNW"}
-{"close":33.47999954223633,"date":"2026-09-24","schema_version":2,"ticker":"WERN"}
+{"close":33.34740447998047,"date":"2026-09-24","schema_version":2,"ticker":"WERN"}
 {"close":45.349998474121094,"date":"2026-09-24","schema_version":2,"ticker":"WES"}
 {"close":73.87000274658203,"date":"2026-09-24","schema_version":2,"ticker":"WES.AX"}
 {"close":7.96999979019165,"date":"2026-09-24","schema_version":2,"ticker":"WEST"}
@@ -119786,8 +119786,8 @@
 {"close":66.76000213623047,"date":"2026-09-24","schema_version":2,"ticker":"WLK"}
 {"close":21.510000228881836,"date":"2026-09-24","schema_version":2,"ticker":"WLKP"}
 {"close":10.1899995803833,"date":"2026-09-24","schema_version":2,"ticker":"WLTH"}
-{"close":48.61000061035156,"date":"2026-09-24","schema_version":2,"ticker":"WLY"}
-{"close":48.560001373291016,"date":"2026-09-24","schema_version":2,"ticker":"WLYB"}
+{"close":48.25198745727539,"date":"2026-09-24","schema_version":2,"ticker":"WLY"}
+{"close":48.209537506103516,"date":"2026-09-24","schema_version":2,"ticker":"WLYB"}
 {"close":207.9600067138672,"date":"2026-09-24","schema_version":2,"ticker":"WM"}
 {"close":70.58000183105469,"date":"2026-09-24","schema_version":2,"ticker":"WMB"}
 {"close":27.290000915527344,"date":"2026-09-24","schema_version":2,"ticker":"WMG"}
@@ -119975,7 +119975,7 @@
 {"close":89.45433807373047,"date":"2026-09-24","schema_version":2,"ticker":"ZBH"}
 {"close":27.5,"date":"2026-09-24","schema_version":2,"ticker":"ZBIO"}
 {"close":365.1000061035156,"date":"2026-09-24","schema_version":2,"ticker":"ZBRA"}
-{"close":0.9779999852180481,"date":"2026-09-24","schema_version":2,"ticker":"ZCMD"}
+{"close":1.9559999704360962,"date":"2026-09-24","schema_version":2,"ticker":"ZCMD"}
 {"close":56.470001220703125,"date":"2026-09-24","schema_version":2,"ticker":"ZD"}
 {"close":1.5850000381469727,"date":"2026-09-24","schema_version":2,"ticker":"ZDAI"}
 {"close":3.0199999809265137,"date":"2026-09-24","schema_version":2,"ticker":"ZDGE"}
@@ -120783,9 +120783,9 @@
 {"close":0.5249999761581421,"date":"2026-09-25","schema_version":2,"ticker":"BBBYW"}
 {"close":9.770000457763672,"date":"2026-09-25","schema_version":2,"ticker":"BBCP"}
 {"close":1.2999999523162842,"date":"2026-09-25","schema_version":2,"ticker":"BBCQW"}
-{"close":3.4100000858306885,"date":"2026-09-25","schema_version":2,"ticker":"BBD"}
+{"close":3.4062631130218506,"date":"2026-09-25","schema_version":2,"ticker":"BBD"}
 {"close":8.670000076293945,"date":"2026-09-25","schema_version":2,"ticker":"BBDC"}
-{"close":3.0999999046325684,"date":"2026-09-25","schema_version":2,"ticker":"BBDO"}
+{"close":3.0970568656921387,"date":"2026-09-25","schema_version":2,"ticker":"BBDO"}
 {"close":15.289999961853027,"date":"2026-09-25","schema_version":2,"ticker":"BBGI"}
 {"close":65.56999969482422,"date":"2026-09-25","schema_version":2,"ticker":"BBIO"}
 {"close":0.4959999918937683,"date":"2026-09-25","schema_version":2,"ticker":"BBLG"}
@@ -121322,7 +121322,7 @@
 {"close":135.42999267578125,"date":"2026-09-25","schema_version":2,"ticker":"CDW"}
 {"close":1.3200000524520874,"date":"2026-09-25","schema_version":2,"ticker":"CDXS"}
 {"close":3.6500000953674316,"date":"2026-09-25","schema_version":2,"ticker":"CDZI"}
-{"close":21.920000076293945,"date":"2026-09-25","schema_version":2,"ticker":"CDZIP"}
+{"close":21.367063522338867,"date":"2026-09-25","schema_version":2,"ticker":"CDZIP"}
 {"close":47.09000015258789,"date":"2026-09-25","schema_version":2,"ticker":"CE"}
 {"close":73.5,"date":"2026-09-25","schema_version":2,"ticker":"CECO"}
 {"close":19.239999771118164,"date":"2026-09-25","schema_version":2,"ticker":"CEE"}
@@ -121373,7 +121373,7 @@
 {"close":4.110000133514404,"date":"2026-09-25","schema_version":2,"ticker":"CGTL"}
 {"close":0.9369999766349792,"date":"2026-09-25","schema_version":2,"ticker":"CGTX"}
 {"close":11.40999984741211,"date":"2026-09-25","schema_version":2,"ticker":"CHA"}
-{"close":8.710356712341309,"date":"2026-09-25","schema_version":2,"ticker":"CHAD"}
+{"close":8.705571174621582,"date":"2026-09-25","schema_version":2,"ticker":"CHAD"}
 {"close":0.2720000147819519,"date":"2026-09-25","schema_version":2,"ticker":"CHAI"}
 {"close":10.989999771118164,"date":"2026-09-25","schema_version":2,"ticker":"CHAR"}
 {"close":10.930000305175781,"date":"2026-09-25","schema_version":2,"ticker":"CHARU"}
@@ -121495,7 +121495,7 @@
 {"close":31.329999923706055,"date":"2026-09-25","schema_version":2,"ticker":"CMG"}
 {"close":525.0599975585938,"date":"2026-09-25","schema_version":2,"ticker":"CMI"}
 {"close":2.1600000858306885,"date":"2026-09-25","schema_version":2,"ticker":"CMMB"}
-{"close":0.8029999732971191,"date":"2026-09-25","schema_version":2,"ticker":"CMND"}
+{"close":6.423999786376953,"date":"2026-09-25","schema_version":2,"ticker":"CMND"}
 {"close":22.6200008392334,"date":"2026-09-25","schema_version":2,"ticker":"CMP"}
 {"close":79.79000091552734,"date":"2026-09-25","schema_version":2,"ticker":"CMPR"}
 {"close":13.0600004196167,"date":"2026-09-25","schema_version":2,"ticker":"CMPS"}
@@ -121723,7 +121723,7 @@
 {"close":2.3499999046325684,"date":"2026-09-25","schema_version":2,"ticker":"CURV"}
 {"close":4.739999771118164,"date":"2026-09-25","schema_version":2,"ticker":"CURX"}
 {"close":5.630000114440918,"date":"2026-09-25","schema_version":2,"ticker":"CUVL"}
-{"close":28.649999618530273,"date":"2026-09-25","schema_version":2,"ticker":"CUZ"}
+{"close":28.322689056396484,"date":"2026-09-25","schema_version":2,"ticker":"CUZ"}
 {"close":6.650000095367432,"date":"2026-09-25","schema_version":2,"ticker":"CV"}
 {"close":22.324623107910156,"date":"2026-09-25","schema_version":2,"ticker":"CVBF"}
 {"close":557.280029296875,"date":"2026-09-25","schema_version":2,"ticker":"CVCO"}
@@ -122198,7 +122198,7 @@
 {"close":8.65999984741211,"date":"2026-09-25","schema_version":2,"ticker":"ERC"}
 {"close":10.239999771118164,"date":"2026-09-25","schema_version":2,"ticker":"ERH"}
 {"close":9.370155334472656,"date":"2026-09-25","schema_version":2,"ticker":"ERIC"}
-{"close":222.86000061035156,"date":"2026-09-25","schema_version":2,"ticker":"ERIE"}
+{"close":221.3852996826172,"date":"2026-09-25","schema_version":2,"ticker":"ERIE"}
 {"close":6.809999942779541,"date":"2026-09-25","schema_version":2,"ticker":"ERII"}
 {"close":3.450000047683716,"date":"2026-09-25","schema_version":2,"ticker":"ERNA"}
 {"close":37.869998931884766,"date":"2026-09-25","schema_version":2,"ticker":"ERO"}
@@ -122638,7 +122638,7 @@
 {"close":0.9549999833106995,"date":"2026-09-25","schema_version":2,"ticker":"GDTC"}
 {"close":28.950000762939453,"date":"2026-09-25","schema_version":2,"ticker":"GDV"}
 {"close":7.75,"date":"2026-09-25","schema_version":2,"ticker":"GDYN"}
-{"close":327.0899963378906,"date":"2026-09-25","schema_version":2,"ticker":"GE"}
+{"close":326.5933837890625,"date":"2026-09-25","schema_version":2,"ticker":"GE"}
 {"close":545.7999877929688,"date":"2026-09-25","schema_version":2,"ticker":"GEBN.SW"}
 {"close":5.28000020980835,"date":"2026-09-25","schema_version":2,"ticker":"GECC"}
 {"close":24.709999084472656,"date":"2026-09-25","schema_version":2,"ticker":"GECCG"}
@@ -122717,7 +122717,7 @@
 {"close":23.1200008392334,"date":"2026-09-25","schema_version":2,"ticker":"GJS"}
 {"close":23.142915725708008,"date":"2026-09-25","schema_version":2,"ticker":"GJT"}
 {"close":154.42999267578125,"date":"2026-09-25","schema_version":2,"ticker":"GKOS"}
-{"close":167.0399932861328,"date":"2026-09-25","schema_version":2,"ticker":"GL"}
+{"close":166.707275390625,"date":"2026-09-25","schema_version":2,"ticker":"GL"}
 {"close":19.360000610351562,"date":"2026-09-25","schema_version":2,"ticker":"GLAD"}
 {"close":6.800000190734863,"date":"2026-09-25","schema_version":2,"ticker":"GLAS"}
 {"close":40.16999816894531,"date":"2026-09-25","schema_version":2,"ticker":"GLBE"}
@@ -122802,7 +122802,7 @@
 {"close":252.17999267578125,"date":"2026-09-25","schema_version":2,"ticker":"GPI"}
 {"close":18.696008682250977,"date":"2026-09-25","schema_version":2,"ticker":"GPJA"}
 {"close":9.380000114440918,"date":"2026-09-25","schema_version":2,"ticker":"GPK"}
-{"close":0.9150000214576721,"date":"2026-09-25","schema_version":2,"ticker":"GPMT"}
+{"close":9.04459285736084,"date":"2026-09-25","schema_version":2,"ticker":"GPMT"}
 {"close":86.48999786376953,"date":"2026-09-25","schema_version":2,"ticker":"GPN"}
 {"close":154.6199951171875,"date":"2026-09-25","schema_version":2,"ticker":"GPOR"}
 {"close":14.920000076293945,"date":"2026-09-25","schema_version":2,"ticker":"GPRE"}
@@ -122879,7 +122879,7 @@
 {"close":13.930000305175781,"date":"2026-09-25","schema_version":2,"ticker":"GUG"}
 {"close":3.259999990463257,"date":"2026-09-25","schema_version":2,"ticker":"GURE"}
 {"close":5.900000095367432,"date":"2026-09-25","schema_version":2,"ticker":"GUT"}
-{"close":0.4860000014305115,"date":"2026-09-25","schema_version":2,"ticker":"GUTS"}
+{"close":5.831999778747559,"date":"2026-09-25","schema_version":2,"ticker":"GUTS"}
 {"close":0.013000000268220901,"date":"2026-09-25","schema_version":2,"ticker":"GV"}
 {"close":114.95133209228516,"date":"2026-09-25","schema_version":2,"ticker":"GVA"}
 {"close":1.0800000429153442,"date":"2026-09-25","schema_version":2,"ticker":"GVH"}
@@ -122913,7 +122913,7 @@
 {"close":15.640000343322754,"date":"2026-09-25","schema_version":2,"ticker":"HBAN"}
 {"close":24.835355758666992,"date":"2026-09-25","schema_version":2,"ticker":"HBANL"}
 {"close":20.030000686645508,"date":"2026-09-25","schema_version":2,"ticker":"HBANM"}
-{"close":15.930000305175781,"date":"2026-09-25","schema_version":2,"ticker":"HBANP"}
+{"close":15.63762092590332,"date":"2026-09-25","schema_version":2,"ticker":"HBANP"}
 {"close":19.049999237060547,"date":"2026-09-25","schema_version":2,"ticker":"HBANZ"}
 {"close":37.2599983215332,"date":"2026-09-25","schema_version":2,"ticker":"HBB"}
 {"close":67.5999984741211,"date":"2026-09-25","schema_version":2,"ticker":"HBCP"}
@@ -123123,7 +123123,7 @@
 {"close":21.479999542236328,"date":"2026-09-25","schema_version":2,"ticker":"HYMC"}
 {"close":16.43000030517578,"date":"2026-09-25","schema_version":2,"ticker":"HYNE"}
 {"close":4.039999961853027,"date":"2026-09-25","schema_version":2,"ticker":"HYPD"}
-{"close":4.650000095367432,"date":"2026-09-25","schema_version":2,"ticker":"HYPMY"}
+{"close":4.601503372192383,"date":"2026-09-25","schema_version":2,"ticker":"HYPMY"}
 {"close":0.8130000233650208,"date":"2026-09-25","schema_version":2,"ticker":"HYPR"}
 {"close":7.789999961853027,"date":"2026-09-25","schema_version":2,"ticker":"HYT"}
 {"close":52.439998626708984,"date":"2026-09-25","schema_version":2,"ticker":"HZO"}
@@ -123172,7 +123172,7 @@
 {"close":12.179261207580566,"date":"2026-09-25","schema_version":2,"ticker":"IDE"}
 {"close":2.390000104904175,"date":"2026-09-25","schema_version":2,"ticker":"IDN"}
 {"close":30.389999389648438,"date":"2026-09-25","schema_version":2,"ticker":"IDR"}
-{"close":67.45999908447266,"date":"2026-09-25","schema_version":2,"ticker":"IDT"}
+{"close":67.40020751953125,"date":"2026-09-25","schema_version":2,"ticker":"IDT"}
 {"close":519.260009765625,"date":"2026-09-25","schema_version":2,"ticker":"IDXX"}
 {"close":36.689998626708984,"date":"2026-09-25","schema_version":2,"ticker":"IDYA"}
 {"close":10.5600004196167,"date":"2026-09-25","schema_version":2,"ticker":"IE"}
@@ -123690,7 +123690,7 @@
 {"close":10.180000305175781,"date":"2026-09-25","schema_version":2,"ticker":"LFACU"}
 {"close":4.199999809265137,"date":"2026-09-25","schema_version":2,"ticker":"LFCR"}
 {"close":2.9700000286102295,"date":"2026-09-25","schema_version":2,"ticker":"LFMD"}
-{"close":23.14900016784668,"date":"2026-09-25","schema_version":2,"ticker":"LFMDP"}
+{"close":22.59387969970703,"date":"2026-09-25","schema_version":2,"ticker":"LFMDP"}
 {"close":2.140000104904175,"date":"2026-09-25","schema_version":2,"ticker":"LFS"}
 {"close":11.84000015258789,"date":"2026-09-25","schema_version":2,"ticker":"LFST"}
 {"close":5.190000057220459,"date":"2026-09-25","schema_version":2,"ticker":"LFT"}
@@ -123982,7 +123982,7 @@
 {"close":10.0,"date":"2026-09-25","schema_version":2,"ticker":"MEVO"}
 {"close":10.1899995803833,"date":"2026-09-25","schema_version":2,"ticker":"MEVOU"}
 {"close":13.406999588012695,"date":"2026-09-25","schema_version":2,"ticker":"MF"}
-{"close":8.170000076293945,"date":"2026-09-25","schema_version":2,"ticker":"MFA"}
+{"close":7.785529613494873,"date":"2026-09-25","schema_version":2,"ticker":"MFA"}
 {"close":25.15999984741211,"date":"2026-09-25","schema_version":2,"ticker":"MFAN"}
 {"close":25.209999084472656,"date":"2026-09-25","schema_version":2,"ticker":"MFAO"}
 {"close":43.86000061035156,"date":"2026-09-25","schema_version":2,"ticker":"MFC"}
@@ -124116,7 +124116,7 @@
 {"close":190.86000061035156,"date":"2026-09-25","schema_version":2,"ticker":"MOH"}
 {"close":4.300000190734863,"date":"2026-09-25","schema_version":2,"ticker":"MOLN"}
 {"close":4.989999771118164,"date":"2026-09-25","schema_version":2,"ticker":"MOMO"}
-{"close":195.97999572753906,"date":"2026-09-25","schema_version":2,"ticker":"MORN"}
+{"close":195.467529296875,"date":"2026-09-25","schema_version":2,"ticker":"MORN"}
 {"close":23.010000228881836,"date":"2026-09-25","schema_version":2,"ticker":"MOS"}
 {"close":34.119998931884766,"date":"2026-09-25","schema_version":2,"ticker":"MOV"}
 {"close":11.770000457763672,"date":"2026-09-25","schema_version":2,"ticker":"MOVE"}
@@ -124150,8 +124150,8 @@
 {"close":0.7400000095367432,"date":"2026-09-25","schema_version":2,"ticker":"MRM"}
 {"close":198.8800048828125,"date":"2026-09-25","schema_version":2,"ticker":"MRNA"}
 {"close":0.28999999165534973,"date":"2026-09-25","schema_version":2,"ticker":"MRNO"}
-{"close":27.190000534057617,"date":"2026-09-25","schema_version":2,"ticker":"MRP"}
-{"close":171.1199951171875,"date":"2026-09-25","schema_version":2,"ticker":"MRSH"}
+{"close":26.317180633544922,"date":"2026-09-25","schema_version":2,"ticker":"MRP"}
+{"close":170.1277313232422,"date":"2026-09-25","schema_version":2,"ticker":"MRSH"}
 {"close":2.1500000953674316,"date":"2026-09-25","schema_version":2,"ticker":"MRT"}
 {"close":12.869999885559082,"date":"2026-09-25","schema_version":2,"ticker":"MRTN"}
 {"close":7.599999904632568,"date":"2026-09-25","schema_version":2,"ticker":"MRVI"}
@@ -124175,7 +124175,7 @@
 {"close":402.8399963378906,"date":"2026-09-25","schema_version":2,"ticker":"MSGS"}
 {"close":8.069999694824219,"date":"2026-09-25","schema_version":2,"ticker":"MSGY"}
 {"close":456.8800048828125,"date":"2026-09-25","schema_version":2,"ticker":"MSI"}
-{"close":12.220000267028809,"date":"2026-09-25","schema_version":2,"ticker":"MSIF"}
+{"close":12.10826301574707,"date":"2026-09-25","schema_version":2,"ticker":"MSIF"}
 {"close":8.699999809265137,"date":"2026-09-25","schema_version":2,"ticker":"MSLE"}
 {"close":121.22000122070312,"date":"2026-09-25","schema_version":2,"ticker":"MSM"}
 {"close":0.4300000071525574,"date":"2026-09-25","schema_version":2,"ticker":"MSN"}
@@ -124187,7 +124187,7 @@
 {"close":10.15999984741211,"date":"2026-09-25","schema_version":2,"ticker":"MTAL"}
 {"close":221.19000244140625,"date":"2026-09-25","schema_version":2,"ticker":"MTB"}
 {"close":5.309999942779541,"date":"2026-09-25","schema_version":2,"ticker":"MTC"}
-{"close":40.54999923706055,"date":"2026-09-25","schema_version":2,"ticker":"MTCH"}
+{"close":40.34885787963867,"date":"2026-09-25","schema_version":2,"ticker":"MTCH"}
 {"close":1511.6400146484375,"date":"2026-09-25","schema_version":2,"ticker":"MTD"}
 {"close":51.54999923706055,"date":"2026-09-25","schema_version":2,"ticker":"MTDR"}
 {"close":1.0950000286102295,"date":"2026-09-25","schema_version":2,"ticker":"MTEK"}
@@ -124240,7 +124240,7 @@
 {"close":8.930000305175781,"date":"2026-09-25","schema_version":2,"ticker":"MYN"}
 {"close":0.3499999940395355,"date":"2026-09-25","schema_version":2,"ticker":"MYND"}
 {"close":1.6100000143051147,"date":"2026-09-25","schema_version":2,"ticker":"MYO"}
-{"close":0.47600001096725464,"date":"2026-09-25","schema_version":2,"ticker":"MYPS"}
+{"close":4.760000228881836,"date":"2026-09-25","schema_version":2,"ticker":"MYPS"}
 {"close":292.5799865722656,"date":"2026-09-25","schema_version":2,"ticker":"MYRG"}
 {"close":1.8600000143051147,"date":"2026-09-25","schema_version":2,"ticker":"MYSE"}
 {"close":1.7200000286102295,"date":"2026-09-25","schema_version":2,"ticker":"MYSZ"}
@@ -124392,7 +124392,7 @@
 {"close":3.5799999237060547,"date":"2026-09-25","schema_version":2,"ticker":"NMAD"}
 {"close":14.09000015258789,"date":"2026-09-25","schema_version":2,"ticker":"NMAI"}
 {"close":10.869999885559082,"date":"2026-09-25","schema_version":2,"ticker":"NMAX"}
-{"close":9.069999694824219,"date":"2026-09-25","schema_version":2,"ticker":"NMCO"}
+{"close":8.999602317810059,"date":"2026-09-25","schema_version":2,"ticker":"NMCO"}
 {"close":6.980000019073486,"date":"2026-09-25","schema_version":2,"ticker":"NMFC"}
 {"close":25.399999618530273,"date":"2026-09-25","schema_version":2,"ticker":"NMFCZ"}
 {"close":1.3200000524520874,"date":"2026-09-25","schema_version":2,"ticker":"NMG"}
@@ -124626,7 +124626,7 @@
 {"close":25.579999923706055,"date":"2026-09-25","schema_version":2,"ticker":"OFSSO"}
 {"close":28.1299991607666,"date":"2026-09-25","schema_version":2,"ticker":"OGC"}
 {"close":4.0,"date":"2026-09-25","schema_version":2,"ticker":"OGCP"}
-{"close":44.810001373291016,"date":"2026-09-25","schema_version":2,"ticker":"OGE"}
+{"close":44.386016845703125,"date":"2026-09-25","schema_version":2,"ticker":"OGE"}
 {"close":0.49000000953674316,"date":"2026-09-25","schema_version":2,"ticker":"OGEN"}
 {"close":2.7699999809265137,"date":"2026-09-25","schema_version":2,"ticker":"OGG"}
 {"close":0.03519999980926514,"date":"2026-09-25","schema_version":2,"ticker":"OGGWZ"}
@@ -124908,7 +124908,7 @@
 {"close":1.350000023841858,"date":"2026-09-25","schema_version":2,"ticker":"PETZ"}
 {"close":2.1600000858306885,"date":"2026-09-25","schema_version":2,"ticker":"PEW"}
 {"close":2.990000009536743,"date":"2026-09-25","schema_version":2,"ticker":"PFAI"}
-{"close":109.4800033569336,"date":"2026-09-25","schema_version":2,"ticker":"PFBC"}
+{"close":108.65746307373047,"date":"2026-09-25","schema_version":2,"ticker":"PFBC"}
 {"close":10.829999923706055,"date":"2026-09-25","schema_version":2,"ticker":"PFD"}
 {"close":28.670000076293945,"date":"2026-09-25","schema_version":2,"ticker":"PFE"}
 {"close":6.900000095367432,"date":"2026-09-25","schema_version":2,"ticker":"PFFL"}
@@ -124987,7 +124987,7 @@
 {"close":123.98999786376953,"date":"2026-09-25","schema_version":2,"ticker":"PLMR"}
 {"close":42.68000030517578,"date":"2026-09-25","schema_version":2,"ticker":"PLNT"}
 {"close":39.7400016784668,"date":"2026-09-25","schema_version":2,"ticker":"PLOW"}
-{"close":423.3299865722656,"date":"2026-09-25","schema_version":2,"ticker":"PLPC"}
+{"close":423.1116638183594,"date":"2026-09-25","schema_version":2,"ticker":"PLPC"}
 {"close":1.0800000429153442,"date":"2026-09-25","schema_version":2,"ticker":"PLRX"}
 {"close":10.774999618530273,"date":"2026-09-25","schema_version":2,"ticker":"PLRZ"}
 {"close":51.630001068115234,"date":"2026-09-25","schema_version":2,"ticker":"PLSE"}
@@ -125003,7 +125003,7 @@
 {"close":2.7200000286102295,"date":"2026-09-25","schema_version":2,"ticker":"PLX"}
 {"close":263.0899963378906,"date":"2026-09-25","schema_version":2,"ticker":"PLXS"}
 {"close":2.0899999141693115,"date":"2026-09-25","schema_version":2,"ticker":"PLYX"}
-{"close":190.47999572753906,"date":"2026-09-25","schema_version":2,"ticker":"PM"}
+{"close":188.86044311523438,"date":"2026-09-25","schema_version":2,"ticker":"PM"}
 {"close":1.3300000429153442,"date":"2026-09-25","schema_version":2,"ticker":"PMA"}
 {"close":1.6200000047683716,"date":"2026-09-25","schema_version":2,"ticker":"PMAX"}
 {"close":0.4410000145435333,"date":"2026-09-25","schema_version":2,"ticker":"PMCB"}
@@ -125335,7 +125335,7 @@
 {"close":6.170000076293945,"date":"2026-09-25","schema_version":2,"ticker":"RGC"}
 {"close":21.280000686645508,"date":"2026-09-25","schema_version":2,"ticker":"RGCO"}
 {"close":189.67999267578125,"date":"2026-09-25","schema_version":2,"ticker":"RGEN"}
-{"close":252.49000549316406,"date":"2026-09-25","schema_version":2,"ticker":"RGLD"}
+{"close":251.97378540039062,"date":"2026-09-25","schema_version":2,"ticker":"RGLD"}
 {"close":1.9800000190734863,"date":"2026-09-25","schema_version":2,"ticker":"RGNT"}
 {"close":7.400000095367432,"date":"2026-09-25","schema_version":2,"ticker":"RGNX"}
 {"close":3.7899999618530273,"date":"2026-09-25","schema_version":2,"ticker":"RGP"}
@@ -125366,11 +125366,11 @@
 {"close":164.85000610351562,"date":"2026-09-25","schema_version":2,"ticker":"RIO.AX"}
 {"close":7088.0,"date":"2026-09-25","schema_version":2,"ticker":"RIO.L"}
 {"close":23.0,"date":"2026-09-25","schema_version":2,"ticker":"RIOT"}
-{"close":9.130000114440918,"date":"2026-09-25","schema_version":2,"ticker":"RITM"}
+{"close":8.874401092529297,"date":"2026-09-25","schema_version":2,"ticker":"RITM"}
 {"close":10.399999618530273,"date":"2026-09-25","schema_version":2,"ticker":"RIV"}
 {"close":15.470000267028809,"date":"2026-09-25","schema_version":2,"ticker":"RIVN"}
 {"close":18.700000762939453,"date":"2026-09-25","schema_version":2,"ticker":"RJET"}
-{"close":159.8699951171875,"date":"2026-09-25","schema_version":2,"ticker":"RJF"}
+{"close":159.32366943359375,"date":"2026-09-25","schema_version":2,"ticker":"RJF"}
 {"close":0.30799999833106995,"date":"2026-09-25","schema_version":2,"ticker":"RKDA"}
 {"close":73.94999694824219,"date":"2026-09-25","schema_version":2,"ticker":"RKLB"}
 {"close":12.170000076293945,"date":"2026-09-25","schema_version":2,"ticker":"RKT"}
@@ -125462,7 +125462,7 @@
 {"close":10.270000457763672,"date":"2026-09-25","schema_version":2,"ticker":"RTB"}
 {"close":20.639999389648438,"date":"2026-09-25","schema_version":2,"ticker":"RTO"}
 {"close":189.39999389648438,"date":"2026-09-25","schema_version":2,"ticker":"RTX"}
-{"close":1.1299999952316284,"date":"2026-09-25","schema_version":2,"ticker":"RUBI"}
+{"close":0.7533329725265503,"date":"2026-09-25","schema_version":2,"ticker":"RUBI"}
 {"close":8.359999656677246,"date":"2026-09-25","schema_version":2,"ticker":"RUM"}
 {"close":8.109999656677246,"date":"2026-09-25","schema_version":2,"ticker":"RUN"}
 {"close":47.970001220703125,"date":"2026-09-25","schema_version":2,"ticker":"RUSHA"}
@@ -125539,7 +125539,7 @@
 {"close":185.9199981689453,"date":"2026-09-25","schema_version":2,"ticker":"SAP.DE"}
 {"close":17.110000610351562,"date":"2026-09-25","schema_version":2,"ticker":"SAR"}
 {"close":22.739999771118164,"date":"2026-09-25","schema_version":2,"ticker":"SARO"}
-{"close":99.75028228759766,"date":"2026-09-25","schema_version":2,"ticker":"SATA"}
+{"close":99.69841766357422,"date":"2026-09-25","schema_version":2,"ticker":"SATA"}
 {"close":6.170000076293945,"date":"2026-09-25","schema_version":2,"ticker":"SATL"}
 {"close":24.510000228881836,"date":"2026-09-25","schema_version":2,"ticker":"SAV"}
 {"close":24.950000762939453,"date":"2026-09-25","schema_version":2,"ticker":"SAX"}
@@ -125587,7 +125587,7 @@
 {"close":7.56645393371582,"date":"2026-09-25","schema_version":2,"ticker":"SCM"}
 {"close":657.0,"date":"2026-09-25","schema_version":2,"ticker":"SCMN.SW"}
 {"close":1.5499999523162842,"date":"2026-09-25","schema_version":2,"ticker":"SCNI"}
-{"close":0.2770000100135803,"date":"2026-09-25","schema_version":2,"ticker":"SCNX"}
+{"close":6.925000190734863,"date":"2026-09-25","schema_version":2,"ticker":"SCNX"}
 {"close":4.909999847412109,"date":"2026-09-25","schema_version":2,"ticker":"SCOR"}
 {"close":10.050000190734863,"date":"2026-09-25","schema_version":2,"ticker":"SCPQ"}
 {"close":10.279999732971191,"date":"2026-09-25","schema_version":2,"ticker":"SCPQU"}
@@ -126045,7 +126045,7 @@
 {"close":1.0499999523162842,"date":"2026-09-25","schema_version":2,"ticker":"SYNX"}
 {"close":1.7400000095367432,"date":"2026-09-25","schema_version":2,"ticker":"SYPR"}
 {"close":85.69000244140625,"date":"2026-09-25","schema_version":2,"ticker":"SYRE"}
-{"close":78.45999908447266,"date":"2026-09-25","schema_version":2,"ticker":"SYY"}
+{"close":77.90512084960938,"date":"2026-09-25","schema_version":2,"ticker":"SYY"}
 {"close":10.489999771118164,"date":"2026-09-25","schema_version":2,"ticker":"SZZL"}
 {"close":0.15000000596046448,"date":"2026-09-25","schema_version":2,"ticker":"SZZLR"}
 {"close":10.539999961853027,"date":"2026-09-25","schema_version":2,"ticker":"SZZLU"}
@@ -126162,7 +126162,7 @@
 {"close":2.759999990463257,"date":"2026-09-25","schema_version":2,"ticker":"THM"}
 {"close":72.1500015258789,"date":"2026-09-25","schema_version":2,"ticker":"THO"}
 {"close":18.670000076293945,"date":"2026-09-25","schema_version":2,"ticker":"THQ"}
-{"close":35.209999084472656,"date":"2026-09-25","schema_version":2,"ticker":"THRM"}
+{"close":33.042747497558594,"date":"2026-09-25","schema_version":2,"ticker":"THRM"}
 {"close":1.7899999618530273,"date":"2026-09-25","schema_version":2,"ticker":"THRY"}
 {"close":13.229999542236328,"date":"2026-09-25","schema_version":2,"ticker":"THW"}
 {"close":8.890000343322754,"date":"2026-09-25","schema_version":2,"ticker":"TIC"}
@@ -126558,7 +126558,7 @@
 {"close":67.43000030517578,"date":"2026-09-25","schema_version":2,"ticker":"VIST"}
 {"close":9.949999809265137,"date":"2026-09-25","schema_version":2,"ticker":"VITL"}
 {"close":11.539000511169434,"date":"2026-09-25","schema_version":2,"ticker":"VIV"}
-{"close":0.535099983215332,"date":"2026-09-25","schema_version":2,"ticker":"VIVK"}
+{"close":8.02649974822998,"date":"2026-09-25","schema_version":2,"ticker":"VIVK"}
 {"close":4.119999885559082,"date":"2026-09-25","schema_version":2,"ticker":"VIVO"}
 {"close":0.2199999988079071,"date":"2026-09-25","schema_version":2,"ticker":"VIVS"}
 {"close":7.960000038146973,"date":"2026-09-25","schema_version":2,"ticker":"VKI"}
@@ -126582,7 +126582,7 @@
 {"close":9.149999618530273,"date":"2026-09-25","schema_version":2,"ticker":"VMET"}
 {"close":466.8299865722656,"date":"2026-09-25","schema_version":2,"ticker":"VMI"}
 {"close":8.630000114440918,"date":"2026-09-25","schema_version":2,"ticker":"VMO"}
-{"close":61.5099983215332,"date":"2026-09-25","schema_version":2,"ticker":"VMRK"}
+{"close":60.78677749633789,"date":"2026-09-25","schema_version":2,"ticker":"VMRK"}
 {"close":17.170000076293945,"date":"2026-09-25","schema_version":2,"ticker":"VNA.DE"}
 {"close":11.5,"date":"2026-09-25","schema_version":2,"ticker":"VNCE"}
 {"close":5.050000190734863,"date":"2026-09-25","schema_version":2,"ticker":"VNDA"}
@@ -126633,7 +126633,7 @@
 {"close":7.739999771118164,"date":"2026-09-25","schema_version":2,"ticker":"VSTM"}
 {"close":13.649999618530273,"date":"2026-09-25","schema_version":2,"ticker":"VSTS"}
 {"close":82.91000366210938,"date":"2026-09-25","schema_version":2,"ticker":"VSXY"}
-{"close":0.15000000596046448,"date":"2026-09-25","schema_version":2,"ticker":"VTAK"}
+{"close":1.5,"date":"2026-09-25","schema_version":2,"ticker":"VTAK"}
 {"close":3.609999895095825,"date":"2026-09-25","schema_version":2,"ticker":"VTEX"}
 {"close":0.27000001072883606,"date":"2026-09-25","schema_version":2,"ticker":"VTGN"}
 {"close":1.1699999570846558,"date":"2026-09-25","schema_version":2,"ticker":"VTIX"}
@@ -126700,7 +126700,7 @@
 {"close":10.40999984741211,"date":"2026-09-25","schema_version":2,"ticker":"WENN"}
 {"close":10.640000343322754,"date":"2026-09-25","schema_version":2,"ticker":"WENNU"}
 {"close":0.25,"date":"2026-09-25","schema_version":2,"ticker":"WENNW"}
-{"close":32.88999938964844,"date":"2026-09-25","schema_version":2,"ticker":"WERN"}
+{"close":32.759742736816406,"date":"2026-09-25","schema_version":2,"ticker":"WERN"}
 {"close":45.599998474121094,"date":"2026-09-25","schema_version":2,"ticker":"WES"}
 {"close":73.61000061035156,"date":"2026-09-25","schema_version":2,"ticker":"WES.AX"}
 {"close":8.09000015258789,"date":"2026-09-25","schema_version":2,"ticker":"WEST"}
@@ -126754,8 +126754,8 @@
 {"close":67.70999908447266,"date":"2026-09-25","schema_version":2,"ticker":"WLK"}
 {"close":21.600000381469727,"date":"2026-09-25","schema_version":2,"ticker":"WLKP"}
 {"close":10.180000305175781,"date":"2026-09-25","schema_version":2,"ticker":"WLTH"}
-{"close":47.54999923706055,"date":"2026-09-25","schema_version":2,"ticker":"WLY"}
-{"close":47.77000045776367,"date":"2026-09-25","schema_version":2,"ticker":"WLYB"}
+{"close":47.199790954589844,"date":"2026-09-25","schema_version":2,"ticker":"WLY"}
+{"close":47.42523956298828,"date":"2026-09-25","schema_version":2,"ticker":"WLYB"}
 {"close":206.8300018310547,"date":"2026-09-25","schema_version":2,"ticker":"WM"}
 {"close":69.26000213623047,"date":"2026-09-25","schema_version":2,"ticker":"WMB"}
 {"close":27.139999389648438,"date":"2026-09-25","schema_version":2,"ticker":"WMG"}
@@ -126938,7 +126938,7 @@
 {"close":90.80078887939453,"date":"2026-09-25","schema_version":2,"ticker":"ZBH"}
 {"close":26.950000762939453,"date":"2026-09-25","schema_version":2,"ticker":"ZBIO"}
 {"close":370.0400085449219,"date":"2026-09-25","schema_version":2,"ticker":"ZBRA"}
-{"close":0.9200000166893005,"date":"2026-09-25","schema_version":2,"ticker":"ZCMD"}
+{"close":1.840000033378601,"date":"2026-09-25","schema_version":2,"ticker":"ZCMD"}
 {"close":56.5099983215332,"date":"2026-09-25","schema_version":2,"ticker":"ZD"}
 {"close":1.6100000143051147,"date":"2026-09-25","schema_version":2,"ticker":"ZDAI"}
 {"close":3.0,"date":"2026-09-25","schema_version":2,"ticker":"ZDGE"}
@@ -127762,9 +127762,9 @@
 {"close":0.5874000191688538,"date":"2026-09-28","schema_version":2,"ticker":"BBBYW"}
 {"close":9.899999618530273,"date":"2026-09-28","schema_version":2,"ticker":"BBCP"}
 {"close":1.2300000190734863,"date":"2026-09-28","schema_version":2,"ticker":"BBCQW"}
-{"close":3.3499999046325684,"date":"2026-09-28","schema_version":2,"ticker":"BBD"}
+{"close":3.3463287353515625,"date":"2026-09-28","schema_version":2,"ticker":"BBD"}
 {"close":8.640000343322754,"date":"2026-09-28","schema_version":2,"ticker":"BBDC"}
-{"close":3.0399999618530273,"date":"2026-09-28","schema_version":2,"ticker":"BBDO"}
+{"close":3.037113904953003,"date":"2026-09-28","schema_version":2,"ticker":"BBDO"}
 {"close":14.59000015258789,"date":"2026-09-28","schema_version":2,"ticker":"BBGI"}
 {"close":66.61000061035156,"date":"2026-09-28","schema_version":2,"ticker":"BBIO"}
 {"close":0.4959999918937683,"date":"2026-09-28","schema_version":2,"ticker":"BBLG"}
@@ -128311,7 +128311,7 @@
 {"close":130.3300018310547,"date":"2026-09-28","schema_version":2,"ticker":"CDW"}
 {"close":1.3600000143051147,"date":"2026-09-28","schema_version":2,"ticker":"CDXS"}
 {"close":3.5799999237060547,"date":"2026-09-28","schema_version":2,"ticker":"CDZI"}
-{"close":21.899999618530273,"date":"2026-09-28","schema_version":2,"ticker":"CDZIP"}
+{"close":21.347566604614258,"date":"2026-09-28","schema_version":2,"ticker":"CDZIP"}
 {"close":45.91999816894531,"date":"2026-09-28","schema_version":2,"ticker":"CE"}
 {"close":72.26000213623047,"date":"2026-09-28","schema_version":2,"ticker":"CECO"}
 {"close":19.459999084472656,"date":"2026-09-28","schema_version":2,"ticker":"CEE"}
@@ -128362,7 +128362,7 @@
 {"close":4.03000020980835,"date":"2026-09-28","schema_version":2,"ticker":"CGTL"}
 {"close":0.9380000233650208,"date":"2026-09-28","schema_version":2,"ticker":"CGTX"}
 {"close":11.449999809265137,"date":"2026-09-28","schema_version":2,"ticker":"CHA"}
-{"close":8.66086483001709,"date":"2026-09-28","schema_version":2,"ticker":"CHAD"}
+{"close":8.656106948852539,"date":"2026-09-28","schema_version":2,"ticker":"CHAD"}
 {"close":0.27000001072883606,"date":"2026-09-28","schema_version":2,"ticker":"CHAI"}
 {"close":10.989999771118164,"date":"2026-09-28","schema_version":2,"ticker":"CHAR"}
 {"close":0.10000000149011612,"date":"2026-09-28","schema_version":2,"ticker":"CHARR"}
@@ -128487,7 +128487,7 @@
 {"close":31.850000381469727,"date":"2026-09-28","schema_version":2,"ticker":"CMG"}
 {"close":517.8400268554688,"date":"2026-09-28","schema_version":2,"ticker":"CMI"}
 {"close":1.6399999856948853,"date":"2026-09-28","schema_version":2,"ticker":"CMMB"}
-{"close":0.7879999876022339,"date":"2026-09-28","schema_version":2,"ticker":"CMND"}
+{"close":6.303999900817871,"date":"2026-09-28","schema_version":2,"ticker":"CMND"}
 {"close":22.389999389648438,"date":"2026-09-28","schema_version":2,"ticker":"CMP"}
 {"close":80.05000305175781,"date":"2026-09-28","schema_version":2,"ticker":"CMPR"}
 {"close":13.229999542236328,"date":"2026-09-28","schema_version":2,"ticker":"CMPS"}
@@ -128721,7 +128721,7 @@
 {"close":2.4000000953674316,"date":"2026-09-28","schema_version":2,"ticker":"CURV"}
 {"close":5.034999847412109,"date":"2026-09-28","schema_version":2,"ticker":"CURX"}
 {"close":5.75,"date":"2026-09-28","schema_version":2,"ticker":"CUVL"}
-{"close":28.059999465942383,"date":"2026-09-28","schema_version":2,"ticker":"CUZ"}
+{"close":27.73942756652832,"date":"2026-09-28","schema_version":2,"ticker":"CUZ"}
 {"close":6.920000076293945,"date":"2026-09-28","schema_version":2,"ticker":"CV"}
 {"close":21.987722396850586,"date":"2026-09-28","schema_version":2,"ticker":"CVBF"}
 {"close":557.530029296875,"date":"2026-09-28","schema_version":2,"ticker":"CVCO"}
@@ -129201,7 +129201,7 @@
 {"close":8.520000457763672,"date":"2026-09-28","schema_version":2,"ticker":"ERC"}
 {"close":10.180000305175781,"date":"2026-09-28","schema_version":2,"ticker":"ERH"}
 {"close":9.26200008392334,"date":"2026-09-28","schema_version":2,"ticker":"ERIC"}
-{"close":221.9199981689453,"date":"2026-09-28","schema_version":2,"ticker":"ERIE"}
+{"close":220.45150756835938,"date":"2026-09-28","schema_version":2,"ticker":"ERIE"}
 {"close":6.71999979019165,"date":"2026-09-28","schema_version":2,"ticker":"ERII"}
 {"close":3.4700000286102295,"date":"2026-09-28","schema_version":2,"ticker":"ERNA"}
 {"close":37.40999984741211,"date":"2026-09-28","schema_version":2,"ticker":"ERO"}
@@ -129642,7 +129642,7 @@
 {"close":0.925000011920929,"date":"2026-09-28","schema_version":2,"ticker":"GDTC"}
 {"close":28.59000015258789,"date":"2026-09-28","schema_version":2,"ticker":"GDV"}
 {"close":7.590000152587891,"date":"2026-09-28","schema_version":2,"ticker":"GDYN"}
-{"close":318.239990234375,"date":"2026-09-28","schema_version":2,"ticker":"GE"}
+{"close":317.7568054199219,"date":"2026-09-28","schema_version":2,"ticker":"GE"}
 {"close":550.5999755859375,"date":"2026-09-28","schema_version":2,"ticker":"GEBN.SW"}
 {"close":5.159999847412109,"date":"2026-09-28","schema_version":2,"ticker":"GECC"}
 {"close":24.479999542236328,"date":"2026-09-28","schema_version":2,"ticker":"GECCG"}
@@ -129722,7 +129722,7 @@
 {"close":23.1200008392334,"date":"2026-09-28","schema_version":2,"ticker":"GJS"}
 {"close":23.12299919128418,"date":"2026-09-28","schema_version":2,"ticker":"GJT"}
 {"close":158.55999755859375,"date":"2026-09-28","schema_version":2,"ticker":"GKOS"}
-{"close":166.69000244140625,"date":"2026-09-28","schema_version":2,"ticker":"GL"}
+{"close":166.3579864501953,"date":"2026-09-28","schema_version":2,"ticker":"GL"}
 {"close":19.260000228881836,"date":"2026-09-28","schema_version":2,"ticker":"GLAD"}
 {"close":6.849999904632568,"date":"2026-09-28","schema_version":2,"ticker":"GLAS"}
 {"close":39.279998779296875,"date":"2026-09-28","schema_version":2,"ticker":"GLBE"}
@@ -129806,7 +129806,7 @@
 {"close":242.22999572753906,"date":"2026-09-28","schema_version":2,"ticker":"GPI"}
 {"close":18.90254020690918,"date":"2026-09-28","schema_version":2,"ticker":"GPJA"}
 {"close":9.25,"date":"2026-09-28","schema_version":2,"ticker":"GPK"}
-{"close":0.8999999761581421,"date":"2026-09-28","schema_version":2,"ticker":"GPMT"}
+{"close":8.893372535705566,"date":"2026-09-28","schema_version":2,"ticker":"GPMT"}
 {"close":84.69999694824219,"date":"2026-09-28","schema_version":2,"ticker":"GPN"}
 {"close":152.08999633789062,"date":"2026-09-28","schema_version":2,"ticker":"GPOR"}
 {"close":14.800000190734863,"date":"2026-09-28","schema_version":2,"ticker":"GPRE"}
@@ -129886,7 +129886,7 @@
 {"close":13.819999694824219,"date":"2026-09-28","schema_version":2,"ticker":"GUG"}
 {"close":3.1500000953674316,"date":"2026-09-28","schema_version":2,"ticker":"GURE"}
 {"close":5.860000133514404,"date":"2026-09-28","schema_version":2,"ticker":"GUT"}
-{"close":0.47099998593330383,"date":"2026-09-28","schema_version":2,"ticker":"GUTS"}
+{"close":5.6519999504089355,"date":"2026-09-28","schema_version":2,"ticker":"GUTS"}
 {"close":0.013000000268220901,"date":"2026-09-28","schema_version":2,"ticker":"GV"}
 {"close":115.64055633544922,"date":"2026-09-28","schema_version":2,"ticker":"GVA"}
 {"close":1.0800000429153442,"date":"2026-09-28","schema_version":2,"ticker":"GVH"}
@@ -129920,7 +129920,7 @@
 {"close":15.300000190734863,"date":"2026-09-28","schema_version":2,"ticker":"HBAN"}
 {"close":24.746904373168945,"date":"2026-09-28","schema_version":2,"ticker":"HBANL"}
 {"close":19.989999771118164,"date":"2026-09-28","schema_version":2,"ticker":"HBANM"}
-{"close":15.720000267028809,"date":"2026-09-28","schema_version":2,"ticker":"HBANP"}
+{"close":15.431475639343262,"date":"2026-09-28","schema_version":2,"ticker":"HBANP"}
 {"close":18.969999313354492,"date":"2026-09-28","schema_version":2,"ticker":"HBANZ"}
 {"close":37.599998474121094,"date":"2026-09-28","schema_version":2,"ticker":"HBB"}
 {"close":67.05999755859375,"date":"2026-09-28","schema_version":2,"ticker":"HBCP"}
@@ -130134,7 +130134,7 @@
 {"close":19.600000381469727,"date":"2026-09-28","schema_version":2,"ticker":"HYMC"}
 {"close":16.399999618530273,"date":"2026-09-28","schema_version":2,"ticker":"HYNE"}
 {"close":3.9149999618530273,"date":"2026-09-28","schema_version":2,"ticker":"HYPD"}
-{"close":4.400000095367432,"date":"2026-09-28","schema_version":2,"ticker":"HYPMY"}
+{"close":4.3541107177734375,"date":"2026-09-28","schema_version":2,"ticker":"HYPMY"}
 {"close":0.8360000252723694,"date":"2026-09-28","schema_version":2,"ticker":"HYPR"}
 {"close":7.769999980926514,"date":"2026-09-28","schema_version":2,"ticker":"HYT"}
 {"close":52.369998931884766,"date":"2026-09-28","schema_version":2,"ticker":"HZO"}
@@ -130183,7 +130183,7 @@
 {"close":12.05032730102539,"date":"2026-09-28","schema_version":2,"ticker":"IDE"}
 {"close":2.3399999141693115,"date":"2026-09-28","schema_version":2,"ticker":"IDN"}
 {"close":28.760000228881836,"date":"2026-09-28","schema_version":2,"ticker":"IDR"}
-{"close":69.55999755859375,"date":"2026-09-28","schema_version":2,"ticker":"IDT"}
+{"close":69.49834442138672,"date":"2026-09-28","schema_version":2,"ticker":"IDT"}
 {"close":529.0599975585938,"date":"2026-09-28","schema_version":2,"ticker":"IDXX"}
 {"close":38.220001220703125,"date":"2026-09-28","schema_version":2,"ticker":"IDYA"}
 {"close":10.640000343322754,"date":"2026-09-28","schema_version":2,"ticker":"IE"}
@@ -130701,7 +130701,7 @@
 {"close":10.180000305175781,"date":"2026-09-28","schema_version":2,"ticker":"LFACU"}
 {"close":6.519999980926514,"date":"2026-09-28","schema_version":2,"ticker":"LFCR"}
 {"close":2.930000066757202,"date":"2026-09-28","schema_version":2,"ticker":"LFMD"}
-{"close":23.14900016784668,"date":"2026-09-28","schema_version":2,"ticker":"LFMDP"}
+{"close":22.59387969970703,"date":"2026-09-28","schema_version":2,"ticker":"LFMDP"}
 {"close":2.140000104904175,"date":"2026-09-28","schema_version":2,"ticker":"LFS"}
 {"close":11.84000015258789,"date":"2026-09-28","schema_version":2,"ticker":"LFST"}
 {"close":5.610000133514404,"date":"2026-09-28","schema_version":2,"ticker":"LFT"}
@@ -130994,7 +130994,7 @@
 {"close":10.1899995803833,"date":"2026-09-28","schema_version":2,"ticker":"MEVOU"}
 {"close":0.25270000100135803,"date":"2026-09-28","schema_version":2,"ticker":"MEVOW"}
 {"close":13.90999984741211,"date":"2026-09-28","schema_version":2,"ticker":"MF"}
-{"close":8.010000228881836,"date":"2026-09-28","schema_version":2,"ticker":"MFA"}
+{"close":7.633059024810791,"date":"2026-09-28","schema_version":2,"ticker":"MFA"}
 {"close":25.1299991607666,"date":"2026-09-28","schema_version":2,"ticker":"MFAN"}
 {"close":25.200000762939453,"date":"2026-09-28","schema_version":2,"ticker":"MFAO"}
 {"close":43.5,"date":"2026-09-28","schema_version":2,"ticker":"MFC"}
@@ -131128,7 +131128,7 @@
 {"close":189.63999938964844,"date":"2026-09-28","schema_version":2,"ticker":"MOH"}
 {"close":3.859999895095825,"date":"2026-09-28","schema_version":2,"ticker":"MOLN"}
 {"close":4.900000095367432,"date":"2026-09-28","schema_version":2,"ticker":"MOMO"}
-{"close":191.55999755859375,"date":"2026-09-28","schema_version":2,"ticker":"MORN"}
+{"close":191.05908203125,"date":"2026-09-28","schema_version":2,"ticker":"MORN"}
 {"close":22.25,"date":"2026-09-28","schema_version":2,"ticker":"MOS"}
 {"close":33.47999954223633,"date":"2026-09-28","schema_version":2,"ticker":"MOV"}
 {"close":11.239999771118164,"date":"2026-09-28","schema_version":2,"ticker":"MOVE"}
@@ -131163,8 +131163,8 @@
 {"close":197.27999877929688,"date":"2026-09-28","schema_version":2,"ticker":"MRNA"}
 {"close":0.30000001192092896,"date":"2026-09-28","schema_version":2,"ticker":"MRNO"}
 {"close":0.008899999782443047,"date":"2026-09-28","schema_version":2,"ticker":"MRNOW"}
-{"close":26.34000015258789,"date":"2026-09-28","schema_version":2,"ticker":"MRP"}
-{"close":169.02999877929688,"date":"2026-09-28","schema_version":2,"ticker":"MRSH"}
+{"close":25.494464874267578,"date":"2026-09-28","schema_version":2,"ticker":"MRP"}
+{"close":168.0498504638672,"date":"2026-09-28","schema_version":2,"ticker":"MRSH"}
 {"close":2.1600000858306885,"date":"2026-09-28","schema_version":2,"ticker":"MRT"}
 {"close":12.920000076293945,"date":"2026-09-28","schema_version":2,"ticker":"MRTN"}
 {"close":7.630000114440918,"date":"2026-09-28","schema_version":2,"ticker":"MRVI"}
@@ -131188,7 +131188,7 @@
 {"close":416.3399963378906,"date":"2026-09-28","schema_version":2,"ticker":"MSGS"}
 {"close":3.130000114440918,"date":"2026-09-28","schema_version":2,"ticker":"MSGY"}
 {"close":452.0799865722656,"date":"2026-09-28","schema_version":2,"ticker":"MSI"}
-{"close":12.079999923706055,"date":"2026-09-28","schema_version":2,"ticker":"MSIF"}
+{"close":11.969542503356934,"date":"2026-09-28","schema_version":2,"ticker":"MSIF"}
 {"close":8.8100004196167,"date":"2026-09-28","schema_version":2,"ticker":"MSLE"}
 {"close":122.13999938964844,"date":"2026-09-28","schema_version":2,"ticker":"MSM"}
 {"close":0.4099999964237213,"date":"2026-09-28","schema_version":2,"ticker":"MSN"}
@@ -131200,7 +131200,7 @@
 {"close":10.15999984741211,"date":"2026-09-28","schema_version":2,"ticker":"MTAL"}
 {"close":220.44000244140625,"date":"2026-09-28","schema_version":2,"ticker":"MTB"}
 {"close":5.300000190734863,"date":"2026-09-28","schema_version":2,"ticker":"MTC"}
-{"close":39.5099983215332,"date":"2026-09-28","schema_version":2,"ticker":"MTCH"}
+{"close":39.31401824951172,"date":"2026-09-28","schema_version":2,"ticker":"MTCH"}
 {"close":1545.260009765625,"date":"2026-09-28","schema_version":2,"ticker":"MTD"}
 {"close":51.45000076293945,"date":"2026-09-28","schema_version":2,"ticker":"MTDR"}
 {"close":0.9710000157356262,"date":"2026-09-28","schema_version":2,"ticker":"MTEK"}
@@ -131254,7 +131254,7 @@
 {"close":8.770000457763672,"date":"2026-09-28","schema_version":2,"ticker":"MYN"}
 {"close":0.3160000145435333,"date":"2026-09-28","schema_version":2,"ticker":"MYND"}
 {"close":1.559999942779541,"date":"2026-09-28","schema_version":2,"ticker":"MYO"}
-{"close":0.46000000834465027,"date":"2026-09-28","schema_version":2,"ticker":"MYPS"}
+{"close":4.599999904632568,"date":"2026-09-28","schema_version":2,"ticker":"MYPS"}
 {"close":285.92999267578125,"date":"2026-09-28","schema_version":2,"ticker":"MYRG"}
 {"close":1.850000023841858,"date":"2026-09-28","schema_version":2,"ticker":"MYSE"}
 {"close":1.6299999952316284,"date":"2026-09-28","schema_version":2,"ticker":"MYSZ"}
@@ -131407,7 +131407,7 @@
 {"close":3.5999999046325684,"date":"2026-09-28","schema_version":2,"ticker":"NMAD"}
 {"close":14.0,"date":"2026-09-28","schema_version":2,"ticker":"NMAI"}
 {"close":10.899999618530273,"date":"2026-09-28","schema_version":2,"ticker":"NMAX"}
-{"close":8.8100004196167,"date":"2026-09-28","schema_version":2,"ticker":"NMCO"}
+{"close":8.741621017456055,"date":"2026-09-28","schema_version":2,"ticker":"NMCO"}
 {"close":6.96999979019165,"date":"2026-09-28","schema_version":2,"ticker":"NMFC"}
 {"close":25.309999465942383,"date":"2026-09-28","schema_version":2,"ticker":"NMFCZ"}
 {"close":1.25,"date":"2026-09-28","schema_version":2,"ticker":"NMG"}
@@ -131640,7 +131640,7 @@
 {"close":25.579999923706055,"date":"2026-09-28","schema_version":2,"ticker":"OFSSO"}
 {"close":26.93000030517578,"date":"2026-09-28","schema_version":2,"ticker":"OGC"}
 {"close":3.759999990463257,"date":"2026-09-28","schema_version":2,"ticker":"OGCP"}
-{"close":44.68000030517578,"date":"2026-09-28","schema_version":2,"ticker":"OGE"}
+{"close":44.25724792480469,"date":"2026-09-28","schema_version":2,"ticker":"OGE"}
 {"close":0.4699999988079071,"date":"2026-09-28","schema_version":2,"ticker":"OGEN"}
 {"close":2.7799999713897705,"date":"2026-09-28","schema_version":2,"ticker":"OGG"}
 {"close":1.0850000381469727,"date":"2026-09-28","schema_version":2,"ticker":"OGI"}
@@ -131922,7 +131922,7 @@
 {"close":1.3899999856948853,"date":"2026-09-28","schema_version":2,"ticker":"PETZ"}
 {"close":2.109999895095825,"date":"2026-09-28","schema_version":2,"ticker":"PEW"}
 {"close":2.7699999809265137,"date":"2026-09-28","schema_version":2,"ticker":"PFAI"}
-{"close":109.0199966430664,"date":"2026-09-28","schema_version":2,"ticker":"PFBC"}
+{"close":108.20091247558594,"date":"2026-09-28","schema_version":2,"ticker":"PFBC"}
 {"close":10.670000076293945,"date":"2026-09-28","schema_version":2,"ticker":"PFD"}
 {"close":28.719999313354492,"date":"2026-09-28","schema_version":2,"ticker":"PFE"}
 {"close":6.789999961853027,"date":"2026-09-28","schema_version":2,"ticker":"PFFL"}
@@ -132000,7 +132000,7 @@
 {"close":123.04000091552734,"date":"2026-09-28","schema_version":2,"ticker":"PLMR"}
 {"close":40.5,"date":"2026-09-28","schema_version":2,"ticker":"PLNT"}
 {"close":39.540000915527344,"date":"2026-09-28","schema_version":2,"ticker":"PLOW"}
-{"close":416.3699951171875,"date":"2026-09-28","schema_version":2,"ticker":"PLPC"}
+{"close":416.1552734375,"date":"2026-09-28","schema_version":2,"ticker":"PLPC"}
 {"close":1.0800000429153442,"date":"2026-09-28","schema_version":2,"ticker":"PLRX"}
 {"close":10.359999656677246,"date":"2026-09-28","schema_version":2,"ticker":"PLRZ"}
 {"close":52.31999969482422,"date":"2026-09-28","schema_version":2,"ticker":"PLSE"}
@@ -132016,7 +132016,7 @@
 {"close":2.690000057220459,"date":"2026-09-28","schema_version":2,"ticker":"PLX"}
 {"close":264.9599914550781,"date":"2026-09-28","schema_version":2,"ticker":"PLXS"}
 {"close":2.0399999618530273,"date":"2026-09-28","schema_version":2,"ticker":"PLYX"}
-{"close":193.75999450683594,"date":"2026-09-28","schema_version":2,"ticker":"PM"}
+{"close":192.112548828125,"date":"2026-09-28","schema_version":2,"ticker":"PM"}
 {"close":1.3020000457763672,"date":"2026-09-28","schema_version":2,"ticker":"PMA"}
 {"close":1.2599999904632568,"date":"2026-09-28","schema_version":2,"ticker":"PMAX"}
 {"close":0.41990000009536743,"date":"2026-09-28","schema_version":2,"ticker":"PMCB"}
@@ -132348,7 +132348,7 @@
 {"close":6.199999809265137,"date":"2026-09-28","schema_version":2,"ticker":"RGC"}
 {"close":21.600000381469727,"date":"2026-09-28","schema_version":2,"ticker":"RGCO"}
 {"close":194.08999633789062,"date":"2026-09-28","schema_version":2,"ticker":"RGEN"}
-{"close":240.32000732421875,"date":"2026-09-28","schema_version":2,"ticker":"RGLD"}
+{"close":239.82867431640625,"date":"2026-09-28","schema_version":2,"ticker":"RGLD"}
 {"close":1.8899999856948853,"date":"2026-09-28","schema_version":2,"ticker":"RGNT"}
 {"close":7.46999979019165,"date":"2026-09-28","schema_version":2,"ticker":"RGNX"}
 {"close":3.759999990463257,"date":"2026-09-28","schema_version":2,"ticker":"RGP"}
@@ -132379,11 +132379,11 @@
 {"close":163.0399932861328,"date":"2026-09-28","schema_version":2,"ticker":"RIO.AX"}
 {"close":7059.0,"date":"2026-09-28","schema_version":2,"ticker":"RIO.L"}
 {"close":21.6200008392334,"date":"2026-09-28","schema_version":2,"ticker":"RIOT"}
-{"close":9.079999923706055,"date":"2026-09-28","schema_version":2,"ticker":"RITM"}
+{"close":8.825800895690918,"date":"2026-09-28","schema_version":2,"ticker":"RITM"}
 {"close":10.380000114440918,"date":"2026-09-28","schema_version":2,"ticker":"RIV"}
 {"close":14.789999961853027,"date":"2026-09-28","schema_version":2,"ticker":"RIVN"}
 {"close":18.3799991607666,"date":"2026-09-28","schema_version":2,"ticker":"RJET"}
-{"close":161.16000366210938,"date":"2026-09-28","schema_version":2,"ticker":"RJF"}
+{"close":160.60926818847656,"date":"2026-09-28","schema_version":2,"ticker":"RJF"}
 {"close":0.30799999833106995,"date":"2026-09-28","schema_version":2,"ticker":"RKDA"}
 {"close":72.19000244140625,"date":"2026-09-28","schema_version":2,"ticker":"RKLB"}
 {"close":11.640000343322754,"date":"2026-09-28","schema_version":2,"ticker":"RKT"}
@@ -132475,7 +132475,7 @@
 {"close":9.359999656677246,"date":"2026-09-28","schema_version":2,"ticker":"RTB"}
 {"close":20.5,"date":"2026-09-28","schema_version":2,"ticker":"RTO"}
 {"close":187.66000366210938,"date":"2026-09-28","schema_version":2,"ticker":"RTX"}
-{"close":1.1299999952316284,"date":"2026-09-28","schema_version":2,"ticker":"RUBI"}
+{"close":0.7533329725265503,"date":"2026-09-28","schema_version":2,"ticker":"RUBI"}
 {"close":7.929999828338623,"date":"2026-09-28","schema_version":2,"ticker":"RUM"}
 {"close":1.809999942779541,"date":"2026-09-28","schema_version":2,"ticker":"RUMBW"}
 {"close":7.670000076293945,"date":"2026-09-28","schema_version":2,"ticker":"RUN"}
@@ -132557,7 +132557,7 @@
 {"close":184.02000427246094,"date":"2026-09-28","schema_version":2,"ticker":"SAP.DE"}
 {"close":16.799999237060547,"date":"2026-09-28","schema_version":2,"ticker":"SAR"}
 {"close":22.219999313354492,"date":"2026-09-28","schema_version":2,"ticker":"SARO"}
-{"close":99.80216979980469,"date":"2026-09-28","schema_version":2,"ticker":"SATA"}
+{"close":99.75028228759766,"date":"2026-09-28","schema_version":2,"ticker":"SATA"}
 {"close":6.050000190734863,"date":"2026-09-28","schema_version":2,"ticker":"SATL"}
 {"close":0.593999981880188,"date":"2026-09-28","schema_version":2,"ticker":"SATLW"}
 {"close":24.459999084472656,"date":"2026-09-28","schema_version":2,"ticker":"SAV"}
@@ -132605,7 +132605,7 @@
 {"close":7.427983283996582,"date":"2026-09-28","schema_version":2,"ticker":"SCM"}
 {"close":639.0,"date":"2026-09-28","schema_version":2,"ticker":"SCMN.SW"}
 {"close":1.4700000286102295,"date":"2026-09-28","schema_version":2,"ticker":"SCNI"}
-{"close":0.27000001072883606,"date":"2026-09-28","schema_version":2,"ticker":"SCNX"}
+{"close":6.75,"date":"2026-09-28","schema_version":2,"ticker":"SCNX"}
 {"close":4.860000133514404,"date":"2026-09-28","schema_version":2,"ticker":"SCOR"}
 {"close":10.050000190734863,"date":"2026-09-28","schema_version":2,"ticker":"SCPQ"}
 {"close":10.279999732971191,"date":"2026-09-28","schema_version":2,"ticker":"SCPQU"}
@@ -133062,7 +133062,7 @@
 {"close":1.0499999523162842,"date":"2026-09-28","schema_version":2,"ticker":"SYNX"}
 {"close":1.7000000476837158,"date":"2026-09-28","schema_version":2,"ticker":"SYPR"}
 {"close":85.79000091552734,"date":"2026-09-28","schema_version":2,"ticker":"SYRE"}
-{"close":78.56999969482422,"date":"2026-09-28","schema_version":2,"ticker":"SYY"}
+{"close":78.01434326171875,"date":"2026-09-28","schema_version":2,"ticker":"SYY"}
 {"close":10.489999771118164,"date":"2026-09-28","schema_version":2,"ticker":"SZZL"}
 {"close":10.539999961853027,"date":"2026-09-28","schema_version":2,"ticker":"SZZLU"}
 {"close":24.899999618530273,"date":"2026-09-28","schema_version":2,"ticker":"T"}
@@ -133178,7 +133178,7 @@
 {"close":2.569999933242798,"date":"2026-09-28","schema_version":2,"ticker":"THM"}
 {"close":71.37999725341797,"date":"2026-09-28","schema_version":2,"ticker":"THO"}
 {"close":18.489999771118164,"date":"2026-09-28","schema_version":2,"ticker":"THQ"}
-{"close":33.61000061035156,"date":"2026-09-28","schema_version":2,"ticker":"THRM"}
+{"close":31.54123306274414,"date":"2026-09-28","schema_version":2,"ticker":"THRM"}
 {"close":1.6050000190734863,"date":"2026-09-28","schema_version":2,"ticker":"THRY"}
 {"close":13.1899995803833,"date":"2026-09-28","schema_version":2,"ticker":"THW"}
 {"close":8.729999542236328,"date":"2026-09-28","schema_version":2,"ticker":"TIC"}
@@ -133577,7 +133577,7 @@
 {"close":66.91000366210938,"date":"2026-09-28","schema_version":2,"ticker":"VIST"}
 {"close":9.670000076293945,"date":"2026-09-28","schema_version":2,"ticker":"VITL"}
 {"close":11.289999961853027,"date":"2026-09-28","schema_version":2,"ticker":"VIV"}
-{"close":0.5297999978065491,"date":"2026-09-28","schema_version":2,"ticker":"VIVK"}
+{"close":7.947000026702881,"date":"2026-09-28","schema_version":2,"ticker":"VIVK"}
 {"close":3.940000057220459,"date":"2026-09-28","schema_version":2,"ticker":"VIVO"}
 {"close":0.2199999988079071,"date":"2026-09-28","schema_version":2,"ticker":"VIVS"}
 {"close":7.630000114440918,"date":"2026-09-28","schema_version":2,"ticker":"VKI"}
@@ -133601,7 +133601,7 @@
 {"close":8.920000076293945,"date":"2026-09-28","schema_version":2,"ticker":"VMET"}
 {"close":467.8399963378906,"date":"2026-09-28","schema_version":2,"ticker":"VMI"}
 {"close":8.369999885559082,"date":"2026-09-28","schema_version":2,"ticker":"VMO"}
-{"close":61.369998931884766,"date":"2026-09-28","schema_version":2,"ticker":"VMRK"}
+{"close":60.64842224121094,"date":"2026-09-28","schema_version":2,"ticker":"VMRK"}
 {"close":17.05500030517578,"date":"2026-09-28","schema_version":2,"ticker":"VNA.DE"}
 {"close":10.819999694824219,"date":"2026-09-28","schema_version":2,"ticker":"VNCE"}
 {"close":5.170000076293945,"date":"2026-09-28","schema_version":2,"ticker":"VNDA"}
@@ -133653,7 +133653,7 @@
 {"close":7.769999980926514,"date":"2026-09-28","schema_version":2,"ticker":"VSTM"}
 {"close":13.449999809265137,"date":"2026-09-28","schema_version":2,"ticker":"VSTS"}
 {"close":88.29000091552734,"date":"2026-09-28","schema_version":2,"ticker":"VSXY"}
-{"close":0.15000000596046448,"date":"2026-09-28","schema_version":2,"ticker":"VTAK"}
+{"close":1.5,"date":"2026-09-28","schema_version":2,"ticker":"VTAK"}
 {"close":3.5799999237060547,"date":"2026-09-28","schema_version":2,"ticker":"VTEX"}
 {"close":0.30000001192092896,"date":"2026-09-28","schema_version":2,"ticker":"VTGN"}
 {"close":1.2100000381469727,"date":"2026-09-28","schema_version":2,"ticker":"VTIX"}
@@ -133720,7 +133720,7 @@
 {"close":10.0,"date":"2026-09-28","schema_version":2,"ticker":"WENC"}
 {"close":10.40999984741211,"date":"2026-09-28","schema_version":2,"ticker":"WENN"}
 {"close":10.640000343322754,"date":"2026-09-28","schema_version":2,"ticker":"WENNU"}
-{"close":33.529998779296875,"date":"2026-09-28","schema_version":2,"ticker":"WERN"}
+{"close":33.39720916748047,"date":"2026-09-28","schema_version":2,"ticker":"WERN"}
 {"close":45.27000045776367,"date":"2026-09-28","schema_version":2,"ticker":"WES"}
 {"close":73.58999633789062,"date":"2026-09-28","schema_version":2,"ticker":"WES.AX"}
 {"close":8.25,"date":"2026-09-28","schema_version":2,"ticker":"WEST"}
@@ -133774,8 +133774,8 @@
 {"close":66.83999633789062,"date":"2026-09-28","schema_version":2,"ticker":"WLK"}
 {"close":21.549999237060547,"date":"2026-09-28","schema_version":2,"ticker":"WLKP"}
 {"close":10.0,"date":"2026-09-28","schema_version":2,"ticker":"WLTH"}
-{"close":47.61000061035156,"date":"2026-09-28","schema_version":2,"ticker":"WLY"}
-{"close":47.77000045776367,"date":"2026-09-28","schema_version":2,"ticker":"WLYB"}
+{"close":47.25934982299805,"date":"2026-09-28","schema_version":2,"ticker":"WLY"}
+{"close":47.42523956298828,"date":"2026-09-28","schema_version":2,"ticker":"WLYB"}
 {"close":206.44000244140625,"date":"2026-09-28","schema_version":2,"ticker":"WM"}
 {"close":68.9800033569336,"date":"2026-09-28","schema_version":2,"ticker":"WMB"}
 {"close":27.139999389648438,"date":"2026-09-28","schema_version":2,"ticker":"WMG"}
@@ -133961,7 +133961,7 @@
 {"close":91.37926483154297,"date":"2026-09-28","schema_version":2,"ticker":"ZBH"}
 {"close":27.549999237060547,"date":"2026-09-28","schema_version":2,"ticker":"ZBIO"}
 {"close":371.8699951171875,"date":"2026-09-28","schema_version":2,"ticker":"ZBRA"}
-{"close":0.8600000143051147,"date":"2026-09-28","schema_version":2,"ticker":"ZCMD"}
+{"close":1.7200000286102295,"date":"2026-09-28","schema_version":2,"ticker":"ZCMD"}
 {"close":55.68000030517578,"date":"2026-09-28","schema_version":2,"ticker":"ZD"}
 {"close":1.649999976158142,"date":"2026-09-28","schema_version":2,"ticker":"ZDAI"}
 {"close":3.0899999141693115,"date":"2026-09-28","schema_version":2,"ticker":"ZDGE"}
@@ -134791,9 +134791,9 @@
 {"close":0.5400000214576721,"date":"2026-09-29","schema_version":2,"ticker":"BBBYW"}
 {"close":9.699999809265137,"date":"2026-09-29","schema_version":2,"ticker":"BBCP"}
 {"close":1.1200000047683716,"date":"2026-09-29","schema_version":2,"ticker":"BBCQW"}
-{"close":3.359999895095825,"date":"2026-09-29","schema_version":2,"ticker":"BBD"}
+{"close":3.3563177585601807,"date":"2026-09-29","schema_version":2,"ticker":"BBD"}
 {"close":8.720000267028809,"date":"2026-09-29","schema_version":2,"ticker":"BBDC"}
-{"close":3.059999942779541,"date":"2026-09-29","schema_version":2,"ticker":"BBDO"}
+{"close":3.0570948123931885,"date":"2026-09-29","schema_version":2,"ticker":"BBDO"}
 {"close":14.1899995803833,"date":"2026-09-29","schema_version":2,"ticker":"BBGI"}
 {"close":65.97000122070312,"date":"2026-09-29","schema_version":2,"ticker":"BBIO"}
 {"close":0.4959999918937683,"date":"2026-09-29","schema_version":2,"ticker":"BBLG"}
@@ -135340,7 +135340,7 @@
 {"close":129.7100067138672,"date":"2026-09-29","schema_version":2,"ticker":"CDW"}
 {"close":1.350000023841858,"date":"2026-09-29","schema_version":2,"ticker":"CDXS"}
 {"close":3.5799999237060547,"date":"2026-09-29","schema_version":2,"ticker":"CDZI"}
-{"close":22.000999450683594,"date":"2026-09-29","schema_version":2,"ticker":"CDZIP"}
+{"close":21.446020126342773,"date":"2026-09-29","schema_version":2,"ticker":"CDZIP"}
 {"close":44.84000015258789,"date":"2026-09-29","schema_version":2,"ticker":"CE"}
 {"close":70.5999984741211,"date":"2026-09-29","schema_version":2,"ticker":"CECO"}
 {"close":18.809999465942383,"date":"2026-09-29","schema_version":2,"ticker":"CEE"}
@@ -135391,7 +135391,7 @@
 {"close":4.005000114440918,"date":"2026-09-29","schema_version":2,"ticker":"CGTL"}
 {"close":0.9539999961853027,"date":"2026-09-29","schema_version":2,"ticker":"CGTX"}
 {"close":11.359999656677246,"date":"2026-09-29","schema_version":2,"ticker":"CHA"}
-{"close":8.611373901367188,"date":"2026-09-29","schema_version":2,"ticker":"CHAD"}
+{"close":8.606643676757812,"date":"2026-09-29","schema_version":2,"ticker":"CHAD"}
 {"close":0.28200000524520874,"date":"2026-09-29","schema_version":2,"ticker":"CHAI"}
 {"close":10.970000267028809,"date":"2026-09-29","schema_version":2,"ticker":"CHAR"}
 {"close":0.10000000149011612,"date":"2026-09-29","schema_version":2,"ticker":"CHARR"}
@@ -135515,7 +135515,7 @@
 {"close":31.8799991607666,"date":"2026-09-29","schema_version":2,"ticker":"CMG"}
 {"close":521.3699951171875,"date":"2026-09-29","schema_version":2,"ticker":"CMI"}
 {"close":1.6100000143051147,"date":"2026-09-29","schema_version":2,"ticker":"CMMB"}
-{"close":0.8109999895095825,"date":"2026-09-29","schema_version":2,"ticker":"CMND"}
+{"close":6.48799991607666,"date":"2026-09-29","schema_version":2,"ticker":"CMND"}
 {"close":22.049999237060547,"date":"2026-09-29","schema_version":2,"ticker":"CMP"}
 {"close":78.16999816894531,"date":"2026-09-29","schema_version":2,"ticker":"CMPR"}
 {"close":12.960000038146973,"date":"2026-09-29","schema_version":2,"ticker":"CMPS"}
@@ -135749,7 +135749,7 @@
 {"close":2.369999885559082,"date":"2026-09-29","schema_version":2,"ticker":"CURV"}
 {"close":4.96999979019165,"date":"2026-09-29","schema_version":2,"ticker":"CURX"}
 {"close":5.869999885559082,"date":"2026-09-29","schema_version":2,"ticker":"CUVL"}
-{"close":27.610000610351562,"date":"2026-09-29","schema_version":2,"ticker":"CUZ"}
+{"close":27.294570922851562,"date":"2026-09-29","schema_version":2,"ticker":"CUZ"}
 {"close":6.690000057220459,"date":"2026-09-29","schema_version":2,"ticker":"CV"}
 {"close":21.740001678466797,"date":"2026-09-29","schema_version":2,"ticker":"CVBF"}
 {"close":556.1199951171875,"date":"2026-09-29","schema_version":2,"ticker":"CVCO"}
@@ -136225,7 +136225,7 @@
 {"close":8.520000457763672,"date":"2026-09-29","schema_version":2,"ticker":"ERC"}
 {"close":10.25,"date":"2026-09-29","schema_version":2,"ticker":"ERH"}
 {"close":9.319999694824219,"date":"2026-09-29","schema_version":2,"ticker":"ERIC"}
-{"close":222.42999267578125,"date":"2026-09-29","schema_version":2,"ticker":"ERIE"}
+{"close":220.9581298828125,"date":"2026-09-29","schema_version":2,"ticker":"ERIE"}
 {"close":6.75,"date":"2026-09-29","schema_version":2,"ticker":"ERII"}
 {"close":3.1600000858306885,"date":"2026-09-29","schema_version":2,"ticker":"ERNA"}
 {"close":37.13999938964844,"date":"2026-09-29","schema_version":2,"ticker":"ERO"}
@@ -136663,7 +136663,7 @@
 {"close":0.8889999985694885,"date":"2026-09-29","schema_version":2,"ticker":"GDTC"}
 {"close":28.459999084472656,"date":"2026-09-29","schema_version":2,"ticker":"GDV"}
 {"close":7.639999866485596,"date":"2026-09-29","schema_version":2,"ticker":"GDYN"}
-{"close":317.8900146484375,"date":"2026-09-29","schema_version":2,"ticker":"GE"}
+{"close":317.4073486328125,"date":"2026-09-29","schema_version":2,"ticker":"GE"}
 {"close":550.7999877929688,"date":"2026-09-29","schema_version":2,"ticker":"GEBN.SW"}
 {"close":5.25,"date":"2026-09-29","schema_version":2,"ticker":"GECC"}
 {"close":24.690000534057617,"date":"2026-09-29","schema_version":2,"ticker":"GECCG"}
@@ -136740,7 +136740,7 @@
 {"close":23.299999237060547,"date":"2026-09-29","schema_version":2,"ticker":"GJS"}
 {"close":23.12299919128418,"date":"2026-09-29","schema_version":2,"ticker":"GJT"}
 {"close":158.5500030517578,"date":"2026-09-29","schema_version":2,"ticker":"GKOS"}
-{"close":166.0800018310547,"date":"2026-09-29","schema_version":2,"ticker":"GL"}
+{"close":165.74920654296875,"date":"2026-09-29","schema_version":2,"ticker":"GL"}
 {"close":19.43000030517578,"date":"2026-09-29","schema_version":2,"ticker":"GLAD"}
 {"close":6.789999961853027,"date":"2026-09-29","schema_version":2,"ticker":"GLAS"}
 {"close":40.060001373291016,"date":"2026-09-29","schema_version":2,"ticker":"GLBE"}
@@ -136824,7 +136824,7 @@
 {"close":240.92999267578125,"date":"2026-09-29","schema_version":2,"ticker":"GPI"}
 {"close":18.637001037597656,"date":"2026-09-29","schema_version":2,"ticker":"GPJA"}
 {"close":9.210000038146973,"date":"2026-09-29","schema_version":2,"ticker":"GPK"}
-{"close":0.8870000243186951,"date":"2026-09-29","schema_version":2,"ticker":"GPMT"}
+{"close":8.76982593536377,"date":"2026-09-29","schema_version":2,"ticker":"GPMT"}
 {"close":83.33000183105469,"date":"2026-09-29","schema_version":2,"ticker":"GPN"}
 {"close":152.1699981689453,"date":"2026-09-29","schema_version":2,"ticker":"GPOR"}
 {"close":14.710000038146973,"date":"2026-09-29","schema_version":2,"ticker":"GPRE"}
@@ -136904,7 +136904,7 @@
 {"close":14.140000343322754,"date":"2026-09-29","schema_version":2,"ticker":"GUG"}
 {"close":3.200000047683716,"date":"2026-09-29","schema_version":2,"ticker":"GURE"}
 {"close":5.659999847412109,"date":"2026-09-29","schema_version":2,"ticker":"GUT"}
-{"close":0.5199999809265137,"date":"2026-09-29","schema_version":2,"ticker":"GUTS"}
+{"close":6.239999771118164,"date":"2026-09-29","schema_version":2,"ticker":"GUTS"}
 {"close":0.014000000432133675,"date":"2026-09-29","schema_version":2,"ticker":"GV"}
 {"close":116.13999938964844,"date":"2026-09-29","schema_version":2,"ticker":"GVA"}
 {"close":1.1399999856948853,"date":"2026-09-29","schema_version":2,"ticker":"GVH"}
@@ -136940,7 +136940,7 @@
 {"close":15.270000457763672,"date":"2026-09-29","schema_version":2,"ticker":"HBAN"}
 {"close":24.638795852661133,"date":"2026-09-29","schema_version":2,"ticker":"HBANL"}
 {"close":20.010000228881836,"date":"2026-09-29","schema_version":2,"ticker":"HBANM"}
-{"close":15.600000381469727,"date":"2026-09-29","schema_version":2,"ticker":"HBANP"}
+{"close":15.313677787780762,"date":"2026-09-29","schema_version":2,"ticker":"HBANP"}
 {"close":18.729999542236328,"date":"2026-09-29","schema_version":2,"ticker":"HBANZ"}
 {"close":38.83000183105469,"date":"2026-09-29","schema_version":2,"ticker":"HBB"}
 {"close":66.48999786376953,"date":"2026-09-29","schema_version":2,"ticker":"HBCP"}
@@ -137151,7 +137151,7 @@
 {"close":19.3799991607666,"date":"2026-09-29","schema_version":2,"ticker":"HYMC"}
 {"close":16.5,"date":"2026-09-29","schema_version":2,"ticker":"HYNE"}
 {"close":3.990000009536743,"date":"2026-09-29","schema_version":2,"ticker":"HYPD"}
-{"close":4.619999885559082,"date":"2026-09-29","schema_version":2,"ticker":"HYPMY"}
+{"close":4.5718159675598145,"date":"2026-09-29","schema_version":2,"ticker":"HYPMY"}
 {"close":0.8050000071525574,"date":"2026-09-29","schema_version":2,"ticker":"HYPR"}
 {"close":7.809999942779541,"date":"2026-09-29","schema_version":2,"ticker":"HYT"}
 {"close":52.2400016784668,"date":"2026-09-29","schema_version":2,"ticker":"HZO"}
@@ -137201,7 +137201,7 @@
 {"close":12.040410041809082,"date":"2026-09-29","schema_version":2,"ticker":"IDE"}
 {"close":2.3299999237060547,"date":"2026-09-29","schema_version":2,"ticker":"IDN"}
 {"close":28.709999084472656,"date":"2026-09-29","schema_version":2,"ticker":"IDR"}
-{"close":75.55999755859375,"date":"2026-09-29","schema_version":2,"ticker":"IDT"}
+{"close":75.49302673339844,"date":"2026-09-29","schema_version":2,"ticker":"IDT"}
 {"close":533.4400024414062,"date":"2026-09-29","schema_version":2,"ticker":"IDXX"}
 {"close":37.86000061035156,"date":"2026-09-29","schema_version":2,"ticker":"IDYA"}
 {"close":10.640000343322754,"date":"2026-09-29","schema_version":2,"ticker":"IE"}
@@ -137718,7 +137718,7 @@
 {"close":10.180000305175781,"date":"2026-09-29","schema_version":2,"ticker":"LFACU"}
 {"close":6.590000152587891,"date":"2026-09-29","schema_version":2,"ticker":"LFCR"}
 {"close":2.880000114440918,"date":"2026-09-29","schema_version":2,"ticker":"LFMD"}
-{"close":23.05500030517578,"date":"2026-09-29","schema_version":2,"ticker":"LFMDP"}
+{"close":22.502134323120117,"date":"2026-09-29","schema_version":2,"ticker":"LFMDP"}
 {"close":2.069999933242798,"date":"2026-09-29","schema_version":2,"ticker":"LFS"}
 {"close":11.890000343322754,"date":"2026-09-29","schema_version":2,"ticker":"LFST"}
 {"close":5.5,"date":"2026-09-29","schema_version":2,"ticker":"LFT"}
@@ -138017,7 +138017,7 @@
 {"close":10.1899995803833,"date":"2026-09-29","schema_version":2,"ticker":"MEVOU"}
 {"close":0.30000001192092896,"date":"2026-09-29","schema_version":2,"ticker":"MEVOW"}
 {"close":17.100000381469727,"date":"2026-09-29","schema_version":2,"ticker":"MF"}
-{"close":8.0,"date":"2026-09-29","schema_version":2,"ticker":"MFA"}
+{"close":7.623529434204102,"date":"2026-09-29","schema_version":2,"ticker":"MFA"}
 {"close":25.149999618530273,"date":"2026-09-29","schema_version":2,"ticker":"MFAN"}
 {"close":25.229999542236328,"date":"2026-09-29","schema_version":2,"ticker":"MFAO"}
 {"close":43.41999816894531,"date":"2026-09-29","schema_version":2,"ticker":"MFC"}
@@ -138152,7 +138152,7 @@
 {"close":189.3800048828125,"date":"2026-09-29","schema_version":2,"ticker":"MOH"}
 {"close":3.9000000953674316,"date":"2026-09-29","schema_version":2,"ticker":"MOLN"}
 {"close":4.840000152587891,"date":"2026-09-29","schema_version":2,"ticker":"MOMO"}
-{"close":186.35000610351562,"date":"2026-09-29","schema_version":2,"ticker":"MORN"}
+{"close":185.8627166748047,"date":"2026-09-29","schema_version":2,"ticker":"MORN"}
 {"close":22.420000076293945,"date":"2026-09-29","schema_version":2,"ticker":"MOS"}
 {"close":33.59000015258789,"date":"2026-09-29","schema_version":2,"ticker":"MOV"}
 {"close":11.8100004196167,"date":"2026-09-29","schema_version":2,"ticker":"MOVE"}
@@ -138186,8 +138186,8 @@
 {"close":0.6850000023841858,"date":"2026-09-29","schema_version":2,"ticker":"MRM"}
 {"close":203.4600067138672,"date":"2026-09-29","schema_version":2,"ticker":"MRNA"}
 {"close":0.328000009059906,"date":"2026-09-29","schema_version":2,"ticker":"MRNO"}
-{"close":26.510000228881836,"date":"2026-09-29","schema_version":2,"ticker":"MRP"}
-{"close":170.4199981689453,"date":"2026-09-29","schema_version":2,"ticker":"MRSH"}
+{"close":25.659008026123047,"date":"2026-09-29","schema_version":2,"ticker":"MRP"}
+{"close":169.43179321289062,"date":"2026-09-29","schema_version":2,"ticker":"MRSH"}
 {"close":1.9600000381469727,"date":"2026-09-29","schema_version":2,"ticker":"MRT"}
 {"close":13.069999694824219,"date":"2026-09-29","schema_version":2,"ticker":"MRTN"}
 {"close":7.650000095367432,"date":"2026-09-29","schema_version":2,"ticker":"MRVI"}
@@ -138210,7 +138210,7 @@
 {"close":413.8399963378906,"date":"2026-09-29","schema_version":2,"ticker":"MSGS"}
 {"close":4.440000057220459,"date":"2026-09-29","schema_version":2,"ticker":"MSGY"}
 {"close":446.1199951171875,"date":"2026-09-29","schema_version":2,"ticker":"MSI"}
-{"close":12.0600004196167,"date":"2026-09-29","schema_version":2,"ticker":"MSIF"}
+{"close":11.949726104736328,"date":"2026-09-29","schema_version":2,"ticker":"MSIF"}
 {"close":8.600000381469727,"date":"2026-09-29","schema_version":2,"ticker":"MSLE"}
 {"close":124.55000305175781,"date":"2026-09-29","schema_version":2,"ticker":"MSM"}
 {"close":0.4099999964237213,"date":"2026-09-29","schema_version":2,"ticker":"MSN"}
@@ -138222,7 +138222,7 @@
 {"close":10.15999984741211,"date":"2026-09-29","schema_version":2,"ticker":"MTAL"}
 {"close":217.5,"date":"2026-09-29","schema_version":2,"ticker":"MTB"}
 {"close":5.03000020980835,"date":"2026-09-29","schema_version":2,"ticker":"MTC"}
-{"close":40.130001068115234,"date":"2026-09-29","schema_version":2,"ticker":"MTCH"}
+{"close":39.93094253540039,"date":"2026-09-29","schema_version":2,"ticker":"MTCH"}
 {"close":1537.3299560546875,"date":"2026-09-29","schema_version":2,"ticker":"MTD"}
 {"close":50.689998626708984,"date":"2026-09-29","schema_version":2,"ticker":"MTDR"}
 {"close":0.8349999785423279,"date":"2026-09-29","schema_version":2,"ticker":"MTEK"}
@@ -138275,7 +138275,7 @@
 {"close":8.699999809265137,"date":"2026-09-29","schema_version":2,"ticker":"MYN"}
 {"close":0.33000001311302185,"date":"2026-09-29","schema_version":2,"ticker":"MYND"}
 {"close":1.5700000524520874,"date":"2026-09-29","schema_version":2,"ticker":"MYO"}
-{"close":0.45899999141693115,"date":"2026-09-29","schema_version":2,"ticker":"MYPS"}
+{"close":4.590000152587891,"date":"2026-09-29","schema_version":2,"ticker":"MYPS"}
 {"close":288.30999755859375,"date":"2026-09-29","schema_version":2,"ticker":"MYRG"}
 {"close":1.809999942779541,"date":"2026-09-29","schema_version":2,"ticker":"MYSE"}
 {"close":1.690000057220459,"date":"2026-09-29","schema_version":2,"ticker":"MYSZ"}
@@ -138427,7 +138427,7 @@
 {"close":3.75,"date":"2026-09-29","schema_version":2,"ticker":"NMAD"}
 {"close":14.220000267028809,"date":"2026-09-29","schema_version":2,"ticker":"NMAI"}
 {"close":10.850000381469727,"date":"2026-09-29","schema_version":2,"ticker":"NMAX"}
-{"close":8.739999771118164,"date":"2026-09-29","schema_version":2,"ticker":"NMCO"}
+{"close":8.672163963317871,"date":"2026-09-29","schema_version":2,"ticker":"NMCO"}
 {"close":7.019999980926514,"date":"2026-09-29","schema_version":2,"ticker":"NMFC"}
 {"close":25.25,"date":"2026-09-29","schema_version":2,"ticker":"NMFCZ"}
 {"close":1.1699999570846558,"date":"2026-09-29","schema_version":2,"ticker":"NMG"}
@@ -138662,7 +138662,7 @@
 {"close":26.0,"date":"2026-09-29","schema_version":2,"ticker":"OFSSO"}
 {"close":27.690000534057617,"date":"2026-09-29","schema_version":2,"ticker":"OGC"}
 {"close":4.130000114440918,"date":"2026-09-29","schema_version":2,"ticker":"OGCP"}
-{"close":45.380001068115234,"date":"2026-09-29","schema_version":2,"ticker":"OGE"}
+{"close":44.95062255859375,"date":"2026-09-29","schema_version":2,"ticker":"OGE"}
 {"close":0.47999998927116394,"date":"2026-09-29","schema_version":2,"ticker":"OGEN"}
 {"close":2.799999952316284,"date":"2026-09-29","schema_version":2,"ticker":"OGG"}
 {"close":0.027699999511241913,"date":"2026-09-29","schema_version":2,"ticker":"OGGWZ"}
@@ -138946,7 +138946,7 @@
 {"close":1.350000023841858,"date":"2026-09-29","schema_version":2,"ticker":"PETZ"}
 {"close":2.0899999141693115,"date":"2026-09-29","schema_version":2,"ticker":"PEW"}
 {"close":2.7699999809265137,"date":"2026-09-29","schema_version":2,"ticker":"PFAI"}
-{"close":106.25,"date":"2026-09-29","schema_version":2,"ticker":"PFBC"}
+{"close":105.45172882080078,"date":"2026-09-29","schema_version":2,"ticker":"PFBC"}
 {"close":10.640000343322754,"date":"2026-09-29","schema_version":2,"ticker":"PFD"}
 {"close":28.719999313354492,"date":"2026-09-29","schema_version":2,"ticker":"PFE"}
 {"close":6.760000228881836,"date":"2026-09-29","schema_version":2,"ticker":"PFFL"}
@@ -139027,7 +139027,7 @@
 {"close":123.13999938964844,"date":"2026-09-29","schema_version":2,"ticker":"PLMR"}
 {"close":40.7400016784668,"date":"2026-09-29","schema_version":2,"ticker":"PLNT"}
 {"close":39.849998474121094,"date":"2026-09-29","schema_version":2,"ticker":"PLOW"}
-{"close":412.760009765625,"date":"2026-09-29","schema_version":2,"ticker":"PLPC"}
+{"close":412.5471496582031,"date":"2026-09-29","schema_version":2,"ticker":"PLPC"}
 {"close":1.0800000429153442,"date":"2026-09-29","schema_version":2,"ticker":"PLRX"}
 {"close":10.489999771118164,"date":"2026-09-29","schema_version":2,"ticker":"PLRZ"}
 {"close":50.88999938964844,"date":"2026-09-29","schema_version":2,"ticker":"PLSE"}
@@ -139043,7 +139043,7 @@
 {"close":2.690000057220459,"date":"2026-09-29","schema_version":2,"ticker":"PLX"}
 {"close":266.1300048828125,"date":"2026-09-29","schema_version":2,"ticker":"PLXS"}
 {"close":2.069999933242798,"date":"2026-09-29","schema_version":2,"ticker":"PLYX"}
-{"close":193.89999389648438,"date":"2026-09-29","schema_version":2,"ticker":"PM"}
+{"close":192.25135803222656,"date":"2026-09-29","schema_version":2,"ticker":"PM"}
 {"close":1.350000023841858,"date":"2026-09-29","schema_version":2,"ticker":"PMA"}
 {"close":0.8820000290870667,"date":"2026-09-29","schema_version":2,"ticker":"PMAX"}
 {"close":0.4189999997615814,"date":"2026-09-29","schema_version":2,"ticker":"PMCB"}
@@ -139374,7 +139374,7 @@
 {"close":6.199999809265137,"date":"2026-09-29","schema_version":2,"ticker":"RGC"}
 {"close":21.530000686645508,"date":"2026-09-29","schema_version":2,"ticker":"RGCO"}
 {"close":194.57000732421875,"date":"2026-09-29","schema_version":2,"ticker":"RGEN"}
-{"close":238.92999267578125,"date":"2026-09-29","schema_version":2,"ticker":"RGLD"}
+{"close":238.44149780273438,"date":"2026-09-29","schema_version":2,"ticker":"RGLD"}
 {"close":1.850000023841858,"date":"2026-09-29","schema_version":2,"ticker":"RGNT"}
 {"close":7.449999809265137,"date":"2026-09-29","schema_version":2,"ticker":"RGNX"}
 {"close":3.7699999809265137,"date":"2026-09-29","schema_version":2,"ticker":"RGP"}
@@ -139404,11 +139404,11 @@
 {"close":164.3699951171875,"date":"2026-09-29","schema_version":2,"ticker":"RIO.AX"}
 {"close":7072.0,"date":"2026-09-29","schema_version":2,"ticker":"RIO.L"}
 {"close":21.389999389648438,"date":"2026-09-29","schema_version":2,"ticker":"RIOT"}
-{"close":9.119999885559082,"date":"2026-09-29","schema_version":2,"ticker":"RITM"}
+{"close":8.864680290222168,"date":"2026-09-29","schema_version":2,"ticker":"RITM"}
 {"close":10.479999542236328,"date":"2026-09-29","schema_version":2,"ticker":"RIV"}
 {"close":14.970000267028809,"date":"2026-09-29","schema_version":2,"ticker":"RIVN"}
 {"close":18.149999618530273,"date":"2026-09-29","schema_version":2,"ticker":"RJET"}
-{"close":159.85000610351562,"date":"2026-09-29","schema_version":2,"ticker":"RJF"}
+{"close":159.30374145507812,"date":"2026-09-29","schema_version":2,"ticker":"RJF"}
 {"close":0.2809999883174896,"date":"2026-09-29","schema_version":2,"ticker":"RKDA"}
 {"close":69.69999694824219,"date":"2026-09-29","schema_version":2,"ticker":"RKLB"}
 {"close":11.6899995803833,"date":"2026-09-29","schema_version":2,"ticker":"RKT"}
@@ -139501,7 +139501,7 @@
 {"close":9.430000305175781,"date":"2026-09-29","schema_version":2,"ticker":"RTB"}
 {"close":20.049999237060547,"date":"2026-09-29","schema_version":2,"ticker":"RTO"}
 {"close":186.94000244140625,"date":"2026-09-29","schema_version":2,"ticker":"RTX"}
-{"close":1.1200000047683716,"date":"2026-09-29","schema_version":2,"ticker":"RUBI"}
+{"close":0.7466660141944885,"date":"2026-09-29","schema_version":2,"ticker":"RUBI"}
 {"close":7.71999979019165,"date":"2026-09-29","schema_version":2,"ticker":"RUM"}
 {"close":1.690000057220459,"date":"2026-09-29","schema_version":2,"ticker":"RUMBW"}
 {"close":7.71999979019165,"date":"2026-09-29","schema_version":2,"ticker":"RUN"}
@@ -139582,7 +139582,7 @@
 {"close":185.32000732421875,"date":"2026-09-29","schema_version":2,"ticker":"SAP.DE"}
 {"close":17.030000686645508,"date":"2026-09-29","schema_version":2,"ticker":"SAR"}
 {"close":21.75,"date":"2026-09-29","schema_version":2,"ticker":"SARO"}
-{"close":99.85408782958984,"date":"2026-09-29","schema_version":2,"ticker":"SATA"}
+{"close":99.80216979980469,"date":"2026-09-29","schema_version":2,"ticker":"SATA"}
 {"close":5.599999904632568,"date":"2026-09-29","schema_version":2,"ticker":"SATL"}
 {"close":24.709999084472656,"date":"2026-09-29","schema_version":2,"ticker":"SAV"}
 {"close":25.329999923706055,"date":"2026-09-29","schema_version":2,"ticker":"SAX"}
@@ -139631,7 +139631,7 @@
 {"close":7.5169997215271,"date":"2026-09-29","schema_version":2,"ticker":"SCM"}
 {"close":637.5,"date":"2026-09-29","schema_version":2,"ticker":"SCMN.SW"}
 {"close":1.409999966621399,"date":"2026-09-29","schema_version":2,"ticker":"SCNI"}
-{"close":0.2669999897480011,"date":"2026-09-29","schema_version":2,"ticker":"SCNX"}
+{"close":6.675000190734863,"date":"2026-09-29","schema_version":2,"ticker":"SCNX"}
 {"close":4.730000019073486,"date":"2026-09-29","schema_version":2,"ticker":"SCOR"}
 {"close":10.050000190734863,"date":"2026-09-29","schema_version":2,"ticker":"SCPQ"}
 {"close":10.279999732971191,"date":"2026-09-29","schema_version":2,"ticker":"SCPQU"}
@@ -139749,7 +139749,7 @@
 {"close":28.850000381469727,"date":"2026-09-29","schema_version":2,"ticker":"SIM"}
 {"close":10.930000305175781,"date":"2026-09-29","schema_version":2,"ticker":"SIMA"}
 {"close":11.25,"date":"2026-09-29","schema_version":2,"ticker":"SIMAU"}
-{"close":0.15000000596046448,"date":"2026-09-29","schema_version":2,"ticker":"SIMAW"}
+{"close":0.16009999811649323,"date":"2026-09-29","schema_version":2,"ticker":"SIMAW"}
 {"close":276.1600036621094,"date":"2026-09-29","schema_version":2,"ticker":"SIMO"}
 {"close":13.819999694824219,"date":"2026-09-29","schema_version":2,"ticker":"SIND"}
 {"close":2.0299999713897705,"date":"2026-09-29","schema_version":2,"ticker":"SINT"}
@@ -140092,7 +140092,7 @@
 {"close":1.0299999713897705,"date":"2026-09-29","schema_version":2,"ticker":"SYNX"}
 {"close":1.7000000476837158,"date":"2026-09-29","schema_version":2,"ticker":"SYPR"}
 {"close":84.72000122070312,"date":"2026-09-29","schema_version":2,"ticker":"SYRE"}
-{"close":78.48999786376953,"date":"2026-09-29","schema_version":2,"ticker":"SYY"}
+{"close":77.93490600585938,"date":"2026-09-29","schema_version":2,"ticker":"SYY"}
 {"close":10.489999771118164,"date":"2026-09-29","schema_version":2,"ticker":"SZZL"}
 {"close":0.12999999523162842,"date":"2026-09-29","schema_version":2,"ticker":"SZZLR"}
 {"close":10.539999961853027,"date":"2026-09-29","schema_version":2,"ticker":"SZZLU"}
@@ -140210,7 +140210,7 @@
 {"close":2.5399999618530273,"date":"2026-09-29","schema_version":2,"ticker":"THM"}
 {"close":70.16000366210938,"date":"2026-09-29","schema_version":2,"ticker":"THO"}
 {"close":18.31999969482422,"date":"2026-09-29","schema_version":2,"ticker":"THQ"}
-{"close":33.91999816894531,"date":"2026-09-29","schema_version":2,"ticker":"THRM"}
+{"close":31.832149505615234,"date":"2026-09-29","schema_version":2,"ticker":"THRM"}
 {"close":1.590000033378601,"date":"2026-09-29","schema_version":2,"ticker":"THRY"}
 {"close":13.029999732971191,"date":"2026-09-29","schema_version":2,"ticker":"THW"}
 {"close":8.460000038146973,"date":"2026-09-29","schema_version":2,"ticker":"TIC"}
@@ -140610,7 +140610,7 @@
 {"close":66.70999908447266,"date":"2026-09-29","schema_version":2,"ticker":"VIST"}
 {"close":9.390000343322754,"date":"2026-09-29","schema_version":2,"ticker":"VITL"}
 {"close":11.380000114440918,"date":"2026-09-29","schema_version":2,"ticker":"VIV"}
-{"close":0.5192000269889832,"date":"2026-09-29","schema_version":2,"ticker":"VIVK"}
+{"close":7.788000106811523,"date":"2026-09-29","schema_version":2,"ticker":"VIVK"}
 {"close":3.680000066757202,"date":"2026-09-29","schema_version":2,"ticker":"VIVO"}
 {"close":0.20000000298023224,"date":"2026-09-29","schema_version":2,"ticker":"VIVS"}
 {"close":7.579999923706055,"date":"2026-09-29","schema_version":2,"ticker":"VKI"}
@@ -140635,7 +140635,7 @@
 {"close":9.029999732971191,"date":"2026-09-29","schema_version":2,"ticker":"VMET"}
 {"close":467.2099914550781,"date":"2026-09-29","schema_version":2,"ticker":"VMI"}
 {"close":8.34000015258789,"date":"2026-09-29","schema_version":2,"ticker":"VMO"}
-{"close":61.349998474121094,"date":"2026-09-29","schema_version":2,"ticker":"VMRK"}
+{"close":60.628658294677734,"date":"2026-09-29","schema_version":2,"ticker":"VMRK"}
 {"close":17.405000686645508,"date":"2026-09-29","schema_version":2,"ticker":"VNA.DE"}
 {"close":10.140000343322754,"date":"2026-09-29","schema_version":2,"ticker":"VNCE"}
 {"close":5.03000020980835,"date":"2026-09-29","schema_version":2,"ticker":"VNDA"}
@@ -140688,7 +140688,7 @@
 {"close":7.920000076293945,"date":"2026-09-29","schema_version":2,"ticker":"VSTM"}
 {"close":13.460000038146973,"date":"2026-09-29","schema_version":2,"ticker":"VSTS"}
 {"close":89.2300033569336,"date":"2026-09-29","schema_version":2,"ticker":"VSXY"}
-{"close":0.14000000059604645,"date":"2026-09-29","schema_version":2,"ticker":"VTAK"}
+{"close":1.399999976158142,"date":"2026-09-29","schema_version":2,"ticker":"VTAK"}
 {"close":3.5899999141693115,"date":"2026-09-29","schema_version":2,"ticker":"VTEX"}
 {"close":0.30000001192092896,"date":"2026-09-29","schema_version":2,"ticker":"VTGN"}
 {"close":1.2000000476837158,"date":"2026-09-29","schema_version":2,"ticker":"VTIX"}
@@ -140756,7 +140756,7 @@
 {"close":10.40999984741211,"date":"2026-09-29","schema_version":2,"ticker":"WENN"}
 {"close":10.640000343322754,"date":"2026-09-29","schema_version":2,"ticker":"WENNU"}
 {"close":0.23999999463558197,"date":"2026-09-29","schema_version":2,"ticker":"WENNW"}
-{"close":34.04999923706055,"date":"2026-09-29","schema_version":2,"ticker":"WERN"}
+{"close":33.9151496887207,"date":"2026-09-29","schema_version":2,"ticker":"WERN"}
 {"close":44.939998626708984,"date":"2026-09-29","schema_version":2,"ticker":"WES"}
 {"close":74.3499984741211,"date":"2026-09-29","schema_version":2,"ticker":"WES.AX"}
 {"close":8.119999885559082,"date":"2026-09-29","schema_version":2,"ticker":"WEST"}
@@ -140809,8 +140809,8 @@
 {"close":63.38999938964844,"date":"2026-09-29","schema_version":2,"ticker":"WLK"}
 {"close":21.43000030517578,"date":"2026-09-29","schema_version":2,"ticker":"WLKP"}
 {"close":10.100000381469727,"date":"2026-09-29","schema_version":2,"ticker":"WLTH"}
-{"close":47.7400016784668,"date":"2026-09-29","schema_version":2,"ticker":"WLY"}
-{"close":47.599998474121094,"date":"2026-09-29","schema_version":2,"ticker":"WLYB"}
+{"close":47.38839340209961,"date":"2026-09-29","schema_version":2,"ticker":"WLY"}
+{"close":47.256465911865234,"date":"2026-09-29","schema_version":2,"ticker":"WLYB"}
 {"close":207.08999633789062,"date":"2026-09-29","schema_version":2,"ticker":"WM"}
 {"close":68.62999725341797,"date":"2026-09-29","schema_version":2,"ticker":"WMB"}
 {"close":27.6200008392334,"date":"2026-09-29","schema_version":2,"ticker":"WMG"}
@@ -140991,7 +140991,7 @@
 {"close":91.0999984741211,"date":"2026-09-29","schema_version":2,"ticker":"ZBH"}
 {"close":26.760000228881836,"date":"2026-09-29","schema_version":2,"ticker":"ZBIO"}
 {"close":375.9700012207031,"date":"2026-09-29","schema_version":2,"ticker":"ZBRA"}
-{"close":0.8999999761581421,"date":"2026-09-29","schema_version":2,"ticker":"ZCMD"}
+{"close":1.7999999523162842,"date":"2026-09-29","schema_version":2,"ticker":"ZCMD"}
 {"close":56.33000183105469,"date":"2026-09-29","schema_version":2,"ticker":"ZD"}
 {"close":1.5,"date":"2026-09-29","schema_version":2,"ticker":"ZDAI"}
 {"close":2.950000047683716,"date":"2026-09-29","schema_version":2,"ticker":"ZDGE"}
@@ -141803,9 +141803,9 @@
 {"close":0.4399000108242035,"date":"2026-09-30","schema_version":2,"ticker":"BBBYW"}
 {"close":9.6899995803833,"date":"2026-09-30","schema_version":2,"ticker":"BBCP"}
 {"close":1.0800000429153442,"date":"2026-09-30","schema_version":2,"ticker":"BBCQW"}
-{"close":3.5199999809265137,"date":"2026-09-30","schema_version":2,"ticker":"BBD"}
+{"close":3.5161423683166504,"date":"2026-09-30","schema_version":2,"ticker":"BBD"}
 {"close":8.619999885559082,"date":"2026-09-30","schema_version":2,"ticker":"BBDC"}
-{"close":3.0799999237060547,"date":"2026-09-30","schema_version":2,"ticker":"BBDO"}
+{"close":3.077075719833374,"date":"2026-09-30","schema_version":2,"ticker":"BBDO"}
 {"close":12.850000381469727,"date":"2026-09-30","schema_version":2,"ticker":"BBGI"}
 {"close":65.80000305175781,"date":"2026-09-30","schema_version":2,"ticker":"BBIO"}
 {"close":0.4959999918937683,"date":"2026-09-30","schema_version":2,"ticker":"BBLG"}
@@ -142140,7 +142140,7 @@
 {"close":31.950000762939453,"date":"2026-09-30","schema_version":2,"ticker":"BSY"}
 {"close":0.04947499930858612,"date":"2026-09-30","schema_version":2,"ticker":"BTAI"}
 {"close":1.8600000143051147,"date":"2026-09-30","schema_version":2,"ticker":"BTBD"}
-{"close":0.024299999698996544,"date":"2026-09-30","schema_version":2,"ticker":"BTBDW"}
+{"close":0.015599999576807022,"date":"2026-09-30","schema_version":2,"ticker":"BTBDW"}
 {"close":1.6299999952316284,"date":"2026-09-30","schema_version":2,"ticker":"BTBT"}
 {"close":1.4700000286102295,"date":"2026-09-30","schema_version":2,"ticker":"BTCS"}
 {"close":1.1299999952316284,"date":"2026-09-30","schema_version":2,"ticker":"BTCT"}
@@ -142346,7 +142346,7 @@
 {"close":128.16000366210938,"date":"2026-09-30","schema_version":2,"ticker":"CDW"}
 {"close":1.3899999856948853,"date":"2026-09-30","schema_version":2,"ticker":"CDXS"}
 {"close":3.9200000762939453,"date":"2026-09-30","schema_version":2,"ticker":"CDZI"}
-{"close":22.200000762939453,"date":"2026-09-30","schema_version":2,"ticker":"CDZIP"}
+{"close":21.64000129699707,"date":"2026-09-30","schema_version":2,"ticker":"CDZIP"}
 {"close":44.369998931884766,"date":"2026-09-30","schema_version":2,"ticker":"CE"}
 {"close":69.63999938964844,"date":"2026-09-30","schema_version":2,"ticker":"CECO"}
 {"close":18.8799991607666,"date":"2026-09-30","schema_version":2,"ticker":"CEE"}
@@ -142397,7 +142397,7 @@
 {"close":3.884999990463257,"date":"2026-09-30","schema_version":2,"ticker":"CGTL"}
 {"close":0.9599999785423279,"date":"2026-09-30","schema_version":2,"ticker":"CGTX"}
 {"close":11.699999809265137,"date":"2026-09-30","schema_version":2,"ticker":"CHA"}
-{"close":8.850107192993164,"date":"2026-09-30","schema_version":2,"ticker":"CHAD"}
+{"close":8.845245361328125,"date":"2026-09-30","schema_version":2,"ticker":"CHAD"}
 {"close":0.2750000059604645,"date":"2026-09-30","schema_version":2,"ticker":"CHAI"}
 {"close":10.970000267028809,"date":"2026-09-30","schema_version":2,"ticker":"CHAR"}
 {"close":10.930000305175781,"date":"2026-09-30","schema_version":2,"ticker":"CHARU"}
@@ -142521,7 +142521,7 @@
 {"close":31.950000762939453,"date":"2026-09-30","schema_version":2,"ticker":"CMG"}
 {"close":516.5700073242188,"date":"2026-09-30","schema_version":2,"ticker":"CMI"}
 {"close":1.190000057220459,"date":"2026-09-30","schema_version":2,"ticker":"CMMB"}
-{"close":0.8050000071525574,"date":"2026-09-30","schema_version":2,"ticker":"CMND"}
+{"close":6.440000057220459,"date":"2026-09-30","schema_version":2,"ticker":"CMND"}
 {"close":22.040000915527344,"date":"2026-09-30","schema_version":2,"ticker":"CMP"}
 {"close":77.12000274658203,"date":"2026-09-30","schema_version":2,"ticker":"CMPR"}
 {"close":12.4399995803833,"date":"2026-09-30","schema_version":2,"ticker":"CMPS"}
@@ -142753,7 +142753,7 @@
 {"close":2.359999895095825,"date":"2026-09-30","schema_version":2,"ticker":"CURV"}
 {"close":5.03000020980835,"date":"2026-09-30","schema_version":2,"ticker":"CURX"}
 {"close":5.960000038146973,"date":"2026-09-30","schema_version":2,"ticker":"CUVL"}
-{"close":27.639999389648438,"date":"2026-09-30","schema_version":2,"ticker":"CUZ"}
+{"close":27.32422637939453,"date":"2026-09-30","schema_version":2,"ticker":"CUZ"}
 {"close":6.460000038146973,"date":"2026-09-30","schema_version":2,"ticker":"CV"}
 {"close":21.610000610351562,"date":"2026-09-30","schema_version":2,"ticker":"CVBF"}
 {"close":560.260009765625,"date":"2026-09-30","schema_version":2,"ticker":"CVCO"}
@@ -143222,7 +143222,7 @@
 {"close":8.520000457763672,"date":"2026-09-30","schema_version":2,"ticker":"ERC"}
 {"close":10.359999656677246,"date":"2026-09-30","schema_version":2,"ticker":"ERH"}
 {"close":9.149999618530273,"date":"2026-09-30","schema_version":2,"ticker":"ERIC"}
-{"close":219.14999389648438,"date":"2026-09-30","schema_version":2,"ticker":"ERIE"}
+{"close":217.69984436035156,"date":"2026-09-30","schema_version":2,"ticker":"ERIE"}
 {"close":6.670000076293945,"date":"2026-09-30","schema_version":2,"ticker":"ERII"}
 {"close":3.200000047683716,"date":"2026-09-30","schema_version":2,"ticker":"ERNA"}
 {"close":36.689998626708984,"date":"2026-09-30","schema_version":2,"ticker":"ERO"}
@@ -143482,7 +143482,7 @@
 {"close":15.029999732971191,"date":"2026-09-30","schema_version":2,"ticker":"FMNB"}
 {"close":22.3799991607666,"date":"2026-09-30","schema_version":2,"ticker":"FMS"}
 {"close":0.640999972820282,"date":"2026-09-30","schema_version":2,"ticker":"FMST"}
-{"close":0.25029999017715454,"date":"2026-09-30","schema_version":2,"ticker":"FMSTW"}
+{"close":0.2500999867916107,"date":"2026-09-30","schema_version":2,"ticker":"FMSTW"}
 {"close":118.55999755859375,"date":"2026-09-30","schema_version":2,"ticker":"FMX"}
 {"close":11.065000534057617,"date":"2026-09-30","schema_version":2,"ticker":"FMY"}
 {"close":424.2699890136719,"date":"2026-09-30","schema_version":2,"ticker":"FN"}
@@ -143664,7 +143664,7 @@
 {"close":0.8429999947547913,"date":"2026-09-30","schema_version":2,"ticker":"GDTC"}
 {"close":28.290000915527344,"date":"2026-09-30","schema_version":2,"ticker":"GDV"}
 {"close":7.880000114440918,"date":"2026-09-30","schema_version":2,"ticker":"GDYN"}
-{"close":312.2900085449219,"date":"2026-09-30","schema_version":2,"ticker":"GE"}
+{"close":311.81585693359375,"date":"2026-09-30","schema_version":2,"ticker":"GE"}
 {"close":545.5999755859375,"date":"2026-09-30","schema_version":2,"ticker":"GEBN.SW"}
 {"close":5.28000020980835,"date":"2026-09-30","schema_version":2,"ticker":"GECC"}
 {"close":24.68000030517578,"date":"2026-09-30","schema_version":2,"ticker":"GECCG"}
@@ -143743,7 +143743,7 @@
 {"close":23.0,"date":"2026-09-30","schema_version":2,"ticker":"GJS"}
 {"close":23.219999313354492,"date":"2026-09-30","schema_version":2,"ticker":"GJT"}
 {"close":164.19000244140625,"date":"2026-09-30","schema_version":2,"ticker":"GKOS"}
-{"close":165.64999389648438,"date":"2026-09-30","schema_version":2,"ticker":"GL"}
+{"close":165.32005310058594,"date":"2026-09-30","schema_version":2,"ticker":"GL"}
 {"close":19.229999542236328,"date":"2026-09-30","schema_version":2,"ticker":"GLAD"}
 {"close":5.610000133514404,"date":"2026-09-30","schema_version":2,"ticker":"GLAS"}
 {"close":39.72999954223633,"date":"2026-09-30","schema_version":2,"ticker":"GLBE"}
@@ -143826,7 +143826,7 @@
 {"close":240.44000244140625,"date":"2026-09-30","schema_version":2,"ticker":"GPI"}
 {"close":19.170000076293945,"date":"2026-09-30","schema_version":2,"ticker":"GPJA"}
 {"close":9.050000190734863,"date":"2026-09-30","schema_version":2,"ticker":"GPK"}
-{"close":0.8600000143051147,"date":"2026-09-30","schema_version":2,"ticker":"GPMT"}
+{"close":8.5,"date":"2026-09-30","schema_version":2,"ticker":"GPMT"}
 {"close":81.66999816894531,"date":"2026-09-30","schema_version":2,"ticker":"GPN"}
 {"close":150.47999572753906,"date":"2026-09-30","schema_version":2,"ticker":"GPOR"}
 {"close":15.0600004196167,"date":"2026-09-30","schema_version":2,"ticker":"GPRE"}
@@ -143906,7 +143906,7 @@
 {"close":14.149999618530273,"date":"2026-09-30","schema_version":2,"ticker":"GUG"}
 {"close":3.059999942779541,"date":"2026-09-30","schema_version":2,"ticker":"GURE"}
 {"close":5.690000057220459,"date":"2026-09-30","schema_version":2,"ticker":"GUT"}
-{"close":0.5440000295639038,"date":"2026-09-30","schema_version":2,"ticker":"GUTS"}
+{"close":6.5279998779296875,"date":"2026-09-30","schema_version":2,"ticker":"GUTS"}
 {"close":0.013000000268220901,"date":"2026-09-30","schema_version":2,"ticker":"GV"}
 {"close":115.91000366210938,"date":"2026-09-30","schema_version":2,"ticker":"GVA"}
 {"close":1.1200000047683716,"date":"2026-09-30","schema_version":2,"ticker":"GVH"}
@@ -143940,7 +143940,7 @@
 {"close":15.260000228881836,"date":"2026-09-30","schema_version":2,"ticker":"HBAN"}
 {"close":24.56999969482422,"date":"2026-09-30","schema_version":2,"ticker":"HBANL"}
 {"close":20.100000381469727,"date":"2026-09-30","schema_version":2,"ticker":"HBANM"}
-{"close":15.3100004196167,"date":"2026-09-30","schema_version":2,"ticker":"HBANP"}
+{"close":15.029000282287598,"date":"2026-09-30","schema_version":2,"ticker":"HBANP"}
 {"close":18.899999618530273,"date":"2026-09-30","schema_version":2,"ticker":"HBANZ"}
 {"close":38.25,"date":"2026-09-30","schema_version":2,"ticker":"HBB"}
 {"close":66.05999755859375,"date":"2026-09-30","schema_version":2,"ticker":"HBCP"}
@@ -144149,7 +144149,7 @@
 {"close":19.040000915527344,"date":"2026-09-30","schema_version":2,"ticker":"HYMC"}
 {"close":16.600000381469727,"date":"2026-09-30","schema_version":2,"ticker":"HYNE"}
 {"close":3.744999885559082,"date":"2026-09-30","schema_version":2,"ticker":"HYPD"}
-{"close":4.53000020980835,"date":"2026-09-30","schema_version":2,"ticker":"HYPMY"}
+{"close":4.482754707336426,"date":"2026-09-30","schema_version":2,"ticker":"HYPMY"}
 {"close":0.8080000281333923,"date":"2026-09-30","schema_version":2,"ticker":"HYPR"}
 {"close":7.840000152587891,"date":"2026-09-30","schema_version":2,"ticker":"HYT"}
 {"close":52.29999923706055,"date":"2026-09-30","schema_version":2,"ticker":"HZO"}
@@ -144199,7 +144199,7 @@
 {"close":12.089999198913574,"date":"2026-09-30","schema_version":2,"ticker":"IDE"}
 {"close":2.299999952316284,"date":"2026-09-30","schema_version":2,"ticker":"IDN"}
 {"close":28.0,"date":"2026-09-30","schema_version":2,"ticker":"IDR"}
-{"close":79.97000122070312,"date":"2026-09-30","schema_version":2,"ticker":"IDT"}
+{"close":79.89912414550781,"date":"2026-09-30","schema_version":2,"ticker":"IDT"}
 {"close":522.1900024414062,"date":"2026-09-30","schema_version":2,"ticker":"IDXX"}
 {"close":38.41999816894531,"date":"2026-09-30","schema_version":2,"ticker":"IDYA"}
 {"close":9.920000076293945,"date":"2026-09-30","schema_version":2,"ticker":"IE"}
@@ -144715,7 +144715,7 @@
 {"close":10.180000305175781,"date":"2026-09-30","schema_version":2,"ticker":"LFACU"}
 {"close":6.579999923706055,"date":"2026-09-30","schema_version":2,"ticker":"LFCR"}
 {"close":2.9000000953674316,"date":"2026-09-30","schema_version":2,"ticker":"LFMD"}
-{"close":23.05500030517578,"date":"2026-09-30","schema_version":2,"ticker":"LFMDP"}
+{"close":22.502134323120117,"date":"2026-09-30","schema_version":2,"ticker":"LFMDP"}
 {"close":2.069999933242798,"date":"2026-09-30","schema_version":2,"ticker":"LFS"}
 {"close":12.029999732971191,"date":"2026-09-30","schema_version":2,"ticker":"LFST"}
 {"close":5.480000019073486,"date":"2026-09-30","schema_version":2,"ticker":"LFT"}
@@ -145013,7 +145013,7 @@
 {"close":10.1899995803833,"date":"2026-09-30","schema_version":2,"ticker":"MEVOU"}
 {"close":0.28999999165534973,"date":"2026-09-30","schema_version":2,"ticker":"MEVOW"}
 {"close":16.489999771118164,"date":"2026-09-30","schema_version":2,"ticker":"MF"}
-{"close":7.849999904632568,"date":"2026-09-30","schema_version":2,"ticker":"MFA"}
+{"close":7.480587959289551,"date":"2026-09-30","schema_version":2,"ticker":"MFA"}
 {"close":25.1299991607666,"date":"2026-09-30","schema_version":2,"ticker":"MFAN"}
 {"close":25.15999984741211,"date":"2026-09-30","schema_version":2,"ticker":"MFAO"}
 {"close":42.59000015258789,"date":"2026-09-30","schema_version":2,"ticker":"MFC"}
@@ -145147,7 +145147,7 @@
 {"close":189.10000610351562,"date":"2026-09-30","schema_version":2,"ticker":"MOH"}
 {"close":3.9100000858306885,"date":"2026-09-30","schema_version":2,"ticker":"MOLN"}
 {"close":4.840000152587891,"date":"2026-09-30","schema_version":2,"ticker":"MOMO"}
-{"close":190.0399932861328,"date":"2026-09-30","schema_version":2,"ticker":"MORN"}
+{"close":189.54306030273438,"date":"2026-09-30","schema_version":2,"ticker":"MORN"}
 {"close":21.649999618530273,"date":"2026-09-30","schema_version":2,"ticker":"MOS"}
 {"close":33.279998779296875,"date":"2026-09-30","schema_version":2,"ticker":"MOV"}
 {"close":11.75,"date":"2026-09-30","schema_version":2,"ticker":"MOVE"}
@@ -145182,8 +145182,8 @@
 {"close":192.57000732421875,"date":"2026-09-30","schema_version":2,"ticker":"MRNA"}
 {"close":0.31700000166893005,"date":"2026-09-30","schema_version":2,"ticker":"MRNO"}
 {"close":0.007199999876320362,"date":"2026-09-30","schema_version":2,"ticker":"MRNOW"}
-{"close":25.969999313354492,"date":"2026-09-30","schema_version":2,"ticker":"MRP"}
-{"close":170.72999572753906,"date":"2026-09-30","schema_version":2,"ticker":"MRSH"}
+{"close":25.136341094970703,"date":"2026-09-30","schema_version":2,"ticker":"MRP"}
+{"close":169.739990234375,"date":"2026-09-30","schema_version":2,"ticker":"MRSH"}
 {"close":1.940000057220459,"date":"2026-09-30","schema_version":2,"ticker":"MRT"}
 {"close":12.920000076293945,"date":"2026-09-30","schema_version":2,"ticker":"MRTN"}
 {"close":7.659999847412109,"date":"2026-09-30","schema_version":2,"ticker":"MRVI"}
@@ -145206,7 +145206,7 @@
 {"close":405.2099914550781,"date":"2026-09-30","schema_version":2,"ticker":"MSGS"}
 {"close":5.659999847412109,"date":"2026-09-30","schema_version":2,"ticker":"MSGY"}
 {"close":445.9700012207031,"date":"2026-09-30","schema_version":2,"ticker":"MSI"}
-{"close":11.770000457763672,"date":"2026-09-30","schema_version":2,"ticker":"MSIF"}
+{"close":11.66237735748291,"date":"2026-09-30","schema_version":2,"ticker":"MSIF"}
 {"close":8.5,"date":"2026-09-30","schema_version":2,"ticker":"MSLE"}
 {"close":123.72000122070312,"date":"2026-09-30","schema_version":2,"ticker":"MSM"}
 {"close":0.4000000059604645,"date":"2026-09-30","schema_version":2,"ticker":"MSN"}
@@ -145218,7 +145218,7 @@
 {"close":10.15999984741211,"date":"2026-09-30","schema_version":2,"ticker":"MTAL"}
 {"close":217.60000610351562,"date":"2026-09-30","schema_version":2,"ticker":"MTB"}
 {"close":5.190000057220459,"date":"2026-09-30","schema_version":2,"ticker":"MTC"}
-{"close":40.150001525878906,"date":"2026-09-30","schema_version":2,"ticker":"MTCH"}
+{"close":39.950843811035156,"date":"2026-09-30","schema_version":2,"ticker":"MTCH"}
 {"close":1510.949951171875,"date":"2026-09-30","schema_version":2,"ticker":"MTD"}
 {"close":51.58000183105469,"date":"2026-09-30","schema_version":2,"ticker":"MTDR"}
 {"close":0.7599999904632568,"date":"2026-09-30","schema_version":2,"ticker":"MTEK"}
@@ -145272,7 +145272,7 @@
 {"close":8.760000228881836,"date":"2026-09-30","schema_version":2,"ticker":"MYN"}
 {"close":0.3089999854564667,"date":"2026-09-30","schema_version":2,"ticker":"MYND"}
 {"close":1.559999942779541,"date":"2026-09-30","schema_version":2,"ticker":"MYO"}
-{"close":0.4749999940395355,"date":"2026-09-30","schema_version":2,"ticker":"MYPS"}
+{"close":4.75,"date":"2026-09-30","schema_version":2,"ticker":"MYPS"}
 {"close":292.4599914550781,"date":"2026-09-30","schema_version":2,"ticker":"MYRG"}
 {"close":1.7899999618530273,"date":"2026-09-30","schema_version":2,"ticker":"MYSE"}
 {"close":1.649999976158142,"date":"2026-09-30","schema_version":2,"ticker":"MYSZ"}
@@ -145428,7 +145428,7 @@
 {"close":3.930000066757202,"date":"2026-09-30","schema_version":2,"ticker":"NMAD"}
 {"close":14.449999809265137,"date":"2026-09-30","schema_version":2,"ticker":"NMAI"}
 {"close":10.8100004196167,"date":"2026-09-30","schema_version":2,"ticker":"NMAX"}
-{"close":8.890000343322754,"date":"2026-09-30","schema_version":2,"ticker":"NMCO"}
+{"close":8.821000099182129,"date":"2026-09-30","schema_version":2,"ticker":"NMCO"}
 {"close":6.920000076293945,"date":"2026-09-30","schema_version":2,"ticker":"NMFC"}
 {"close":25.43000030517578,"date":"2026-09-30","schema_version":2,"ticker":"NMFCZ"}
 {"close":1.2000000476837158,"date":"2026-09-30","schema_version":2,"ticker":"NMG"}
@@ -145659,7 +145659,7 @@
 {"close":26.0,"date":"2026-09-30","schema_version":2,"ticker":"OFSSO"}
 {"close":27.530000686645508,"date":"2026-09-30","schema_version":2,"ticker":"OGC"}
 {"close":4.130000114440918,"date":"2026-09-30","schema_version":2,"ticker":"OGCP"}
-{"close":45.41999816894531,"date":"2026-09-30","schema_version":2,"ticker":"OGE"}
+{"close":44.99024200439453,"date":"2026-09-30","schema_version":2,"ticker":"OGE"}
 {"close":0.49000000953674316,"date":"2026-09-30","schema_version":2,"ticker":"OGEN"}
 {"close":2.819999933242798,"date":"2026-09-30","schema_version":2,"ticker":"OGG"}
 {"close":0.9959999918937683,"date":"2026-09-30","schema_version":2,"ticker":"OGI"}
@@ -145940,7 +145940,7 @@
 {"close":1.2999999523162842,"date":"2026-09-30","schema_version":2,"ticker":"PETZ"}
 {"close":2.0899999141693115,"date":"2026-09-30","schema_version":2,"ticker":"PEW"}
 {"close":2.7699999809265137,"date":"2026-09-30","schema_version":2,"ticker":"PFAI"}
-{"close":104.7300033569336,"date":"2026-09-30","schema_version":2,"ticker":"PFBC"}
+{"close":103.94314575195312,"date":"2026-09-30","schema_version":2,"ticker":"PFBC"}
 {"close":10.770000457763672,"date":"2026-09-30","schema_version":2,"ticker":"PFD"}
 {"close":28.520000457763672,"date":"2026-09-30","schema_version":2,"ticker":"PFE"}
 {"close":6.71999979019165,"date":"2026-09-30","schema_version":2,"ticker":"PFFL"}
@@ -146019,7 +146019,7 @@
 {"close":123.29000091552734,"date":"2026-09-30","schema_version":2,"ticker":"PLMR"}
 {"close":42.220001220703125,"date":"2026-09-30","schema_version":2,"ticker":"PLNT"}
 {"close":39.25,"date":"2026-09-30","schema_version":2,"ticker":"PLOW"}
-{"close":407.20001220703125,"date":"2026-09-30","schema_version":2,"ticker":"PLPC"}
+{"close":406.9900207519531,"date":"2026-09-30","schema_version":2,"ticker":"PLPC"}
 {"close":1.0800000429153442,"date":"2026-09-30","schema_version":2,"ticker":"PLRX"}
 {"close":10.782999992370605,"date":"2026-09-30","schema_version":2,"ticker":"PLRZ"}
 {"close":49.91999816894531,"date":"2026-09-30","schema_version":2,"ticker":"PLSE"}
@@ -146034,7 +146034,7 @@
 {"close":2.759999990463257,"date":"2026-09-30","schema_version":2,"ticker":"PLX"}
 {"close":260.95001220703125,"date":"2026-09-30","schema_version":2,"ticker":"PLXS"}
 {"close":2.069999933242798,"date":"2026-09-30","schema_version":2,"ticker":"PLYX"}
-{"close":190.82000732421875,"date":"2026-09-30","schema_version":2,"ticker":"PM"}
+{"close":189.19757080078125,"date":"2026-09-30","schema_version":2,"ticker":"PM"}
 {"close":1.2999999523162842,"date":"2026-09-30","schema_version":2,"ticker":"PMA"}
 {"close":0.8199999928474426,"date":"2026-09-30","schema_version":2,"ticker":"PMAX"}
 {"close":0.4106000065803528,"date":"2026-09-30","schema_version":2,"ticker":"PMCB"}
@@ -146305,7 +146305,7 @@
 {"close":0.8299999833106995,"date":"2026-09-30","schema_version":2,"ticker":"RDGT"}
 {"close":0.47999998927116394,"date":"2026-09-30","schema_version":2,"ticker":"RDHL"}
 {"close":1.850000023841858,"date":"2026-09-30","schema_version":2,"ticker":"RDI"}
-{"close":15.729999542236328,"date":"2026-09-30","schema_version":2,"ticker":"RDIB"}
+{"close":15.15999984741211,"date":"2026-09-30","schema_version":2,"ticker":"RDIB"}
 {"close":30.610000610351562,"date":"2026-09-30","schema_version":2,"ticker":"RDN"}
 {"close":68.94000244140625,"date":"2026-09-30","schema_version":2,"ticker":"RDNT"}
 {"close":5.5,"date":"2026-09-30","schema_version":2,"ticker":"RDNW"}
@@ -146362,7 +146362,7 @@
 {"close":6.21999979019165,"date":"2026-09-30","schema_version":2,"ticker":"RGC"}
 {"close":21.270000457763672,"date":"2026-09-30","schema_version":2,"ticker":"RGCO"}
 {"close":192.22999572753906,"date":"2026-09-30","schema_version":2,"ticker":"RGEN"}
-{"close":236.0,"date":"2026-09-30","schema_version":2,"ticker":"RGLD"}
+{"close":235.5175018310547,"date":"2026-09-30","schema_version":2,"ticker":"RGLD"}
 {"close":1.809999942779541,"date":"2026-09-30","schema_version":2,"ticker":"RGNT"}
 {"close":7.53000020980835,"date":"2026-09-30","schema_version":2,"ticker":"RGNX"}
 {"close":3.759999990463257,"date":"2026-09-30","schema_version":2,"ticker":"RGP"}
@@ -146391,11 +146391,11 @@
 {"close":166.92999267578125,"date":"2026-09-30","schema_version":2,"ticker":"RIO.AX"}
 {"close":7099.0,"date":"2026-09-30","schema_version":2,"ticker":"RIO.L"}
 {"close":20.149999618530273,"date":"2026-09-30","schema_version":2,"ticker":"RIOT"}
-{"close":8.930000305175781,"date":"2026-09-30","schema_version":2,"ticker":"RITM"}
+{"close":8.680000305175781,"date":"2026-09-30","schema_version":2,"ticker":"RITM"}
 {"close":10.34000015258789,"date":"2026-09-30","schema_version":2,"ticker":"RIV"}
 {"close":14.9399995803833,"date":"2026-09-30","schema_version":2,"ticker":"RIVN"}
 {"close":18.059999465942383,"date":"2026-09-30","schema_version":2,"ticker":"RJET"}
-{"close":158.02000427246094,"date":"2026-09-30","schema_version":2,"ticker":"RJF"}
+{"close":157.47999572753906,"date":"2026-09-30","schema_version":2,"ticker":"RJF"}
 {"close":0.2800000011920929,"date":"2026-09-30","schema_version":2,"ticker":"RKDA"}
 {"close":69.68000030517578,"date":"2026-09-30","schema_version":2,"ticker":"RKLB"}
 {"close":11.510000228881836,"date":"2026-09-30","schema_version":2,"ticker":"RKT"}
@@ -146489,7 +146489,7 @@
 {"close":8.859999656677246,"date":"2026-09-30","schema_version":2,"ticker":"RTB"}
 {"close":19.75,"date":"2026-09-30","schema_version":2,"ticker":"RTO"}
 {"close":185.64999389648438,"date":"2026-09-30","schema_version":2,"ticker":"RTX"}
-{"close":1.0700000524520874,"date":"2026-09-30","schema_version":2,"ticker":"RUBI"}
+{"close":0.713333010673523,"date":"2026-09-30","schema_version":2,"ticker":"RUBI"}
 {"close":7.559999942779541,"date":"2026-09-30","schema_version":2,"ticker":"RUM"}
 {"close":7.769999980926514,"date":"2026-09-30","schema_version":2,"ticker":"RUN"}
 {"close":45.810001373291016,"date":"2026-09-30","schema_version":2,"ticker":"RUSHA"}
@@ -146568,7 +146568,7 @@
 {"close":185.66000366210938,"date":"2026-09-30","schema_version":2,"ticker":"SAP.DE"}
 {"close":16.65999984741211,"date":"2026-09-30","schema_version":2,"ticker":"SAR"}
 {"close":21.350000381469727,"date":"2026-09-30","schema_version":2,"ticker":"SARO"}
-{"close":99.9060287475586,"date":"2026-09-30","schema_version":2,"ticker":"SATA"}
+{"close":99.85408782958984,"date":"2026-09-30","schema_version":2,"ticker":"SATA"}
 {"close":5.53000020980835,"date":"2026-09-30","schema_version":2,"ticker":"SATL"}
 {"close":24.729999542236328,"date":"2026-09-30","schema_version":2,"ticker":"SAV"}
 {"close":25.75,"date":"2026-09-30","schema_version":2,"ticker":"SAX"}
@@ -146618,7 +146618,7 @@
 {"close":7.420000076293945,"date":"2026-09-30","schema_version":2,"ticker":"SCM"}
 {"close":634.0,"date":"2026-09-30","schema_version":2,"ticker":"SCMN.SW"}
 {"close":1.4199999570846558,"date":"2026-09-30","schema_version":2,"ticker":"SCNI"}
-{"close":0.25999999046325684,"date":"2026-09-30","schema_version":2,"ticker":"SCNX"}
+{"close":6.5,"date":"2026-09-30","schema_version":2,"ticker":"SCNX"}
 {"close":4.690000057220459,"date":"2026-09-30","schema_version":2,"ticker":"SCOR"}
 {"close":10.100000381469727,"date":"2026-09-30","schema_version":2,"ticker":"SCPQ"}
 {"close":10.279999732971191,"date":"2026-09-30","schema_version":2,"ticker":"SCPQU"}
@@ -147071,7 +147071,7 @@
 {"close":1.0,"date":"2026-09-30","schema_version":2,"ticker":"SYNX"}
 {"close":1.7699999809265137,"date":"2026-09-30","schema_version":2,"ticker":"SYPR"}
 {"close":89.02999877929688,"date":"2026-09-30","schema_version":2,"ticker":"SYRE"}
-{"close":77.95999908447266,"date":"2026-09-30","schema_version":2,"ticker":"SYY"}
+{"close":77.40865325927734,"date":"2026-09-30","schema_version":2,"ticker":"SYY"}
 {"close":10.489999771118164,"date":"2026-09-30","schema_version":2,"ticker":"SZZL"}
 {"close":0.10450000315904617,"date":"2026-09-30","schema_version":2,"ticker":"SZZLR"}
 {"close":10.539999961853027,"date":"2026-09-30","schema_version":2,"ticker":"SZZLU"}
@@ -147188,7 +147188,7 @@
 {"close":2.549999952316284,"date":"2026-09-30","schema_version":2,"ticker":"THM"}
 {"close":69.0999984741211,"date":"2026-09-30","schema_version":2,"ticker":"THO"}
 {"close":18.399999618530273,"date":"2026-09-30","schema_version":2,"ticker":"THQ"}
-{"close":33.29999923706055,"date":"2026-09-30","schema_version":2,"ticker":"THRM"}
+{"close":31.25031280517578,"date":"2026-09-30","schema_version":2,"ticker":"THRM"}
 {"close":1.5700000524520874,"date":"2026-09-30","schema_version":2,"ticker":"THRY"}
 {"close":13.039999961853027,"date":"2026-09-30","schema_version":2,"ticker":"THW"}
 {"close":8.319999694824219,"date":"2026-09-30","schema_version":2,"ticker":"TIC"}
@@ -147586,7 +147586,7 @@
 {"close":65.3499984741211,"date":"2026-09-30","schema_version":2,"ticker":"VIST"}
 {"close":9.279999732971191,"date":"2026-09-30","schema_version":2,"ticker":"VITL"}
 {"close":11.449999809265137,"date":"2026-09-30","schema_version":2,"ticker":"VIV"}
-{"close":0.5092999935150146,"date":"2026-09-30","schema_version":2,"ticker":"VIVK"}
+{"close":7.639500141143799,"date":"2026-09-30","schema_version":2,"ticker":"VIVK"}
 {"close":3.690000057220459,"date":"2026-09-30","schema_version":2,"ticker":"VIVO"}
 {"close":0.20999999344348907,"date":"2026-09-30","schema_version":2,"ticker":"VIVS"}
 {"close":7.480000019073486,"date":"2026-09-30","schema_version":2,"ticker":"VKI"}
@@ -147610,7 +147610,7 @@
 {"close":8.800000190734863,"date":"2026-09-30","schema_version":2,"ticker":"VMET"}
 {"close":462.9800109863281,"date":"2026-09-30","schema_version":2,"ticker":"VMI"}
 {"close":8.350000381469727,"date":"2026-09-30","schema_version":2,"ticker":"VMO"}
-{"close":60.7599983215332,"date":"2026-09-30","schema_version":2,"ticker":"VMRK"}
+{"close":60.04559326171875,"date":"2026-09-30","schema_version":2,"ticker":"VMRK"}
 {"close":17.0,"date":"2026-09-30","schema_version":2,"ticker":"VNA.DE"}
 {"close":10.069999694824219,"date":"2026-09-30","schema_version":2,"ticker":"VNCE"}
 {"close":4.909999847412109,"date":"2026-09-30","schema_version":2,"ticker":"VNDA"}
@@ -147661,7 +147661,7 @@
 {"close":8.050000190734863,"date":"2026-09-30","schema_version":2,"ticker":"VSTM"}
 {"close":13.359999656677246,"date":"2026-09-30","schema_version":2,"ticker":"VSTS"}
 {"close":88.45999908447266,"date":"2026-09-30","schema_version":2,"ticker":"VSXY"}
-{"close":0.15000000596046448,"date":"2026-09-30","schema_version":2,"ticker":"VTAK"}
+{"close":1.5,"date":"2026-09-30","schema_version":2,"ticker":"VTAK"}
 {"close":3.6500000953674316,"date":"2026-09-30","schema_version":2,"ticker":"VTEX"}
 {"close":0.3100000023841858,"date":"2026-09-30","schema_version":2,"ticker":"VTGN"}
 {"close":1.2300000190734863,"date":"2026-09-30","schema_version":2,"ticker":"VTIX"}
@@ -147728,7 +147728,7 @@
 {"close":10.420000076293945,"date":"2026-09-30","schema_version":2,"ticker":"WENN"}
 {"close":10.640000343322754,"date":"2026-09-30","schema_version":2,"ticker":"WENNU"}
 {"close":0.23999999463558197,"date":"2026-09-30","schema_version":2,"ticker":"WENNW"}
-{"close":33.97999954223633,"date":"2026-09-30","schema_version":2,"ticker":"WERN"}
+{"close":33.84542465209961,"date":"2026-09-30","schema_version":2,"ticker":"WERN"}
 {"close":44.369998931884766,"date":"2026-09-30","schema_version":2,"ticker":"WES"}
 {"close":76.61000061035156,"date":"2026-09-30","schema_version":2,"ticker":"WES.AX"}
 {"close":8.039999961853027,"date":"2026-09-30","schema_version":2,"ticker":"WEST"}
@@ -147783,8 +147783,8 @@
 {"close":62.310001373291016,"date":"2026-09-30","schema_version":2,"ticker":"WLK"}
 {"close":21.200000762939453,"date":"2026-09-30","schema_version":2,"ticker":"WLKP"}
 {"close":10.380000114440918,"date":"2026-09-30","schema_version":2,"ticker":"WLTH"}
-{"close":47.7599983215332,"date":"2026-09-30","schema_version":2,"ticker":"WLY"}
-{"close":48.93000030517578,"date":"2026-09-30","schema_version":2,"ticker":"WLYB"}
+{"close":47.40824508666992,"date":"2026-09-30","schema_version":2,"ticker":"WLY"}
+{"close":48.576866149902344,"date":"2026-09-30","schema_version":2,"ticker":"WLYB"}
 {"close":203.9199981689453,"date":"2026-09-30","schema_version":2,"ticker":"WM"}
 {"close":67.97000122070312,"date":"2026-09-30","schema_version":2,"ticker":"WMB"}
 {"close":27.610000610351562,"date":"2026-09-30","schema_version":2,"ticker":"WMG"}
@@ -147967,7 +147967,7 @@
 {"close":88.83000183105469,"date":"2026-09-30","schema_version":2,"ticker":"ZBH"}
 {"close":26.969999313354492,"date":"2026-09-30","schema_version":2,"ticker":"ZBIO"}
 {"close":373.30999755859375,"date":"2026-09-30","schema_version":2,"ticker":"ZBRA"}
-{"close":0.8629999756813049,"date":"2026-09-30","schema_version":2,"ticker":"ZCMD"}
+{"close":1.7259999513626099,"date":"2026-09-30","schema_version":2,"ticker":"ZCMD"}
 {"close":56.689998626708984,"date":"2026-09-30","schema_version":2,"ticker":"ZD"}
 {"close":1.569000005722046,"date":"2026-09-30","schema_version":2,"ticker":"ZDAI"}
 {"close":2.880000114440918,"date":"2026-09-30","schema_version":2,"ticker":"ZDGE"}
