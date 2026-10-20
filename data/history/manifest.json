@@ -1,18 +1,18 @@
 {
   "schema_version": 2,
-  "updated_at": "2026-10-19T14:02:52.536629+00:00",
+  "updated_at": "2026-10-20T12:12:07.062813+00:00",
   "features": {
-    "rows": 12349,
-    "dates": 67,
+    "rows": 12568,
+    "dates": 68,
     "first_date": "2026-07-20",
-    "last_date": "2026-10-19",
-    "distinct_tickers": 1472
+    "last_date": "2026-10-20",
+    "distinct_tickers": 1485
   },
   "prices": {
-    "rows": 479099,
-    "dates": 82,
+    "rows": 483170,
+    "dates": 83,
     "first_date": "2026-06-25",
-    "last_date": "2026-10-19",
+    "last_date": "2026-10-20",
     "distinct_tickers": 7372
   }
 }
