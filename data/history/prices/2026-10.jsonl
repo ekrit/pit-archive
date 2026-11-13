@@ -147198,6 +147198,7 @@
 {"close":1.1100000143051147,"date":"2026-10-30","schema_version":2,"ticker":"BTMD"}
 {"close":37.2599983215332,"date":"2026-10-30","schema_version":2,"ticker":"BTO"}
 {"close":2.2309999465942383,"date":"2026-10-30","schema_version":2,"ticker":"BTOC"}
+{"close":7.335000038146973,"date":"2026-10-30","schema_version":2,"ticker":"BTOG"}
 {"close":1.9800000190734863,"date":"2026-10-30","schema_version":2,"ticker":"BTQ"}
 {"close":66.88999938964844,"date":"2026-10-30","schema_version":2,"ticker":"BTSG"}
 {"close":218.16000366210938,"date":"2026-10-30","schema_version":2,"ticker":"BTSGU"}
@@ -148384,7 +148385,7 @@
 {"close":44.75,"date":"2026-10-30","schema_version":2,"ticker":"FBIN"}
 {"close":1.9199999570846558,"date":"2026-10-30","schema_version":2,"ticker":"FBIO"}
 {"close":15.100000381469727,"date":"2026-10-30","schema_version":2,"ticker":"FBIOP"}
-{"close":75.4000015258789,"date":"2026-10-30","schema_version":2,"ticker":"FBIZ"}
+{"close":75.05782318115234,"date":"2026-10-30","schema_version":2,"ticker":"FBIZ"}
 {"close":53.3658332824707,"date":"2026-10-30","schema_version":2,"ticker":"FBK"}
 {"close":16.700000762939453,"date":"2026-10-30","schema_version":2,"ticker":"FBLA"}
 {"close":0.9300000071525574,"date":"2026-10-30","schema_version":2,"ticker":"FBLG"}
@@ -149690,7 +149691,7 @@
 {"close":18.8799991607666,"date":"2026-10-30","schema_version":2,"ticker":"LANDP"}
 {"close":0.7850000262260437,"date":"2026-10-30","schema_version":2,"ticker":"LANV"}
 {"close":4.079999923706055,"date":"2026-10-30","schema_version":2,"ticker":"LAR"}
-{"close":32.06999969482422,"date":"2026-10-30","schema_version":2,"ticker":"LARK"}
+{"close":31.862010955810547,"date":"2026-10-30","schema_version":2,"ticker":"LARK"}
 {"close":0.6819999814033508,"date":"2026-10-30","schema_version":2,"ticker":"LASE"}
 {"close":37.130001068115234,"date":"2026-10-30","schema_version":2,"ticker":"LASR"}
 {"close":10.210000038146973,"date":"2026-10-30","schema_version":2,"ticker":"LATA"}
@@ -151391,6 +151392,7 @@
 {"close":6094.0,"date":"2026-10-30","schema_version":2,"ticker":"RIO.L"}
 {"close":12.8100004196167,"date":"2026-10-30","schema_version":2,"ticker":"RIOT"}
 {"close":9.3100004196167,"date":"2026-10-30","schema_version":2,"ticker":"RITM"}
+{"close":4.75,"date":"2026-10-30","schema_version":2,"ticker":"RITR"}
 {"close":10.3100004196167,"date":"2026-10-30","schema_version":2,"ticker":"RIV"}
 {"close":12.15999984741211,"date":"2026-10-30","schema_version":2,"ticker":"RIVN"}
 {"close":19.31999969482422,"date":"2026-10-30","schema_version":2,"ticker":"RJET"}
