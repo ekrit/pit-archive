@@ -1,9 +1,9 @@
 {
   "horizon_days": 63,
-  "labeled_rows": 9098,
+  "labeled_rows": 9099,
   "distinct_dates": 52,
   "distinct_tickers": 1205,
-  "label_positive_rate": 0.3129,
+  "label_positive_rate": 0.313,
   "fwd_ret_mean": -0.0688,
   "feature_missing_pct": {
     "ret_5d": 0.1,
