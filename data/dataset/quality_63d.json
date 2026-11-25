@@ -3,8 +3,8 @@
   "labeled_rows": 9313,
   "distinct_dates": 53,
   "distinct_tickers": 1220,
-  "label_positive_rate": 0.3133,
-  "fwd_ret_mean": -0.0713,
+  "label_positive_rate": 0.313,
+  "fwd_ret_mean": -0.0717,
   "feature_missing_pct": {
     "ret_5d": 0.1,
     "ret_21d": 0.0,
