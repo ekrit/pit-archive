@@ -569,6 +569,8 @@ def main():
     test_scoring_edge_cases()
     test_quality_gate()
     test_overlap_adjusted_tstat()
+    test_tstat_refused_without_independent_windows()
+    test_purged_folds_placed_where_training_survives()
     test_predictions_require_validation()
     test_estimate_revisions()
     test_watchlist_priority()
@@ -580,6 +582,7 @@ def main():
     test_preflight_ua_parity()
     test_sec_throttle_handling()
     test_weekly_sweep_gate()
+    test_oos_independent_window_accounting()
     test_backfill()
     test_calibration_and_ensemble()
     print("ALL SELF-TESTS PASSED")
@@ -648,6 +651,52 @@ def test_calibration_and_ensemble():
     assert probs[0] > probs[1], "a strong signal must score above a weak one"
     print(f"  calibration + ensemble (OOS AUC {res['oos_auc']}, "
           f"Brier {res['brier_uncalibrated']}->{res.get('brier_calibrated')}) OK")
+
+
+def test_oos_independent_window_accounting():
+    """OOS row count is not evidence; independent forward windows are.
+
+    Observed live on 2026-11-24: after the fold scheduler was fixed, the
+    ensemble reported 852 out-of-sample rows across 4 folds -- which sounds
+    conclusive -- but every test row sat in 2026-09-24..09-29. At a 63-day
+    horizon that is 1.08 independent windows: ONE observation. The AUC of
+    0.467 computed from it is a single draw, so predict.py must refuse to
+    publish on it.
+    """
+    from pipeline import ensemble
+
+    rng = np.random.default_rng(5)
+
+    def build(n_dates, step_days, horizon):
+        out = []
+        for d in range(n_dates):
+            date = (dt.date(2026, 1, 1) + dt.timedelta(days=d * step_days)).isoformat()
+            for t in range(30):
+                g = rng.normal()
+                out.append({"date": date, "ticker": f"T{t}", "horizon_days": horizon,
+                            "features": {"good": g, "noise": rng.normal()},
+                            "fwd_ret": 0.6 * g + rng.normal(scale=0.4)})
+        return out
+
+    # Weekly sampling, 5-day horizon: windows barely overlap, evidence is real.
+    wide = ensemble.walk_forward_ensemble(build(20, 7, 5), ["good", "noise"])
+    assert wide["oos_independent_windows"] >= 2.0, wide
+    assert wide["oos_dates"] > 1, wide
+    # The reported figure is 1 + span/horizon, not a row count.
+    assert approx(wide["oos_independent_windows"],
+                  1.0 + wide["oos_date_span_days"] / 5.0, tol=0.01), wide
+
+    # Daily sampling against a 63-day horizon, span just past the purge
+    # boundary: folds run, hundreds of OOS rows, and a planted signal scores
+    # a gorgeous AUC -- off ONE forward window. The count must expose that,
+    # which is why the publish gate cannot key on AUC alone.
+    narrow = ensemble.walk_forward_ensemble(build(75, 1, 63), ["good", "noise"])
+    assert narrow["n_folds_used"] >= 1 and narrow["n_oos"] > 200, narrow
+    assert narrow["oos_auc"] > 0.8, narrow                  # looks conclusive ...
+    assert narrow["oos_independent_windows"] < 2.0, narrow  # ... one observation
+    print(f"  OOS independent-window accounting "
+          f"(wide {wide['oos_independent_windows']} vs "
+          f"narrow {narrow['oos_independent_windows']}) OK")
 
 
 def test_backfill():
@@ -945,6 +994,72 @@ def test_recency():
     print("  recency weighting (parsers, half-life, stale-collapse) OK")
 
 
+def test_tstat_refused_without_independent_windows():
+    """Fewer than 2 independent forward windows -> no t-stat at all.
+
+    Observed live on 2026-11-24: a 63-day horizon sampled daily over 30
+    dates gives n_eff = 0.48 -- less than ONE independent window. Flooring
+    n_eff at 1 made t = ir * sqrt(1) = ir, so `pt_upside` published
+    "IC -0.343, t-stat -4.62" and read as overwhelming significance while
+    resting on a single overlapping observation. A ratio is not a test.
+    """
+    rng = np.random.default_rng(11)
+    ics = list(-0.34 + rng.normal(0, 0.07, 30))
+    bad = metrics.ic_summary(ics, overlap=63.0)        # n_eff = 0.48
+    assert bad["n_eff"] < 1.0, bad
+    assert bad["t_stat"] is None, bad
+    assert bad["ic_ir"] is not None, bad               # ratio still reported
+    assert "independent forward window" in bad["t_stat_note"], bad
+    # Enough independent windows -> the test comes back.
+    ok = metrics.ic_summary(list(-0.34 + rng.normal(0, 0.07, 200)), overlap=63.0)
+    assert ok["n_eff"] >= metrics.MIN_EFF_WINDOWS and ok["t_stat"] is not None, ok
+    assert "t_stat_note" not in ok, ok
+    print("  t-stat refused below 2 independent forward windows OK")
+
+
+def test_purged_folds_placed_where_training_survives():
+    """Folds must be placed where purging leaves training data.
+
+    Observed live on 2026-11-24: 9,313 labeled rows across 53 dates returned
+    "no valid folds". Index-fraction folds put every test start inside the
+    63-day label window of every training row, so purging emptied all four
+    training sets. The fix places test blocks after the purge boundary.
+    """
+    def ex_for(n_days):
+        out = []
+        for i in range(n_days):
+            d = (dt.date(2026, 1, 1) + dt.timedelta(days=i)).isoformat()
+            for t in range(40):
+                out.append({"date": d, "ticker": f"T{t}", "horizon_days": 63,
+                            "features": {}, "fwd_ret": 0.0})
+        return out
+
+    # Span inside the purge boundary (63d label + 2d embargo): honestly zero
+    # folds, plus a calendar reason instead of a bare "no valid folds".
+    short = ex_for(60)
+    assert model.purged_folds(short, min_train=20) == []
+    why = model.fold_shortfall(short)
+    assert "63d label window" in why and "span" in why, why
+
+    # Just past the boundary: a fold appears as soon as the calendar allows,
+    # which is the whole point -- the old index-fraction schedule returned
+    # zero here no matter how many rows it was given.
+    assert len(model.purged_folds(ex_for(70), min_train=20)) >= 1
+
+    # Span comfortably past it: folds appear, and every one is purge-clean.
+    longer = ex_for(400)
+    folds = model.purged_folds(longer, n_folds=4, embargo_days=2, min_train=20)
+    assert len(folds) >= 2, len(folds)
+    for tr_idx, lo, hi in folds:
+        assert len(tr_idx) >= 20 and hi > lo
+        t0 = dt.date.fromisoformat(longer[lo]["date"])
+        for i in tr_idx:
+            assert i < lo                                  # no lookahead
+            end = dt.date.fromisoformat(longer[i]["date"]) + dt.timedelta(days=63)
+            assert end < t0 - dt.timedelta(days=2)         # purge + embargo hold
+    print("  purged folds placed after the purge boundary OK")
+
+
 def test_overlap_adjusted_tstat():
     """Overlapping forward windows must not inflate significance.
 
@@ -955,17 +1070,17 @@ def test_overlap_adjusted_tstat():
     share 20 of 21 days of return. Correcting it left 0 of 69 significant,
     which agrees with the model.
     """
-    ics = [0.12] * 35                       # a steady, plausible-looking IC
+    ics = [0.12] * 84                       # a steady, plausible-looking IC
     naive = metrics.ic_summary(ics)
     adj = metrics.ic_summary(ics, overlap=21.0)
     assert adj["n_eff"] < naive["n"], (naive, adj)
-    assert approx(adj["n_eff"], 35 / 21, tol=0.1), adj
+    assert approx(adj["n_eff"], 84 / 21, tol=0.1), adj
     # Zero-variance ICs give no t-stat at all; use a noisy series to compare.
     rng = np.random.default_rng(7)
-    noisy = list(0.12 + rng.normal(0, 0.05, 35))
+    noisy = list(0.12 + rng.normal(0, 0.05, 84))
     n2, a2 = metrics.ic_summary(noisy), metrics.ic_summary(noisy, overlap=21.0)
     assert a2["t_stat"] < n2["t_stat"], (n2, a2)
-    assert approx(a2["t_stat"] / n2["t_stat"], (35 / 21) ** 0.5 / 35 ** 0.5, tol=0.02)
+    assert approx(a2["t_stat"] / n2["t_stat"], (84 / 21) ** 0.5 / 84 ** 0.5, tol=0.02)
 
     # The overlap factor is derived from the data, not hardcoded.
     daily = [{"date": (dt.date(2026, 1, 1) + dt.timedelta(days=i)).isoformat(),

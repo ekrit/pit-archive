@@ -18,6 +18,8 @@ the future, and fit the calibrator on earlier out-of-sample predictions.
 """
 from __future__ import annotations
 
+import datetime as dt
+
 import numpy as np
 
 from . import metrics, model
@@ -67,17 +69,15 @@ def walk_forward_ensemble(
     X = model._matrix(ex, feature_keys)
     fwd = np.array([e.get("fwd_ret", np.nan) for e in ex], dtype=float)
     n = len(ex)
-    fold = n // (n_folds + 1)
 
     oos_raw, oos_y, oos_fwd = [], [], []
-    for f in range(1, n_folds + 1):
-        tr_end, te_end = fold * f, min(fold * (f + 1), n)
-        if te_end - tr_end < 5 or tr_end < 30:
+    oos_dates: list[str] = []
+    used, dead_max = 0, 0
+    for tr_idx, tr_end, te_end in model.purged_folds(ex, n_folds, embargo_days,
+                                                     min_train=30, min_test=5):
+        if len(np.unique(y[tr_idx])) < 2:
             continue
-        tr_idx = model._purge_train_indices(
-            ex, tr_end, ex[tr_end].get("date", ""), embargo_days)
-        if len(tr_idx) < 30 or len(np.unique(y[tr_idx])) < 2:
-            continue
+        dead_max = max(dead_max, int(model._dead_features(X[tr_idx]).sum()))
         Xtr, Xte = model._standardize(X[tr_idx], X[tr_end:te_end])
         ytr = y[tr_idx]
 
@@ -96,9 +96,12 @@ def walk_forward_ensemble(
         oos_raw.extend(rank_average(members).tolist())
         oos_y.extend(y[tr_end:te_end].tolist())
         oos_fwd.extend(fwd[tr_end:te_end].tolist())
+        oos_dates.extend(str(e.get("date"))[:10] for e in ex[tr_end:te_end])
+        used += 1
 
     if not oos_raw:
-        return {"error": "no valid folds", "n": n, "target": target}
+        return {"error": "no fold has a purged training set yet", "n": n,
+                "why": model.fold_shortfall(ex, embargo_days), "target": target}
 
     raw = np.array(oos_raw)
     lab = np.array(oos_y)
@@ -108,10 +111,27 @@ def walk_forward_ensemble(
     # second: fitting and judging a calibrator on the same rows would flatter
     # it exactly the way in-sample backtests flatter models.
     half = len(raw) // 2
+    # How much INDEPENDENT evidence the out-of-sample rows actually carry.
+    # 852 OOS rows sound like plenty; if they all come from four dates inside
+    # one week, a 63-day forward window makes them a single observation, and
+    # the AUC computed from them is one draw, not a measurement.
+    horizon = int(ex[0].get("horizon_days", 0) or 0) or 1
+    uniq = sorted(set(oos_dates))
+    if uniq:
+        span = (dt.date.fromisoformat(uniq[-1]) - dt.date.fromisoformat(uniq[0])).days
+        indep = 1.0 + span / horizon
+    else:
+        span, indep = 0, 0.0
+
     result = {
         "target": target,
+        "oos_dates": len(uniq),
+        "oos_date_span_days": span,
+        "oos_independent_windows": round(indep, 2),
+        "dead_features_max": dead_max,
         "backend": "ensemble(numpy-logreg+sklearn-HGB)" if model._HAVE_SKLEARN
         else "ensemble(numpy-logreg)",
+        "n_folds_used": used,
         "n_oos": int(raw.size),
         "positive_rate": round(float(lab.mean()), 4),
         "oos_auc": metrics.auc(raw, lab),

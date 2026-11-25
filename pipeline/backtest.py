@@ -230,8 +230,15 @@ def to_markdown(rows: list[dict], title: str = "Signal Evaluation") -> str:
         "IC = cross-sectional Spearman corr of signal vs forward return, averaged over dates. "
         "A consistent mean IC ≥ ~0.03 with |t-stat| ≥ 2 is a genuinely useful signal.",
         "",
-        "| Signal | mean IC | IC t-stat | neut IC | dates | decile spread | top-quintile hit | turnover |",
-        "|--------|--------:|----------:|--------:|------:|--------------:|-----------------:|---------:|",
+        "`n_eff` is the number of INDEPENDENT (non-overlapping) forward windows behind "
+        "the IC series: dates / (horizon / sampling interval). Daily snapshots against a "
+        "63-day horizon overlap 63x, so 53 dates carry n_eff = 0.84 — less than one "
+        "independent observation. Below n_eff = 2 no t-stat is computed (shown as `—`), "
+        "because there are no degrees of freedom to test with; `IC ratio` is mean/std of "
+        "the IC series, a descriptive ratio and *not* evidence of significance.",
+        "",
+        "| Signal | mean IC | IC t-stat | IC ratio | n_eff | neut IC | dates | decile spread | top-quintile hit | turnover |",
+        "|--------|--------:|----------:|---------:|------:|--------:|------:|--------------:|-----------------:|---------:|",
     ]
     for r in rows:
         def f(x, pct=False):
@@ -241,6 +248,8 @@ def to_markdown(rows: list[dict], title: str = "Signal Evaluation") -> str:
         lines.append(
             f"| {r['signal']} | {f(r['mean_ic'])} | "
             f"{r['t_stat'] if r['t_stat'] is not None else '—'} | "
+            f"{r.get('ic_ir') if r.get('ic_ir') is not None else '—'} | "
+            f"{r.get('n_eff') if r.get('n_eff') is not None else '—'} | "
             f"{f(r.get('neut_ic'))} | "
             f"{r['n']} | {f(r['decile_spread'], pct=True)} | "
             f"{f(r['top_quintile_hit_rate'])} | "

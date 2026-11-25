@@ -35,6 +35,9 @@ MIN_EXAMPLES = 200
 # the rows and emits P=1.000. Publishing those numbers with no validation
 # behind them is precisely the false confidence this project exists to avoid.
 MIN_LABELED_DATES = 10
+# Independent (non-overlapping) forward windows the out-of-sample rows
+# must span before any ranking is published. See _unusable() in run().
+MIN_OOS_WINDOWS = 2.0
 HORIZON = 63
 TOP_N = 20
 BIG_MOVE_THRESHOLD = 0.30
@@ -133,6 +136,50 @@ def run() -> str:
     # its probabilities mean anything. Rank-ordering names anyway would hand
     # back confident-looking numbers (P=1.000 is typical when a model simply
     # memorises a small sample) with nothing standing behind them.
+    #
+    # "A fold ran" is NOT the same as "there is evidence". Two further tests
+    # have to pass, both learned from live failures:
+    #   * INDEPENDENT WINDOWS. Four folds whose test rows all sit inside one
+    #     week are one observation at a 63-day horizon, however many rows
+    #     they contain. Require >= MIN_OOS_WINDOWS of them.
+    #   * AUC ABOVE CHANCE. A model that scores below 0.5 out-of-sample has
+    #     failed its own test; publishing its ranking would be publishing
+    #     an anti-signal with a confident face on it.
+    def _unusable(res: dict) -> str | None:
+        if "error" in res:
+            return str(res["error"])
+        w = res.get("oos_independent_windows") or 0
+        if w < MIN_OOS_WINDOWS:
+            return (f"out-of-sample rows span only {w} independent forward "
+                    f"window(s) ({res.get('oos_dates')} dates over "
+                    f"{res.get('oos_date_span_days')}d, need "
+                    f"\u2265{MIN_OOS_WINDOWS}) \u2014 one observation, not a measurement")
+        auc = res.get("oos_auc")
+        if auc is None or auc <= 0.5:
+            return f"out-of-sample AUC {auc} is at or below chance (0.5)"
+        return None
+
+    bad_rank, bad_big = _unusable(res_rank), _unusable(res_big)
+    if bad_rank and bad_big:
+        return "\n".join([
+            "# Model Predictions",
+            "",
+            f"_Status: **not validated** \u2014 {len(live)} labeled examples across "
+            f"{labeled_dates} labeled dates._",
+            "",
+            f"- Peer-relative target: {bad_rank}",
+            f"- Big-move target: {bad_big}",
+            "",
+            "No ranked list is published. The model can fit these rows, but "
+            "nothing here demonstrates the fit generalises, and a confident "
+            "number with no out-of-sample evidence behind it is worse than "
+            "no number at all. Predictions resume automatically once the "
+            "out-of-sample evidence spans enough independent forward windows "
+            "and clears chance.",
+            "",
+            "Today's heuristic screen remains in `data/daily_output.md`.",
+        ])
+
     if "error" in res_rank and "error" in res_big:
         return "\n".join([
             "# Model Predictions",

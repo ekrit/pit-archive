@@ -38,14 +38,33 @@ def _num(x):
     return float(x) if isinstance(x, (int, float)) else np.nan
 
 
+def _dead_features(train: np.ndarray) -> np.ndarray:
+    """Boolean mask of columns with no finite value anywhere in the training window.
+
+    A short training window can miss a whole feature family: the estimates
+    sources only start on 2026-08-20, so a fold training on 2026-07-20 has
+    nothing but NaN in those six columns while the test rows have real
+    values. Naive standardization turns that into NaN/NaN -> 0 silently,
+    which quietly feeds the model a column it could never learn from.
+    """
+    return ~np.isfinite(train).any(axis=0)
+
+
 def _standardize(train: np.ndarray, *others: np.ndarray):
-    mu = np.nanmean(train, axis=0)
-    sd = np.nanstd(train, axis=0)
-    sd = np.where(sd == 0, 1.0, sd)
+    dead = _dead_features(train)
+    mu = np.zeros(train.shape[1], dtype=float)
+    sd = np.ones(train.shape[1], dtype=float)
+    live = ~dead
+    if live.any():
+        mu[live] = np.nanmean(train[:, live], axis=0)
+        s = np.nanstd(train[:, live], axis=0)
+        sd[live] = np.where(s == 0, 1.0, s)
 
     def norm(m):
         z = (m - mu) / sd
-        return np.nan_to_num(z, nan=0.0)  # missing -> mean (0 after centering)
+        if dead.any():
+            z[:, dead] = 0.0   # unlearnable from this window; carry no signal
+        return np.nan_to_num(z, nan=0.0, posinf=0.0, neginf=0.0)
 
     return (norm(train), *[norm(o) for o in others])
 
@@ -141,6 +160,69 @@ def _purge_train_indices(ex: list[dict], tr_end: int, test_start_date: str,
     return np.array(keep, dtype=int)
 
 
+def purged_folds(ex: list[dict], n_folds: int = 4, embargo_days: int = 2,
+                 min_train: int = 20, min_test: int = 5) -> list[tuple]:
+    """Test blocks placed where purging can still leave a usable training set.
+
+    Returns [(train_idx, test_lo, test_hi), ...], expanding-window.
+
+    Fixed index-fraction folds -- train on the first f/5 of the rows, test on
+    the next fifth -- silently collapse to ZERO folds whenever the labeled
+    span is short relative to the horizon: every training row's label window
+    still reaches past the test start, purging empties the training set, and
+    the model reports "no valid folds" while holding thousands of rows. That
+    is not a shortage of data, it is the test windows being placed where no
+    purged training data can exist.
+
+    This finds the earliest index whose purged training set clears
+    `min_train` (the count is monotone in the index, so bisect), then splits
+    everything after it into contiguous test blocks. A fold appears as soon
+    as the calendar permits one, and never before.
+    """
+    n = len(ex)
+    if n == 0:
+        return []
+    lo, hi = 0, n
+    while lo < hi:
+        mid = (lo + hi) // 2
+        cnt = len(_purge_train_indices(ex, mid, ex[mid].get("date", ""), embargo_days))
+        if cnt >= min_train:
+            hi = mid
+        else:
+            lo = mid + 1
+    start = lo
+    if start >= n - min_test:
+        return []
+    block = max(min_test, (n - start) // max(n_folds, 1))
+    folds, te_lo = [], start
+    while te_lo < n and len(folds) < n_folds:
+        te_hi = min(te_lo + block, n)
+        if te_hi - te_lo < min_test:
+            break
+        tr_idx = _purge_train_indices(ex, te_lo, ex[te_lo].get("date", ""), embargo_days)
+        if len(tr_idx) >= min_train:
+            folds.append((tr_idx, te_lo, te_hi))
+        te_lo = te_hi
+    return folds
+
+
+def fold_shortfall(ex: list[dict], embargo_days: int = 2) -> str:
+    """Plain-calendar explanation of why no fold is possible yet."""
+    import datetime as dt
+    if not ex:
+        return "no labeled examples"
+    d0, dn = str(ex[0].get("date"))[:10], str(ex[-1].get("date"))[:10]
+    h = int(ex[0].get("horizon_days", 0) or 0)
+    try:
+        span = (dt.date.fromisoformat(dn) - dt.date.fromisoformat(d0)).days
+    except ValueError:
+        return "unparseable example dates"
+    return (f"labeled dates span {span}d ({d0} -> {dn}); a {h}d label window plus "
+            f"{embargo_days}d embargo means no training row is clean until the test "
+            f"start is past {d0}+{h + embargo_days}d, and a test block must follow "
+            f"it. Needs >{h + embargo_days}d of labeled span; keep collecting.")
+
+
 def walk_forward(
     examples: list[dict], feature_keys: list[str], n_folds: int = 4,
     top_frac: float = 0.2, embargo_days: int = 2,
@@ -162,24 +244,19 @@ def walk_forward(
     fwd_all = np.array([e["fwd_ret"] for e in ex])
 
     n = len(ex)
-    fold_size = n // (n_folds + 1)
     oos_scores, oos_labels, oos_fwd = [], [], []
     purged_total = 0
+    used = 0
+    dead_max = 0
 
-    for f in range(1, n_folds + 1):
-        tr_end = fold_size * f
-        te_end = min(fold_size * (f + 1), n)
-        if te_end - tr_end < 5 or tr_end < 20:
-            continue
-        tr_idx = _purge_train_indices(ex, tr_end, ex[tr_end].get("date", ""),
-                                      embargo_days)
+    for tr_idx, tr_end, te_end in purged_folds(ex, n_folds, embargo_days,
+                                               min_train=20, min_test=5):
         purged_total += tr_end - len(tr_idx)
-        if len(tr_idx) < 20:
-            continue
         Xtr_raw, Xte_raw = X_all[tr_idx], X_all[tr_end:te_end]
         ytr = y_all[tr_idx]
         if len(np.unique(ytr)) < 2:
             continue
+        dead_max = max(dead_max, int(_dead_features(Xtr_raw).sum()))
         Xtr, Xte = _standardize(Xtr_raw, Xte_raw)
         model = _make_model()
         model.fit(Xtr, ytr)
@@ -192,9 +269,11 @@ def walk_forward(
         oos_scores.extend(proba.tolist())
         oos_labels.extend(y_all[tr_end:te_end].tolist())
         oos_fwd.extend(fwd_all[tr_end:te_end].tolist())
+        used += 1
 
     if not oos_scores:
-        return {"error": "no valid folds", "n": n,
+        return {"error": "no fold has a purged training set yet", "n": n,
+                "why": fold_shortfall(ex, embargo_days),
                 "backend": "sklearn" if _HAVE_SKLEARN else "numpy"}
 
     s = np.array(oos_scores)
@@ -202,6 +281,8 @@ def walk_forward(
     fwd = np.array(oos_fwd)
     return {
         "backend": "sklearn-HGB" if _HAVE_SKLEARN else "numpy-logreg",
+        "n_folds_used": used,
+        "dead_features_max": dead_max,
         "purged_rows": int(purged_total),
         "embargo_days": embargo_days,
         "n_oos": int(s.size),

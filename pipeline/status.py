@@ -92,9 +92,26 @@ def main():
         print(f"  learned predictions: waiting on labels "
               f"({n_examples}/200 examples{matures})")
     else:
-        print("  learned predictions: ACTIVE")
-    print("  first meaningful IC evaluation needs ~63d of labels "
-          "(snapshots mature into examples)")
+        # "Enough examples" is not "enough evidence". Out-of-sample rows only
+        # count as independent once their forward windows stop overlapping, so
+        # report the calendar date the evidence bar is actually cleared rather
+        # than declaring the model ACTIVE off a row count. See predict.py's
+        # MIN_OOS_WINDOWS and pipeline/model.py purged_folds().
+        first = f.get("first_date")
+        when = ""
+        if first:
+            d0 = dt.date.fromisoformat(first)
+            # Test blocks begin after the purge boundary (d0 + horizon + embargo)
+            # and must then span a further horizon to be 2 independent windows.
+            need_last_label = d0 + dt.timedelta(days=2 * 63 + 2)
+            # Labels lag collection by the horizon (minus the match tolerance).
+            eta = need_last_label + dt.timedelta(days=63 - 7)
+            left = (eta - dt.date.today()).days
+            when = (f"; 2 independent forward windows ~{eta.isoformat()}"
+                    + (f" ({left}d away)" if left > 0 else ""))
+        print(f"  learned predictions: labels mature, evidence still thin{when}")
+    print("  publishable predictions need out-of-sample rows spanning \u22652 "
+          "non-overlapping 63d windows, not merely many rows")
 
     gate = _read_json("data/quality_gate.json")
     if gate and gate.get("families"):

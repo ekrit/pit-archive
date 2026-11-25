@@ -78,9 +78,12 @@ def write_report(rows, model_res, note, mode, horizon, decay_lines=None):
         f"> {note}",
         "",
         "> ⚠️ Positive in-sample IC is easy to find by luck. Trust a signal only "
-        "when the mean IC is **consistent across many dates** (|t-stat| ≥ 2) AND the "
-        "walk-forward out-of-sample numbers below hold up. Everything here is "
-        "research, not advice.",
+        "when the mean IC is **consistent across independent forward windows** "
+        "(|t-stat| ≥ 2, which requires n_eff ≥ 2) AND the walk-forward "
+        "out-of-sample numbers below hold up. While the archive is shorter than "
+        "a couple of horizons, every t-stat reads `—` by design: a large |IC| "
+        "with n_eff < 1 is a single overlapping observation, not a finding. "
+        "Everything here is research, not advice.",
         "",
         backtest.to_markdown(rows, title=f"Per-signal edge ({horizon}d forward return)"),
         *(decay_lines or []),

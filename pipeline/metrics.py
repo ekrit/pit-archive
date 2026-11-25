@@ -54,6 +54,11 @@ def spearman(x: np.ndarray, y: np.ndarray) -> float | None:
     return float(np.corrcoef(rx, ry)[0, 1])
 
 
+# Fewer than this many independent (non-overlapping) forward windows and a
+# t-stat has no degrees of freedom; ic_summary refuses to compute one.
+MIN_EFF_WINDOWS = 2.0
+
+
 def ic_summary(ics: list[float], overlap: float = 1.0) -> dict:
     """Summarize per-date ICs into mean, std, and an OVERLAP-ADJUSTED t-stat.
 
@@ -67,7 +72,15 @@ def ic_summary(ics: list[float], overlap: float = 1.0) -> dict:
     shows to be worthless can look overwhelmingly significant.
 
     `overlap` is horizon_days / sampling_interval_days. The effective sample
-    is n / overlap, floored at 1.
+    is n / overlap.
+
+    When n_eff < 2 there is not even one independent forward window to spare,
+    so a t-stat has zero degrees of freedom and is NOT computed: it is None,
+    with `t_stat_note` saying why. The alternative -- flooring n_eff at 1 and
+    returning ir * sqrt(1) == ir -- silently relabels an Information Ratio as
+    a significance test. That is how a 63-day signal sampled daily for 30
+    dates (n_eff = 0.48, ONE overlapping window) came to report "t = -4.62"
+    and read as overwhelming evidence while resting on a single observation.
     """
     vals = np.array([v for v in ics if v is not None and math.isfinite(v)], dtype=float)
     if vals.size == 0:
@@ -76,16 +89,24 @@ def ic_summary(ics: list[float], overlap: float = 1.0) -> dict:
     std = float(vals.std(ddof=1)) if vals.size > 1 else 0.0
     # Information Ratio of the IC series == its t-stat scaled by sqrt(n).
     ir = (mean / std) if std > 0 else None
-    n_eff = max(1.0, vals.size / max(overlap, 1.0))
-    t_stat = (ir * math.sqrt(n_eff)) if ir is not None else None
-    return {
+    n_eff = vals.size / max(overlap, 1.0)
+    # Zero degrees of freedom -> no test. See the docstring.
+    enough = n_eff >= MIN_EFF_WINDOWS
+    t_stat = (ir * math.sqrt(n_eff)) if (ir is not None and enough) else None
+    out = {
         "n": int(vals.size),
         "mean_ic": round(mean, 4),
         "std_ic": round(std, 4),
         "ic_ir": round(ir, 3) if ir is not None else None,
         "t_stat": round(t_stat, 2) if t_stat is not None else None,
-        "n_eff": round(n_eff, 1),
+        "n_eff": round(n_eff, 2),
     }
+    if not enough:
+        out["t_stat_note"] = (
+            f"n_eff={n_eff:.2f} independent forward windows (<{MIN_EFF_WINDOWS:g}); "
+            "no significance test is possible -- ic_ir is a ratio, not evidence"
+        )
+    return out
 
 
 def decile_spread(signal: np.ndarray, fwd_ret: np.ndarray, q: int = 10) -> dict:
