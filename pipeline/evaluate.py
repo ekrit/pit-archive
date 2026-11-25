@@ -9,7 +9,7 @@ Modes:
                  usable today, before the store has accumulated. Price signals
                  only.
 
-Both write a ranked signal table + walk-forward model result to data/eval_report.md.
+Store mode writes data/eval_report.md; price mode writes data/eval_report_prices.md.
 """
 from __future__ import annotations
 
@@ -20,7 +20,11 @@ import os
 from . import backtest, dataset, labels, model, store, universe
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# Mode-specific report paths. The two modes measure different things over
+# different spans (the archive's point-in-time snapshots vs 2 years of price
+# history), so they must not overwrite each other's findings.
 EVAL_MD = os.path.join(ROOT, "data/eval_report.md")
+EVAL_MD_PRICES = os.path.join(ROOT, "data/eval_report_prices.md")
 
 PRICE_ONLY_FEATURES = ["ret_5d", "ret_21d", "ret_63d", "volume_spike_ratio", "rsi_14"]
 ALL_FEATURES = dataset.FEATURE_KEYS  # base signals + the Alpha-factor battery
@@ -97,9 +101,10 @@ def write_report(rows, model_res, note, mode, horizon, decay_lines=None):
     for k, v in model_res.items():
         lines.append(f"{k}: {v}")
     lines += ["```", ""]
-    with open(EVAL_MD, "w") as fh:
+    out = EVAL_MD_PRICES if mode == "from-prices" else EVAL_MD
+    with open(out, "w") as fh:
         fh.write("\n".join(lines))
-    print(f"[write] {EVAL_MD}")
+    print(f"[write] {out}")
 
 
 def main():
