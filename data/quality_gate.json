@@ -1,7 +1,7 @@
 {
-  "date": "2026-11-25",
-  "n_tickers": 295,
-  "checked_at": "2026-11-25T20:20:45.166880+00:00",
+  "date": "2026-11-26",
+  "n_tickers": 217,
+  "checked_at": "2026-11-26T00:13:59.911769+00:00",
   "families": {
     "prices": {
       "alive_fraction": 1.0,
@@ -16,27 +16,27 @@
       "status": "OK"
     },
     "news": {
-      "alive_fraction": 0.949,
+      "alive_fraction": 0.963,
       "floor": 0.2,
-      "trailing_avg": 0.934,
+      "trailing_avg": 0.94,
       "status": "OK"
     },
     "stocktwits": {
-      "alive_fraction": 0.868,
+      "alive_fraction": 0.885,
       "floor": 0.2,
-      "trailing_avg": 0.878,
+      "trailing_avg": 0.872,
       "status": "OK"
     },
     "finra_short": {
-      "alive_fraction": 0.986,
+      "alive_fraction": 1.0,
       "floor": 0.5,
-      "trailing_avg": 0.991,
+      "trailing_avg": 0.989,
       "status": "OK"
     },
     "wikipedia": {
-      "alive_fraction": 0.742,
+      "alive_fraction": 0.737,
       "floor": 0.1,
-      "trailing_avg": 0.844,
+      "trailing_avg": 0.828,
       "status": "OK"
     },
     "sec_filings": {
@@ -52,10 +52,10 @@
       "status": "EXPECTED-DOWN"
     },
     "estimates": {
-      "alive_fraction": 0.695,
+      "alive_fraction": 0.0,
       "floor": 0.15,
-      "trailing_avg": 0.918,
-      "status": "OK"
+      "trailing_avg": 0.865,
+      "status": "COLLAPSED"
     }
   },
   "status": "OK"
