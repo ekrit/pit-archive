@@ -1,7 +1,7 @@
 {
   "date": "2026-11-27",
-  "n_tickers": 217,
-  "checked_at": "2026-11-27T00:34:07.924074+00:00",
+  "n_tickers": 280,
+  "checked_at": "2026-11-27T17:10:59.446119+00:00",
   "families": {
     "prices": {
       "alive_fraction": 1.0,
@@ -16,7 +16,7 @@
       "status": "OK"
     },
     "news": {
-      "alive_fraction": 0.945,
+      "alive_fraction": 0.961,
       "floor": 0.2,
       "trailing_avg": 0.947,
       "status": "OK"
@@ -28,13 +28,13 @@
       "status": "OK"
     },
     "finra_short": {
-      "alive_fraction": 1.0,
+      "alive_fraction": 0.996,
       "floor": 0.5,
       "trailing_avg": 0.992,
       "status": "OK"
     },
     "wikipedia": {
-      "alive_fraction": 0.76,
+      "alive_fraction": 0.761,
       "floor": 0.1,
       "trailing_avg": 0.814,
       "status": "OK"
@@ -52,7 +52,7 @@
       "status": "EXPECTED-DOWN"
     },
     "estimates": {
-      "alive_fraction": 0.982,
+      "alive_fraction": 0.975,
       "floor": 0.15,
       "trailing_avg": 0.857,
       "status": "OK"
