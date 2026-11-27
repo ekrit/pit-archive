@@ -1,8 +1,8 @@
 # Signal Evaluation — what actually works
 
-_Generated: 2026-11-26T19:57:48.135927+00:00 · mode: from-store · horizon: 63d_
+_Generated: 2026-11-27T00:34:40.346556+00:00 · mode: from-store · horizon: 63d_
 
-> 18674 feature snapshots across 95 dates → 9527 labeled examples at 63d horizon (pos rate 0.3135, 1237 tickers).
+> 18891 feature snapshots across 96 dates → 9527 labeled examples at 63d horizon (pos rate 0.3135, 1237 tickers).
 
 > ⚠️ Positive in-sample IC is easy to find by luck. Trust a signal only when the mean IC is **consistent across independent forward windows** (|t-stat| ≥ 2, which requires n_eff ≥ 2) AND the walk-forward out-of-sample numbers below hold up. While the archive is shorter than a couple of horizons, every t-stat reads `—` by design: a large |IC| with n_eff < 1 is a single overlapping observation, not a finding. Everything here is research, not advice.
 
